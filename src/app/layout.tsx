@@ -1,42 +1,48 @@
-import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next"
+import { Oswald, Montserrat } from "next/font/google"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
+import { MapCTA } from "@/components/ui/map-cta"
+import { PageTransition } from "@/components/ui/page-transition"
+import "./globals.css"
 
-const inter = Inter({
-  subsets: ["cyrillic", "latin"],
-  variable: "--font-sans",
+const oswald = Oswald({
+  variable: "--font-display",
+  subsets: ["latin", "cyrillic"],
   display: "swap",
-});
+})
 
 const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin"],
-  variable: "--font-heading",
+  variable: "--font-body",
+  subsets: ["latin", "cyrillic"],
   display: "swap",
-});
+})
 
 export const metadata: Metadata = {
-  title: "Poidem Pozhrem! — Ресторан на Фукуоке",
+  title: "POIDEM POZHREM! — Ресторан на Фукуоке",
   description:
-    "Ресторан на Фукуоке, где каждый день что-то происходит! Русская, кавказская, восточная, европейская и азиатская кухни.",
-};
+    "Ресторан на Фукуоке, где каждый день что-то происходит! Русская, кавказская, восточная, европейская, азиатская кухня. Кальяны, мероприятия, доставка.",
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html
       lang="ru"
-      className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${oswald.variable} ${montserrat.variable}`}
     >
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white font-sans">
+      <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-primary)] font-body antialiased">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <MapCTA />
         <Footer />
       </body>
     </html>
-  );
+  )
 }

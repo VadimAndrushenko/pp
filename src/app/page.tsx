@@ -1,23 +1,19 @@
-import Hero from "@/components/sections/Hero";
-import NeonSlogan from "@/components/sections/NeonSlogan";
-import NavButtons from "@/components/sections/NavButtons";
-import VideoSection from "@/components/sections/VideoSection";
-import EventsCarousel from "@/components/sections/EventsCarousel";
-import Gallery from "@/components/sections/Gallery";
-import ServicesGrid from "@/components/sections/ServicesGrid";
-import RouteBlock from "@/components/sections/RouteBlock";
+import { HeroSection } from "@/components/sections/hero-section"
+import { QuickNav } from "@/components/sections/quick-nav"
+import { VideoSection } from "@/components/sections/video-section"
+import { EventsPreview } from "@/components/sections/events-preview"
+import { GalleryPreview } from "@/components/sections/gallery-preview"
+import { ServicesGrid } from "@/components/sections/services-grid"
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Hero />
-      <NeonSlogan />
-      <NavButtons />
+      <HeroSection />
+      <QuickNav />
       <VideoSection />
-      <EventsCarousel />
-      <Gallery />
+      <EventsPreview />
+      <GalleryPreview />
       <ServicesGrid />
-      <RouteBlock />
     </>
-  );
+  )
 }
