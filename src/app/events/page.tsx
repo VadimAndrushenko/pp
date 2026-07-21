@@ -1,14 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { FilterTabs } from "@/components/ui/filter-tabs"
-import { EventCard } from "@/components/ui/event-card"
 import { PromoBanner } from "@/components/ui/promo-banner"
-import { FeaturesRow } from "@/components/sections/features-row"
+import { FeaturesRow } from "@/components/sections/main/features-row"
+import { EventsHeader } from "@/components/sections/events/events-header"
+import { EventList } from "@/components/sections/events/event-list"
 import { events } from "@/config/events"
-import { CalendarCheck, LayoutGrid, MicVocal, Brain, Music, Briefcase, Sparkles } from "lucide-react"
+import { LayoutGrid, MicVocal, Brain, Music, Briefcase, Sparkles } from "lucide-react"
 import type { EventCategory } from "@/types"
 
 const filterTabs = [
@@ -28,42 +27,11 @@ export default function EventsPage() {
   return (
     <div className="px-5 py-6">
       <div className="max-w-7xl mx-auto">
-        <Breadcrumb />
-
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
-            Афиша мероприятий
-          </h1>
-          <Link
-            href="/today"
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-[var(--radius-sm)] border text-xs font-display uppercase tracking-wider"
-            style={{
-              borderColor: "var(--color-border)",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            <CalendarCheck className="w-4 h-4" style={{ color: "var(--color-accent)" }} />
-            Что сегодня?
-          </Link>
-        </div>
-
-        <p className="text-sm text-[var(--color-text-secondary)] mb-6">
-          Каждый день что-то происходит! Выбирай событие по душе и присоединяйся.
-        </p>
+        <EventsHeader />
 
         <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} tabs={filterTabs} />
 
-        <div className="mt-6 grid gap-4">
-          {filtered.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
-          <p className="text-center py-12 text-[var(--color-text-muted)] font-display uppercase">
-            В этой категории пока нет событий
-          </p>
-        )}
+        <EventList events={filtered} />
 
         <div className="mt-10">
           <FeaturesRow />

@@ -1,9 +1,9 @@
-import { HeroSection } from "@/components/sections/hero-section"
-import { QuickNav } from "@/components/sections/quick-nav"
-import { VideoSection } from "@/components/sections/video-section"
-import { EventsPreview } from "@/components/sections/events-preview"
-import { GalleryPreview } from "@/components/sections/gallery-preview"
-import { ServicesGrid } from "@/components/sections/services-grid"
+import { HeroSection } from "@/components/sections/main/hero-section"
+import { QuickNav } from "@/components/sections/main/quick-nav"
+import { VideoSection } from "@/components/sections/main/video-section"
+import { EventsPreview } from "@/components/sections/main/events-preview"
+import { ServicesGrid } from "@/components/sections/main/services-grid"
+import { galleryPreviews } from "@/config/gallery"
 
 export default function HomePage() {
   return (
@@ -12,7 +12,12 @@ export default function HomePage() {
       <QuickNav />
       <VideoSection />
       <EventsPreview />
-      <GalleryPreview />
+      <EventsPreview
+        title="Фото и видеоотчёты"
+        events={galleryPreviews}
+        linkHref="/gallery"
+        linkLabel="Смотреть всё"
+      />
       <ServicesGrid />
     </>
   )

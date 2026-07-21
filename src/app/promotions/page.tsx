@@ -1,53 +1,16 @@
 import { Breadcrumb } from "@/components/layout/breadcrumb"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { PromoBanner } from "@/components/ui/promo-banner"
-import { Gift, Percent, Star, Cake, Coffee, Beer } from "lucide-react"
-
-const promotions = [
-  { icon: Gift, title: "День рождения", desc: "Празднуй у нас и получай подарки!", badge: "Активно" },
-  { icon: Percent, title: "Счастливые часы", desc: "Скидки на напитки с 17:00 до 19:00", badge: "Ежедневно" },
-  { icon: Star, title: "Бонусная программа", desc: "Копите бонусы и оплачивайте до 50% заказа", badge: "Постоянно" },
-  { icon: Coffee, title: "Бизнес-завтрак", desc: "Скидка 20% на завтраки в будние дни", badge: "Активно" },
-  { icon: Beer, title: "Пивной сет", desc: "Сет закусок к пиву со скидкой 15%", badge: "Активно" },
-  { icon: Cake, title: "Караоке-батл", desc: "Победитель получает десерт в подарок", badge: "Каждую пятницу" },
-]
+import { PromotionsHero } from "@/components/sections/promotions/promotions-hero"
+import { PromotionsGrid } from "@/components/sections/promotions/promotions-grid"
+import { PromotionsBanner } from "@/components/sections/promotions/promotions-banner"
 
 export default function PromotionsPage() {
   return (
     <div className="px-5 py-6">
       <div className="max-w-7xl mx-auto">
         <Breadcrumb />
-        <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-2">
-          Акции и бонусы
-        </h1>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-8">
-          Спецпредложения и бонусная программа для наших гостей.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          {promotions.map((p, i) => {
-            const Icon = p.icon
-            return (
-              <Card key={i} className="flex items-start gap-4 p-5">
-                <Icon className="w-8 h-8 shrink-0 mt-1" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-base font-display uppercase text-[var(--color-text-primary)]">{p.title}</h3>
-                    <Badge>{p.badge}</Badge>
-                  </div>
-                  <p className="text-xs text-[var(--color-text-secondary)]">{p.desc}</p>
-                </div>
-              </Card>
-            )
-          })}
-        </div>
-
-        <PromoBanner
-          title="VIP CLUB"
-          description="Вступай в наш VIP CLUB и получай до 50% кешбэк!"
-          href="/vip"
-        />
+        <PromotionsHero />
+        <PromotionsGrid />
+        <PromotionsBanner />
       </div>
     </div>
   )

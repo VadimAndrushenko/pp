@@ -7,12 +7,11 @@ import { site } from "@/config/site"
 
 export function HeroSection() {
   return (
-    <section className="">
-        <div className="max-w-7xl mx-auto px-3 py-8 lg:py-12 flex flex-col lg:flex-row lg:items-stretch lg:gap-12">
-          {/* LEFT COLUMN */}
-          <div className="flex-1 flex flex-col justify-between">
+    <section className="relative max-w-7xl h-auto mx-auto px-3 py-8 lg:py-12">
+        <div className=" relative">
+          <div className="lg:w-[40%] flex flex-col ">
             <MotionDiv direction="left" delay={0.1} className="mb-6">
-              <h1 className="text-[40px] leading-[1.1] md:text-5xl font-display font-bold uppercase tracking-tight mb-4">
+              <h1 className="leading-[1.1] text-5xl font-display font-bold uppercase tracking-tight mb-4 max-lg:text-4xl max-sm:text-[6.5vw]">
                 <span className="text-[var(--color-text-primary)]">
                   Ресторан на Фукуоке, где каждый день
                 </span>{" "}
@@ -24,7 +23,7 @@ export function HeroSection() {
                 className="h-0.5 w-16 mb-6"
                 style={{ backgroundColor: "var(--color-accent)" }}
               />
-              <p className="text-xl md:text-2xl text-[var(--color-text-primary)] font-display uppercase tracking-wider leading-relaxed max-w-lg">
+              <p className="text-base md:text-2xl text-[var(--color-text-primary)] font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
                 {site.cuisines.split("•").map((part, i, arr) =>
                   i < arr.length - 1 ? (
                     <span key={i}>
@@ -38,8 +37,8 @@ export function HeroSection() {
               </p>
             </MotionDiv>
 
-            {/* NEON — desktop only, inside left column */}
-            <div className="hidden lg:block lg:mt-auto">
+            {/* NEON */}
+            <div>
               <MotionDiv direction="up" delay={0.25}>
                 <NeonHeading
                   prefix={site.neonSlogan.line1}
@@ -52,35 +51,23 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN — фото */}
+          {/* PHOTO — absolute, natural proportions */}
           <MotionDiv
             direction="right"
             delay={0.2}
-            className="relative mt-8 lg:mt-0 lg:w-[700px] lg:shrink-0"
+            className="absolute bottom-0 right-0 h-full pointer-events-none -z-10 max-lg:max-h-[80%] max-[460px]:hidden"
           >
-            <div className="relative right-11 rounded-[var(--radius-card)] transition-all duration-500">
+            <div className="relative sm:right-11 rounded-[var(--radius-card)] transition-all duration-500 h-full max-sm:left-10">
               <Image
                 src="/images/people.png"
                 alt="People"
                 width={800}
                 height={600}
-                className="object-cover w-full lg:w-[800px] h-auto"
+                className="h-full object-contain"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/0 10% to-transparent z-10" />
             </div>
-          </MotionDiv>
-        </div>
-
-        {/* NEON — mobile only, after the image */}
-        <div className="lg:hidden mt-8">
-          <MotionDiv direction="up" delay={0.25}>
-            <NeonHeading
-              prefix={site.neonSlogan.line1}
-              accent1={site.neonSlogan.accent1}
-              accent2={site.neonSlogan.accent2}
-              subtitle={site.neonSlogan.subtitle}
-              align="left"
-            />
           </MotionDiv>
         </div>
     </section>

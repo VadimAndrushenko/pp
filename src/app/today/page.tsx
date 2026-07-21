@@ -4,12 +4,12 @@ import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { EventsPreview } from "@/components/sections/events-preview"
+import { EventsPreview } from "@/components/sections/main/events-preview"
 import { MapCTA } from "@/components/ui/map-cta"
-import { QuickNav } from "@/components/sections/quick-nav"
+import { QuickNav } from "@/components/sections/main/quick-nav"
 import { events } from "@/config/events"
 import { MicVocal, Music, CalendarCheck, Eye, Gift, Image } from "lucide-react"
-import type { NavItem } from "@/components/sections/quick-nav"
+import type { NavItem } from "@/components/sections/main/quick-nav"
 
 export default function TodayPage() {
   const todayEvent = events[4]

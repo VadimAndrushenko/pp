@@ -18,6 +18,7 @@ export function CarouselArrows({ className }: CarouselArrowsProps) {
         onClick={() => emblaApi?.scrollPrev()}
         disabled={!canScrollPrev}
         aria-label="Предыдущее мероприятие"
+        suppressHydrationWarning
         className={cn(
           "w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200",
           "border-[var(--color-border)] text-[var(--color-text-secondary)]",
@@ -33,6 +34,7 @@ export function CarouselArrows({ className }: CarouselArrowsProps) {
         onClick={() => emblaApi?.scrollNext()}
         disabled={!canScrollNext}
         aria-label="Следующее мероприятие"
+        suppressHydrationWarning
         className={cn(
           "w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200",
           "border-[var(--color-border)] text-[var(--color-text-secondary)]",
