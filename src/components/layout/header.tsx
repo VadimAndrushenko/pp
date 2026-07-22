@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { workingHours } from "@/config/links"
 
@@ -27,15 +28,8 @@ export function Header() {
       }}
     >
       <div className="px-5 py-3 flex items-center justify-between max-w-7xl mx-auto">
-        <Link href="/" className="flex items-center gap-2 shrink-0 group">
-          <span className="text-2xl transition-transform duration-300 group-hover:scale-110">🥔</span>
-          <div className="flex flex-col leading-none font-display uppercase">
-            <span className="text-base tracking-wider text-[var(--color-text-primary)]">POIDEM</span>
-            <span className="text-base tracking-wider text-[var(--color-text-primary)]">
-              POZHREM
-              <span style={{ color: "var(--color-accent)" }}>!</span>
-            </span>
-          </div>
+        <Link href="/" className="shrink-0 group">
+          <Image src="/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-6 text-xs font-display uppercase tracking-wider">

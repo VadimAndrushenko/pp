@@ -58,15 +58,6 @@ export function ServicesGrid() {
           })}
         </StaggerGrid>
 
-        <div
-          className="mt-8 p-5 rounded-[var(--radius-card)] border text-center animate-glow-pulse hover-lift"
-          style={{ borderColor: "var(--color-border)" }}
-        >
-          <span className="text-3xl block mb-2">🥔</span>
-          <p className="text-sm font-display uppercase tracking-wider text-[var(--color-text-secondary)]">
-            POIDEM POZHREM — сообщество и поддержка русскоязычных на Фукуоке
-          </p>
-        </div>
       </div>
     </section>
   )
