@@ -2,7 +2,17 @@
 
 import { createContext, useContext, useCallback, useEffect, useState, type ReactNode } from "react"
 import useEmblaCarousel from "embla-carousel-react"
-import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel"
+import type { UseEmblaCarouselType } from "embla-carousel-react"
+
+type EmblaCarouselType = NonNullable<UseEmblaCarouselType[1]>
+interface EmblaOptionsType {
+  loop?: boolean
+  align?: "start" | "center" | "end"
+  slidesToScroll?: number
+  skipSnaps?: boolean
+  duration?: number
+  [key: string]: unknown
+}
 
 interface CarouselContextValue {
   emblaRef: (node: HTMLElement | null) => void
