@@ -56,17 +56,19 @@ export function CarouselProvider({ children, opts }: CarouselProviderProps) {
     setCanScrollPrev(api.canScrollPrev())
     setCanScrollNext(api.canScrollNext())
     setSelectedIndex(api.selectedScrollSnap())
+    setScrollSnapList(api.scrollSnapList())
   }, [])
 
   useEffect(() => {
     if (!emblaApi) return
-    setScrollSnapList(emblaApi.scrollSnapList())
     onSelect(emblaApi)
     emblaApi.on("select", onSelect)
     emblaApi.on("reInit", onSelect)
+    emblaApi.on("resize", onSelect)
     return () => {
       emblaApi.off("select", onSelect)
       emblaApi.off("reInit", onSelect)
+      emblaApi.off("resize", onSelect)
     }
   }, [emblaApi, onSelect])
 
