@@ -15,19 +15,19 @@ export default function MenuPage() {
           Меню
         </h1>
 
-        <h2 className="text-xs font-display uppercase tracking-widest text-[var(--color-text-muted)] mb-4">
+        <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
           Основные разделы
         </h2>
-        <div className="grid grid-cols-3 gap-5 mb-10">
+        <div className="grid grid-cols-3 gap-5 mb-10 max-lg:grid-cols-2 max-sm:grid-cols-1">
           {largeCards.map((item, i) => (
             <MenuCategoryCard key={item.id} item={item} priority={i < 2} />
           ))}
         </div>
 
-        <h2 className="text-xs font-display uppercase tracking-widest text-[var(--color-text-muted)] mb-4">
+        <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
           Напитки и закуски
         </h2>
-        <div className="grid grid-cols-3 gap-5 mb-10">
+        <div className="grid grid-cols-3 gap-5 mb-10 max-lg:grid-cols-2 max-sm:grid-cols-1">
           {compactCards.map((item) => (
             <MenuCategoryCard key={item.id} item={item} />
           ))}
@@ -35,7 +35,7 @@ export default function MenuPage() {
 
         {fullCard && (
           <>
-            <h2 className="text-xs font-display uppercase tracking-widest text-[var(--color-text-muted)] mb-4">
+            <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
               Специальное меню
             </h2>
             <div className="mb-10">

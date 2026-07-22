@@ -1,23 +1,25 @@
+import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 import { Card } from "@/components/ui/card"
-import { Coffee, Cigarette, Wine, ArrowRight } from "lucide-react"
+import Slider from "@/components/ui/Slider"
 
 const services = [
   {
-    icon: Coffee,
     title: "Еда и напитки",
-    description: "Все блюда из меню с доставкой",
+    description: "Горячие блюда, закуски, салаты, десерты и напитки",
+    image: "/images/delivery/hookah.png",
     href: "/menu",
   },
   {
-    icon: Cigarette,
     title: "Кальяны",
-    description: "Премиальные кальяны на выезд",
+    description: "Более 40 вкусов на выбор. Готовим с любовью!",
+    image: "/images/delivery/hookah.png",
     href: "/hookah",
   },
   {
-    icon: Wine,
     title: "Напитки",
     description: "Алкогольные и безалкогольные",
+    image: "/images/delivery/hookah.png",
     href: "/menu",
   },
 ]
@@ -25,22 +27,38 @@ const services = [
 export function ServicesSection() {
   return (
     <section className="mb-10">
-      <h2 className="text-lg font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-4">
-        Что доставляем?
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {services.map((s, i) => {
-          const Icon = s.icon
-          return (
-            <Card key={i} as="a" href={s.href} className="flex flex-col gap-3 p-4">
-              <Icon className="w-6 h-6" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
-              <h3 className="text-sm font-display uppercase text-[var(--color-text-primary)]">{s.title}</h3>
-              <p className="text-xs text-[var(--color-text-secondary)]">{s.description}</p>
-              <ArrowRight className="w-4 h-4" style={{ color: "var(--color-accent)" }} />
-            </Card>
-          )
-        })}
-      </div>
+      <Slider title="Что доставляем?" cols={{ base: 1, sm: 2, lg: 3 }} className="mb-4">
+        {services.map((s, i) => (
+          <Card
+            key={i}
+            as="a"
+            href={s.href}
+            className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-100 hover:-translate-y-2 hover:shadow-[0_4px_24px_-6px_var(--color-accent)]"
+          >
+            <div className="relative w-full shrink-0 overflow-hidden aspect-[4/3]">
+              <Image
+                src={s.image}
+                alt={s.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            <div className="flex flex-col flex-1 gap-2 p-5">
+              <h3 className="text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
+                {s.title}
+              </h3>
+              <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed line-clamp-2 min-h-[3.75rem]">
+                {s.description}
+              </p>
+              <ArrowRight
+                className="w-5 h-5 mt-auto pt-2 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5"
+                strokeWidth={2}
+              />
+            </div>
+          </Card>
+        ))}
+      </Slider>
     </section>
   )
 }

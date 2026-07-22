@@ -164,3 +164,28 @@ body {
 .link-accent:hover {
   color: var(--color-accent);
 }
+
+.neon-card {
+  --glow: var(--color-accent);
+  transition: box-shadow 300ms ease, transform 250ms ease;
+  box-shadow:
+    0 0 14px -4px color-mix(in srgb, var(--glow) 45%, transparent),
+    inset 0 0 22px -14px color-mix(in srgb, var(--glow) 55%, transparent);
+}
+
+.neon-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 28px -2px color-mix(in srgb, var(--glow) 70%, transparent),
+    inset 0 0 26px -10px color-mix(in srgb, var(--glow) 70%, transparent);
+}
+
+.neon-btn {
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+
+.neon-card:hover .neon-btn {
+  background-color: var(--glow);
+  color: #0a0908 !important;
+  box-shadow: 0 0 18px -2px color-mix(in srgb, var(--glow) 70%, transparent);
+}

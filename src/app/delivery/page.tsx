@@ -4,8 +4,8 @@ import { DeliveryHero } from "@/components/sections/delivery/delivery-hero"
 import { InfoCards } from "@/components/sections/delivery/info-cards"
 import { ServicesSection } from "@/components/sections/delivery/services-section"
 import { DeliveryMethods } from "@/components/sections/delivery/delivery-methods"
-import { ZonesSection } from "@/components/sections/delivery/zones-section"
-import { HelpCard } from "@/components/sections/delivery/help-card"
+import { CTABanner } from "@/components/ui/cta-banner"
+import { DeliveryZones } from "@/components/sections/delivery/zones-section"
 
 export default function DeliveryPage() {
   return (
@@ -17,7 +17,7 @@ export default function DeliveryPage() {
         <InfoCards />
         <ServicesSection />
         <DeliveryMethods />
-        <ZonesSection />
+        <DeliveryZones/>
 
         <PromoBanner
           title="VIP CLUB"
@@ -26,7 +26,7 @@ export default function DeliveryPage() {
           className="mb-8"
         />
 
-        <HelpCard />
+        <CTABanner />
       </div>
     </div>
   )
