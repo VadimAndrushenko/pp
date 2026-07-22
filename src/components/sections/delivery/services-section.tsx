@@ -7,7 +7,7 @@ const services = [
   {
     title: "Еда и напитки",
     description: "Горячие блюда, закуски, салаты, десерты и напитки",
-    image: "/images/delivery/hookah.png",
+    image: "/images/delivery/food.png",
     href: "/menu",
   },
   {
@@ -19,7 +19,7 @@ const services = [
   {
     title: "Напитки",
     description: "Алкогольные и безалкогольные",
-    image: "/images/delivery/hookah.png",
+    image: "/images/delivery/drinks.png",
     href: "/menu",
   },
 ]
@@ -52,7 +52,7 @@ export function ServicesSection() {
                 {s.description}
               </p>
               <ArrowRight
-                className="w-5 h-5 mt-auto pt-2 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5"
+                className="w-10 h-10 mt-auto pt-2 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5"
                 strokeWidth={2}
               />
             </div>
