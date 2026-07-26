@@ -9,7 +9,7 @@ interface NeonHeadingProps {
   className?: string
 }
 
-const neonSizes = "text-6xl lg:text-7xl xl:text-8xl"
+const neonSizes = "text-6xl max-[450px]:text-4xl lg:text-7xl xl:text-8xl"
 
 export function NeonHeading({
   accent1,
@@ -31,7 +31,7 @@ export function NeonHeading({
       {prefix && (
         <p
           className={cn(
-            "text-3xl md:text-4xl font-display tracking-wider mb-2 -rotate-1 animate-glow-reveal",
+            "text-3xl max-[450px]:text-xl md:text-4xl font-display tracking-wider mb-2 -rotate-1 animate-glow-reveal",
             isLeft && "text-left",
           )}
           style={{
@@ -71,7 +71,7 @@ export function NeonHeading({
       {subtitle && (
         <p
           className={cn(
-            "text-xl md:text-2xl font-display uppercase tracking-wider -rotate-1",
+            "text-xl max-[450px]:text-base md:text-2xl font-display uppercase tracking-wider -rotate-1",
             isLeft && "",
           )}
           style={{ color: "var(--color-accent)" }}

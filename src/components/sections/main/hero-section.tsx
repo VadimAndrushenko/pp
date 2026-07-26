@@ -20,10 +20,10 @@ export function HeroSection() {
                 </span>
               </h1>
               <div
-                className="h-0.5 w-16 mb-6"
+                className="h-0.5 w-16 mb-3"
                 style={{ backgroundColor: "var(--color-accent)" }}
               />
-              <p className="text-base md:text-2xl text-[var(--color-text-primary)] font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
+              <p className="text-base max-[450px]:text-sm md:text-2xl text-[var(--color-text-primary)] font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
                 {site.cuisines.split("•").map((part, i, arr) =>
                   i < arr.length - 1 ? (
                     <span key={i}>
@@ -55,7 +55,7 @@ export function HeroSection() {
           <MotionDiv
             direction="right"
             delay={0.2}
-            className="absolute bottom-0 right-0 h-full pointer-events-none -z-10 max-lg:max-h-[80%] max-[460px]:hidden"
+            className="absolute bottom-0 right-0 h-full pointer-events-none -z-10 max-lg:max-h-[80%] max-[450px]:max-h-[75%] max-[450px]:translate-y-14"
           >
             <div className="relative sm:right-11 rounded-[var(--radius-card)] transition-all duration-500 h-full max-sm:left-10">
               <Image

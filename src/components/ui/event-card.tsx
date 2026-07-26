@@ -34,7 +34,7 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
     return (
       <a
         href={`/events/${event.slug}`}
-        className="group shrink-0 w-[180px] sm:w-[200px] md:w-[210px] lg:w-[240px] border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:outline-none rounded-[var(--radius-card)] cursor-pointer"
+        className="group w-full border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:outline-none rounded-[var(--radius-card)] cursor-pointer"
       >
         <div
           className="relative w-full aspect-[4/5] rounded-[var(--radius-card)] overflow-hidden bg-contain bg-center"
