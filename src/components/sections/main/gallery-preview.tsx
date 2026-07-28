@@ -17,9 +17,8 @@ export function GalleryPreview() {
   const [playingVideo, setPlayingVideo] = useState<string | null>(null)
 
   return (
-    <section className="px-5 py-8">
-      <div className="max-w-7xl mx-auto">
-        <MotionDiv direction="up" delay={0.05}>
+    <section>
+      <MotionDiv direction="up" delay={0.05}>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl md:text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
               Фото и видеоотчёты
@@ -100,7 +99,6 @@ export function GalleryPreview() {
             })}
           </div>
         </MotionDiv>
-      </div>
     </section>
   )
 }

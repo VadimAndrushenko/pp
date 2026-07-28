@@ -1,20 +1,20 @@
 import { Card } from "@/components/ui/card"
 import { Send, CalendarCheck } from "lucide-react"
 
-export function CommunityHero() {
+export function CommunityHero({ className }: { className?: string }) {
   return (
-    <>
-      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-2">
+    <div className={className}>
+      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
         Сообщество
       </h1>
-      <p className="text-sm font-display uppercase tracking-wider mb-2" style={{ color: "var(--color-accent)" }}>
+      <p className="text-sm font-display uppercase tracking-wider" style={{ color: "var(--color-accent)" }}>
         Люди, знакомства, мероприятия, общение
       </p>
-      <p className="text-sm text-[var(--color-text-secondary)] mb-8">
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Мы — сообщество русскоязычных на Фукуоке. Знакомства, общение, совместные мероприятия.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Card as="a" href="https://t.me/poidem_pozhrem" className="flex items-center gap-4 p-5">
           <Send className="w-8 h-8 shrink-0" style={{ color: "var(--color-telegram)" }} />
           <div>
@@ -30,6 +30,6 @@ export function CommunityHero() {
           </div>
         </Card>
       </div>
-    </>
+    </div>
   )
 }

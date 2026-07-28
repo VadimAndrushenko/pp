@@ -1,10 +1,10 @@
 import { EventCard } from "@/components/ui/event-card"
 import type { EventItem } from "@/types"
 
-export function EventList({ events }: { events: EventItem[] }) {
+export function EventList({ events, className }: { events: EventItem[]; className?: string }) {
   return (
-    <>
-      <div className="mt-6 grid gap-4">
+    <div className={className}>
+      <div className="grid gap-4">
         {events.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
@@ -14,6 +14,6 @@ export function EventList({ events }: { events: EventItem[] }) {
           В этой категории пока нет событий
         </p>
       )}
-    </>
+    </div>
   )
 }

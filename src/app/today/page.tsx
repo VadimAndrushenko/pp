@@ -4,7 +4,7 @@ import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { EventsPreview } from "@/components/blocks/events-preview"
+import { EventsPreview } from "@/components/sections/events/events-preview"
 import { MapCTA } from "@/components/ui/map-cta"
 import { QuickNav } from "@/components/sections/main/quick-nav"
 import { events } from "@/config/events"
@@ -40,7 +40,7 @@ export default function TodayPage() {
           Афиша событий на сегодня
         </p>
 
-        <Card className="overflow-hidden p-0 mb-8">
+        <Card className="overflow-hidden p-0">
           <div className="relative">
             <Badge variant="accent" className="absolute top-3 left-3 z-10">
               Сегодня
@@ -80,7 +80,7 @@ export default function TodayPage() {
           </div>
         </Card>
 
-        <div className="mb-10">
+        <div className="py-8">
           <QuickNav embedded items={todayNavItems} />
         </div>
 
@@ -88,9 +88,10 @@ export default function TodayPage() {
           title="Дальнейшие события"
           events={upcomingEvents}
           linkLabel="Смотреть все"
+          className="py-8"
         />
 
-        <Card className="flex items-center gap-4 p-5 mb-8">
+        <Card className="flex items-center gap-4 p-5">
           <div className="flex-1">
             <p className="text-sm font-display uppercase tracking-wider text-[var(--color-text-primary)] mb-2">
               Участие бесплатно!

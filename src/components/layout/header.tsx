@@ -44,7 +44,7 @@ export function Header() {
         backdropFilter: scrolled ? "blur(12px)" : "none",
       }}
     >
-      <div className="px-5 py-3 flex items-center justify-between max-w-7xl mx-auto">
+      <div className="container mx-auto max-w-7xl px-3 sm:px-4 flex items-center justify-between py-3">
         <Link href="/" className="shrink-0 group">
           <Image src="/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
         </Link>

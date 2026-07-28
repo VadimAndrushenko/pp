@@ -88,9 +88,9 @@ const methods = [
   },
 ] as const
 
-export function DeliveryMethods() {
+export function DeliveryMethods({ className }: { className?: string }) {
   return (
-    <section className="mb-10">
+    <section className={className}>
       <h2 className="text-xl sm:text-2xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-5">
         Выберите способ доставки
       </h2>

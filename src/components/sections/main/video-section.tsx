@@ -4,13 +4,12 @@ import { useState } from "react"
 import { Play } from "lucide-react"
 import { MotionDiv } from "@/components/ui/motion-div"
 
-export function VideoSection() {
+export function VideoSection({ className }: { className?: string }) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   return (
-    <section className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <MotionDiv direction="up" delay={0.1}>
+    <section className={className}>
+      <MotionDiv direction="up" delay={0.1}>
           <div
             className="relative w-full aspect-video max-h-[620px] rounded-[var(--radius-card)] overflow-hidden cursor-pointer bg-cover bg-center group hover-lift"
             style={{
@@ -51,7 +50,6 @@ export function VideoSection() {
             )}
           </div>
         </MotionDiv>
-      </div>
     </section>
   )
 }

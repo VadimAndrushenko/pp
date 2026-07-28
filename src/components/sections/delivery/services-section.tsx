@@ -24,9 +24,9 @@ const services = [
   },
 ]
 
-export function ServicesSection() {
+export function ServicesSection({ className }: { className?: string }) {
   return (
-    <section className="mb-10">
+    <section className={className}>
       <Slider title="Что доставляем?" cols={{ base: 1, sm: 2, lg: 3 }} className="mb-4">
         {services.map((s, i) => (
           <Card

@@ -8,9 +8,9 @@ const features = [
   { icon: Star, title: "Меню", desc: "Индивидуальное меню" },
 ]
 
-export function BanquetFeatures() {
+export function BanquetFeatures({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${className ?? ""}`}>
       {features.map((item, i) => {
         const Icon = item.icon
         return (

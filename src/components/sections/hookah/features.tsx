@@ -16,9 +16,9 @@ const features: Feature[] = [
   { icon: ShieldCheck, title: "Чистота и гигиена", description: "Одноразовые мундштуки, чистые принадлежности" },
 ]
 
-export function HookahFeatures() {
+export function HookahFeatures({ className }: { className?: string }) {
   return (
-    <section className="mb-12">
+    <section className={className}>
       <h2 className="text-2xl lg:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-6 lg:mb-10 max-sm:text-lg max-sm:mb-4">
         Почему у нас лучшие кальяны?
       </h2>

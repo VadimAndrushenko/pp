@@ -5,9 +5,9 @@ import Slider from "@/components/ui/Slider"
 
 const hookahPrice = ["/images/hookah/light.png", "/images/hookah/medium.png", "/images/hookah/strong.png"]
 
-export function HookahPrices() {
+export function HookahPrices({ className }: { className?: string }) {
   return (
-    <section className="mb-12">
+    <section className={className}>
       <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 mb-4 -mx-5 px-5 md:mx-0 md:px-0">
         <Slider title="Стоимость кальяна в ресторане" cols={{ base: 1, sm: 2, lg: 3 }} className="mb-4">
           {hookahPrice.map((src) => (

@@ -9,9 +9,9 @@ interface Photo {
   date: string
 }
 
-export function PhotosGrid({ photos }: { photos: Photo[] }) {
+export function PhotosGrid({ photos, className }: { photos: Photo[]; className?: string }) {
   return (
-    <section id="photos" className="mb-10">
+    <section id="photos" className={className}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-display font-bold uppercase text-[var(--color-text-primary)]">Последние фото</h2>
         <Link

@@ -1,8 +1,8 @@
 import Image from "next/image"
 
-export function DeliveryHero() {
+export function DeliveryHero({ className }: { className?: string }) {
   return (
-    <div className="relative flex items-center mb-10 md:min-h-[320px] min-[550px]:max-md:min-h-[250px]">
+    <div className={`relative flex items-center ${className ?? ""} md:min-h-[320px] min-[550px]:max-md:min-h-[250px]`}>
       <div className="space-y-2.5 w-[40%] max-lg:w-[60%]">
         <h1 className="text-9xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] md:mb-7 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
           Доставка

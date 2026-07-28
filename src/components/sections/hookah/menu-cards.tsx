@@ -19,9 +19,9 @@ const cards = [
   },
 ]
 
-export function HookahMenuCards() {
+export function HookahMenuCards({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-5 mb-12 max-lg:gap-x-4 ">
+    <div className={`grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-5 max-lg:gap-x-4 ${className ?? ""}`}>
       {cards.map((card) => (
         <Link
           key={card.href}

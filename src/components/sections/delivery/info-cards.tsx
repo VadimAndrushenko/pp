@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { Clock, Wallet } from "lucide-react"
 
-export function InfoCards() {
+export function InfoCards({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${className ?? ""}`}>
       <Card className="group relative overflow-hidden p-5 rounded-[var(--radius-card)] bg-gradient-to-br from-[var(--color-surface)] to-black border border-[var(--color-border)] shadow-[0_0_16px_-6px_var(--color-accent-dim)] hover:border-[var(--color-accent)] hover:shadow-[0_0_28px_-4px_var(--color-accent)] transition-all duration-500 hover:-translate-y-1">
         {/* верхняя световая полоса — всегда видна, ярче при hover */}
         <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--color-accent-dim)] to-transparent group-hover:from-[var(--color-accent)] transition-all duration-500" />

@@ -12,17 +12,17 @@ export default function DeliveryPage() {
     <>
       <Breadcrumb />
 
-      <DeliveryHero />
-      <InfoCards />
-      <ServicesSection />
-      <DeliveryMethods />
-      <DeliveryZones/>
+      <DeliveryHero className="py-8" />
+      <InfoCards className="py-6" />
+      <ServicesSection className="py-8" />
+      <DeliveryMethods className="py-8" />
+      <DeliveryZones className="py-8" />
 
       <PromoBanner
         title="VIP CLUB"
         description="Вступай в наш VIP CLUB и получай до 50% кешбэк!"
         href="/vip"
-        className="mb-8"
+        className="py-8"
       />
 
       <CTABanner />

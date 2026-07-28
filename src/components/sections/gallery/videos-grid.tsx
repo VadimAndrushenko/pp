@@ -9,9 +9,9 @@ interface Video {
   date: string
 }
 
-export function VideosGrid({ videos }: { videos: Video[] }) {
+export function VideosGrid({ videos, className }: { videos: Video[]; className?: string }) {
   return (
-    <section id="videos" className="mb-10">
+    <section id="videos" className={className}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-display font-bold uppercase text-[var(--color-text-primary)]">Последние видео</h2>
         <Link

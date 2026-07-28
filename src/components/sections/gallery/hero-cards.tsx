@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { Play } from "lucide-react"
 
-export function HeroCards() {
+export function HeroCards({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${className ?? ""}`}>
       <Card as="a" href="#photos" className="p-0 overflow-hidden">
         <div
           className="w-full h-48 bg-cover bg-center"

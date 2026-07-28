@@ -26,17 +26,15 @@ export default function EventsPage() {
 
   return (
     <>
-      <EventsHeader />
-
+      <EventsHeader className="py-8" />
         <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} tabs={filterTabs} />
+        <EventList events={filtered} className="py-8" />
 
-        <EventList events={filtered} />
-
-        <div className="mt-10">
+        <div className="py-8">
           <FeaturesRow />
         </div>
 
-        <div className="mt-8">
+        <div className="py-8">
           <PromoBanner
             title="День рождения в Poidem Pozhrem!"
             description="Празднуй у нас и получай подарки!"

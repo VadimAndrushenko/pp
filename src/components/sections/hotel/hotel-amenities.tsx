@@ -10,9 +10,9 @@ const amenities = [
   { icon: Building, title: "Сейф" },
 ]
 
-export function HotelAmenities() {
+export function HotelAmenities({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+    <div className={`grid grid-cols-2 sm:grid-cols-3 gap-3 ${className ?? ""}`}>
       {amenities.map((item, i) => {
         const Icon = item.icon
         return (

@@ -56,9 +56,5 @@ export function FeaturesRow({ embedded }: FeaturesRowProps) {
 
   if (embedded) return grid
 
-  return (
-    <section className="px-5 py-10">
-      <div className="max-w-7xl mx-auto">{grid}</div>
-    </section>
-  )
+  return grid
 }

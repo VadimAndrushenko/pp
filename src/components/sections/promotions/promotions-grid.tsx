@@ -11,9 +11,9 @@ const promotions = [
   { icon: Cake, title: "Караоке-батл", desc: "Победитель получает десерт в подарок", badge: "Каждую пятницу" },
 ]
 
-export function PromotionsGrid() {
+export function PromotionsGrid({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${className ?? ""}`}>
       {promotions.map((p, i) => {
         const Icon = p.icon
         return (

@@ -7,9 +7,9 @@ export default function VipPage() {
   return (
     <>
       <Breadcrumb />
-      <VipHero />
-      <VipBenefits />
-      <VipCard />
+      <VipHero className="py-8" />
+      <VipBenefits className="py-8" />
+      <VipCard className="py-8" />
     </>
   )
 }

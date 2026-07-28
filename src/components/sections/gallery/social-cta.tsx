@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { Send } from "lucide-react"
 
-export function SocialCta() {
+export function SocialCta({ className }: { className?: string }) {
   return (
-    <Card className="p-5 text-center mb-8">
+    <Card className={`p-5 text-center ${className ?? ""}`}>
       <p className="text-sm text-[var(--color-text-secondary)] mb-4">
         Хочешь оставить своё фото или видео? Отмечай нас в соцсетях или отправляй в директ!
       </p>

@@ -38,10 +38,10 @@ export default function GalleryPage() {
           Фото и видеоотчёты
         </p>
 
-        <HeroCards />
-        <PhotosGrid photos={photos} />
-        <VideosGrid videos={videos} />
-        <SocialCta />
+        <HeroCards className="py-6" />
+        <PhotosGrid photos={photos} className="py-8" />
+        <VideosGrid videos={videos} className="py-8" />
+        <SocialCta className="py-8" />
     </>
   )
 }

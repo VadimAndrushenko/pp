@@ -2,11 +2,11 @@ import Link from "next/link"
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { CalendarCheck } from "lucide-react"
 
-export function EventsHeader() {
+export function EventsHeader({ className }: { className?: string }) {
   return (
-    <>
+    <div className={className}>
       <Breadcrumb />
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between">
         <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
           Афиша мероприятий
         </h1>
@@ -22,9 +22,9 @@ export function EventsHeader() {
           Что сегодня?
         </Link>
       </div>
-      <p className="text-sm text-[var(--color-text-secondary)] mb-6">
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Каждый день что-то происходит! Выбирай событие по душе и присоединяйся.
       </p>
-    </>
+    </div>
   )
 }

@@ -22,8 +22,7 @@ export function EventsPreview({
   className = "",
 }: EventsPreviewProps) {
   return (
-    <section className={`px-5 py-8 ${className}`}>
-      <div className="max-w-7xl mx-auto">
+    <section className={className}>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl md:text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
             {title}
@@ -43,7 +42,6 @@ export function EventsPreview({
             <EventCard key={event.id} event={event} variant="carousel" />
           ))}
         </Slider>
-      </div>
     </section>
   )
 }
