@@ -1,26 +1,43 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, Phone } from "lucide-react"
 import { workingHours } from "@/config/links"
+import { cn } from "@/lib/utils"
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20)
+    const handler = () => {
+      const currentY = window.scrollY
+      setScrolled(currentY > 20)
+
+      if (currentY > 100 && currentY > lastScrollY.current) {
+        setHidden(true)
+        setIsOpen(false)
+      } else {
+        setHidden(false)
+      }
+
+      lastScrollY.current = currentY
+    }
     window.addEventListener("scroll", handler, { passive: true })
     return () => window.removeEventListener("scroll", handler)
   }, [])
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
-        scrolled ? "shadow-[0_4px_20px_rgba(0,0,0,0.5)]" : ""
-      }`}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500",
+        hidden ? "-translate-y-full" : "translate-y-0",
+        scrolled && "shadow-[0_4px_20px_rgba(0,0,0,0.5)]",
+      )}
       style={{
         backgroundColor: scrolled ? "rgba(10, 10, 10, 0.95)" : "var(--color-bg)",
         borderColor: "var(--color-border)",
@@ -45,6 +62,15 @@ export function Header() {
             </div>
           </div>
 
+          <Link
+            href="/contacts"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-display font-bold uppercase text-xs tracking-wider border-2 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,106,0,0.4)]"
+            style={{ borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
+          >
+            <Phone className="w-3.5 h-3.5" />
+            Контакты
+          </Link>
+
           <button className="flex items-center gap-1 px-3 py-1 rounded-[var(--radius-sm)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-all duration-200">
             RU
             <ChevronDown className="w-3 h-3" />
@@ -61,12 +87,14 @@ export function Header() {
       </div>
 
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-screen" : "max-h-0"
-        }`}
-        style={{ backgroundColor: "var(--color-surface)" }}
+        className="lg:hidden grid transition-all duration-500 ease-in-out"
+        style={{
+          gridTemplateRows: isOpen ? "1fr" : "0fr",
+          backgroundColor: "var(--color-surface)",
+        }}
       >
-        <div className="px-5 py-4 flex flex-col gap-4 text-sm font-display uppercase">
+        <div className="overflow-hidden">
+          <div className="px-5 py-4 flex flex-col gap-4 text-sm font-display uppercase">
           <div className="flex flex-col gap-2 text-[var(--color-text-muted)]">
             <div className="flex justify-between">
               <span>{workingHours.weekdays.label}</span>
@@ -77,10 +105,20 @@ export function Header() {
               <span className="text-[var(--color-accent)] font-bold">{workingHours.weekends.hours}</span>
             </div>
           </div>
+          <Link
+            href="/contacts"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-full font-display font-bold uppercase text-sm tracking-wider border-2 transition-all duration-200"
+            style={{ borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
+          >
+            <Phone className="w-4 h-4" />
+            Контакты
+          </Link>
+
           <button className="flex items-center justify-center gap-1 w-full py-2 rounded-[var(--radius-sm)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">
             RU
             <ChevronDown className="w-3 h-3" />
           </button>
+        </div>
         </div>
       </div>
     </header>

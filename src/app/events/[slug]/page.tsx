@@ -1,5 +1,18 @@
 import Link from "next/link"
-import { Armchair, Calendar, Camera, ChevronRight, Martini, Mic2, PersonStanding, UtensilsCrossed, Wine, Users } from "lucide-react"
+import Image from "next/image"
+
+import {
+  Calendar,
+  Camera,
+  Clock,
+  Martini,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  UtensilsCrossed,
+  Users,
+  Wine,
+} from "lucide-react"
 
 /**
  * Статичная версия страницы афиши (event detail).
@@ -7,176 +20,194 @@ import { Armchair, Calendar, Camera, ChevronRight, Martini, Mic2, PersonStanding
  * Когда будешь возвращать динамику — замени константу EVENT на event из props/API,
  * структура JSX останется той же.
  *
- * Layout:
- * - Мобилка (<lg): одна колонка, порядок как раньше — фото, заголовок, всё остальное.
- * - Десктоп (lg+): 2 колонки — слева sticky-фото, справа контент. Контейнер до max-w-7xl.
+ * Layout: единая колонка сверху вниз на всех разрешениях. Своего контейнера/max-w
+ * не задаём — ширину и отступы (px-3 sm:px-4, max-w-7xl) даёт <main> в layout.tsx.
+ * На lg+ типографика и отступы масштабируются вверх, чтобы страница
+ * занимала всё доступное пространство внутри контейнера.
  *
  * Допущение: шапка (лого + бургер) и нижний таб-бар — это layout.tsx, сюда не включены.
  */
 
 const EVENT = {
   heroImage: "/images/events/monday-afterparty.png",
+  karaokeImage: "/images/events/karaoke-banner.png",
   badgeTitle: "POIDEM POZHREM",
   badgeSubtitle: "RESTAURANT · BAR\nKARAOKE · CAFE",
-  titleLine1: "ПОНЕДЕЛЬНИК",
-  titleLine2: "AFTER",
-  titleLine3: "WEEKEND PARTY",
+  scheduleLabel: "ПОНЕДЕЛЬНИК",
+  scheduleTime: "21:00",
+  titleLine1: "AFTER",
+  titleLine2: "WEEKEND",
+  titleLine3: "PARTY",
   subtitle: "ПРОДОЛЖАЕМ ВЫХОДНЫЕ ВМЕСТЕ!",
-  scheduleLabel: "КАЖДЫЙ ПОНЕДЕЛЬНИК",
-  scheduleTime: "19:00",
-  lead: "Лёгкая атмосфера, вкусная кухня,\nлюбимые люди и отличный старт недели!",
-  ctaLabel: "ЗАБРОНИРОВАТЬ СТОЛ",
   description:
     "Если после насыщенных выходных вам не хочется в рутину — понедельник создан именно для этой встречи. Вкусный ужин, любимые напитки, новые знакомства и отличное настроение с первых минут.",
-  featuresHeading: "ЧТО ВАС ЖДЁТ:",
+  ctaLabel: "ЗАБРОНИРОВАТЬ СТОЛ",
+  featuresHeading: "В ПРОГРАММЕ",
   features: [
-    { icon: Wine, label: "ЛЁГКАЯ АТМОСФЕРА" },
-    { icon: Martini, label: "АВТОРСКИЕ КОКТЕЙЛИ" },
-    { icon: UtensilsCrossed, label: "ВКУСНАЯ КУХНЯ НА ЛЮБОЙ ВКУС" },
-    { icon: Users, label: "НОВЫЕ ЗНАКОМСТВА" },
-    { icon: Camera, label: "ФОТО И ВОСПОМИНАНИЯ" },
+    { icon: Wine, title: "ЛЁГКАЯ АТМОСФЕРА", desc: "Расслабленный вечер без суеты" },
+    { icon: Martini, title: "АВТОРСКИЕ КОКТЕЙЛИ", desc: "Напитки от бармена по особым ценам" },
+    { icon: UtensilsCrossed, title: "ВКУСНАЯ КУХНЯ", desc: "Блюда на любой вкус" },
+    { icon: Users, title: "НОВЫЕ ЗНАКОМСТВА", desc: "Общение, знакомства и драйв" },
+    { icon: Camera, title: "ФОТО И ВОСПОМИНАНИЯ", desc: "Яркие кадры на память" },
   ],
   karaoke: {
     lineTop: "ПОСЛЕ ОСНОВНОЙ ПРОГРАММЫ —",
     lineHighlight: "КАРАОКЕ И ТАНЦЫ",
     lineBottom: "ДО САМОГО УТРА!",
   },
-  bottomCtaTitle: "ЗАБРОНИРОВАТЬ СТОЛ",
-  bottomCtaSubtitle: "ГАРАНТИРУЕМ ЛУЧШИЕ МЕСТА",
+  infoBar: [
+    { icon: Clock, label: "СТАРТ", value: "21:00" },
+    { icon: Calendar, label: "ДЕНЬ", value: "ПОНЕДЕЛЬНИК" },
+    { icon: MapPin, label: "МЕСТО", value: "POIDEM POZHREM" },
+    { icon: ShieldCheck, label: "ВОЗРАСТ", value: "18+" },
+  ],
   bookingHref: "https://wa.me/84855559797",
 }
 
 export default function EventPage() {
   return (
-    <div className="min-h-screen bg-[var(--color-bg)]">
-      <div className="mx-auto max-w-7xl px-4 pb-10 lg:px-8 lg:pb-16">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-14 lg:items-start">
-          {/* LEFT COLUMN (desktop) — HERO */}
-          <div className="lg:sticky lg:top-8">
-            <div
-              className="relative h-[220px] w-[calc(100%+2rem)] -mx-4 bg-cover bg-center lg:mx-0 lg:h-[560px] lg:w-full lg:rounded-[var(--radius-card)] lg:overflow-hidden"
-              style={{ backgroundImage: `url(${EVENT.heroImage})`, backgroundColor: "var(--color-surface)" }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-            </div>
-          </div>
-
-          {/* RIGHT COLUMN (desktop) — CONTENT */}
-          <div className="mt-8 lg:mt-0">
-            {/* TITLE BLOCK */}
-            <div className="text-center lg:text-left">
-              <h1 className="font-display font-extrabold uppercase leading-[0.95] text-4xl text-[var(--color-text-primary)] lg:text-6xl">
-                {EVENT.titleLine1}
-              </h1>
-              <h1 className="mt-1 font-display font-extrabold uppercase leading-[0.95] text-5xl text-[var(--color-accent)] lg:text-7xl">
-                {EVENT.titleLine2}
-              </h1>
-              <h1 className="mt-1 font-display font-extrabold uppercase leading-[0.95] text-4xl text-[var(--color-accent)] lg:text-6xl">
-                {EVENT.titleLine3}
-              </h1>
-              <p className="mt-4 text-sm uppercase tracking-wide text-[var(--color-text-secondary)] lg:text-base">
-                {EVENT.subtitle}
-              </p>
-            </div>
-
-            {/* SCHEDULE BAR */}
-            <div className="neon-card mt-6 flex items-center justify-center gap-3 rounded-[var(--radius-card)] border border-[var(--color-border)] py-4 lg:justify-start lg:px-6 lg:py-5">
-              <Calendar className="h-5 w-5 text-[var(--color-accent)] lg:h-6 lg:w-6" />
-              <span className="font-display font-bold uppercase text-sm text-[var(--color-text-primary)] sm:text-base lg:text-lg">
-                {EVENT.scheduleLabel}
-              </span>
-              <span className="h-5 w-px bg-[var(--color-border)] lg:h-6" />
-              <span className="font-display font-bold text-sm text-[var(--color-accent)] sm:text-base lg:text-lg">
+    <div>
+      {/* Постер: фото + заголовок поверх на градиенте */}
+      {/* <div
+        className="relative mt-4 w-[calc(100%+1.5rem)] -mx-3 bg-cover bg-center sm:w-[calc(100%+2rem)] sm:-mx-4 lg:mx-0 lg:w-full lg:rounded-[var(--radius-card)] lg:overflow-hidden aspect-[16/9] max-h-[80vh] flex flex-col justify-end"
+        style={{ backgroundImage: `url(${EVENT.heroImage})`, backgroundColor: "var(--color-surface)" }}
+        role="img"
+        aria-label={`${EVENT.titleLine1} ${EVENT.titleLine2} ${EVENT.titleLine3}`}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="absolute left-4 top-4 z-10 lg:left-8 lg:top-8">
+          
+        </div>
+        <div className="relative z-10 px-5 pb-6 lg:px-12 lg:pb-12">
+          <h1 className="font-display font-extrabold uppercase leading-[0.95] text-4xl text-[var(--color-text-primary)] lg:text-7xl xl:text-8xl">
+            {EVENT.titleLine1}
+          </h1>
+          <h1 className="font-display font-extrabold uppercase leading-[0.95] text-4xl text-[var(--color-text-primary)] lg:text-7xl xl:text-8xl">
+            {EVENT.titleLine2}
+          </h1>
+          <h1 className="font-display font-extrabold uppercase leading-[0.95] text-5xl text-[var(--color-accent)] lg:text-8xl xl:text-9xl">
+            {EVENT.titleLine3}
+          </h1>
+          <p className="link-underline mt-3 inline-block text-sm uppercase tracking-wide text-[var(--color-text-primary)] lg:mt-5 lg:text-2xl">
+            {EVENT.subtitle}
+          </p>
+        </div>
+      </div> */}
+      <div className="relative flex items-center pt-6 mb-10 md:min-h-[320px] min-[550px]:max-md:min-h-[250px]">
+        <div className="space-y-2.5 w-[40%] max-lg:w-[60%]">
+          <div className="flex gap-3" >
+            <div className="neon-card inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] px-4 py-2 lg:px-6 lg:py-3">
+              <Clock className="h-4 w-4 text-[var(--color-accent)] lg:h-5 lg:w-5" />
+              <span className="font-display font-bold text-sm text-[var(--color-text-primary)] lg:text-xl">
                 {EVENT.scheduleTime}
               </span>
             </div>
-
-            {/* LEAD TEXT */}
-            <p className="mt-6 whitespace-pre-line text-center text-lg font-medium text-[var(--color-text-primary)] lg:text-left lg:text-xl">
-              {EVENT.lead}
-            </p>
-
-            {/* CTA */}
-            <Link
-              href={EVENT.bookingHref}
-              className="hover-lift mt-6 flex items-center justify-center gap-2 rounded-[var(--radius-card)] bg-[var(--color-accent)] py-4 font-display font-bold uppercase text-sm text-black transition-colors hover:bg-[var(--color-accent-hover)] sm:text-base lg:max-w-md lg:justify-start lg:px-6 lg:text-base"
-            >
-              <Armchair className="h-5 w-5" />
-              {EVENT.ctaLabel}
-            </Link>
-
-            {/* DESCRIPTION */}
-            <p className="mt-6 text-center text-sm leading-relaxed text-[var(--color-text-secondary)] lg:text-left lg:text-base">
-              {EVENT.description}
-            </p>
-
-            {/* FEATURES */}
-            <h3 className="mb-4 mt-8 text-center font-display font-bold uppercase text-sm tracking-wide text-[var(--color-accent)] lg:text-left lg:text-base">
-              {EVENT.featuresHeading}
-            </h3>
-            <div className="grid grid-cols-5 gap-1 lg:gap-3">
-              {EVENT.features.map((f, i) => {
-                const Icon = f.icon
-                return (
-                  <div
-                    key={f.label}
-                    className={`hover-glow-accent flex flex-col items-center px-1 text-center ${
-                      i !== 0 ? "border-l border-[var(--color-border)]" : ""
-                    }`}
-                  >
-                    <Icon className="mb-2 h-6 w-6 text-[var(--color-accent)] lg:h-8 lg:w-8" strokeWidth={1.5} />
-                    <span className="text-[9px] uppercase leading-tight text-[var(--color-text-primary)]/90 lg:text-[11px]">
-                      {f.label}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* KARAOKE BANNER */}
-            <div className="neon-card mt-8 flex items-center justify-between gap-3 rounded-[var(--radius-card)] border border-[var(--color-border)] p-4 lg:p-6">
-              <Mic2
-                className="animate-float h-10 w-10 shrink-0 text-[var(--color-accent)] lg:h-14 lg:w-14"
-                strokeWidth={1.5}
-                style={{ filter: "drop-shadow(0 0 10px var(--color-accent-dim))" }}
-              />
-              <p className="flex-1 text-center leading-snug">
-                <span className="block text-xs uppercase text-[var(--color-text-primary)] lg:text-sm">
-                  {EVENT.karaoke.lineTop}
-                </span>
-                <span className="my-0.5 block font-display font-extrabold uppercase text-2xl text-[var(--color-accent)] lg:text-4xl">
-                  {EVENT.karaoke.lineHighlight}
-                </span>
-                <span className="block font-bold uppercase text-sm text-[var(--color-text-primary)] lg:text-base">
-                  {EVENT.karaoke.lineBottom}
-                </span>
-              </p>
-              <div className="flex shrink-0 text-[var(--color-accent)]">
-                <PersonStanding className="h-6 w-6 lg:h-9 lg:w-9" strokeWidth={1.5} />
-                <PersonStanding className="-ml-2 h-6 w-6 scale-x-[-1] lg:h-9 lg:w-9" strokeWidth={1.5} />
-              </div>
-            </div>
-
-            {/* BOTTOM CTA BAR */}
-            <Link
-              href={EVENT.bookingHref}
-              className="hover-lift mt-6 flex items-center gap-3 rounded-[var(--radius-card)] bg-[var(--color-accent)] px-5 py-4 text-black transition-colors hover:bg-[var(--color-accent-hover)] lg:px-6 lg:py-5"
-            >
-              <Calendar className="h-6 w-6 shrink-0 lg:h-7 lg:w-7" />
-              <span className="flex-1">
-                <span className="block font-display font-bold uppercase text-base leading-tight lg:text-lg">
-                  {EVENT.bottomCtaTitle}
-                </span>
-                <span className="block text-[11px] uppercase leading-tight opacity-80 lg:text-xs">
-                  {EVENT.bottomCtaSubtitle}
-                </span>
+            <div className="flex items-center gap-3">
+              <span className="font-display font-bold uppercase text-sm tracking-wide text-[var(--color-text-secondary)] lg:text-lg">
+                {EVENT.scheduleLabel}
               </span>
-              <ChevronRight className="h-5 w-5 shrink-0 lg:h-6 lg:w-6" />
-            </Link>
+            </div>
           </div>
+          <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] md:mb-7 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
+            AFTER WEEKEND <span className="text-accent">PARTY</span>
+          </h1>
+          <p className="text-5xl text-[var(--color-accent)] font-display uppercase tracking-wider md:mb-5 max-lg:text-3xl max-md:text-xl max-sm:text-lg">
+            ПРОДОЛЖАЕМ ВЫХОДНЫЕ ВМЕСТЕ!
+          </p>
+        </div>
+        <div className="absolute  right-0 w-[100%] sm:left-10 h-[150%] rounded-[var(--radius-card)] -z-10 min-[460px]:max-sm:h-[170%] max-sm:right-3">
+          <Image
+            src="/images/events/monday-afterparty.png"
+            alt="Доставка еды и кальянов"
+            fill
+            className="lg:object-contain max-lg:object-cover"
+          />
         </div>
       </div>
+
+      {/* Описание */}
+      <p className="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-relaxed text-[var(--color-text-secondary)] lg:mt-10 lg:pl-6 lg:text-xl">
+        {EVENT.description}
+      </p>
+
+      {/* Программа */}
+      <h3 className="mb-6 max-lg:mb-4 mt-12 max-lg:mt-8 font-display font-bold uppercase text-4xl tracking-wide text-[var(--color-text-primary)]">
+        {EVENT.featuresHeading}
+      </h3>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-5">
+        {EVENT.features.map((f) => {
+          const Icon = f.icon
+          return (
+            <div
+              key={f.title}
+              className="hover-lift neon-card flex flex-col items-center gap-2 rounded-[var(--radius-card)] border border-[var(--color-border)] p-4 text-center lg:gap-4 lg:p-8"
+            >
+              <Icon className="h-12 w-12 max-lg:h-8 max-lg:w-8 text-[var(--color-accent)]" strokeWidth={1.5} />
+              <span className="font-display font-bold uppercase text-lg max-lg:text-sm leading-tight text-[var(--color-text-primary)]">
+                {f.title}
+              </span>
+              <span className="text-base max-lg:text-xs leading-snug text-[var(--color-text-secondary)]">
+                {f.desc}
+              </span>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Караоке-баннер */}
+      <div className="relative mt-12 max-lg:mt-8 min-h-[230px] flex items-center overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] aspect-[16/6] max-sm:aspect-auto">
+        <Image
+          src={EVENT.karaokeImage}
+          alt="Караоке и танцы"
+          fill
+          className="relative object-contain max-sm:object-cover max-sm:object-[20%_50%]"
+        />
+        <p className="relative w-full pl-[50%] leading-snug ">
+          <span className="block text-3xl max-lg:text-xl uppercase text-[var(--color-text-primary)] max-md:text-base max-sm:text-sm">
+            {EVENT.karaoke.lineTop}
+          </span>
+          <span className="my-3 max-lg:my-1 block font-display font-extrabold uppercase text-8xl max-lg:text-6xl text-[var(--color-accent)] max-md:text-4xl max-sm:text-2xl">
+            {EVENT.karaoke.lineHighlight}
+          </span>
+          <span className="block font-bold uppercase text-4xl max-lg:text-3xl text-[var(--color-text-primary)] max-md:text-xl max-sm:text-base">
+            {EVENT.karaoke.lineBottom}
+          </span>
+        </p>
+      </div>
+
+      {/* Инфо-бар */}
+      <div className="neon-card mt-6 grid grid-cols-2 gap-y-4 rounded-[var(--radius-card)] border border-[var(--color-border)] py-5 sm:grid-cols-4 lg:mt-12 lg:py-8">
+        {EVENT.infoBar.map((item, i) => {
+          const Icon = item.icon
+          return (
+            <div
+              key={item.label}
+              className={`flex flex-col items-center gap-1 px-2 text-center lg:gap-2 ${
+                i % 2 === 1 ? "border-l border-[var(--color-border)]" : ""
+              } ${i >= 2 ? "border-t border-[var(--color-border)] sm:border-t-0 pt-2 " : ""} ${
+                i > 0 ? "sm:border-l sm:border-[var(--color-border)]" : ""
+              }`}
+            >
+              <Icon className="h-5 w-5 text-[var(--color-accent)] lg:h-8 lg:w-8" strokeWidth={1.5} />
+              <span className="text-[10px] uppercase tracking-wide text-[var(--color-text-secondary)] lg:text-sm">
+                {item.label}
+              </span>
+              <span className="font-display font-bold text-xs uppercase text-[var(--color-text-primary)] lg:text-xl">
+                {item.value}
+              </span>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* CTA */}
+      <Link
+        href={EVENT.bookingHref}
+        className="hover-lift mb-8 mt-6 flex items-center justify-center gap-2 rounded-[var(--radius-card)] bg-[var(--color-accent)] py-4 font-display font-bold uppercase text-sm text-black transition-colors hover:bg-[var(--color-accent-hover)] sm:text-base lg:mt-12 lg:py-6 lg:text-2xl"
+      >
+        <Phone className="h-5 w-5 lg:h-7 lg:w-7" />
+        {EVENT.ctaLabel}
+      </Link>
     </div>
   )
 }

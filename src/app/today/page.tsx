@@ -23,9 +23,8 @@ export default function TodayPage() {
   ]
 
   return (
-    <div className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+    <>
+      <div className="flex items-center justify-between mb-6">
           <Breadcrumb />
           <span className="inline-flex items-center gap-1.5 text-xl font-display uppercase tracking-wider px-4 py-2 rounded-[var(--radius-sm)] border border-[var(--color-border)]">
             <span style={{ color: "var(--color-accent)" }}>24</span>
@@ -105,7 +104,6 @@ export default function TodayPage() {
             style={{ backgroundImage: "url('https://picsum.photos/seed/poidem-interior-night/400/400')", backgroundColor: "var(--color-surface)" }}
           />
         </Card>
-      </div>
-    </div>
+    </>
   )
 }

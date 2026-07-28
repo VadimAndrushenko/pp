@@ -21,9 +21,8 @@ const videos = [
 
 export default function GalleryPage() {
   return (
-    <div className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-start justify-between mb-6">
+    <>
+      <div className="flex items-start justify-between mb-6">
           <div>
             <Breadcrumb />
           </div>
@@ -43,7 +42,6 @@ export default function GalleryPage() {
         <PhotosGrid photos={photos} />
         <VideosGrid videos={videos} />
         <SocialCta />
-      </div>
-    </div>
+    </>
   )
 }

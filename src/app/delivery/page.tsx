@@ -9,25 +9,23 @@ import { DeliveryZones } from "@/components/sections/delivery/zones-section"
 
 export default function DeliveryPage() {
   return (
-    <div className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <Breadcrumb />
+    <>
+      <Breadcrumb />
 
-        <DeliveryHero />
-        <InfoCards />
-        <ServicesSection />
-        <DeliveryMethods />
-        <DeliveryZones/>
+      <DeliveryHero />
+      <InfoCards />
+      <ServicesSection />
+      <DeliveryMethods />
+      <DeliveryZones/>
 
-        <PromoBanner
-          title="VIP CLUB"
-          description="Вступай в наш VIP CLUB и получай до 50% кешбэк!"
-          href="/vip"
-          className="mb-8"
-        />
+      <PromoBanner
+        title="VIP CLUB"
+        description="Вступай в наш VIP CLUB и получай до 50% кешбэк!"
+        href="/vip"
+        className="mb-8"
+      />
 
-        <CTABanner />
-      </div>
-    </div>
+      <CTABanner />
+    </>
   )
 }

@@ -46,8 +46,6 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 @media (min-width: 1280px) {
@@ -60,9 +58,10 @@ body {
   background: var(--color-bg);
   color: var(--color-text-primary);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   width: 100%;
   position: relative;
+  padding-top: 80px;
 }
 
 html, body {

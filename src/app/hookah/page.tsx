@@ -9,17 +9,15 @@ import { HookahVIP } from "@/components/sections/hookah/vip"
 
 export default function HookahPage() {
   return (
-    <div className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <Breadcrumb />
-        <HookahHero />
-        <HookahMenuCards />
-        <HookahFeatures />
-        <HookahPrices />
-        <HookahDelivery />
-        <CTABanner />
-        <HookahVIP />
-      </div>
-    </div>
+    <>
+      <Breadcrumb />
+      <HookahHero />
+      <HookahMenuCards />
+      <HookahFeatures />
+      <HookahPrices />
+      <HookahDelivery />
+      <CTABanner />
+      <HookahVIP />
+    </>
   )
 }

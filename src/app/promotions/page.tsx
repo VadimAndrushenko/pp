@@ -5,13 +5,11 @@ import { PromotionsBanner } from "@/components/sections/promotions/promotions-ba
 
 export default function PromotionsPage() {
   return (
-    <div className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <Breadcrumb />
-        <PromotionsHero />
-        <PromotionsGrid />
-        <PromotionsBanner />
-      </div>
-    </div>
+    <>
+      <Breadcrumb />
+      <PromotionsHero />
+      <PromotionsGrid />
+      <PromotionsBanner />
+    </>
   )
 }

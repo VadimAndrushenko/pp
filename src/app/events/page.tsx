@@ -25,9 +25,8 @@ export default function EventsPage() {
   const filtered = activeTab === "all" ? events : events.filter((e) => e.category === activeTab)
 
   return (
-    <div className="px-5 py-6">
-      <div className="max-w-7xl mx-auto">
-        <EventsHeader />
+    <>
+      <EventsHeader />
 
         <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} tabs={filterTabs} />
 
@@ -44,7 +43,6 @@ export default function EventsPage() {
             href="/promotions"
           />
         </div>
-      </div>
-    </div>
+    </>
   )
 }
