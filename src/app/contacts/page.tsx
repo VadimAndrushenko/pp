@@ -118,17 +118,17 @@ function ContactsGrid() {
     <div className="space-y-10">
       {/* ЗАГОЛОВОК — только текст, без фото, с лучами по бокам от "КОНТАКТЫ" */}
       <div className="text-center pt-2">
-        <div className="relative mx-auto flex max-w-3xl items-center justify-center">
-          <BurstLines className="absolute left-4 sm:left-8 top-1/2 h-16 w-16 -translate-y-1/2 scale-x-[-1] sm:h-24 sm:w-24 lg:h-32 lg:w-32" />
-          <h1 className="font-display font-extrabold uppercase text-6xl text-[var(--color-text-primary)] sm:text-7xl lg:text-8xl">
+        <div className="mx-auto flex max-w-3xl items-center justify-center gap-4 max-sm:gap-2">
+          <BurstLines className="h-[120px] w-[120px] shrink-0 scale-x-[-1] max-lg:h-20 max-lg:w-20 max-sm:h-16 max-sm:w-16" />
+          <h1 className="font-display font-extrabold uppercase text-8xl text-[var(--color-text-primary)] max-lg:text-7xl max-sm:text-5xl">
             КОНТАКТЫ
           </h1>
-          <BurstLines className="absolute right-4 sm:right-8 top-1/2 h-16 w-16 -translate-y-1/2 sm:h-24 sm:w-24 lg:h-32 lg:w-32" />
+          <BurstLines className="h-[120px] w-[120px] shrink-0 max-lg:h-20 max-lg:w-20 max-sm:h-16 max-sm:w-16" />
         </div>
-        <p className="mt-2 font-display font-bold uppercase text-3xl text-[var(--color-accent)] sm:text-4xl lg:text-5xl">
+        <p className="mt-2 font-display font-bold uppercase text-5xl text-[var(--color-accent)] max-lg:text-4xl max-sm:text-2xl">
           МЫ ВСЕГДА НА СВЯЗИ!
         </p>
-        <p className="mt-4 text-base text-[var(--color-text-secondary)] sm:text-lg">
+        <p className="mt-4 text-lg text-[var(--color-text-secondary)] max-sm:text-sm">
           Свяжитесь с нами удобным для вас способом
         </p>
       </div>
