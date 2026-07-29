@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, X, ChevronDown, Phone } from "lucide-react"
+import { ChevronDown, Phone } from "lucide-react"
 import { workingHours } from "@/config/links"
 import { cn } from "@/lib/utils"
 
@@ -44,7 +44,7 @@ export function Header() {
         backdropFilter: scrolled ? "blur(12px)" : "none",
       }}
     >
-      <div className="container mx-auto max-w-7xl px-3 sm:px-4 flex items-center justify-between py-3">
+      <div className="container flex items-center justify-between py-3">
         <Link href="/" className="shrink-0 group">
           <Image src="/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
         </Link>
@@ -79,10 +79,30 @@ export function Header() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden p-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors"
+          className="lg:hidden relative z-50 w-8 h-8 flex flex-col items-center justify-center gap-[5px]"
           aria-label="Меню"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <span
+            className={cn(
+              "block h-0.5 w-6 rounded-full transition-all duration-300 ease-in-out",
+              isOpen && "translate-y-[7px] rotate-45"
+            )}
+            style={{ backgroundColor: isOpen ? "var(--color-accent)" : "var(--color-text-primary)" }}
+          />
+          <span
+            className={cn(
+              "block h-0.5 w-6 rounded-full transition-all duration-300 ease-in-out",
+              isOpen && "opacity-0 scale-x-0"
+            )}
+            style={{ backgroundColor: "var(--color-text-primary)" }}
+          />
+          <span
+            className={cn(
+              "block h-0.5 w-6 rounded-full transition-all duration-300 ease-in-out",
+              isOpen && "-translate-y-[7px] -rotate-45"
+            )}
+            style={{ backgroundColor: isOpen ? "var(--color-accent)" : "var(--color-text-primary)" }}
+          />
         </button>
       </div>
 
@@ -107,6 +127,7 @@ export function Header() {
           </div>
           <Link
             href="/contacts"
+            onClick={() => setIsOpen(false)}
             className="flex items-center justify-center gap-2 w-full py-3 rounded-full font-display font-bold uppercase text-sm tracking-wider border-2 transition-all duration-200"
             style={{ borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
           >

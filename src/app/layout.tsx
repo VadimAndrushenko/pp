@@ -37,7 +37,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text-primary)] font-body antialiased">
         <Header />
-        <main className="container mx-auto max-w-7xl px-3 sm:px-4 py-6 flex-1">
+        <main className="container py-6 flex-1">
           <PageTransition>{children}</PageTransition>
         </main>
         <MapCTA />
