@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { ArrowRight, X } from "lucide-react"
+import { ArrowRight, X, Truck, Package } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import { links } from "@/config/links"
 
@@ -16,15 +16,15 @@ function IconGrab({ className, color }: { className?: string; color: string }) {
 
 function IconOwnDelivery({ color }: { color: string }) {
   return (
-    <div className="relative flex h-16 w-16 items-center justify-center">
-      <svg viewBox="0 0 24 24" className="absolute h-9 w-9 -translate-x-3 -translate-y-4" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+    <div className="relative flex h-14 w-14 items-center justify-center">
+      <svg viewBox="0 0 24 24" className="absolute h-8 w-8 -translate-x-2.5 -translate-y-3" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
         <path d="M12 12l8 -4.5" />
         <path d="M12 12l0 9" />
         <path d="M12 12l-8 -4.5" />
         <path d="M16 5.25l-8 4.5" />
       </svg>
-      <svg viewBox="0 0 24 24" className="absolute h-11 w-11 translate-x-3 translate-y-3" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" className="absolute h-9 w-9 translate-x-2.5 translate-y-2.5" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
         <path d="M5 16v1a2 2 0 0 0 4 0v-5h-3a3 3 0 0 0 -3 3v1h10a6 6 0 0 1 5 -4v-5a2 2 0 0 0 -2 -2h-1" />
         <path d="M6 9l3 0" />
@@ -39,8 +39,24 @@ const services = [
 ]
 
 const methods = [
-  { key: "grab", label: "Grab Доставка", href: links.grab, color: "var(--color-grab)" },
-  { key: "own", label: "Собственная доставка", href: null as string | null, color: "var(--color-accent)" },
+  { 
+    key: "grab", 
+    label: "Grab Доставка", 
+    description: "Быстрая доставка через приложение",
+    href: links.grab, 
+    color: "#00B14F",
+    bgGradient: "from-emerald-500/10 to-emerald-500/5",
+    glowColor: "rgba(0,177,79,0.2)"
+  },
+  { 
+    key: "own", 
+    label: "Собственная доставка", 
+    description: "Доставка от нашего ресторана",
+    href: null as string | null, 
+    color: "var(--color-accent)",
+    bgGradient: "from-orange-500/10 to-orange-500/5",
+    glowColor: "rgba(255,106,0,0.2)"
+  },
 ]
 
 type Phase = "idle" | "entering" | "open" | "leaving"
@@ -53,19 +69,32 @@ export function ServicesSection({ className }: { className?: string }) {
 
   useEffect(() => {
     if (phase !== "entering") return
+    document.documentElement.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
     const id = requestAnimationFrame(() => setPhase("open"))
     return () => cancelAnimationFrame(id)
   }, [phase])
 
   useEffect(() => {
     if (phase !== "leaving") return
-    const id = setTimeout(() => setPhase("idle"), 300)
+    const id = setTimeout(() => {
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+      setPhase("idle")
+    }, 350)
     return () => clearTimeout(id)
   }, [phase])
 
+  useEffect(() => {
+    return () => {
+      document.documentElement.style.overflow = ""
+      document.body.style.overflow = ""
+    }
+  }, [])
+
   return (
     <section className={className}>
-      <h2 className="text-5xl mb-6">Заказать</h2>
+      <h2 className="text-5xl lg:text-6xl mb-6 font-display">Заказать</h2>
       <div className="grid grid-cols-2 gap-11 max-lg:gap-6 max-[500px]:grid-cols-1">
         {services.map((s, i) => (
           <div key={i}>
@@ -79,9 +108,9 @@ export function ServicesSection({ className }: { className?: string }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="absolute bottom-0 z-10 flex flex-col flex-1 gap-2 p-5">
-                <h3 className="flex justify-center gap-3 text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] min-[500px]:max-sm:text-xl max-[450px]:text-xl">
+                <h3 className="flex justify-center gap-3 text-3xl lg:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] min-[500px]:max-sm:text-xl max-[450px]:text-xl">
                   {s.title}
-                  <ArrowRight className="w-10 h-10 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 min-[500px]:max-sm:w-6 min-[500px]:max-sm:h-6 max-[450px]:w-8 max-[450px]:h-8" strokeWidth={2} />
+                  <ArrowRight className="w-10 h-10 lg:w-12 lg:h-12 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 min-[500px]:max-sm:w-6 min-[500px]:max-sm:h-6 max-[450px]:w-8 max-[450px]:h-8" strokeWidth={2} />
                 </h3>
               </div>
             </Card>
@@ -91,40 +120,90 @@ export function ServicesSection({ className }: { className?: string }) {
 
       {phase !== "idle" && (
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center ${
+          className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${
             phase === "leaving" ? "animate-overlay-leave" : "animate-overlay-enter"
           }`}
-          style={{ backgroundColor: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
+          style={{ backgroundColor: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)" }}
           onClick={close}
         >
           <div
-            className={`relative flex flex-col items-center min-[450px]:bg-[var(--color-surface)] gap-6 min-[450px]:p-8 rounded-[var(--radius-card)] min-[450px]:border border-[var(--color-border)] ${
+            className={`relative w-full max-w-lg bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-2xl overflow-hidden ${
               phase === "leaving" ? "animate-modal-leave" : "animate-modal-enter"
             }`}
             onClick={(e) => e.stopPropagation()}
           >
-            <button onClick={close} className="absolute top-2 right-2 p-1 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
-              <X className="w-5 h-5 max-[450px]:hidden" />
+            {/* Декоративный градиент сверху */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500" />
+            
+            {/* Кнопка закрытия */}
+            <button 
+              onClick={close} 
+              className="absolute top-2 right-2 z-10 p-2 rounded-full bg-black/5 hover:bg-black/10 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-all duration-200 hover:rotate-90"
+            >
+              <X className="w-5 h-5" strokeWidth={2} />
             </button>
-            <div className="flex gap-4 bg-[var(--color-surface)] max-[375px]:flex-col">
-              {methods.map((m) => {
-                const Tag = m.href ? "a" : "button"
-                return (
-                  <Tag
-                    key={m.key}
-                    href={m.href ?? undefined}
-                    className="flex flex-1 flex-col items-center gap-3 rounded-[var(--radius-card)] border-2 px-6 py-5 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] min-w-[160px] max-sm:px-3 max-sm:py-2 max-[375px]:w-full"
-                    style={{ borderColor: m.color, color: m.color }}
-                  >
-                    {m.key === "grab" ? (
-                      <IconGrab className="w-15 h-15" color={m.color} />
-                    ) : (
-                      <IconOwnDelivery color={m.color} />
-                    )}
-                    <span className="font-display text-sm font-bold uppercase tracking-wide">{m.label}</span>
-                  </Tag>
-                )
-              })}
+
+            <div className="p-8 max-sm:p-6">
+              {/* Заголовок */}
+              <div className="text-center mb-8">
+                <h3 className="text-2xl lg:text-3xl font-display font-bold text-[var(--color-text-primary)] mb-2">
+                  Выберите способ доставки
+                </h3>
+                <p className="text-sm lg:text-base text-[var(--color-text-muted)]">
+                  Как вам удобнее получить заказ?
+                </p>
+              </div>
+
+              {/* Карточки методов */}
+              <div className="flex gap-4 max-[420px]:flex-col">
+                {methods.map((m) => {
+                  const Tag = m.href ? "a" : "button"
+                  return (
+                    <Tag
+                      key={m.key}
+                      href={m.href ?? undefined}
+                      className="group/method relative flex-1 flex flex-col items-center gap-4 rounded-xl border-2 px-6 py-8 text-center transition-all duration-300 hover:-translate-y-1 max-sm:px-4 max-sm:py-6 max-[420px]:w-full overflow-hidden"
+                      style={{ 
+                        borderColor: m.color,
+                        color: m.color,
+                      }}
+                    >
+                      {/* Фоновый градиент при наведении */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover/method:opacity-100 transition-opacity duration-300 bg-gradient-to-br"
+                        style={{ 
+                          background: `linear-gradient(135deg, ${m.glowColor.replace('0.2', '0.08')} 0%, transparent 60%)` 
+                        }}
+                      />
+                      
+                      {/* Иконка с анимацией */}
+                      <div className="relative transition-transform duration-300 group-hover/method:scale-110">
+                        {m.key === "grab" ? (
+                          <IconGrab className="w-14 h-14" color={m.color} />
+                        ) : (
+                          <IconOwnDelivery color={m.color} />
+                        )}
+                      </div>
+
+                      {/* Текст */}
+                      <div className="relative flex flex-col gap-1.5">
+                        <span className="font-display text-sm lg:text-base font-bold uppercase tracking-wide leading-tight">
+                          {m.label}
+                        </span>
+                        <span className="text-xs lg:text-sm opacity-70 leading-relaxed">
+                          {m.description}
+                        </span>
+                      </div>
+
+                      {/* Индикатор действия */}
+                      <div className="relative mt-1 flex items-center gap-1 text-xs lg:text-sm font-medium opacity-0 group-hover/method:opacity-100 transition-all duration-300 translate-y-1 group-hover/method:translate-y-0">
+                        <span>{m.href ? "Перейти" : "Заказать"}</span>
+                        <ArrowRight className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform duration-300 group-hover/method:translate-x-0.5" />
+                      </div>
+                    </Tag>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
