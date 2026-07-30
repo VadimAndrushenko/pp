@@ -17,8 +17,8 @@ interface EventsPreviewProps {
 export function EventsPreview({
   title = "Афиша мероприятий",
   events,
-  linkHref = "/events",
-  linkLabel = "Смотреть всю афишу",
+  linkHref,
+  linkLabel,
   className = "",
 }: EventsPreviewProps) {
   return (
@@ -27,14 +27,16 @@ export function EventsPreview({
           <h2 className="text-2xl md:text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
             {title}
           </h2>
-          <Link
-            href={linkHref}
-            className="text-xs font-display uppercase tracking-wider flex items-center gap-1 link-underline shrink-0"
-            style={{ color: "var(--color-accent)" }}
-          >
-            {linkLabel}
-            <ArrowRight className="w-3 h-3" />
-          </Link>
+          {linkLabel && linkHref && (
+            <Link
+              href={linkHref}
+              className="text-xs font-display uppercase tracking-wider flex items-center gap-1 link-underline shrink-0"
+              style={{ color: "var(--color-accent)" }}
+            >
+              {linkLabel}
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          )}
         </div>
 
         <Slider cols={{ base: 1,[380]:2 ,sm:3 , md:4 , lg: 5 }}>

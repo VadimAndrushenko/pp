@@ -1,5 +1,5 @@
-import Link from "next/link"
 import Image from "next/image"
+import { notFound } from "next/navigation"
 
 import {
   Calendar,
@@ -7,136 +7,203 @@ import {
   Clock,
   Martini,
   MapPin,
-  Phone,
   ShieldCheck,
   UtensilsCrossed,
   Users,
   Wine,
+  Music,
+  MicVocal,
+  Brain,
+  Briefcase,
+  Sparkles,
+  Star,
+  Coffee,
+  Trophy,
+  Lightbulb,
+  Beer,
+  Heart,
+  Gift,
+  Dices,
+  Handshake,
+  CupSoda,
+  Disc3,
+  Smile,
+  Soup,
 } from "lucide-react"
 
-/**
- * Статичная версия страницы афиши (event detail).
- * Контент захардкожен под конкретное событие — "Понедельник — After Weekend Party".
- * Когда будешь возвращать динамику — замени константу EVENT на event из props/API,
- * структура JSX останется той же.
- *
- * Layout: единая колонка сверху вниз на всех разрешениях. Своего контейнера/max-w
- * не задаём — ширину и отступы (px-3 sm:px-4, max-w-7xl) даёт <main> в layout.tsx.
- * На lg+ типографика и отступы масштабируются вверх, чтобы страница
- * занимала всё доступное пространство внутри контейнера.
- *
- * Допущение: шапка (лого + бургер) и нижний таб-бар — это layout.tsx, сюда не включены.
- */
+import { BookingButton } from "@/components/ui/booking-button"
+import { Breadcrumb } from "@/components/layout/breadcrumb"
+import { events } from "@/config/events"
 
-const EVENT = {
-  heroImage: "/images/events/monday-afterparty.png",
-  karaokeImage: "/images/events/karaoke-banner.png",
-  badgeTitle: "POIDEM POZHREM",
-  badgeSubtitle: "RESTAURANT · BAR\nKARAOKE · CAFE",
-  scheduleLabel: "ПОНЕДЕЛЬНИК",
-  scheduleTime: "21:00",
-  titleLine1: "AFTER",
-  titleLine2: "WEEKEND",
-  titleLine3: "PARTY",
-  subtitle: "ПРОДОЛЖАЕМ ВЫХОДНЫЕ ВМЕСТЕ!",
-  description:
-    "Если после насыщенных выходных вам не хочется в рутину — понедельник создан именно для этой встречи. Вкусный ужин, любимые напитки, новые знакомства и отличное настроение с первых минут.",
-  ctaLabel: "ЗАБРОНИРОВАТЬ СТОЛ",
-  featuresHeading: "В ПРОГРАММЕ",
-  features: [
-    { icon: Wine, title: "ЛЁГКАЯ АТМОСФЕРА", desc: "Расслабленный вечер без суеты" },
-    { icon: Martini, title: "АВТОРСКИЕ КОКТЕЙЛИ", desc: "Напитки от бармена по особым ценам" },
-    { icon: UtensilsCrossed, title: "ВКУСНАЯ КУХНЯ", desc: "Блюда на любой вкус" },
-    { icon: Users, title: "НОВЫЕ ЗНАКОМСТВА", desc: "Общение, знакомства и драйв" },
-    { icon: Camera, title: "ФОТО И ВОСПОМИНАНИЯ", desc: "Яркие кадры на память" },
-  ],
-  karaoke: {
-    lineTop: "ПОСЛЕ ОСНОВНОЙ ПРОГРАММЫ —",
-    lineHighlight: "КАРАОКЕ И ТАНЦЫ",
-    lineBottom: "ДО САМОГО УТРА!",
-  },
-  infoBar: [
-    { icon: Clock, label: "СТАРТ", value: "21:00" },
-    { icon: Calendar, label: "ДЕНЬ", value: "ПОНЕДЕЛЬНИК" },
-    { icon: MapPin, label: "МЕСТО", value: "POIDEM POZHREM" },
-    { icon: ShieldCheck, label: "ВОЗРАСТ", value: "18+" },
-  ],
-  bookingHref: "https://wa.me/84855559797",
+const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+  Wine, Martini, UtensilsCrossed, Users, Camera, Music, MicVocal, Brain,
+  Briefcase, Sparkles, Star, Coffee, Trophy, Lightbulb, Beer, Heart,
+  Calendar, Clock, MapPin, ShieldCheck,
+  Gift, Dices, Handshake, CupSoda, Disc3, Smile, Soup,
 }
 
-export default function EventPage() {
+type EventDetail = {
+  titleLine1: string
+  titleLine2?: string
+  titleLine3?: string
+  subtitle: string
+  featuresHeading: string
+  features: Array<{ icon: string; title: string; desc: string }>
+}
+
+const EVENT_DETAILS: Record<string, EventDetail> = {
+  "after-weekend-party": {
+    titleLine1: "AFTER",
+    titleLine2: "WEEKEND",
+    titleLine3: "PARTY",
+    subtitle: "ПРОДОЛЖАЕМ ВЫХОДНЫЕ",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "MicVocal", title: "КАРАОКЕ ДО УТРА", desc: "Свободный микрофон и любимые хиты" },
+      { icon: "Martini", title: "СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ БАРА", desc: "Коктейли и напитки по приятным ценам" },
+      { icon: "Gift", title: "РОЗЫГРЫШИ ШОТОВ И ПОДАРКОВ", desc: "Каждый час приятные сюрпризы" },
+      { icon: "Music", title: "ЛУЧШИЕ ТАНЦЕВАЛЬНЫЕ ХИТЫ", desc: "Танцпол, где разогреваем неделю" },
+      { icon: "Users", title: "НОВЫЕ ЛЮДИ И ОТЛИЧНОЕ НАСТРОЕНИЕ", desc: "Знакомства, общение и драйв" },
+    ],
+  },
+  "business-breakfast": {
+    titleLine1: "GAME",
+    titleLine2: "NIGHT",
+    subtitle: "ИГРЫ • КОНКУРСЫ • ПРИЗЫ",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "Dices", title: "НАСТОЛЬНЫЕ ИГРЫ", desc: "Популярные игры для компаний и новых знакомств" },
+      { icon: "Trophy", title: "ТУРНИРЫ И КОНКУРСЫ", desc: "Соревнования с призами для всех гостей" },
+      { icon: "Music", title: "МУЗЫКАЛЬНЫЕ УГАДАЙКИ", desc: "Любимые хиты, визуальные и аудио-викторины" },
+      { icon: "Gift", title: "ПРИЗЫ И ПОДАРКИ", desc: "Каждый участник может выиграть классные призы" },
+      { icon: "Users", title: "НОВЫЕ ЛЮДИ И ОБЩЕНИЕ", desc: "Знакомства, общение и крутая атмосфера" },
+    ],
+  },
+  "quiz-poidem-pozhrem": {
+    titleLine1: "СВОИ",
+    titleLine2: "ЛЮДИ",
+    subtitle: "ВСТРЕЧА ЭКСПАТОВ И НОВЫЕ ЗНАКОМСТВА",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "Users", title: "ОБЩЕНИЕ", desc: "Свободное общение в дружеской атмосфере" },
+      { icon: "Handshake", title: "НОВЫЕ ЗНАКОМСТВА", desc: "Находите друзей и единомышленников по всему миру" },
+      { icon: "MicVocal", title: "КАРАОКЕ", desc: "Любимые песни для всех желающих" },
+      { icon: "Music", title: "МУЗЫКА", desc: "Лучшие хиты и приятная атмосфера вечера" },
+      { icon: "Wine", title: "НАПИТКИ И УГОЩЕНИЯ", desc: "Вкусные блюда и напитки по отличным ценам" },
+    ],
+  },
+  "live-music": {
+    titleLine1: "ЖИВАЯ",
+    titleLine2: "МУЗЫКА",
+    subtitle: "АКУСТИЧЕСКИЙ ВЕЧЕР",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "Music", title: "ЖИВОЙ ЗВУК", desc: "Акустическое исполнение" },
+      { icon: "MicVocal", title: "ВОКАЛ", desc: "Профессиональный вокал" },
+      { icon: "Heart", title: "АТМОСФЕРА", desc: "Уютная обстановка" },
+      { icon: "Users", title: "ЗРИТЕЛИ", desc: "Тёплая публика" },
+      { icon: "Star", title: "ХИТЫ", desc: "Любимые песни" },
+    ],
+  },
+  "karaoke-battle": {
+    titleLine1: "ТЕМАТИЧЕСКИЙ",
+    titleLine2: "КВИЗ",
+    subtitle: "ИНТЕЛЛЕКТ • ЭМОЦИИ • ПРИЗЫ • ВЕСЕЛЬЕ",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "Brain", title: "РАЗНЫЕ ТЕМЫ", desc: "Новые вопросы каждую неделю" },
+      { icon: "Users", title: "КОМАНДНАЯ ИГРА", desc: "2-8 человек в команде" },
+      { icon: "Trophy", title: "ПРИЗЫ И ПОДАРКИ", desc: "Победители получают крутые награды" },
+      { icon: "Music", title: "МУЗЫКА И АТМОСФЕРА", desc: "Лучшая музыка и отличное настроение" },
+      { icon: "Smile", title: "ВЕСЕЛЬЕ И ОБЩЕНИЕ", desc: "Новые знакомства и море эмоций" },
+    ],
+  },
+  "dj-party": {
+    titleLine1: "ШКОЛЬНАЯ",
+    titleLine2: "ДИСКОТЕКА",
+    titleLine3: "90-2000",
+    subtitle: "ЛУЧШИЕ ХИТЫ ДВУХ ПОКОЛЕНИЙ • ТАНЦЫ • КАРАОКЕ • ВЕЧЕРИНКА",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "Disc3", title: "ХИТЫ 90-2000", desc: "Лучшие треки двух легендарных десятилетий" },
+      { icon: "Music", title: "ТАНЦЫ ДО УТРА", desc: "Танцпол, который не пустеет до самого утра" },
+      { icon: "MicVocal", title: "КАРАОКЕ ДЛЯ ВСЕХ", desc: "Пой любимые песни с друзьями и новыми людьми" },
+      { icon: "Gift", title: "КОНКУРСЫ И ПОДАРКИ", desc: "Призы, розыгрыши и отличное настроение" },
+      { icon: "Users", title: "НОВЫЕ ЛЮДИ И ДРУЗЬЯ", desc: "Знакомства, общение и яркие впечатления" },
+    ],
+  },
+  "show-program": {
+    titleLine1: "ВОСКРЕСНЫЙ",
+    titleLine2: "ОПОХМЕЛ",
+    subtitle: "ГОТОВИМ ТЕЛО К ЖИЗНИ И ПРОДОЛЖАЕМ ВЕЧЕР ВМЕСТЕ",
+    featuresHeading: "В ПРОГРАММЕ",
+    features: [
+      { icon: "Soup", title: "ГОРЯЧАЯ БАЗА — ЖИДКОЕ ЗОЛОТО", desc: "Супы и блюда, которые ставят на ноги" },
+      { icon: "CupSoda", title: "ОТРЕЗВЛЕНИЕ", desc: "Бодрящие напитки для восстановления сил" },
+      { icon: "Beer", title: "ПРОДОЛЖЕНИЕ БАНКЕТА", desc: "Пиво, коктейли и классические напитки" },
+      { icon: "Music", title: "КАРАОКЕ И МУЗЫКА", desc: "Любимые хиты и живой вайб" },
+      { icon: "Users", title: "ОТЛИЧНАЯ КОМПАНИЯ", desc: "Друзья, общение и весёлое настроение" },
+    ],
+  },
+}
+
+export async function generateStaticParams() {
+  return events.map((event) => ({ slug: event.slug }))
+}
+
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const event = events.find((e) => e.slug === slug)
+  const details = event ? EVENT_DETAILS[event.slug] : undefined
+
+  if (!event || !details) {
+    notFound()
+  }
+
   return (
     <div>
-      {/* Постер: фото + заголовок поверх на градиенте */}
-      {/* <div
-        className="relative mt-4 w-[calc(100%+1.5rem)] -mx-3 bg-cover bg-center sm:w-[calc(100%+2rem)] sm:-mx-4 lg:mx-0 lg:w-full lg:rounded-[var(--radius-card)] lg:overflow-hidden aspect-[16/9] max-h-[80vh] flex flex-col justify-end"
-        style={{ backgroundImage: `url(${EVENT.heroImage})`, backgroundColor: "var(--color-surface)" }}
-        role="img"
-        aria-label={`${EVENT.titleLine1} ${EVENT.titleLine2} ${EVENT.titleLine3}`}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        <div className="absolute left-4 top-4 z-10 lg:left-8 lg:top-8">
-          
-        </div>
-        <div className="relative z-10 px-5 pb-6 lg:px-12 lg:pb-12">
-          <h1 className="font-display font-extrabold uppercase leading-[0.95] text-4xl text-[var(--color-text-primary)] lg:text-7xl xl:text-8xl">
-            {EVENT.titleLine1}
-          </h1>
-          <h1 className="font-display font-extrabold uppercase leading-[0.95] text-4xl text-[var(--color-text-primary)] lg:text-7xl xl:text-8xl">
-            {EVENT.titleLine2}
-          </h1>
-          <h1 className="font-display font-extrabold uppercase leading-[0.95] text-5xl text-[var(--color-accent)] lg:text-8xl xl:text-9xl">
-            {EVENT.titleLine3}
-          </h1>
-          <p className="link-underline mt-3 inline-block text-sm uppercase tracking-wide text-[var(--color-text-primary)] lg:mt-5 lg:text-2xl">
-            {EVENT.subtitle}
-          </p>
-        </div>
-      </div> */}
-      <div className="relative flex items-center pt-6 mb-10 md:min-h-[320px] min-[550px]:max-md:min-h-[250px]">
+      <Breadcrumb />
+      <div className="relative flex items-center mb-10 md:min-h-[320px] min-[550px]:max-md:min-h-[250px]">
         <div className="space-y-2.5 w-[40%] max-lg:w-[60%]">
-          <div className="flex gap-3" >
+          <div className="w-fit space-y-1 lg:space-y-2">
+            <span className="block font-display font-extrabold uppercase tracking-wider text-[var(--color-accent)] text-xl lg:text-4xl">
+              {event.dayOfWeek.toUpperCase()}
+            </span>
             <div className="neon-card inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] px-4 py-2 lg:px-6 lg:py-3">
               <Clock className="h-4 w-4 text-[var(--color-accent)] lg:h-5 lg:w-5" />
-              <span className="font-display font-bold text-sm text-[var(--color-text-primary)] lg:text-xl">
-                {EVENT.scheduleTime}
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="font-display font-bold uppercase text-sm tracking-wide text-[var(--color-text-secondary)] lg:text-lg">
-                {EVENT.scheduleLabel}
+              <span className="font-display font-bold text-[10px] text-[var(--color-text-primary)] lg:text-base">
+                {event.time}
               </span>
             </div>
           </div>
           <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] md:mb-7 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
-            AFTER WEEKEND <span className="text-accent">PARTY</span>
+            {details.titleLine1}{details.titleLine2 ? <br /> : null}{details.titleLine2}{details.titleLine3 ? <br /> : null}{details.titleLine3}
+            {!details.titleLine2 && !details.titleLine3 ? null : null}
           </h1>
           <p className="text-5xl text-[var(--color-accent)] font-display uppercase tracking-wider md:mb-5 max-lg:text-3xl max-md:text-xl max-sm:text-lg">
-            ПРОДОЛЖАЕМ ВЫХОДНЫЕ ВМЕСТЕ!
+            {details.subtitle}
           </p>
         </div>
-        <div className="absolute  right-0 w-[100%] sm:left-10 h-[150%] rounded-[var(--radius-card)] -z-10 min-[460px]:max-sm:h-[170%] max-sm:right-3">
+        <div className="absolute left-0 right-0 top- h-[150%] rounded-[var(--radius-card)] -z-10  ">
           <Image
             src="/images/events/monday-afterparty.png"
-            alt="Доставка еды и кальянов"
+            alt={event.title}
             fill
             className="lg:object-contain max-lg:object-cover"
           />
         </div>
       </div>
 
-      {/* Описание */}
       <p className="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-relaxed text-[var(--color-text-secondary)] lg:mt-10 lg:pl-6 lg:text-xl">
-        {EVENT.description}
+        {event.description}
       </p>
 
-      {/* Программа */}
       <h3 className="mb-6 max-lg:mb-4 mt-12 max-lg:mt-8 font-display font-bold uppercase text-4xl tracking-wide text-[var(--color-text-primary)]">
-        {EVENT.featuresHeading}
+        {details.featuresHeading}
       </h3>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-5">
-        {EVENT.features.map((f) => {
-          const Icon = f.icon
+        {details.features.map((f) => {
+          const Icon = iconMap[f.icon]
           return (
             <div
               key={f.title}
@@ -154,31 +221,34 @@ export default function EventPage() {
         })}
       </div>
 
-      {/* Караоке-баннер */}
       <div className="relative mt-12 max-lg:mt-8 min-h-[230px] flex items-center overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] aspect-[16/6] max-sm:aspect-auto">
         <Image
-          src={EVENT.karaokeImage}
+          src="/images/events/karaoke-banner.png"
           alt="Караоке и танцы"
           fill
           className="relative object-contain max-sm:object-cover max-sm:object-[20%_50%]"
         />
         <p className="relative w-full pl-[50%] leading-snug ">
           <span className="block text-3xl max-lg:text-xl uppercase text-[var(--color-text-primary)] max-md:text-base max-sm:text-sm">
-            {EVENT.karaoke.lineTop}
+            ПОСЛЕ ОСНОВНОЙ ПРОГРАММЫ —
           </span>
           <span className="my-3 max-lg:my-1 block font-display font-extrabold uppercase text-8xl max-lg:text-6xl text-[var(--color-accent)] max-md:text-4xl max-sm:text-2xl">
-            {EVENT.karaoke.lineHighlight}
+            КАРАОКЕ И ТАНЦЫ
           </span>
           <span className="block font-bold uppercase text-4xl max-lg:text-3xl text-[var(--color-text-primary)] max-md:text-xl max-sm:text-base">
-            {EVENT.karaoke.lineBottom}
+            ДО САМОГО УТРА!
           </span>
         </p>
       </div>
 
-      {/* Инфо-бар */}
       <div className="neon-card mt-6 grid grid-cols-2 gap-y-4 rounded-[var(--radius-card)] border border-[var(--color-border)] py-5 sm:grid-cols-4 lg:mt-12 lg:py-8">
-        {EVENT.infoBar.map((item, i) => {
-          const Icon = item.icon
+        {([
+          { icon: "Clock", label: "СТАРТ", value: event.time },
+          { icon: "Calendar", label: "ДЕНЬ", value: event.dayOfWeek.toUpperCase() },
+          { icon: "MapPin", label: "МЕСТО", value: "POIDEM POZHREM" },
+          { icon: "ShieldCheck", label: "ВОЗРАСТ", value: "18+" },
+        ] as const).map((item, i) => {
+          const Icon = iconMap[item.icon]
           return (
             <div
               key={item.label}
@@ -200,14 +270,11 @@ export default function EventPage() {
         })}
       </div>
 
-      {/* CTA */}
-      <Link
-        href={EVENT.bookingHref}
-        className="hover-lift mb-8 mt-6 flex items-center justify-center gap-2 rounded-[var(--radius-card)] bg-[var(--color-accent)] py-4 font-display font-bold uppercase text-sm text-black transition-colors hover:bg-[var(--color-accent-hover)] sm:text-base lg:mt-12 lg:py-6 lg:text-2xl"
-      >
-        <Phone className="h-5 w-5 lg:h-7 lg:w-7" />
-        {EVENT.ctaLabel}
-      </Link>
+      <BookingButton
+        href="https://wa.me/84855559797"
+        label="ЗАБРОНИРОВАТЬ СТОЛ"
+        className="mb-8 mt-6 text-black lg:mt-12 lg:py-6 lg:text-2xl"
+      />
     </div>
   )
 }

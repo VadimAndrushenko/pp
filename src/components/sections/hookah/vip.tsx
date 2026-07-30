@@ -6,7 +6,7 @@ export function HookahVIP({ className }: { className?: string }) {
   return (
     <Link
       href="/vip"
-      className={`group relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 block transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,106,0,0.3)] hover:border-[var(--color-accent)]/80 ${className ?? ""}`}
+      className={`group relative overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-accent)]/30 block transition-all duration-300 hover:shadow-[0_0_50px_rgba(255,106,0,0.3)] hover:border-[var(--color-accent)]/80}`}
     >
       <div className="absolute inset-0 transition-all duration-300 group-hover:scale-105">
         <Image

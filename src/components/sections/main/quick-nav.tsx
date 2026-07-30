@@ -10,9 +10,24 @@ export interface NavItem {
   href: string
 }
 
+const TODAY_SLUGS = [
+  "show-program",          // Воскресенье (0)
+  "after-weekend-party",   // Понедельник (1)
+  "business-breakfast",    // Вторник (2)
+  "quiz-poidem-pozhrem",   // Среда (3)
+  "live-music",            // Четверг (4)
+  "karaoke-battle",        // Пятница (5)
+  "dj-party",              // Суббота (6)
+]
+
+function getTodayHref() {
+  const day = new Date().getDay()
+  return `/events/${TODAY_SLUGS[day]}`
+}
+
 const navItems: NavItem[] = [
   { icon: Soup, label: "МЕНЮ", desc: "Русская, кавказская, восточная, европейская и азиатская кухни", href: "/menu" },
-  { icon: CalendarCheck, label: "ЧТО СЕГОДНЯ?", desc: "Каждый день — мероприятия", href: "/today" },
+  { icon: CalendarCheck, label: "ЧТО СЕГОДНЯ?", desc: "Каждый день — мероприятия", href: getTodayHref() },
   { icon: Motorbike, label: "ДОСТАВКА", desc: "Премиальные кальяны", href: "/delivery" },
   { icon: Video, label: "КАК У НАС", desc: "Фото- и видеоотчёты", href: "/gallery" },
 ]

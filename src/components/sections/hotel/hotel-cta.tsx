@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button"
+import { BookingButton } from "@/components/ui/booking-button"
 
 export function HotelCta({ className }: { className?: string }) {
   return (
     <div className={className}>
-      <Button variant="solid" size="full" as="a" href="https://wa.me/84855559797">
-        Забронировать номер
-      </Button>
+      <BookingButton label="Забронировать номер" />
     </div>
   )
 }
