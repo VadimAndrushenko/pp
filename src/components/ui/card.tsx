@@ -21,7 +21,7 @@ export function Card({ children, variant = "outline", className, as: Tag = "div"
   }
 
   const classes = cn(
-    "rounded-[var(--radius-card)] p-4 transition-all duration-300",
+    "rounded-[var(--radius-card)] p-4 transition-all duration-300 relative",
     variants[variant],
     Tag === "a" &&
       "block hover:border-[var(--color-accent)] hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] hover:scale-[1.02] cursor-pointer active:scale-[0.98]",
