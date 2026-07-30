@@ -4,7 +4,7 @@ import { MapPin, ArrowRight } from "lucide-react"
 
 export function MapCTA() {
   return (
-    <section className="container mx-auto max-w-7xl px-3 sm:px-4 py-6">
+    <section className="container">
       <Card
         as="a"
         href={links.googleMaps}

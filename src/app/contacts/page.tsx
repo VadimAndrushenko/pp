@@ -115,7 +115,7 @@ function ContactsGrid() {
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-15 max-sm:space-y-8">
       {/* ЗАГОЛОВОК — только текст, без фото, с лучами по бокам от "КОНТАКТЫ" */}
       <div className="text-center pt-2">
         <div className="mx-auto flex max-w-3xl items-center justify-center gap-4 max-sm:gap-2">
@@ -128,12 +128,48 @@ function ContactsGrid() {
         <p className="mt-2 font-display font-bold uppercase text-5xl text-[var(--color-accent)] max-lg:text-4xl max-sm:text-2xl">
           МЫ ВСЕГДА НА СВЯЗИ!
         </p>
-        <p className="mt-4 text-lg text-[var(--color-text-secondary)] max-sm:text-sm">
-          Свяжитесь с нами удобным для вас способом
-        </p>
+      </div>
+
+      {/* КНОПКИ ЗАБРОНИРОВАТЬ / ЗАКАЗАТЬ ДОСТАВКУ */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <a
+          href="https://wa.me/84855559797"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-br from-[var(--color-surface)] to-black p-5 border border-[var(--color-border)] shadow-[0_0_16px_-6px_var(--color-accent-dim)] hover:border-[var(--color-accent)] hover:shadow-[0_0_28px_-4px_var(--color-accent)] hover:-translate-y-1 transition-all duration-500"
+        >
+          <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--color-accent-dim)] to-transparent group-hover:from-[var(--color-accent)] transition-all duration-500" />
+          <div className="flex items-start gap-4">
+            <div className="shrink-0 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full bg-[var(--color-accent)]/10 ring-1 ring-[var(--color-border)] group-hover:bg-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)] transition-all duration-500">
+              <Phone className="w-5 h-5 text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <span className="font-display uppercase tracking-widest text-xs text-[var(--color-text-muted)]">Быстрое бронирование</span>
+              <p className="font-bold text-lg text-[var(--color-text-primary)]">Забронировать столик</p>
+            </div>
+          </div>
+        </a>
+        <Link
+          href="/delivery"
+          className="group relative overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-br from-[var(--color-surface)] to-black p-5 border border-[var(--color-border)] shadow-[0_0_16px_-6px_var(--color-accent-dim)] hover:border-[var(--color-accent)] hover:shadow-[0_0_28px_-4px_var(--color-accent)] hover:-translate-y-1 transition-all duration-500"
+        >
+          <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--color-accent-dim)] to-transparent group-hover:from-[var(--color-accent)] transition-all duration-500" />
+          <div className="flex items-start gap-4">
+            <div className="shrink-0 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full bg-[var(--color-accent)]/10 ring-1 ring-[var(--color-border)] group-hover:bg-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)] transition-all duration-500">
+              <MessageCircle className="w-5 h-5 text-[var(--color-accent)]" />
+            </div>
+            <div>
+              <span className="font-display uppercase tracking-widest text-xs text-[var(--color-text-muted)]">Еда, напитки и кальян</span>
+              <p className="font-bold text-lg text-[var(--color-text-primary)]">Заказать доставку</p>
+            </div>
+          </div>
+        </Link>
       </div>
 
       {/* СПОСОБЫ СВЯЗИ */}
+      <h2 className="font-display font-bold uppercase text-4xl text-[var(--color-accent)] text-center tracking-widest max-sm:text-xl mb-6">
+        Свяжитесь с нами удобным для вас способом
+      </h2>
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         {CONTACT_METHODS.map((m) => {
           const Icon = m.icon
