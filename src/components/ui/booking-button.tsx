@@ -14,7 +14,7 @@ const WHATSAPP_HREF = "https://wa.me/84855559797"
 export function BookingButton({
   href = WHATSAPP_HREF,
   label = "Забронировать стол",
-  icon = <Phone className="h-5 w-5 lg:h-7 lg:w-7" />,
+  icon = <Phone className="h-8 w-8 max-sm:h-6 max-sm:w-6" />,
   className,
 }: BookingButtonProps) {
   return (
@@ -23,7 +23,7 @@ export function BookingButton({
       size="full"
       as="a"
       href={href}
-      className={className}
+      className={"gap-3 " + (className ?? "")}
     >
       {icon}
       {label}

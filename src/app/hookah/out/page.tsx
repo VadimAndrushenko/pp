@@ -13,7 +13,7 @@ export default function HookahOutPage() {
       <HookahOutPricing className="py-10" />
       <HookahOutIncluded className="py-10" />
       <HookahOutSteps className="py-10" />
-      <BookingButton label="Заказать выездной кальян" className="py-6 text-3xl lg:text-4xl" />
+      <BookingButton label="Заказать выездной кальян" className="py-6 text-4xl max-lg:text-3xl max-sm:text-lg max-sm:py-3" />
     </>
   )
 }
