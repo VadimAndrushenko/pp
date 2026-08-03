@@ -1,5 +1,5 @@
 import { Card } from "./card"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 import { ArrowRight } from "lucide-react"
 
 interface PromoBannerProps {

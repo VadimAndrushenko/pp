@@ -1,6 +1,4 @@
-import Link from "next/link"
 import { Card } from "@/components/ui/card"
-import { ArrowRight } from "lucide-react"
 
 interface Photo {
   id: string
@@ -12,17 +10,10 @@ interface Photo {
 export function PhotosGrid({ photos, className }: { photos: Photo[]; className?: string }) {
   return (
     <section id="photos" className={className}>
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-display font-bold uppercase text-[var(--color-text-primary)]">Последние фото</h2>
-        <Link
-          href="#"
-          className="text-xs font-display uppercase flex items-center gap-1"
-          style={{ color: "var(--color-accent)" }}
-        >
-          Смотреть все фото
-          <ArrowRight className="w-3 h-3" />
-        </Link>
-      </div>
+      <h2 className="section-heading font-display font-bold uppercase text-[var(--color-text-primary)] mb-2">Фото отчёты</h2>
+      <p className="text-sm font-display uppercase tracking-wider mb-6" style={{ color: "var(--color-accent)" }}>
+        Все фото с наших мероприятий
+      </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {photos.map((p) => (
           <Card key={p.id} className="relative overflow-hidden p-0 aspect-square">

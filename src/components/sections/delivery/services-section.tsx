@@ -101,7 +101,7 @@ export function ServicesSection({ className }: { className?: string }) {
 
   return (
     <section className={className}>
-      <h2 className="text-5xl lg:text-6xl mb-6 font-display">Заказать</h2>
+      <h2 className="section-heading mb-6 font-display">Заказать</h2>
       <div className="grid grid-cols-2 gap-11 max-lg:gap-6 max-sm:gap-3">
         {services.map((s, i) => (
           <div key={i}>
@@ -119,7 +119,7 @@ export function ServicesSection({ className }: { className?: string }) {
                 <h3 className="flex items-center justify-center gap-3 text-center text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] max-lg:text-2xl max-[570px]:flex-col max-[570px]:gap-1 max-[570px]:text-sm max-[570px]:leading-tight max-[360px]:text-[13px] max-sm:text-base">
                   <span>{s.items.join(", ")}</span>
                   <ArrowRight
-                    className="w-10 h-10 lg:w-12 lg:h-12 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-8 max-lg:h-8 max-[570px]:w-5 max-[570px]:h-5"
+                    className="w-14 h-14 lg:w-16 lg:h-16 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-12 max-lg:h-12 max-[570px]:w-7 max-[570px]:h-7"
                     strokeWidth={2}
                   />
                 </h3>

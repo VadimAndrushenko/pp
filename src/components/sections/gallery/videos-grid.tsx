@@ -1,6 +1,5 @@
-import Link from "next/link"
 import { Card } from "@/components/ui/card"
-import { Play, ArrowRight } from "lucide-react"
+import { Play } from "lucide-react"
 
 interface Video {
   id: string
@@ -12,17 +11,10 @@ interface Video {
 export function VideosGrid({ videos, className }: { videos: Video[]; className?: string }) {
   return (
     <section id="videos" className={className}>
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-display font-bold uppercase text-[var(--color-text-primary)]">Последние видео</h2>
-        <Link
-          href="#"
-          className="text-xs font-display uppercase flex items-center gap-1"
-          style={{ color: "var(--color-accent)" }}
-        >
-          Смотреть все видео
-          <ArrowRight className="w-3 h-3" />
-        </Link>
-      </div>
+      <h2 className="section-heading font-display font-bold uppercase text-[var(--color-text-primary)] mb-2">Видео отчёты</h2>
+      <p className="text-sm font-display uppercase tracking-wider mb-6" style={{ color: "var(--color-accent)" }}>
+        Все видео с наших мероприятий
+      </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {videos.map((v) => (
           <Card key={v.id} className="relative overflow-hidden p-0 aspect-square cursor-pointer">

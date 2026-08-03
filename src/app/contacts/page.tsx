@@ -167,7 +167,7 @@ function ContactsGrid() {
       </div>
 
       {/* СПОСОБЫ СВЯЗИ */}
-      <h2 className="font-display font-bold uppercase text-4xl text-[var(--color-accent)] text-center tracking-widest max-sm:text-xl mb-6">
+      <h2 className="section-heading font-display font-bold uppercase text-[var(--color-accent)] text-center tracking-widest mb-6">
         Свяжитесь с нами удобным для вас способом
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">

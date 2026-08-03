@@ -35,19 +35,19 @@ function dividerClass(index: number, total: number) {
 
 export function HookahOutIncluded({ className }: { className?: string }) {
   return (
-    <div className={className}>
-      <h2 className="text-center font-display font-bold uppercase tracking-wide text-5xl max-xl:text-4xl max-sm:text-3xl text-[var(--color-text-primary)] mb-8">
+    <div className={`section-heading ${className}`}>
+      <h2 className="text-center font-display font-bold uppercase tracking-wide text-[var(--color-text-primary)] mb-8">
         Что входит в услугу
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-10">
         {items.map(({ icon: Icon, label }, i) => (
-          <div key={label} className="relative flex flex-col items-center gap-3 px-6 text-center max-sm:px-3">
+          <div key={label} className="section-heading relative flex flex-col items-center gap-3 px-6 text-center max-sm:px-3">
             <Icon
-              className="w-20 h-20 max-xl:w-16 max-xl:h-16 max-sm:w-14 max-sm:h-14 text-[var(--color-accent)]"
+              className="text-[var(--color-accent)]"
               strokeWidth={1.5}
             />
-            <p className="text-2xl max-xl:text-xl max-sm:text-lg font-medium leading-tight">
+            <p className="font-medium leading-tight">
               {label}
             </p>
             <div

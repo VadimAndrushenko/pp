@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ChevronDown, Phone } from "lucide-react"
 import { workingHours } from "@/config/links"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)

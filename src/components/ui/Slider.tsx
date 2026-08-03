@@ -128,7 +128,7 @@ export default function Slider({
       {(title || showArrows) && (
         <div className="flex items-center justify-between mb-6">
           {title && (
-            <h2 className="text-2xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
+            <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
               {title}
             </h2>
           )}

@@ -2,7 +2,7 @@
 
 import { useCarousel } from "./carousel-provider"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 
 interface CarouselArrowsProps {
   className?: string

@@ -19,7 +19,7 @@ const features: Feature[] = [
 export function HookahFeatures({ className }: { className?: string }) {
   return (
     <section className={className}>
-      <h2 className="text-2xl lg:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-6 lg:mb-10 max-sm:text-lg max-sm:mb-4">
+      <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-6 lg:mb-10 max-sm:mb-4">
         Почему у нас лучшие кальяны?
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4 max-sm:gap-2">

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 
 interface EmblaCarouselProps {
   children: React.ReactNode

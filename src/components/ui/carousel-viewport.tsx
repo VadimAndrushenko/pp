@@ -1,7 +1,7 @@
 "use client"
 
 import { useCarousel } from "./carousel-provider"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 import { CAROUSEL_CONFIG } from "@/config/carousel"
 
 interface CarouselViewportProps {

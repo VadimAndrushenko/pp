@@ -45,6 +45,56 @@
   }
 }
 
+/* Стандартный размер заголовков блоков и медиа — как в блоке "Что входит в услугу" */
+@layer base {
+  .section-heading,
+  .section-heading > h2 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .section-heading > svg {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .section-heading > p {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 80rem) {
+    .section-heading,
+    .section-heading > h2 {
+      font-size: 2.25rem;
+    }
+
+    .section-heading > svg {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .section-heading > p {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .section-heading,
+    .section-heading > h2 {
+      font-size: 1.875rem;
+    }
+
+    .section-heading > svg {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .section-heading > p {
+      font-size: 1.125rem;
+    }
+  }
+}
+
 :root {
   --color-bg: #000000;
   --color-surface: #121110;

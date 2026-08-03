@@ -8,8 +8,8 @@ const zones = [
 
 export function HookahOutPricing({ className }: { className?: string }) {
   return (
-    <div className={className}>
-      <h2 className="text-center font-display font-bold uppercase tracking-wide text-5xl max-xl:text-4xl max-sm:text-3xl text-[var(--color-text-primary)] mb-6">
+    <div className={`section-heading ${className}`}>
+      <h2 className="text-center font-display font-bold uppercase tracking-wide text-[var(--color-text-primary)] mb-6">
         Стоимость доставки
       </h2>
 

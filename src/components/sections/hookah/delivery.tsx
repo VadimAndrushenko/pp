@@ -6,7 +6,7 @@ const deliveryImages = ["/images/hookah/delivery-1.png", "/images/hookah/deliver
 export function HookahDelivery({ className }: { className?: string }) {
   return (
     <section className={className}>
-      <h2 className="text-2xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-6">
+      <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-6">
         Выездной кальян на дом или мероприятие
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

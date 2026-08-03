@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 import type { EventCategory } from "@/types"
 import type { LucideIcon } from "lucide-react"
 

@@ -3,7 +3,7 @@
 import { StaggerGrid, StaggerItem } from "@/components/ui/stagger-grid"
 import type { LucideIcon } from "lucide-react"
 import { Soup, CalendarCheck, Cigarette, Camera } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 
 interface FeatureItem {
   icon: LucideIcon

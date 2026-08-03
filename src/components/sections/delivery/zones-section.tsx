@@ -89,7 +89,7 @@ export function DeliveryZones({ className }: { className?: string }) {
 
         <div className="w-full flex-1">
           <h2
-            className="mb-6 text-center font-display text-2xl font-bold uppercase tracking-tight sm:text-left sm:text-3xl"
+            className="section-heading mb-6 text-center font-display font-bold uppercase tracking-tight sm:text-left"
             style={{ color: "var(--color-accent)" }}
           >
             Зоны доставки и стоимость

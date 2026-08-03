@@ -1,7 +1,7 @@
 "use client"
 
 import { useCarousel } from "./carousel-provider"
-import { cn } from "@/lib/utils"
+import { cn } from "@/components/lib/utils"
 
 interface CarouselDotsProps {
   className?: string
