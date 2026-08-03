@@ -11,7 +11,7 @@ export default function DeliveryPage() {
       <Breadcrumb />
       <DeliveryHero className="py-8" />
       <ServicesSection className="py-8" />
-      {/* <InfoCards className="py-6" /> */}
+      <InfoCards className="py-6" />
       <DeliveryZones className="py-8" />
       {/* <CTABanner /> */}
     </>

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const deliveryImages = ["/images/hookah/delivery-1.png", "/images/hookah/delivery-2.png"]
 
@@ -16,6 +17,14 @@ export function HookahDelivery({ className }: { className?: string }) {
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-6 flex justify-center">
+        <Link
+          href="/hookah/out"
+          className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-wider transition-all duration-200 border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white px-8 py-4 rounded-[var(--radius-card)] text-base"
+        >
+          Подробнее о выездном кальяне
+        </Link>
       </div>
     </section>
   )

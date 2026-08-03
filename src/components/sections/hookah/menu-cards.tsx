@@ -11,7 +11,7 @@ const cards = [
     buttonLabel: "Смотреть меню",
   },
   {
-    href: "/delivery",
+    href: "/hookah/out",
     title: "Выездной кальян",
     subtitle: "Привезём и установим в любую точку",
     image: "/images/hookah/delivery-cover.png",
