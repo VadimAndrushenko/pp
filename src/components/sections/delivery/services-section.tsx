@@ -34,8 +34,15 @@ function IconOwnDelivery({ color }: { color: string }) {
 }
 
 const services = [
-  { title: "Заказать еду и напитки", image: "/images/delivery/food.png" },
-  { title: "Заказать кальян", image: "/images/delivery/hookah.png", href: "/hookah/out" },
+  {
+    image: "/images/delivery/food.png",
+    items: ["Блюда", "Напитки", "Полуфабрикаты"],
+  },
+  {
+    image: "/images/delivery/hookah.png",
+    href: "/hookah/out",
+    items: ["Выездной кальян", "Табак", "Кальян в аренду"],
+  },
 ]
 
 const methods = [
@@ -105,14 +112,14 @@ export function ServicesSection({ className }: { className?: string }) {
               className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-95 hover:-translate-y-2 hover:shadow-[0_4px_24px_-6px_var(--color-accent)] cursor-pointer"
             >
               <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden max-lg:aspect-[3/2] max-[500px]:aspect-square max-sm:aspect-[2/3]">
-                <Image src={s.image} alt={s.title} fill className="object-cover" />
+                <Image src={s.image} alt={s.items.join(", ")} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="absolute bottom-0 z-10 flex flex-col flex-1 gap-2 p-5 max-[500px]:p-3 max-sm:inset-x-0 max-sm:mx-auto max-sm:w-fit max-sm:items-center max-sm:text-center">
-                <h3 className="flex items-center justify-center gap-3 text-center text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] max-lg:text-2xl max-[500px]:flex-col max-[500px]:gap-1 max-[500px]:text-sm max-[500px]:leading-tight max-[360px]:text-[13px] max-lg:text-3xl max-sm:text-lg">
-                  <span>{s.title}</span>
+                <h3 className="flex items-center justify-center gap-3 text-center text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] max-lg:text-2xl max-[570px]:flex-col max-[570px]:gap-1 max-[570px]:text-sm max-[570px]:leading-tight max-[360px]:text-[13px] max-sm:text-base">
+                  <span>{s.items.join(", ")}</span>
                   <ArrowRight
-                    className="w-10 h-10 lg:w-12 lg:h-12 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-8 max-lg:h-8 max-[500px]:w-5 max-[500px]:h-5"
+                    className="w-10 h-10 lg:w-12 lg:h-12 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-8 max-lg:h-8 max-[570px]:w-5 max-[570px]:h-5"
                     strokeWidth={2}
                   />
                 </h3>
