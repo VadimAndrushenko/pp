@@ -95,22 +95,25 @@ export function ServicesSection({ className }: { className?: string }) {
   return (
     <section className={className}>
       <h2 className="text-5xl lg:text-6xl mb-6 font-display">Заказать</h2>
-      <div className="grid grid-cols-2 gap-11 max-lg:gap-6 max-[500px]:grid-cols-1">
+      <div className="grid grid-cols-2 gap-11 max-lg:gap-6 max-sm:gap-3">
         {services.map((s, i) => (
           <div key={i}>
             <Card
               as="div"
               onClick={open}
-              className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-100 hover:-translate-y-2 hover:shadow-[0_4px_24px_-6px_var(--color-accent)] cursor-pointer"
+              className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-95 hover:-translate-y-2 hover:shadow-[0_4px_24px_-6px_var(--color-accent)] cursor-pointer"
             >
-              <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden max-lg:aspect-[3/2]">
+              <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden max-lg:aspect-[3/2] max-[500px]:aspect-square max-sm:aspect-[2/3]">
                 <Image src={s.image} alt={s.title} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               </div>
-              <div className="absolute bottom-0 z-10 flex flex-col flex-1 gap-2 p-5">
-                <h3 className="flex justify-center gap-3 text-3xl lg:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] min-[500px]:max-sm:text-xl max-[450px]:text-xl">
-                  {s.title}
-                  <ArrowRight className="w-10 h-10 lg:w-12 lg:h-12 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 min-[500px]:max-sm:w-6 min-[500px]:max-sm:h-6 max-[450px]:w-8 max-[450px]:h-8" strokeWidth={2} />
+              <div className="absolute bottom-0 z-10 flex flex-col flex-1 gap-2 p-5 max-[500px]:p-3 max-sm:inset-x-0 max-sm:mx-auto max-sm:w-fit max-sm:items-center max-sm:text-center">
+                <h3 className="flex items-center justify-center gap-3 text-center text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] max-lg:text-2xl max-[500px]:flex-col max-[500px]:gap-1 max-[500px]:text-sm max-[500px]:leading-tight max-[360px]:text-[13px] max-lg:text-3xl max-sm:text-lg">
+                  <span>{s.title}</span>
+                  <ArrowRight
+                    className="w-10 h-10 lg:w-12 lg:h-12 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-8 max-lg:h-8 max-[500px]:w-5 max-[500px]:h-5"
+                    strokeWidth={2}
+                  />
                 </h3>
               </div>
             </Card>
