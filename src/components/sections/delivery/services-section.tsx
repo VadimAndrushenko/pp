@@ -35,7 +35,7 @@ function IconOwnDelivery({ color }: { color: string }) {
 
 const services = [
   { title: "Заказать еду и напитки", image: "/images/delivery/food.png" },
-  { title: "Заказать кальян", image: "/images/delivery/hookah.png" },
+  { title: "Заказать кальян", image: "/images/delivery/hookah.png", href: "/hookah/out" },
 ]
 
 const methods = [
@@ -99,8 +99,9 @@ export function ServicesSection({ className }: { className?: string }) {
         {services.map((s, i) => (
           <div key={i}>
             <Card
-              as="div"
-              onClick={open}
+              as={s.href ? "a" : "div"}
+              href={s.href}
+              onClick={s.href ? undefined : open}
               className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-95 hover:-translate-y-2 hover:shadow-[0_4px_24px_-6px_var(--color-accent)] cursor-pointer"
             >
               <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden max-lg:aspect-[3/2] max-[500px]:aspect-square max-sm:aspect-[2/3]">
