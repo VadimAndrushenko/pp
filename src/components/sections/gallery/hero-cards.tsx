@@ -33,7 +33,7 @@ export function HeroCards({ className }: { className?: string }) {
             <h3 className="
               flex items-center justify-center gap-3 text-center text-3xl 
               font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] 
-              max-lg:text-2xl max-sm:text-lg
+              max-lg:text-2xl max-sm:text-base
 
 
             ">
