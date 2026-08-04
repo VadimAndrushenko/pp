@@ -75,3 +75,11 @@ export interface GalleryItem {
   date: string
   type: "photo" | "video"
 }
+
+export interface GalleryPhoto {
+  id: string
+  image: string
+  title: string
+  dateKey: string
+  dateLabel: string
+}
