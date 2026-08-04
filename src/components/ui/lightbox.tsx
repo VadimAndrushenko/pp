@@ -93,9 +93,9 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           </button>
 
           <div ref={emblaRef} className="h-full overflow-hidden">
-            <div className="flex h-full gap-2">
+            <div className="flex h-full">
               {photos.map((photo) => (
-                <div key={photo.id} className="relative h-full min-w-0 flex-[0_0_calc(100%-0.5rem)]">
+                <div key={photo.id} className="relative h-full min-w-0 flex-[0_0_100%] px-1.5">
                   <div
                     className="h-full w-full bg-contain bg-center bg-no-repeat"
                     style={{ backgroundImage: `url(${photo.image})`, backgroundColor: "var(--color-surface)" }}
