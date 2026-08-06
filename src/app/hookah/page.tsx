@@ -5,7 +5,7 @@ import { HookahFeatures } from "@/components/sections/hookah/features"
 import { HookahPrices } from "@/components/sections/hookah/prices"
 import { HookahDelivery } from "@/components/sections/hookah/delivery"
 import { CTABanner } from "@/components/ui/cta-banner"
-import { HookahVIP } from "@/components/sections/hookah/vip"
+// import { HookahVIP } from "@/components/sections/hookah/vip"
 
 export default function HookahPage() {
   return (
@@ -17,7 +17,7 @@ export default function HookahPage() {
       <HookahPrices className="py-8" />
       <HookahDelivery className="py-8" />
       <CTABanner />
-      <HookahVIP className="py-8" />
+      {/* <HookahVIP className="py-8" /> */}
     </>
   )
 }

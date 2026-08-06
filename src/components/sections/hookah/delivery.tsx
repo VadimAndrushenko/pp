@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Link from "next/link"
+// import Link from "next/link"
 
 const deliveryImages = ["/images/hookah/delivery-1.png", "/images/hookah/delivery-2.png"]
 
@@ -18,6 +18,7 @@ export function HookahDelivery({ className }: { className?: string }) {
           </div>
         ))}
       </div>
+      {/*
       <div className="mt-6 flex justify-center">
         <Link
           href="/hookah/out"
@@ -26,6 +27,7 @@ export function HookahDelivery({ className }: { className?: string }) {
           Подробнее о выездном кальяне
         </Link>
       </div>
+      */}
     </section>
   )
 }

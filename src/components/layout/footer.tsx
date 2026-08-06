@@ -19,7 +19,7 @@ const NAV_LINKS = [
 
 const SERVICE_LINKS = [
   { label: "Фото и видео", href: "/gallery" },
-  { label: "VIP Club", href: "/vip" },
+  // { label: "VIP Club", href: "/vip" },
   { label: "Отель", href: "/hotel" },
   { label: "Сообщество", href: "/community" },
   { label: "Обмен рублей", href: "/currency" },
