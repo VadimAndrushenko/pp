@@ -5,7 +5,7 @@ export default function CommunityPage() {
   return (
     <>
       <Breadcrumb />
-      <CommunityHero className="py-8" />
+      <CommunityHero className="section-py" />
     </>
   )
 }

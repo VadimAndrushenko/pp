@@ -20,6 +20,7 @@
   --radius-sm: 10px;
   --font-display: "Oswald", sans-serif;
   --font-body: "Montserrat", sans-serif;
+  --spacing-section: 2rem;
 }
 
 @theme inline {
@@ -71,6 +72,19 @@
 
   @media (width >= 1280px) {
     max-width: 1280px;
+  }
+}
+
+/* Вертикальный паддинг секций: единый отступ между блоками, меньше на мобильных */
+@layer utilities {
+  .section-py {
+    padding-block: var(--spacing-section);
+  }
+}
+
+@media (max-width: 640px) {
+  .section-py {
+    padding-block: 1.25rem;
   }
 }
 

@@ -163,7 +163,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   return (
     <div>
       <Breadcrumb />
-      <div className="relative flex items-center mb-10 md:min-h-[320px] min-[550px]:max-md:min-h-[250px]">
+      <div className="relative flex items-center mb-10 min-h-[320px] max-md:min-h-[auto] min-[550px]:max-md:min-h-[250px]">
         <div className="space-y-2.5 w-[40%] max-lg:w-[60%]">
           <div className="w-fit space-y-1 lg:space-y-2">
             <span className="block font-display font-extrabold uppercase tracking-wider text-accent text-xl lg:text-4xl">
@@ -176,11 +176,11 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               </span>
             </div>
           </div>
-          <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-text-primary md:mb-7 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
+          <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-text-primary mb-7 max-md:mb-0 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
             {details.titleLine1}{details.titleLine2 ? <br /> : null}{details.titleLine2}{details.titleLine3 ? <br /> : null}{details.titleLine3}
             {!details.titleLine2 && !details.titleLine3 ? null : null}
           </h1>
-          <p className="text-5xl text-accent font-display uppercase tracking-wider md:mb-5 max-lg:text-3xl max-md:text-xl max-sm:text-lg">
+          <p className="text-5xl text-accent font-display uppercase tracking-wider mb-5 max-md:mb-0 max-lg:text-3xl max-md:text-xl max-sm:text-lg">
             {details.subtitle}
           </p>
         </div>

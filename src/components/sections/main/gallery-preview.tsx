@@ -44,7 +44,7 @@ export function GalleryPreview() {
                         setPlayingVideo(item.id)
                       }
                     }}
-                    className="group block shrink-0 w-[180px] sm:w-[200px] md:w-[210px] lg:w-[240px] border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
+                    className="group block shrink-0 w-[240px] max-lg:w-[210px] max-md:w-[200px] max-sm:w-[180px] border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
                   >
                     <div
                       className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-cover bg-center bg-surface"

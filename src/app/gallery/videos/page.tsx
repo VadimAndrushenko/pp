@@ -6,7 +6,7 @@ export default function GalleryVideosPage() {
   return (
     <>
       <Breadcrumb />
-      <VideoAlbums videos={galleryVideos} className="py-6" />
+      <VideoAlbums videos={galleryVideos} className="section-py" />
     </>
   )
 }

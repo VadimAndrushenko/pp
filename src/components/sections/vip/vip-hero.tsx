@@ -5,7 +5,7 @@ export function VipHero({ className }: { className?: string }) {
     <div className={className}>
       <div className="flex items-center gap-3">
         <Crown className="w-10 h-10 text-accent"  strokeWidth={1.5} />
-        <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-text-primary">
+        <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
           VIP Club
         </h1>
       </div>

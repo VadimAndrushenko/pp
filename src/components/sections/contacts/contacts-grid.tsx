@@ -5,7 +5,7 @@ import { MapPin, Phone, MessageCircle, Send, Clock } from "lucide-react"
 export function ContactsGrid() {
   return (
     <>
-      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-text-primary mb-6">
+      <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary mb-6">
         Контакты
       </h1>
 

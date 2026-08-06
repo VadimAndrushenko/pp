@@ -45,7 +45,7 @@ export function MenuCategoryCard({ item, priority }: { item: MenuCategory; prior
 
       <div className="relative z-10 p-4 flex flex-col items-start h-full justify-center" style={{ width: "200px" }}>
         {Icon && <Icon className={`${iconSize} mb-3 text-accent`} strokeWidth={1.5} />}
-        <h3 className="font-display uppercase tracking-tight text-white text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-accent">
+        <h3 className="font-display uppercase tracking-tight text-white text-3xl max-md:text-2xl leading-tight transition-colors duration-300 group-hover:text-accent">
           {item.title}
         </h3>
         <p className="font-body text-text-muted text-base mt-1">

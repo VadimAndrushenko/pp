@@ -6,8 +6,8 @@ export default function IslandInfoPage() {
   return (
     <>
       <Breadcrumb />
-      <IslandInfoHero className="py-8" />
-      <IslandInfoGrid className="py-8" />
+      <IslandInfoHero className="section-py" />
+      <IslandInfoGrid className="section-py" />
     </>
   )
 }

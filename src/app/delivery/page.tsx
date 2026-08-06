@@ -9,10 +9,10 @@ export default function DeliveryPage() {
   return (
     <>
       <Breadcrumb />
-      <DeliveryHero className="py-8" />
-      <ServicesSection className="py-8" />
-      <InfoCards className="py-6" />
-      <DeliveryZones className="py-8" />
+      <DeliveryHero className="section-py" />
+      <ServicesSection className="section-py" />
+      <InfoCards className="section-py" />
+      <DeliveryZones className="section-py" />
       {/* <CTABanner /> */}
     </>
   )

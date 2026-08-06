@@ -7,9 +7,9 @@ export default function CurrencyPage() {
   return (
     <>
       <Breadcrumb />
-      <CurrencyHero className="py-8" />
-      <CurrencyFeatures className="py-8" />
-      <CurrencyCta className="py-8" />
+      <CurrencyHero className="section-py" />
+      <CurrencyFeatures className="section-py" />
+      <CurrencyCta className="section-py" />
     </>
   )
 }

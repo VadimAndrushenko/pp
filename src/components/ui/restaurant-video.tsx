@@ -37,7 +37,7 @@ export function RestaurantVideo({ className }: RestaurantVideoProps) {
               <Play className="w-8 h-8 text-white ml-1" fill="white" />
             </div>
             <div className="text-center">
-              <p className="text-lg md:text-2xl font-display uppercase tracking-wider text-white drop-shadow-lg">
+              <p className="text-2xl max-md:text-lg font-display uppercase tracking-wider text-white drop-shadow-lg">
                 Посмотрите наш ресторан
               </p>
               <p

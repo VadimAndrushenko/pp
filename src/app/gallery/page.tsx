@@ -8,11 +8,11 @@ export default function GalleryPage() {
     <>
       <Breadcrumb />
 
-      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-text-primary mb-2">
+      <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary mb-2">
         Как у нас
       </h1>
 
-      <RestaurantVideo className="py-6" />
+      <RestaurantVideo className="section-py" />
 
       <h2 id="reports" className="section-heading scroll-mt-20 font-display font-bold uppercase tracking-tight text-text-primary mb-2 mt-8">
         Фото и видеоотчёты
@@ -21,7 +21,7 @@ export default function GalleryPage() {
         Что происходит в нашем ресторане
       </p>
 
-        <HeroCards className="py-6" />
+        <HeroCards className="section-py" />
     </>
   )
 }

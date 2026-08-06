@@ -7,9 +7,9 @@ export default function PromotionsPage() {
   return (
     <>
       <Breadcrumb />
-      <PromotionsHero className="py-8" />
-      <PromotionsGrid className="py-8" />
-      {/* <PromotionsBanner className="py-8" /> */}
+      <PromotionsHero className="section-py" />
+      <PromotionsGrid className="section-py" />
+      {/* <PromotionsBanner className="section-py" /> */}
     </>
   )
 }

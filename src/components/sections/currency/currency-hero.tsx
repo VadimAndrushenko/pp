@@ -1,7 +1,7 @@
 export function CurrencyHero({ className }: { className?: string }) {
   return (
     <div className={className}>
-      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-text-primary">
+      <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
         Обмен рублей
       </h1>
       <p className="text-sm font-display uppercase tracking-wider text-accent" >

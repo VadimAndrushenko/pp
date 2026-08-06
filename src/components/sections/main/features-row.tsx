@@ -40,10 +40,10 @@ export function FeaturesRow({ embedded }: FeaturesRowProps) {
                 className="w-7 h-7 lg:w-8 lg:h-8 text-accent hover-glow-accent"
                 strokeWidth={1.5}
               />
-              <span className="text-base md:text-lg font-display font-bold uppercase tracking-wide text-text-primary">
+              <span className="text-lg max-md:text-base font-display font-bold uppercase tracking-wide text-text-primary">
                 {feature.label}
               </span>
-              <span className="text-xs md:text-sm uppercase tracking-wide leading-snug text-text-muted -mt-1">
+              <span className="text-sm max-md:text-xs uppercase tracking-wide leading-snug text-text-muted -mt-1">
                 {feature.text}
               </span>
             </div>

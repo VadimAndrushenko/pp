@@ -105,7 +105,7 @@ function ContactsGrid() {
       </div>
 
       {/* КНОПКИ ЗАБРОНИРОВАТЬ / ЗАКАЗАТЬ ДОСТАВКУ */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
         <a
           href={links.whatsapp}
           target="_blank"
@@ -173,7 +173,7 @@ function ContactsGrid() {
       </div>
 
       {/* АДРЕС + РЕЖИМ РАБОТЫ */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
         {/* Карточка адреса — фото фасада как ПОЛНЫЙ фон карточки, естественные пропорции 1024x977 */}
         <div className="relative a w-full overflow-hidden rounded-card border border-border min-h-[300px]">
           <Image

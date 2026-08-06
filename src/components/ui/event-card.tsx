@@ -69,8 +69,8 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
 
   /* FULL variant (events page) */
   return (
-    <Card as="a" href={`/events/${event.slug}`} className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[auto_1fr_auto] items-start">
-      <div className="col-span-2 md:col-span-1 md:col-start-2">
+    <Card as="a" href={`/events/${event.slug}`} className="grid grid-cols-[auto_1fr_auto] gap-4 max-md:grid-cols-[1fr_auto] items-start">
+      <div className="col-span-1 col-start-2 max-md:col-span-2 max-md:col-start-auto">
         <div
           className="w-full h-36 rounded-sm bg-cover bg-center mb-3 relative"
           style={{ backgroundImage: `url(${event.image})` }}
@@ -98,18 +98,18 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
         </div>
       </div>
 
-      <div className="flex items-center gap-x-3 md:flex-col md:items-center md:justify-center md:text-center md:min-w-[70px] md:gap-x-0">
+      <div className="flex flex-col items-center justify-center gap-x-0 text-center min-w-[70px] max-md:flex-row max-md:justify-start max-md:gap-x-3 max-md:text-left max-md:min-w-[auto]">
         <div
           className="text-7xl font-display font-bold leading-none text-accent"
         >
           {event.date}
         </div>
-        <div className="text-xl text-text-primary uppercase md:mt-1">{event.month}</div>
-        <div className="text-lg text-accent md:mt-1">{event.dayOfWeek}</div>
+        <div className="text-xl text-text-primary uppercase mt-1 max-md:mt-0">{event.month}</div>
+        <div className="text-lg text-accent mt-1 max-md:mt-0">{event.dayOfWeek}</div>
       </div>
 
       <ChevronRight
-        className="w-5 h-5 justify-self-end self-center md:mt-4 text-accent"
+        className="w-5 h-5 justify-self-end self-center mt-4 max-md:mt-0 text-accent"
       />
     </Card>
   )
