@@ -20,13 +20,12 @@ export function GalleryPreview() {
     <section>
       <MotionDiv direction="up" delay={0.05}>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
+            <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary">
               Фото и видеоотчёты
             </h2>
             <Link
               href="/gallery"
-              className="text-xs font-display uppercase tracking-wider flex items-center gap-1 link-underline"
-              style={{ color: "var(--color-accent)" }}
+              className="text-xs font-display uppercase tracking-wider flex items-center gap-1 link-underline text-accent"
             >
               Смотреть всё
               <ArrowRight className="w-3 h-3" />
@@ -45,13 +44,12 @@ export function GalleryPreview() {
                         setPlayingVideo(item.id)
                       }
                     }}
-                    className="group block shrink-0 w-[180px] sm:w-[200px] md:w-[210px] lg:w-[240px] border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-[var(--color-accent)] focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:outline-none rounded-[var(--radius-card)] cursor-pointer"
+                    className="group block shrink-0 w-[180px] sm:w-[200px] md:w-[210px] lg:w-[240px] border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
                   >
                     <div
-                      className="relative w-full aspect-[4/5] rounded-[var(--radius-card)] overflow-hidden bg-cover bg-center"
+                      className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-cover bg-center bg-surface"
                       style={{
                         backgroundImage: isPlaying ? "none" : `url(${item.image})`,
-                        backgroundColor: "var(--color-surface)",
                       }}
                     >
                       {isPlaying ? (
@@ -74,10 +72,10 @@ export function GalleryPreview() {
                             </div>
                           )}
                           <div className="absolute top-2 left-2 bg-black/80 rounded-md px-2 py-1.5 text-center min-w-[44px]">
-                            <div className="text-base font-display font-bold leading-none text-[var(--color-text-primary)]">
+                            <div className="text-base font-display font-bold leading-none text-text-primary">
                               {item.date.split(" ")[0]}
                             </div>
-                            <div className="text-[9px] uppercase tracking-wide text-[var(--color-text-muted)] mt-0.5">
+                            <div className="text-[9px] uppercase tracking-wide text-text-muted mt-0.5">
                               {item.date.split(" ")[1]}
                             </div>
                           </div>
@@ -85,10 +83,10 @@ export function GalleryPreview() {
                       )}
                     </div>
                     <div className="pt-3 pb-3 px-2 text-center">
-                      <h3 className="text-sm font-display font-bold uppercase leading-snug text-[var(--color-text-primary)] line-clamp-2 min-h-[2.2em]">
+                      <h3 className="text-sm font-display font-bold uppercase leading-snug text-text-primary line-clamp-2 min-h-[2.2em]">
                         {item.title}
                       </h3>
-                      <div className="flex items-center justify-center gap-1 mt-1.5 text-xs text-[var(--color-text-muted)] uppercase tracking-wide">
+                      <div className="flex items-center justify-center gap-1 mt-1.5 text-xs text-text-muted uppercase tracking-wide">
                         <Clock className="w-3 h-3 shrink-0" />
                         <span>{item.dayOfWeek}</span>
                       </div>

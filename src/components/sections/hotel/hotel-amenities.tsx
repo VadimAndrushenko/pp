@@ -17,8 +17,8 @@ export function HotelAmenities({ className }: { className?: string }) {
         const Icon = item.icon
         return (
           <Card key={i} className="flex flex-col items-center gap-2 p-4 text-center">
-            <Icon className="w-6 h-6" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
-            <span className="text-xs font-display uppercase text-[var(--color-text-primary)]">{item.title}</span>
+            <Icon className="w-6 h-6 text-accent"  strokeWidth={1.5} />
+            <span className="text-xs font-display uppercase text-text-primary">{item.title}</span>
           </Card>
         )
       })}

@@ -15,10 +15,10 @@ export function BanquetFeatures({ className }: { className?: string }) {
         const Icon = item.icon
         return (
           <Card key={i} className="flex items-center gap-4 p-4">
-            <Icon className="w-8 h-8 shrink-0" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
+            <Icon className="w-8 h-8 shrink-0 text-accent"  strokeWidth={1.5} />
             <div>
-              <h3 className="text-sm font-display uppercase text-[var(--color-text-primary)]">{item.title}</h3>
-              <p className="text-xs text-[var(--color-text-secondary)]">{item.desc}</p>
+              <h3 className="text-sm font-display uppercase text-text-primary">{item.title}</h3>
+              <p className="text-xs text-text-secondary">{item.desc}</p>
             </div>
           </Card>
         )

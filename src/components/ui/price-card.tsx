@@ -13,11 +13,11 @@ export function PriceCard({ name, price, image, description, className }: PriceC
         className="w-20 h-20 rounded-full bg-cover bg-center"
         style={{ backgroundImage: `url(${image})` }}
       />
-      <h3 className="text-lg font-display uppercase text-[var(--color-text-primary)]">{name}</h3>
+      <h3 className="text-lg font-display uppercase text-text-primary">{name}</h3>
       {description && (
-        <p className="text-xs text-[var(--color-text-secondary)]">{description}</p>
+        <p className="text-xs text-text-secondary">{description}</p>
       )}
-      <p className="text-xl font-display font-bold text-[var(--color-accent)]">{price}</p>
+      <p className="text-xl font-display font-bold text-accent">{price}</p>
     </Card>
   )
 }

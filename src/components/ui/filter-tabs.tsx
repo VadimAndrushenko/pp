@@ -24,10 +24,10 @@ export function FilterTabs({ activeTab, onTabChange, tabs }: FilterTabsProps) {
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
           className={cn(
-            "whitespace-nowrap px-8 py-4 rounded-[var(--radius-sm)] text-lg font-display uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-3",
+            "whitespace-nowrap px-8 py-4 rounded-sm text-lg font-display uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-3",
             activeTab === tab.id
-              ? "bg-[var(--color-accent)] text-white"
-              : "border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]",
+              ? "bg-accent text-white"
+              : "border border-border text-text-secondary hover:text-accent",
           )}
         >
           <tab.icon className="w-7 h-7" />

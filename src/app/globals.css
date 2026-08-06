@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+:root {
+  --color-bg: #000000;
+  --color-surface: #121110;
+  --color-accent: #FF6A00;
+  --color-accent-hover: #CC5200;
+  --color-accent-dim: rgba(255, 106, 0, 0.6);
+  --color-neon-blue: #2E6BFF;
+  --color-neon-red: #FF2A3C;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B7B4B0;
+  --color-text-muted: #8A8783;
+  --color-border: rgba(255, 106, 0, 0.6);
+  --color-success: #3ECF6E;
+  --color-grab: #00B14F;
+  --color-whatsapp: #25D366;
+  --color-telegram: #229ED9;
+  --radius-card: 20px;
+  --radius-sm: 10px;
+  --font-display: "Oswald", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+}
+
 @theme inline {
   --color-bg: var(--color-bg);
   --color-surface: var(--color-surface);
@@ -20,6 +42,13 @@
   --radius-sm: var(--radius-sm);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
+  --shadow-card-glow: 0 0 16px -6px var(--color-accent-dim);
+  --shadow-card-glow-hover: 0 0 28px -4px var(--color-accent);
+  --shadow-accent-sm: 0 0 6px var(--color-accent);
+  --shadow-accent: 0 4px 24px -6px var(--color-accent);
+  --shadow-brand: 0 0 18px -2px var(--brand);
+  --drop-shadow-accent: 0 0 10px var(--color-accent);
+  --drop-shadow-accent-dim: 0 0 6px var(--color-accent-dim);
 }
 
 @utility container {
@@ -45,7 +74,7 @@
   }
 }
 
-/* Стандартный размер заголовков блоков и медиа — как в блоке "Что входит в услугу" */
+/* Стандартный размер заголовков блоков и медиа  */
 @layer base {
   .section-heading,
   .section-heading > h2 {
@@ -95,30 +124,9 @@
   }
 }
 
-:root {
-  --color-bg: #000000;
-  --color-surface: #121110;
-  --color-accent: #FF6A00;
-  --color-accent-hover: #CC5200;
-  --color-accent-dim: rgba(255, 106, 0, 0.6);
-  --color-neon-blue: #2E6BFF;
-  --color-neon-red: #FF2A3C;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B7B4B0;
-  --color-text-muted: #8A8783;
-  --color-border: rgba(255, 106, 0, 0.6);
-  --color-success: #3ECF6E;
-  --color-grab: #00B14F;
-  --color-whatsapp: #25D366;
-  --color-telegram: #229ED9;
-  --radius-card: 20px;
-  --radius-sm: 10px;
-  --font-display: "Oswald", sans-serif;
-  --font-body: "Montserrat", sans-serif;
-}
-
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   overflow-x: hidden;
 }
 

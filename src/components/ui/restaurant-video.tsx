@@ -13,10 +13,9 @@ export function RestaurantVideo({ className }: RestaurantVideoProps) {
   return (
     <div className={className}>
       <div
-        className="relative w-full aspect-video max-h-[620px] rounded-[var(--radius-card)] overflow-hidden cursor-pointer bg-cover bg-center group hover-lift"
+        className="relative w-full aspect-video max-h-[620px] rounded-card overflow-hidden cursor-pointer bg-cover bg-center bg-surface group hover-lift"
         style={{
           backgroundImage: isPlaying ? "none" : "url('https://picsum.photos/seed/poidem-interior/800/450')",
-          backgroundColor: "var(--color-surface)",
         }}
         onClick={() => !isPlaying && setIsPlaying(true)}
       >
@@ -42,8 +41,7 @@ export function RestaurantVideo({ className }: RestaurantVideoProps) {
                 Посмотрите наш ресторан
               </p>
               <p
-                className="text-sm font-display uppercase tracking-wider mt-1 drop-shadow-lg"
-                style={{ color: "var(--color-accent)" }}
+                className="text-sm font-display uppercase tracking-wider mt-1 drop-shadow-lg text-accent"
               >
                 Короткое видео о нас
               </p>

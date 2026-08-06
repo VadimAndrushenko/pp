@@ -4,6 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Phone, MessageCircle, MessageSquare, Send, MapPin, Map, Clock, Mail, Globe, Loader2 } from "lucide-react"
+import { links } from "@/config/links"
+import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/social-icons"
 
 const CONTACT_METHODS = [
   {
@@ -20,7 +22,7 @@ const CONTACT_METHODS = [
     value: "+84 783 779 879",
     hint: "Напишите нам",
     href: "https://wa.me/84783779879",
-    color: "var(--color-whatsapp)",
+    color: "#25D366",
   },
   {
     icon: Send,
@@ -28,7 +30,7 @@ const CONTACT_METHODS = [
     value: "@poidem_pozhrem",
     hint: "Напишите нам",
     href: "https://t.me/poidem_pozhrem",
-    color: "var(--color-telegram)",
+    color: "#229ED9",
   },
   {
     icon: MessageSquare,
@@ -47,38 +49,11 @@ const CONTACT_METHODS = [
  * рисуются через currentColor, чтобы наследовать цвет из className.
  * ------------------------------------------------------------------ */
 
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  )
-}
-
-function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  )
-}
-
-function YoutubeIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
-      <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
-    </svg>
-  )
-}
-
 const SOCIALS = [
-  { icon: Send, label: "t.me/poidem_po_zhrem", href: "https://t.me/poidem_po_zhrem" },
-  { icon: InstagramIcon, label: "instagram.com/poidem_po_zhrem", href: "https://instagram.com/poidem_po_zhrem" },
-  { icon: FacebookIcon, label: "facebook.com/PoidemPozhrem", href: "https://facebook.com/PoidemPozhrem" },
-  { icon: YoutubeIcon, label: "youtube.com/@poidempozhrEM", href: "https://youtube.com/@poidempozhrEM" },
+  { icon: Send, label: "t.me/poidem_pozhrem", href: links.telegram },
+  { icon: InstagramIcon, label: "instagram.com/poidem_po_zhrem", href: links.instagram },
+  { icon: FacebookIcon, label: "facebook.com/PoidemPozhrem", href: links.facebook },
+  { icon: YoutubeIcon, label: "youtube.com/@poidempozhrEM", href: links.youtube },
 ]
 
 /**
@@ -90,16 +65,15 @@ function BurstLines({ className = "" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 120 120"
-      className={className}
+      className={`${className} drop-shadow-accent-dim`}
       fill="none"
       aria-hidden="true"
-      style={{ filter: "drop-shadow(0 0 6px var(--color-accent-dim))" }}
     >
-      <line x1="14" y1="30" x2="55" y2="22" stroke="var(--color-accent)" strokeWidth="5" strokeLinecap="round" />
-      <line x1="14" y1="45" x2="50" y2="41" stroke="var(--color-accent)" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="14" y1="60" x2="58" y2="60" stroke="var(--color-accent)" strokeWidth="5" strokeLinecap="round" />
-      <line x1="14" y1="75" x2="50" y2="79" stroke="var(--color-accent)" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="14" y1="90" x2="55" y2="98" stroke="var(--color-accent)" strokeWidth="5" strokeLinecap="round" />
+      <line x1="14" y1="30" x2="55" y2="22" className="stroke-accent" strokeWidth="5" strokeLinecap="round" />
+      <line x1="14" y1="45" x2="50" y2="41" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" />
+      <line x1="14" y1="60" x2="58" y2="60" className="stroke-accent" strokeWidth="5" strokeLinecap="round" />
+      <line x1="14" y1="75" x2="50" y2="79" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" />
+      <line x1="14" y1="90" x2="55" y2="98" className="stroke-accent" strokeWidth="5" strokeLinecap="round" />
     </svg>
   )
 }
@@ -120,12 +94,12 @@ function ContactsGrid() {
       <div className="text-center pt-2">
         <div className="mx-auto flex max-w-3xl items-center justify-center gap-4 max-sm:gap-2">
           <BurstLines className="h-[120px] w-[120px] shrink-0 scale-x-[-1] max-lg:h-20 max-lg:w-20 max-sm:h-16 max-sm:w-16" />
-          <h1 className="font-display font-extrabold uppercase text-8xl text-[var(--color-text-primary)] max-lg:text-7xl max-sm:text-5xl">
+          <h1 className="font-display font-extrabold uppercase text-8xl text-text-primary max-lg:text-7xl max-sm:text-5xl">
             КОНТАКТЫ
           </h1>
           <BurstLines className="h-[120px] w-[120px] shrink-0 max-lg:h-20 max-lg:w-20 max-sm:h-16 max-sm:w-16" />
         </div>
-        <p className="mt-2 font-display font-bold uppercase text-5xl text-[var(--color-accent)] max-lg:text-4xl max-sm:text-2xl">
+        <p className="mt-2 font-display font-bold uppercase text-5xl text-accent max-lg:text-4xl max-sm:text-2xl">
           МЫ ВСЕГДА НА СВЯЗИ!
         </p>
       </div>
@@ -133,41 +107,41 @@ function ContactsGrid() {
       {/* КНОПКИ ЗАБРОНИРОВАТЬ / ЗАКАЗАТЬ ДОСТАВКУ */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <a
-          href="https://wa.me/84855559797"
+          href={links.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-br from-[var(--color-surface)] to-black p-5 border border-[var(--color-border)] shadow-[0_0_16px_-6px_var(--color-accent-dim)] hover:border-[var(--color-accent)] hover:shadow-[0_0_28px_-4px_var(--color-accent)] hover:-translate-y-1 transition-all duration-500"
+          className="group relative overflow-hidden rounded-card bg-gradient-to-br from-surface to-black p-5 border border-border shadow-card-glow hover:border-accent hover:shadow-card-glow-hover hover:-translate-y-1 transition-all duration-500"
         >
-          <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--color-accent-dim)] to-transparent group-hover:from-[var(--color-accent)] transition-all duration-500" />
+          <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-accent-dim to-transparent group-hover:from-accent transition-all duration-500" />
           <div className="flex items-start gap-4">
-            <div className="shrink-0 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full bg-[var(--color-accent)]/10 ring-1 ring-[var(--color-border)] group-hover:bg-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)] transition-all duration-500">
-              <Phone className="w-5 h-5 text-[var(--color-accent)]" />
+            <div className="shrink-0 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full bg-accent/10 ring-1 ring-border group-hover:bg-accent/20 group-hover:ring-accent transition-all duration-500">
+              <Phone className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <span className="font-display uppercase tracking-widest text-xs text-[var(--color-text-muted)]">Быстрое бронирование</span>
-              <p className="font-bold text-lg text-[var(--color-text-primary)]">Забронировать столик</p>
+              <span className="font-display uppercase tracking-widest text-xs text-text-muted">Быстрое бронирование</span>
+              <p className="font-bold text-lg text-text-primary">Забронировать столик</p>
             </div>
           </div>
         </a>
         <Link
           href="/delivery"
-          className="group relative overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-br from-[var(--color-surface)] to-black p-5 border border-[var(--color-border)] shadow-[0_0_16px_-6px_var(--color-accent-dim)] hover:border-[var(--color-accent)] hover:shadow-[0_0_28px_-4px_var(--color-accent)] hover:-translate-y-1 transition-all duration-500"
+          className="group relative overflow-hidden rounded-card bg-gradient-to-br from-surface to-black p-5 border border-border shadow-card-glow hover:border-accent hover:shadow-card-glow-hover hover:-translate-y-1 transition-all duration-500"
         >
-          <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-[var(--color-accent-dim)] to-transparent group-hover:from-[var(--color-accent)] transition-all duration-500" />
+          <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-accent-dim to-transparent group-hover:from-accent transition-all duration-500" />
           <div className="flex items-start gap-4">
-            <div className="shrink-0 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full bg-[var(--color-accent)]/10 ring-1 ring-[var(--color-border)] group-hover:bg-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)] transition-all duration-500">
-              <MessageCircle className="w-5 h-5 text-[var(--color-accent)]" />
+            <div className="shrink-0 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full bg-accent/10 ring-1 ring-border group-hover:bg-accent/20 group-hover:ring-accent transition-all duration-500">
+              <MessageCircle className="w-5 h-5 text-accent" />
             </div>
             <div>
-              <span className="font-display uppercase tracking-widest text-xs text-[var(--color-text-muted)]">Еда, напитки и кальян</span>
-              <p className="font-bold text-lg text-[var(--color-text-primary)]">Заказать доставку</p>
+              <span className="font-display uppercase tracking-widest text-xs text-text-muted">Еда, напитки и кальян</span>
+              <p className="font-bold text-lg text-text-primary">Заказать доставку</p>
             </div>
           </div>
         </Link>
       </div>
 
       {/* СПОСОБЫ СВЯЗИ */}
-      <h2 className="section-heading font-display font-bold uppercase text-[var(--color-accent)] text-center tracking-widest mb-6">
+      <h2 className="section-heading font-display font-bold uppercase text-accent text-center tracking-widest mb-6">
         Свяжитесь с нами удобным для вас способом
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
@@ -179,7 +153,7 @@ function ContactsGrid() {
               href={m.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover-lift neon-card flex flex-col items-center rounded-[var(--radius-card)] border border-[var(--color-border)] px-4 py-6 text-center"
+              className="hover-lift neon-card flex flex-col items-center rounded-card border border-border px-4 py-6 text-center"
               style={{ ["--glow" as string]: m.color }}
             >
               <span
@@ -188,11 +162,11 @@ function ContactsGrid() {
               >
                 <Icon className="h-6 w-6 text-white" strokeWidth={2} />
               </span>
-              <span className="font-display font-bold uppercase text-sm text-[var(--color-text-primary)]">
+              <span className="font-display font-bold uppercase text-sm text-text-primary">
                 {m.label}
               </span>
-              <span className="mt-1 text-sm font-semibold text-[var(--color-accent)]">{m.value}</span>
-              <span className="mt-1 text-xs text-[var(--color-text-muted)]">{m.hint}</span>
+              <span className="mt-1 text-sm font-semibold text-accent">{m.value}</span>
+              <span className="mt-1 text-xs text-text-muted">{m.hint}</span>
             </Link>
           )
         })}
@@ -201,7 +175,7 @@ function ContactsGrid() {
       {/* АДРЕС + РЕЖИМ РАБОТЫ */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Карточка адреса — фото фасада как ПОЛНЫЙ фон карточки, естественные пропорции 1024x977 */}
-        <div className="relative a w-full overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] min-h-[300px]">
+        <div className="relative a w-full overflow-hidden rounded-card border border-border min-h-[300px]">
           <Image
             src="/images/contacts/facade.png"
             alt="Фасад ресторана Poidem Pozhrem"
@@ -210,7 +184,7 @@ function ContactsGrid() {
           />
           <div className="absolute inset-x-0 top-0 p-5">
             <div className="flex items-center gap-2">
-              <MapPin className="h-5 w-5 text-[var(--color-accent)]" />
+              <MapPin className="h-5 w-5 text-accent" />
               <h3 className="font-display font-bold uppercase text-base sm:text-xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Наш адрес</h3>
             </div>
             <p className="pt-2 text-xs sm:text-base text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -221,16 +195,16 @@ function ContactsGrid() {
           </div>
         </div>
 
-      <div className="flex gap-5 rounded-[var(--radius-card)] border border-[var(--color-border)] p-5 min-h-[200px] sm:min-h-[260px] max-sm:flex-col max-sm:p-3">
+      <div className="flex gap-5 rounded-card border border-border p-5 min-h-[200px] sm:min-h-[260px] max-sm:flex-col max-sm:p-3">
         <div className="flex flex-col justify-center flex-1">
           <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-[var(--color-accent)]" />
-            <h3 className="font-display font-bold uppercase text-base sm:text-xl max-sm:text-sm text-[var(--color-text-primary)]">
+            <Clock className="h-5 w-5 text-accent" />
+            <h3 className="font-display font-bold uppercase text-base sm:text-xl max-sm:text-sm text-text-primary">
               Режим работы
             </h3>
           </div>
 
-          <p className="mt-4 font-display font-extrabold uppercase text-6xl max-sm:text-5xl text-[var(--color-accent)]">
+          <p className="mt-4 font-display font-extrabold uppercase text-6xl max-sm:text-5xl text-accent">
             24/7
           </p>
           <p className="mt-2 text-lg max-sm:text-base uppercase text-white">Все 7 дней в неделю</p>
@@ -238,12 +212,12 @@ function ContactsGrid() {
 
           <div className="mt-4 space-y-3 text-xl max-sm:text-sm max-sm:flex justify-between gap-3">
             <div>
-              <p className="font-display font-bold uppercase text-[var(--color-accent)]">Кухня и бар</p>
+              <p className="font-display font-bold uppercase text-accent">Кухня и бар</p>
               <p className="text-white">Круглосуточно</p>
             </div>
             <div>
-              <p className="font-display font-bold uppercase text-[var(--color-accent)]">Завтраки / Коворкинг</p>
-              <p className="text-[var(--color-text-secondary)]">Ежедневно с 08:00 до 17:00</p>
+              <p className="font-display font-bold uppercase text-accent">Завтраки / Коворкинг</p>
+              <p className="text-text-secondary">Ежедневно с 08:00 до 17:00</p>
             </div>
           </div>
         </div>
@@ -252,9 +226,9 @@ function ContactsGrid() {
           <div className="text-center">
             <div className="mb-2 flex items-center justify-center gap-1.5">
               <MapPin className="h-4 w-4" style={{ color: "#FC3F1D" }} />
-              <span className="text-xs max-sm:text-[11px] font-medium text-[var(--color-text-primary)]">Яндекс Карты</span>
+              <span className="text-xs max-sm:text-[11px] font-medium text-text-primary">Яндекс Карты</span>
             </div>
-            <div className="relative h-28 w-28 max-sm:h-36 max-sm:w-36 overflow-hidden rounded-[var(--radius-sm)] border border-[var(--color-border)]">
+            <div className="relative h-28 w-28 max-sm:h-36 max-sm:w-36 overflow-hidden rounded-sm border border-border">
               <Image src="/images/contacts/qr-yandex.png" alt="QR-код Яндекс Карты" fill className="object-cover" />
             </div>
           </div>
@@ -262,9 +236,9 @@ function ContactsGrid() {
           <div className="text-center">
             <div className="mb-2 flex items-center justify-center gap-1.5">
               <MapPin className="h-4 w-4" style={{ color: "#4285F4" }} />
-              <span className="text-xs max-sm:text-[11px] font-medium text-[var(--color-text-primary)]">Google Maps</span>
+              <span className="text-xs max-sm:text-[11px] font-medium text-text-primary">Google Maps</span>
             </div>
-            <div className="relative h-28 w-28 max-sm:h-36 max-sm:w-36 overflow-hidden rounded-[var(--radius-sm)] border border-[var(--color-border)]">
+            <div className="relative h-28 w-28 max-sm:h-36 max-sm:w-36 overflow-hidden rounded-sm border border-border">
               <Image src="/images/contacts/qr-google.png" alt="QR-код Google Maps" fill className="object-cover" />
             </div>
           </div>
@@ -275,10 +249,10 @@ function ContactsGrid() {
       {/* КАК НАС НАЙТИ — карта Google Maps */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <Map className="h-5 w-5 text-[var(--color-accent)]" />
-          <h3 className="font-display font-bold uppercase text-base sm:text-xl text-[var(--color-text-primary)]">Как нас найти</h3>
+          <Map className="h-5 w-5 text-accent" />
+          <h3 className="font-display font-bold uppercase text-base sm:text-xl text-text-primary">Как нас найти</h3>
         </div>
-        <div className="relative w-full overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] aspect-[16/4] min-h-[300px]">
+        <div className="relative w-full overflow-hidden rounded-card border border-border aspect-[16/4] min-h-[300px]">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.6977096240234!2d103.9614389748743!3d10.205185289910963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a78dcc750e2e1b%3A0xb5338d32fc7decc6!2sPOIDEM%20POZHREM%20%E2%80%94%20Russian%2C%20Caucasian%2C%20European%20%26%20Eastern%20Cuisine!5e0!3m2!1sru!2sil!4v1785186951084!5m2!1sru!2sil"
             style={{ border: 0, position: "absolute", inset: 0, width: "100%", height: "100%" }}
@@ -291,69 +265,69 @@ function ContactsGrid() {
       </div>
 
       {/* ФОРМА ОБРАТНОЙ СВЯЗИ */}
-      <div className="rounded-[var(--radius-card)] border border-[var(--color-border)] p-5 sm:p-6">
+      <div className="rounded-card border border-border p-5 sm:p-6">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-display font-bold uppercase text-[var(--color-text-primary)]">Напишите нам</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--color-text-secondary)]">
+          <h3 className="font-display font-bold uppercase text-text-primary">Напишите нам</h3>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
             <span className="flex items-center gap-1">
-              <Mail className="h-3.5 w-3.5 text-[var(--color-accent)]" /> poidempozhrem@gmail.com
+              <Mail className="h-3.5 w-3.5 text-accent" /> poidempozhrem@gmail.com
             </span>
             <span className="flex items-center gap-1">
-              <Globe className="h-3.5 w-3.5 text-[var(--color-accent)]" /> poidempozhrem.com
+              <Globe className="h-3.5 w-3.5 text-accent" /> poidempozhrem.com
             </span>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm font-medium text-[var(--color-text-primary)]">
+            <span className="text-sm font-medium text-text-primary">
               Ваше имя <span className="text-[#ef4444]">*</span>
             </span>
             <input
               required
               type="text"
               placeholder="Иван Иванов"
-              className="rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
+              className="rounded-sm border border-border bg-transparent px-4 py-3 text-sm text-text-primary outline-none placeholder:text-text-muted focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1.5">
-            <span className="text-sm font-medium text-[var(--color-text-primary)]">
+            <span className="text-sm font-medium text-text-primary">
               Email / Telegram / WhatsApp <span className="text-[#ef4444]">*</span>
             </span>
             <input
               required
               type="text"
               placeholder="example@mail.com / @username / +1234567890"
-              className="rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
+              className="rounded-sm border border-border bg-transparent px-4 py-3 text-sm text-text-primary outline-none placeholder:text-text-muted focus:border-accent"
             />
           </label>
           <label className="flex flex-col gap-1.5 lg:col-span-2">
-            <span className="text-sm font-medium text-[var(--color-text-primary)]">
+            <span className="text-sm font-medium text-text-primary">
               Ваше сообщение <span className="text-[#ef4444]">*</span>
             </span>
             <textarea
               required
               placeholder="Введите ваше сообщение..."
               rows={4}
-              className="rounded-[var(--radius-sm)] border border-[var(--color-border)] bg-transparent px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)]"
+              className="rounded-sm border border-border bg-transparent px-4 py-3 text-sm text-text-primary outline-none placeholder:text-text-muted focus:border-accent"
             />
           </label>
 
           <button
             type="submit"
             disabled={status !== "idle"}
-            className="hover-lift flex items-center justify-center gap-2 rounded-[var(--radius-card)] bg-[var(--color-accent)] py-4 font-display font-bold uppercase text-sm text-black transition-colors hover:bg-[var(--color-accent-hover)] disabled:opacity-70 lg:col-span-2"
+            className="hover-lift flex items-center justify-center gap-2 rounded-card bg-accent py-4 font-display font-bold uppercase text-sm text-black transition-colors hover:bg-accent-hover disabled:opacity-70 lg:col-span-2"
           >
             {status === "sending" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             {status === "sent" ? "Отправлено!" : "Отправить сообщение"}
           </button>
 
-          <p className="text-center text-xs text-[var(--color-text-muted)] lg:col-span-2">
+          <p className="text-center text-xs text-text-muted lg:col-span-2">
             Мы ответим вам в ближайшее время!
           </p>
         </form>
 
-        <div className="mt-5 flex flex-wrap justify-center gap-4 border-t border-[var(--color-border)] pt-4">
+        <div className="mt-5 flex flex-wrap justify-center gap-4 border-t border-border pt-4">
           {SOCIALS.map((s) => {
             const Icon = s.icon
             return (
@@ -362,7 +336,7 @@ function ContactsGrid() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="link-accent flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)]"
+                className="link-accent flex items-center gap-1.5 text-xs text-text-secondary"
               >
                 <Icon className="h-4 w-4" />
                 {s.label}

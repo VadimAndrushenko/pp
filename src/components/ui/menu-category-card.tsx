@@ -29,8 +29,7 @@ export function MenuCategoryCard({ item, priority }: { item: MenuCategory; prior
       href={item.href}
       target={item.href.startsWith("http") ? "_blank" : undefined}
       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-      className="relative overflow-hidden rounded-[var(--radius-card)] h-[260px] block group cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:-translate-y-1.5 hover:border-[var(--color-accent)] active:scale-[0.98]"
-      style={{ border: "1px solid var(--color-border)" }}
+      className="relative overflow-hidden rounded-card h-[260px] block group cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:-translate-y-1.5 hover:border-accent active:scale-[0.98] border border-border"
     >
       <Image
         src={item.image}
@@ -45,11 +44,11 @@ export function MenuCategoryCard({ item, priority }: { item: MenuCategory; prior
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
 
       <div className="relative z-10 p-4 flex flex-col items-start h-full justify-center" style={{ width: "200px" }}>
-        {Icon && <Icon className={`${iconSize} mb-3`} strokeWidth={1.5} style={{ color: "var(--color-accent)" }} />}
-        <h3 className="font-display uppercase tracking-tight text-white text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-[var(--color-accent)]">
+        {Icon && <Icon className={`${iconSize} mb-3 text-accent`} strokeWidth={1.5} />}
+        <h3 className="font-display uppercase tracking-tight text-white text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-accent">
           {item.title}
         </h3>
-        <p className="font-body text-[var(--color-text-muted)] text-base mt-1">
+        <p className="font-body text-text-muted text-base mt-1">
           {item.subtitle}
         </p>
       </div>

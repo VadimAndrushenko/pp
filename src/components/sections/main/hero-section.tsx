@@ -12,23 +12,22 @@ export function HeroSection({ className }: { className?: string }) {
           <div className="lg:w-[40%] flex flex-col ">
             <MotionDiv direction="left" delay={0.1} className="mb-6">
               <h1 className="leading-[1.1] text-5xl font-display font-bold uppercase tracking-tight mb-4 max-lg:text-4xl max-sm:text-[6.5vw]">
-                <span className="text-[var(--color-text-primary)]">
+                <span className="text-text-primary">
                   Ресторан на Фукуоке, где каждый день
                 </span>{" "}
-                <span style={{ color: "var(--color-accent)" }}>
+                <span className="text-accent">
                   что-то происходит!
                 </span>
               </h1>
               <div
-                className="h-0.5 w-16 mb-3"
-                style={{ backgroundColor: "var(--color-accent)" }}
+                className="h-0.5 w-16 mb-3 bg-accent"
               />
-              <p className="text-base max-[450px]:text-sm md:text-2xl text-[var(--color-text-primary)] font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
+              <p className="text-base max-[450px]:text-sm md:text-2xl text-text-primary font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
                 {site.cuisines.split("•").map((part, i, arr) =>
                   i < arr.length - 1 ? (
                     <span key={i}>
                       {part}
-                      <span style={{ color: "var(--color-accent)" }}>•</span>
+                      <span className="text-accent">•</span>
                     </span>
                   ) : (
                     <span key={i}>{part}</span>
@@ -57,7 +56,7 @@ export function HeroSection({ className }: { className?: string }) {
             delay={0.2}
             className="absolute bottom-0 right-0 h-full pointer-events-none -z-10 max-lg:max-h-[80%] max-[450px]:max-h-[75%] max-[450px]:translate-y-14"
           >
-            <div className="relative sm:right-11 rounded-[var(--radius-card)] transition-all duration-500 h-full max-sm:left-10">
+            <div className="relative sm:right-11 rounded-card transition-all duration-500 h-full max-sm:left-10">
               <Image
                 src="/images/people.png"
                 alt="People"
@@ -66,7 +65,7 @@ export function HeroSection({ className }: { className?: string }) {
                 className="h-full object-contain"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-[var(--color-bg)]/0 10% to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/0 10% to-transparent z-10" />
             </div>
           </MotionDiv>
         </div>

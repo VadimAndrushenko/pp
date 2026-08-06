@@ -166,25 +166,25 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       <div className="relative flex items-center mb-10 md:min-h-[320px] min-[550px]:max-md:min-h-[250px]">
         <div className="space-y-2.5 w-[40%] max-lg:w-[60%]">
           <div className="w-fit space-y-1 lg:space-y-2">
-            <span className="block font-display font-extrabold uppercase tracking-wider text-[var(--color-accent)] text-xl lg:text-4xl">
+            <span className="block font-display font-extrabold uppercase tracking-wider text-accent text-xl lg:text-4xl">
               {event.dayOfWeek.toUpperCase()}
             </span>
-            <div className="neon-card inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] px-4 py-2 lg:px-6 lg:py-3">
-              <Clock className="h-4 w-4 text-[var(--color-accent)] lg:h-5 lg:w-5" />
-              <span className="font-display font-bold text-[10px] text-[var(--color-text-primary)] lg:text-base">
+            <div className="neon-card inline-flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 lg:px-6 lg:py-3">
+              <Clock className="h-4 w-4 text-accent lg:h-5 lg:w-5" />
+              <span className="font-display font-bold text-[10px] text-text-primary lg:text-base">
                 {event.time}
               </span>
             </div>
           </div>
-          <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] md:mb-7 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
+          <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-text-primary md:mb-7 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
             {details.titleLine1}{details.titleLine2 ? <br /> : null}{details.titleLine2}{details.titleLine3 ? <br /> : null}{details.titleLine3}
             {!details.titleLine2 && !details.titleLine3 ? null : null}
           </h1>
-          <p className="text-5xl text-[var(--color-accent)] font-display uppercase tracking-wider md:mb-5 max-lg:text-3xl max-md:text-xl max-sm:text-lg">
+          <p className="text-5xl text-accent font-display uppercase tracking-wider md:mb-5 max-lg:text-3xl max-md:text-xl max-sm:text-lg">
             {details.subtitle}
           </p>
         </div>
-        <div className="absolute left-0 right-0 top- h-[150%] rounded-[var(--radius-card)] -z-10  ">
+        <div className="absolute left-0 right-0 top- h-[150%] rounded-card -z-10  ">
           <Image
             src="/images/events/monday-afterparty.png"
             alt={event.title}
@@ -194,11 +194,11 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </div>
       </div>
 
-      <p className="mt-6 border-l-2 border-[var(--color-accent)] pl-4 text-sm leading-relaxed text-[var(--color-text-secondary)] lg:mt-10 lg:pl-6 lg:text-xl">
+      <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-relaxed text-text-secondary lg:mt-10 lg:pl-6 lg:text-xl">
         {event.description}
       </p>
 
-      <h3 className="mb-6 max-lg:mb-4 mt-12 max-lg:mt-8 font-display font-bold uppercase text-4xl tracking-wide text-[var(--color-text-primary)]">
+      <h3 className="mb-6 max-lg:mb-4 mt-12 max-lg:mt-8 font-display font-bold uppercase text-4xl tracking-wide text-text-primary">
         {details.featuresHeading}
       </h3>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-5">
@@ -207,13 +207,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           return (
             <div
               key={f.title}
-              className="hover-lift neon-card flex flex-col items-center gap-2 rounded-[var(--radius-card)] border border-[var(--color-border)] p-4 text-center lg:gap-4 lg:p-8"
+              className="hover-lift neon-card flex flex-col items-center gap-2 rounded-card border border-border p-4 text-center lg:gap-4 lg:p-8"
             >
-              <Icon className="h-12 w-12 max-lg:h-8 max-lg:w-8 text-[var(--color-accent)]" strokeWidth={1.5} />
-              <span className="font-display font-bold uppercase text-lg max-lg:text-sm leading-tight text-[var(--color-text-primary)]">
+              <Icon className="h-12 w-12 max-lg:h-8 max-lg:w-8 text-accent" strokeWidth={1.5} />
+              <span className="font-display font-bold uppercase text-lg max-lg:text-sm leading-tight text-text-primary">
                 {f.title}
               </span>
-              <span className="text-base max-lg:text-xs leading-snug text-[var(--color-text-secondary)]">
+              <span className="text-base max-lg:text-xs leading-snug text-text-secondary">
                 {f.desc}
               </span>
             </div>
@@ -221,7 +221,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         })}
       </div>
 
-      <div className="relative mt-12 max-lg:mt-8 min-h-[230px] flex items-center overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] aspect-[16/6] max-sm:aspect-auto">
+      <div className="relative mt-12 max-lg:mt-8 min-h-[230px] flex items-center overflow-hidden rounded-card border border-border aspect-[16/6] max-sm:aspect-auto">
         <Image
           src="/images/events/karaoke-banner.png"
           alt="Караоке и танцы"
@@ -229,19 +229,19 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           className="relative object-contain max-sm:object-cover max-sm:object-[20%_50%]"
         />
         <p className="relative w-full pl-[50%] leading-snug ">
-          <span className="block text-3xl max-lg:text-xl uppercase text-[var(--color-text-primary)] max-md:text-base max-sm:text-sm">
+          <span className="block text-3xl max-lg:text-xl uppercase text-text-primary max-md:text-base max-sm:text-sm">
             ПОСЛЕ ОСНОВНОЙ ПРОГРАММЫ —
           </span>
-          <span className="my-3 max-lg:my-1 block font-display font-extrabold uppercase text-8xl max-lg:text-6xl text-[var(--color-accent)] max-md:text-4xl max-sm:text-2xl">
+          <span className="my-3 max-lg:my-1 block font-display font-extrabold uppercase text-8xl max-lg:text-6xl text-accent max-md:text-4xl max-sm:text-2xl">
             КАРАОКЕ И ТАНЦЫ
           </span>
-          <span className="block font-bold uppercase text-4xl max-lg:text-3xl text-[var(--color-text-primary)] max-md:text-xl max-sm:text-base">
+          <span className="block font-bold uppercase text-4xl max-lg:text-3xl text-text-primary max-md:text-xl max-sm:text-base">
             ДО САМОГО УТРА!
           </span>
         </p>
       </div>
 
-      <div className="neon-card mt-6 grid grid-cols-2 gap-y-4 rounded-[var(--radius-card)] border border-[var(--color-border)] py-5 sm:grid-cols-4 lg:mt-12 lg:py-8">
+      <div className="neon-card mt-6 grid grid-cols-2 gap-y-4 rounded-card border border-border py-5 sm:grid-cols-4 lg:mt-12 lg:py-8">
         {([
           { icon: "Clock", label: "СТАРТ", value: event.time },
           { icon: "Calendar", label: "ДЕНЬ", value: event.dayOfWeek.toUpperCase() },
@@ -253,16 +253,16 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             <div
               key={item.label}
               className={`flex flex-col items-center gap-1 px-2 text-center lg:gap-2 ${
-                i % 2 === 1 ? "border-l border-[var(--color-border)]" : ""
-              } ${i >= 2 ? "border-t border-[var(--color-border)] sm:border-t-0 pt-2 " : ""} ${
-                i > 0 ? "sm:border-l sm:border-[var(--color-border)]" : ""
+                i % 2 === 1 ? "border-l border-border" : ""
+              } ${i >= 2 ? "border-t border-border sm:border-t-0 pt-2 " : ""} ${
+                i > 0 ? "sm:border-l sm:border-border" : ""
               }`}
             >
-              <Icon className="h-5 w-5 text-[var(--color-accent)] lg:h-8 lg:w-8" strokeWidth={1.5} />
-              <span className="text-[10px] uppercase tracking-wide text-[var(--color-text-secondary)] lg:text-sm">
+              <Icon className="h-5 w-5 text-accent lg:h-8 lg:w-8" strokeWidth={1.5} />
+              <span className="text-[10px] uppercase tracking-wide text-text-secondary lg:text-sm">
                 {item.label}
               </span>
-              <span className="font-display font-bold text-xs uppercase text-[var(--color-text-primary)] lg:text-xl">
+              <span className="font-display font-bold text-xs uppercase text-text-primary lg:text-xl">
                 {item.value}
               </span>
             </div>

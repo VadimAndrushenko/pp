@@ -16,7 +16,7 @@ export default function HomePage() {
       <EventsPreview
         title="Фото и видеоотчёты"
         events={galleryPreviews}
-        linkHref="/gallery"
+        linkHref="/gallery#reports"
         linkLabel="Смотреть всё"
         className="py-8"
       />

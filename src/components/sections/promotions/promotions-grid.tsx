@@ -18,13 +18,13 @@ export function PromotionsGrid({ className }: { className?: string }) {
         const Icon = p.icon
         return (
           <Card key={i} className="flex items-start gap-4 p-5">
-            <Icon className="w-8 h-8 shrink-0 mt-1" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
+            <Icon className="w-8 h-8 shrink-0 mt-1 text-accent"  strokeWidth={1.5} />
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-base font-display uppercase text-[var(--color-text-primary)]">{p.title}</h3>
+                <h3 className="text-base font-display uppercase text-text-primary">{p.title}</h3>
                 <Badge>{p.badge}</Badge>
               </div>
-              <p className="text-xs text-[var(--color-text-secondary)]">{p.desc}</p>
+              <p className="text-xs text-text-secondary">{p.desc}</p>
             </div>
           </Card>
         )

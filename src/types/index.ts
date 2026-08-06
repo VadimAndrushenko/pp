@@ -83,3 +83,11 @@ export interface GalleryPhoto {
   dateKey: string
   dateLabel: string
 }
+
+export interface GalleryVideo {
+  id: string
+  videoId: string
+  title: string
+  dateKey: string
+  dateLabel: string
+}

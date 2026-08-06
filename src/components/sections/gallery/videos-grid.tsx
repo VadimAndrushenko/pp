@@ -1,42 +1,91 @@
+"use client"
+
+import { useState } from "react"
+import type { GalleryVideo } from "@/types"
 import { Card } from "@/components/ui/card"
+import { VideoLightbox } from "@/components/ui/video-lightbox"
 import { Play } from "lucide-react"
 
-interface Video {
-  id: string
-  image: string
-  title: string
-  date: string
+interface VideoGroup {
+  dateKey: string
+  dateLabel: string
+  videos: GalleryVideo[]
 }
 
-export function VideosGrid({ videos, className }: { videos: Video[]; className?: string }) {
+function groupByDate(videos: GalleryVideo[]): VideoGroup[] {
+  const map = new Map<string, VideoGroup>()
+  for (const video of videos) {
+    const group = map.get(video.dateKey) ?? { dateKey: video.dateKey, dateLabel: video.dateLabel, videos: [] }
+    group.videos.push(video)
+    map.set(video.dateKey, group)
+  }
+  return [...map.values()].sort((a, b) => (a.dateKey < b.dateKey ? 1 : -1))
+}
+
+export function VideoAlbums({ videos, className }: { videos: GalleryVideo[]; className?: string }) {
+  const [activeAlbum, setActiveAlbum] = useState<{ videos: GalleryVideo[]; index: number } | null>(null)
+  const albums = groupByDate(videos)
+
   return (
     <section id="videos" className={className}>
-      <h2 className="section-heading font-display font-bold uppercase text-[var(--color-text-primary)] mb-2">Видео отчёты</h2>
-      <p className="text-sm font-display uppercase tracking-wider mb-6" style={{ color: "var(--color-accent)" }}>
-        Все видео с наших мероприятий
-      </p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {videos.map((v) => (
-          <Card key={v.id} className="relative overflow-hidden p-0 aspect-square cursor-pointer">
-            <div
-              className="w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${v.image})`, backgroundColor: "var(--color-surface)" }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
-              >
-                <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
-              </div>
+      <h2 className="section-heading font-display font-bold uppercase text-text-primary mb-2">
+        Видео отчёты
+        
+        <p className="text-sm font-display uppercase tracking-wider mb-6 mt-2 text-accent" >
+          Все видео с наших мероприятий
+        </p>
+      </h2>
+      
+      <div className="flex flex-col gap-10">
+        {albums.map((album) => (
+          <div key={album.dateKey}>
+            <h3 className="section-heading font-display font-bold uppercase text-text-primary mb-6">
+              {album.dateLabel}
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {album.videos.map((video, index) => (
+                <Card
+                  key={video.id}
+                  className="relative cursor-pointer overflow-hidden p-0"
+                  onClick={() => setActiveAlbum({ videos: album.videos, index })}
+                >
+                  <div className="relative aspect-square w-full">
+                    <div
+                      className="w-full h-full bg-cover bg-center bg-surface"
+                      style={{
+                        backgroundImage: `url(https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg)`,
+                      }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                      >
+                        <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-t border-border bg-surface p-3">
+                    <p className="text-base font-display uppercase leading-tight text-text-primary">
+                      {video.title}
+                    </p>
+                    <p className="text-xs text-text-muted">{video.dateLabel}</p>
+                  </div>
+                </Card>
+              ))}
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-              <p className="text-xs font-display uppercase text-white">{v.title}</p>
-              <p className="text-[10px] text-[var(--color-text-muted)]">{v.date}</p>
-            </div>
-          </Card>
+          </div>
         ))}
       </div>
+
+      {activeAlbum && (
+        <VideoLightbox
+          key={`${activeAlbum.index}-${activeAlbum.videos.length}`}
+          videos={activeAlbum.videos}
+          initialIndex={activeAlbum.index}
+          onClose={() => setActiveAlbum(null)}
+        />
+      )}
     </section>
   )
 }

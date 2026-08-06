@@ -60,7 +60,7 @@ const methods = [
     label: "Собственная доставка", 
     description: "Доставка от нашего ресторана",
     href: null as string | null, 
-    color: "var(--color-accent)",
+    color: "#FF6A00",
     bgGradient: "from-orange-500/10 to-orange-500/5",
     glowColor: "rgba(255,106,0,0.2)"
   },
@@ -109,17 +109,17 @@ export function ServicesSection({ className }: { className?: string }) {
               as={s.href ? "a" : "div"}
               href={s.href}
               onClick={s.href ? undefined : open}
-              className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-95 hover:-translate-y-2 hover:shadow-[0_4px_24px_-6px_var(--color-accent)] cursor-pointer"
+              className="group p-0 flex flex-col h-full overflow-hidden transition-all duration-500 ease-out hover:scale-100 active:scale-95 hover:-translate-y-2 hover:shadow-accent cursor-pointer"
             >
               <div className="relative aspect-[2/1] w-full shrink-0 overflow-hidden max-lg:aspect-[3/2] max-[500px]:aspect-square max-sm:aspect-[2/3]">
                 <Image src={s.image} alt={s.items.join(", ")} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="absolute bottom-0 z-10 flex flex-col flex-1 gap-2 p-5 max-[500px]:p-3 max-sm:inset-x-0 max-sm:mx-auto max-sm:w-fit max-sm:items-center max-sm:text-center">
-                <h3 className="flex items-center justify-center gap-3 text-center text-3xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] max-lg:text-2xl max-[570px]:flex-col max-[570px]:gap-1 max-[570px]:text-sm max-[570px]:leading-tight max-[360px]:text-[13px] max-sm:text-base">
+                <h3 className="flex items-center justify-center gap-3 text-center text-3xl font-display font-bold uppercase tracking-tight text-text-primary max-lg:text-2xl max-[570px]:flex-col max-[570px]:gap-1 max-[570px]:text-sm max-[570px]:leading-tight max-[360px]:text-[13px] max-sm:text-base">
                   <span>{s.items.join(", ")}</span>
                   <ArrowRight
-                    className="w-14 h-14 lg:w-16 lg:h-16 text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-12 max-lg:h-12 max-[570px]:w-7 max-[570px]:h-7"
+                    className="w-14 h-14 lg:w-16 lg:h-16 text-accent transition-transform duration-500 group-hover:translate-x-1.5 max-lg:w-12 max-lg:h-12 max-[570px]:w-7 max-[570px]:h-7"
                     strokeWidth={2}
                   />
                 </h3>
@@ -138,7 +138,7 @@ export function ServicesSection({ className }: { className?: string }) {
           onClick={close}
         >
           <div
-            className={`relative w-full max-w-lg bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-2xl overflow-hidden ${
+            className={`relative w-full max-w-lg bg-surface rounded-2xl border border-border shadow-2xl overflow-hidden ${
               phase === "leaving" ? "animate-modal-leave" : "animate-modal-enter"
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -149,7 +149,7 @@ export function ServicesSection({ className }: { className?: string }) {
             {/* Кнопка закрытия */}
             <button 
               onClick={close} 
-              className="absolute top-2 right-2 z-10 p-2 rounded-full bg-black/5 hover:bg-black/10 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-all duration-200 hover:rotate-90"
+              className="absolute top-2 right-2 z-10 p-2 rounded-full bg-black/5 hover:bg-black/10 text-text-muted hover:text-text-primary transition-all duration-200 hover:rotate-90"
             >
               <X className="w-5 h-5" strokeWidth={2} />
             </button>
@@ -157,10 +157,10 @@ export function ServicesSection({ className }: { className?: string }) {
             <div className="p-8 max-sm:p-6">
               {/* Заголовок */}
               <div className="text-center mb-8">
-                <h3 className="text-2xl lg:text-3xl font-display font-bold text-[var(--color-text-primary)] mb-2">
+                <h3 className="text-2xl lg:text-3xl font-display font-bold text-text-primary mb-2">
                   Выберите способ доставки
                 </h3>
-                <p className="text-sm lg:text-base text-[var(--color-text-muted)]">
+                <p className="text-sm lg:text-base text-text-muted">
                   Как вам удобнее получить заказ?
                 </p>
               </div>

@@ -21,9 +21,9 @@ export function CarouselArrows({ className }: CarouselArrowsProps) {
         suppressHydrationWarning
         className={cn(
           "w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200",
-          "border-[var(--color-border)] text-[var(--color-text-secondary)]",
-          "hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)]",
-          "focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:outline-none",
+          "border-border text-text-secondary",
+          "hover:border-accent hover:bg-accent/10 hover:text-accent",
+          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
           !canScrollPrev && "opacity-30 cursor-not-allowed pointer-events-none",
         )}
       >
@@ -37,9 +37,9 @@ export function CarouselArrows({ className }: CarouselArrowsProps) {
         suppressHydrationWarning
         className={cn(
           "w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200",
-          "border-[var(--color-border)] text-[var(--color-text-secondary)]",
-          "hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)]",
-          "focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:outline-none",
+          "border-border text-text-secondary",
+          "hover:border-accent hover:bg-accent/10 hover:text-accent",
+          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
           !canScrollNext && "opacity-30 cursor-not-allowed pointer-events-none",
         )}
       >

@@ -10,7 +10,7 @@ export default function MenuPage() {
     <>
       <Breadcrumb />
 
-      <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-10">
+      <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold uppercase tracking-tight text-text-primary mb-10">
         Меню
       </h1>
 

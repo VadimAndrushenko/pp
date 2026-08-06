@@ -13,20 +13,20 @@ interface CardProps {
 export function Card({ children, variant = "outline", className, as: Tag = "div", href, onClick, style }: CardProps) {
   const variants = {
     outline:
-      "border border-[var(--color-border)] bg-transparent",
+      "border border-border bg-transparent",
     solid:
-      "bg-[var(--color-surface)] border border-[var(--color-border)]",
+      "bg-surface border border-border",
     ghost:
       "bg-transparent border-none",
   }
 
   const classes = cn(
-    "rounded-[var(--radius-card)] p-4 transition-all duration-300 relative",
+    "rounded-card p-4 transition-all duration-300 relative",
     variants[variant],
     Tag === "a" &&
-      "block hover:border-[var(--color-accent)] hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] hover:scale-[1.02] cursor-pointer active:scale-[0.98]",
+      "block hover:border-accent hover:shadow-[0_0_20px_rgba(255,106,0,0.15)] hover:scale-[1.02] cursor-pointer active:scale-[0.98]",
     Tag === "button" &&
-      "hover:border-[var(--color-accent)] hover:shadow-[0_0_15px_rgba(255,106,0,0.1)] cursor-pointer active:scale-[0.98]",
+      "hover:border-accent hover:shadow-[0_0_15px_rgba(255,106,0,0.1)] cursor-pointer active:scale-[0.98]",
     className,
   )
 

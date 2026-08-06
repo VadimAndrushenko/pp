@@ -31,20 +31,19 @@ export function FeaturesRow({ embedded }: FeaturesRowProps) {
           <StaggerItem key={index}>
             <div
               className={cn(
-                "flex flex-col items-center text-center gap-3 px-2 py-4 rounded-[var(--radius-sm)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(255,106,0,0.1)]",
-                "lg:border-r lg:border-[var(--color-border)]",
+                "flex flex-col items-center text-center gap-3 px-2 py-4 rounded-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(255,106,0,0.1)]",
+                "lg:border-r lg:border-border",
                 index === features.length - 1 && "lg:border-r-0",
               )}
             >
               <Icon
-                className="w-7 h-7 lg:w-8 lg:h-8 hover-glow-accent"
-                style={{ color: "var(--color-accent)" }}
+                className="w-7 h-7 lg:w-8 lg:h-8 text-accent hover-glow-accent"
                 strokeWidth={1.5}
               />
-              <span className="text-base md:text-lg font-display font-bold uppercase tracking-wide text-[var(--color-text-primary)]">
+              <span className="text-base md:text-lg font-display font-bold uppercase tracking-wide text-text-primary">
                 {feature.label}
               </span>
-              <span className="text-xs md:text-sm uppercase tracking-wide leading-snug text-[var(--color-text-muted)] -mt-1">
+              <span className="text-xs md:text-sm uppercase tracking-wide leading-snug text-text-muted -mt-1">
                 {feature.text}
               </span>
             </div>

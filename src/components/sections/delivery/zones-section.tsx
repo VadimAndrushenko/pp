@@ -26,7 +26,7 @@ function PinShape({ opacity = 1 }: { opacity?: number }) {
     <>
       <path
         d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"
-        stroke="var(--color-accent)"
+        className="stroke-accent"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -34,7 +34,7 @@ function PinShape({ opacity = 1 }: { opacity?: number }) {
       />
       <path
         d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"
-        stroke="var(--color-accent)"
+        className="stroke-accent"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -50,7 +50,7 @@ function RouteIcon() {
       {/* пунктирный маршрут между точками */}
       <path
         d="M44 146c48-4 -6-30 26-46 32-16 -18-34 8-56 10-9 16-13 20-16"
-        stroke="var(--color-accent)"
+        className="stroke-accent"
         strokeWidth="2.5"
         strokeDasharray="1 9"
         strokeLinecap="round"
@@ -75,13 +75,7 @@ export function DeliveryZones({ className }: { className?: string }) {
   return (
     <section className={className}>
       <Card
-        className="neon-card flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 rounded-[var(--radius-card)] px-6 py-8 sm:px-10 sm:py-9"
-        style={{
-          borderWidth: "1.5px",
-          borderStyle: "solid",
-          borderColor: "var(--color-accent)",
-          ["--glow" as any]: "var(--color-accent)",
-        }}
+        className="neon-card flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 rounded-card px-6 py-8 sm:px-10 sm:py-9 border-[1.5px] border-solid border-accent"
       >
         <div className="flex shrink-0 items-center justify-center">
           <RouteIcon />
@@ -89,8 +83,7 @@ export function DeliveryZones({ className }: { className?: string }) {
 
         <div className="w-full flex-1">
           <h2
-            className="section-heading mb-6 text-center font-display font-bold uppercase tracking-tight sm:text-left"
-            style={{ color: "var(--color-accent)" }}
+            className="section-heading mb-6 text-center font-display font-bold uppercase tracking-tight sm:text-left text-accent"
           >
             Зоны доставки и стоимость
           </h2>
@@ -103,13 +96,13 @@ export function DeliveryZones({ className }: { className?: string }) {
                   i < zones.length - 1 ? "sm:pr-8" : ""
                 }`}
               >
-                <h3 className="mb-2 font-display text-base font-bold uppercase tracking-wide text-[var(--color-text-primary)] sm:text-lg">
+                <h3 className="mb-2 font-display text-base font-bold uppercase tracking-wide text-text-primary sm:text-lg">
                   {z.title}
                 </h3>
-                <p className="mb-1 text-xl font-semibold text-[var(--color-text-primary)] sm:text-2xl">
-                  {z.price} <span style={{ color: "var(--color-success)" }}>đ</span>
+                <p className="mb-1 text-xl font-semibold text-text-primary sm:text-2xl">
+                  {z.price} <span className="text-success">đ</span>
                 </p>
-                <p className="text-sm text-[var(--color-text-secondary)]">{z.time}</p>
+                <p className="text-sm text-text-secondary">{z.time}</p>
               </div>
             ))}
           </div>

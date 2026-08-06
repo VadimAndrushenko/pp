@@ -8,16 +8,16 @@ export default function GalleryPage() {
     <>
       <Breadcrumb />
 
-      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-2">
+      <h1 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight text-text-primary mb-2">
         Как у нас
       </h1>
 
       <RestaurantVideo className="py-6" />
 
-      <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-2 mt-8">
+      <h2 id="reports" className="section-heading scroll-mt-20 font-display font-bold uppercase tracking-tight text-text-primary mb-2 mt-8">
         Фото и видеоотчёты
       </h2>
-      <p className="text-sm font-display uppercase tracking-wider mb-6" style={{ color: "var(--color-accent)" }}>
+      <p className="text-sm font-display uppercase tracking-wider mb-6 text-accent" >
         Что происходит в нашем ресторане
       </p>
 

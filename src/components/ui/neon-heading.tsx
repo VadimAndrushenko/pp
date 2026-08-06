@@ -71,10 +71,9 @@ export function NeonHeading({
       {subtitle && (
         <p
           className={cn(
-            "text-xl max-[450px]:text-base md:text-2xl font-display uppercase tracking-wider -rotate-1",
+            "text-xl max-[450px]:text-base md:text-2xl font-display uppercase tracking-wider -rotate-1 text-accent",
             isLeft && "",
           )}
-          style={{ color: "var(--color-accent)" }}
         >
           {subtitle}
         </p>

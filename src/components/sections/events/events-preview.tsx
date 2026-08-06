@@ -24,14 +24,13 @@ export function EventsPreview({
   return (
     <section className={className}>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
+          <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary">
             {title}
           </h2>
           {linkLabel && linkHref && (
             <Link
               href={linkHref}
-              className="text-xs font-display uppercase tracking-wider flex items-center gap-1 link-underline shrink-0"
-              style={{ color: "var(--color-accent)" }}
+              className="text-xs font-display uppercase tracking-wider flex items-center gap-1 link-underline shrink-0 text-accent"
             >
               {linkLabel}
               <ArrowRight className="w-3 h-3" />

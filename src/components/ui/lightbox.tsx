@@ -97,19 +97,19 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
               {photos.map((photo) => (
                 <div key={photo.id} className="relative h-full min-w-0 flex-[0_0_100%] px-1.5">
                   <div
-                    className="h-full w-full bg-contain bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${photo.image})`, backgroundColor: "var(--color-surface)" }}
+                    className="h-full w-full bg-contain bg-center bg-no-repeat bg-surface"
+                    style={{ backgroundImage: `url(${photo.image})` }}
                   />
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center gap-1 p-4 bg-gradient-to-t from-black/80 to-transparent">
-            <p className="text-xs font-display uppercase tracking-wider text-white">
+          <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center gap-1 border-t border-white/10 bg-black/85 p-4 backdrop-blur-sm">
+            <p className="text-xl font-display uppercase tracking-wider text-white">
               {current?.title}
             </p>
-            <p className="text-[10px] text-[var(--color-text-muted)]">{current?.dateLabel}</p>
+            <p className="text-xs text-white/70">{current?.dateLabel}</p>
           </div>
 
           <div className="absolute top-4 left-4 z-10 rounded-full bg-black/40 px-3 py-1.5 text-xs font-display uppercase tracking-wider text-white">

@@ -27,10 +27,10 @@ export function PhotoAlbums({ photos, className }: { photos: GalleryPhoto[]; cla
 
   return (
     <section id="photos" className={className}>
-      <h2 className="section-heading font-display font-bold uppercase text-[var(--color-text-primary)] mb-2">
+      <h2 className="section-heading font-display font-bold uppercase text-text-primary mb-2">
         Фото отчёты
         
-        <p className="text-sm font-display uppercase tracking-wider mb-6" style={{ color: "var(--color-accent)" }}>
+        <p className="text-sm font-display uppercase tracking-wider mb-6 mt-2 text-accent" >
           Все фото с наших мероприятий
         </p>
       </h2>
@@ -38,23 +38,24 @@ export function PhotoAlbums({ photos, className }: { photos: GalleryPhoto[]; cla
       <div className="flex flex-col gap-10">
         {albums.map((album) => (
           <div key={album.dateKey}>
-            <h3 className="section-heading font-display font-bold uppercase text-[var(--color-text-primary)] mb-6">
+            <h3 className="section-heading font-display font-bold uppercase text-text-primary mb-6">
               {album.dateLabel}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {album.photos.map((photo, index) => (
                 <Card
                   key={photo.id}
-                  className="relative overflow-hidden p-0 aspect-square cursor-pointer"
+                  className="relative cursor-pointer overflow-hidden p-0"
                   onClick={() => setActiveAlbum({ photos: album.photos, index })}
                 >
                   <div
-                    className="w-full h-full bg-cover bg-center"
-                    style={{ backgroundImage: `url(${photo.image})`, backgroundColor: "var(--color-surface)" }}
+                    className="aspect-square w-full bg-cover bg-center bg-surface"
+                    style={{ backgroundImage: `url(${photo.image})` }}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-                    <p className="text-xs font-display uppercase text-white">{photo.title}</p>
-                    <p className="text-[10px] text-[var(--color-text-muted)]">{photo.dateLabel}</p>
+                  <div className="border-t border-border bg-surface p-3">
+                    <p className=" font-display uppercase leading-tight text-text-primary">
+                      {photo.title}
+                    </p>
                   </div>
                 </Card>
               ))}

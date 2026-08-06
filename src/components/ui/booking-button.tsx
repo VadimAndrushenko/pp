@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { links } from "@/config/links"
 import { Phone } from "lucide-react"
 import type { ReactNode } from "react"
 
@@ -6,21 +7,21 @@ interface BookingButtonProps {
   href?: string
   label?: string
   icon?: ReactNode
+  size?: "sm" | "md" | "lg" | "full"
   className?: string
 }
 
-const WHATSAPP_HREF = "https://wa.me/84855559797"
-
 export function BookingButton({
-  href = WHATSAPP_HREF,
+  href = links.whatsapp,
   label = "Забронировать стол",
   icon = <Phone className="h-8 w-8 max-sm:h-6 max-sm:w-6" />,
+  size = "full",
   className,
 }: BookingButtonProps) {
   return (
     <Button
       variant="solid"
-      size="full"
+      size={size}
       as="a"
       href={href}
       className={"gap-3 " + (className ?? "")}

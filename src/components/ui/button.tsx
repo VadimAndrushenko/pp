@@ -30,22 +30,22 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const [isHovered, setIsHovered] = useState(false)
 
     const base =
-      "inline-flex items-center justify-center gap-2 font-display uppercase tracking-wider transition-all duration-200 select-none"
+      "inline-flex items-center justify-center gap-2 font-display uppercase tracking-wider select-none transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
 
     const variants = {
       outline:
-        "border border-[var(--color-border)] text-[var(--color-text-primary)] bg-transparent hover:bg-[var(--color-accent)] hover:border-[var(--color-accent)] hover:text-white",
+        "border border-border text-text-primary bg-transparent hover:bg-accent hover:border-accent hover:text-white",
       solid:
-        "bg-[var(--color-accent)] text-white border border-[var(--color-accent)] hover:bg-[var(--color-accent-hover)]",
+        "bg-accent text-white border border-accent hover:bg-accent-hover",
       ghost:
-        "text-[var(--color-text-secondary)] hover:text-[var(--color-accent)]",
+        "text-text-secondary hover:text-accent",
     }
 
     const sizes = {
-      sm: "text-xs py-2 px-4 rounded-[var(--radius-sm)]",
-      md: "text-sm py-3 px-6 rounded-[var(--radius-sm)]",
-      lg: "text-base py-4 px-8 rounded-[var(--radius-card)]",
-      full: "text-sm py-4 px-6 rounded-[var(--radius-card)] w-full",
+      sm: "text-xs py-2 px-4 rounded-sm",
+      md: "text-sm py-3 px-6 rounded-sm",
+      lg: "text-base py-4 px-8 rounded-card",
+      full: "text-sm py-4 px-6 rounded-card w-full",
     }
 
     const classes = cn(base, variants[variant], sizes[variant === "ghost" ? "sm" : size], className)

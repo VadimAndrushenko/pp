@@ -17,7 +17,7 @@ export function PromoBanner({ title, description, href, image, className }: Prom
       href={href}
       className={cn(
         "relative overflow-hidden min-h-[160px] flex flex-col justify-end p-5",
-        image ? "text-white" : "text-[var(--color-text-primary)]",
+        image ? "text-white" : "text-text-primary",
         className,
       )}
       style={
@@ -31,10 +31,9 @@ export function PromoBanner({ title, description, href, image, className }: Prom
       }
     >
       <h3 className="text-lg font-display uppercase tracking-wider mb-1">{title}</h3>
-      <p className="text-xs text-[var(--color-text-secondary)] mb-3">{description}</p>
+      <p className="text-xs text-text-secondary mb-3">{description}</p>
       <span
-        className="inline-flex items-center gap-1 text-xs font-display uppercase tracking-wider"
-        style={{ color: "var(--color-accent)" }}
+        className="inline-flex items-center gap-1 text-xs font-display uppercase tracking-wider text-accent"
       >
         Подробнее
         <ArrowRight className="w-3 h-3" />

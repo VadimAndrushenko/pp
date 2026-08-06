@@ -128,7 +128,7 @@ export default function Slider({
       {(title || showArrows) && (
         <div className="flex items-center justify-between mb-6">
           {title && (
-            <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)]">
+            <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary">
               {title}
             </h2>
           )}
@@ -139,7 +139,7 @@ export default function Slider({
                 onClick={scrollPrev}
                 disabled={!canScrollPrev}
                 aria-label={locale === "en" ? "Previous slide" : "Предыдущий слайд"}
-                className="flex aspect-square w-9 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] transition-all hover:bg-[var(--color-accent)] hover:text-white hover:border-[var(--color-accent)] disabled:opacity-30 disabled:cursor-not-allowed"
+                className="flex aspect-square w-9 items-center justify-center rounded-full border border-border bg-surface text-text-primary transition-all hover:bg-accent hover:text-white hover:border-accent disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <ChevronLeft size={20} strokeWidth={2.5} />
               </button>
@@ -148,7 +148,7 @@ export default function Slider({
                 onClick={scrollNext}
                 disabled={!canScrollNext}
                 aria-label={locale === "en" ? "Next slide" : "Следующий слайд"}
-                className="flex aspect-square w-9 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] transition-all hover:bg-[var(--color-accent)] hover:text-white hover:border-[var(--color-accent)] disabled:opacity-30 disabled:cursor-not-allowed"
+                className="flex aspect-square w-9 items-center justify-center rounded-full border border-border bg-surface text-text-primary transition-all hover:bg-accent hover:text-white hover:border-accent disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <ChevronRight size={20} strokeWidth={2.5} />
               </button>

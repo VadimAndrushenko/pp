@@ -14,9 +14,9 @@ export function CurrencyFeatures({ className }: { className?: string }) {
         const Icon = item.icon
         return (
           <Card key={i} className="flex flex-col items-center text-center gap-3 p-5">
-            <Icon className="w-8 h-8" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
-            <h3 className="text-sm font-display uppercase text-[var(--color-text-primary)]">{item.title}</h3>
-            <p className="text-xs text-[var(--color-text-secondary)]">{item.desc}</p>
+            <Icon className="w-8 h-8 text-accent"  strokeWidth={1.5} />
+            <h3 className="text-sm font-display uppercase text-text-primary">{item.title}</h3>
+            <p className="text-xs text-text-secondary">{item.desc}</p>
           </Card>
         )
       })}

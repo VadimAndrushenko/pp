@@ -19,7 +19,7 @@ const features: Feature[] = [
 export function HookahFeatures({ className }: { className?: string }) {
   return (
     <section className={className}>
-      <h2 className="section-heading font-display font-bold uppercase tracking-tight text-[var(--color-text-primary)] mb-6 lg:mb-10 max-sm:mb-4">
+      <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary mb-6 lg:mb-10 max-sm:mb-4">
         Почему у нас лучшие кальяны?
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4 max-sm:gap-2">
@@ -27,9 +27,9 @@ export function HookahFeatures({ className }: { className?: string }) {
           const Icon = feature.icon
           return (
             <Card key={i} className="flex flex-col items-center text-center gap-2 lg:gap-3 p-4 lg:p-6 max-sm:gap-1 max-sm:p-3">
-              <Icon className="w-16 h-16 max-sm:w-10 max-sm:h-10" style={{ color: "var(--color-accent)" }} strokeWidth={1.5} />
-              <h3 className="text-2xl font-display uppercase text-[var(--color-text-primary)] leading-tight max-sm:text-base">{feature.title}</h3>
-              <p className="text-lg text-[var(--color-text-secondary)] leading-tight max-sm:text-xs">{feature.description}</p>
+              <Icon className="w-16 h-16 max-sm:w-10 max-sm:h-10 text-accent"  strokeWidth={1.5} />
+              <h3 className="text-2xl font-display uppercase text-text-primary leading-tight max-sm:text-base">{feature.title}</h3>
+              <p className="text-lg text-text-secondary leading-tight max-sm:text-xs">{feature.description}</p>
             </Card>
           )
         })}
