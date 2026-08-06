@@ -27,12 +27,8 @@ export function FooterContacts() {
         </a>
         <div className="flex items-start gap-2">
           <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.5} />
-          <span>
-            {workingHours.weekdays.label}: {workingHours.weekdays.hours}
-            <br />
-            <span className="text-accent">
-              {workingHours.weekends.label}: {workingHours.weekends.hours}
-            </span>
+          <span className="text-accent font-semibold">
+            {workingHours.daily.label}: {workingHours.daily.hours}
           </span>
         </div>
       </address>

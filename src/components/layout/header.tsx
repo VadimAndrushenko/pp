@@ -51,13 +51,8 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-6 text-xs font-display uppercase tracking-wider">
           <div className="flex gap-4 text-text-muted">
             <div className="flex items-center gap-2">
-              <span>{workingHours.weekdays.label}</span>
-              <span className="text-text-secondary">{workingHours.weekdays.hours}</span>
-            </div>
-            <span className="text-border">|</span>
-            <div className="flex items-center gap-2">
-              <span>{workingHours.weekends.label}</span>
-              <span className="text-accent font-bold">{workingHours.weekends.hours}</span>
+              <span>{workingHours.daily.label}</span>
+              <span className="text-accent font-bold">{workingHours.daily.hours}</span>
             </div>
           </div>
 
@@ -113,12 +108,8 @@ export function Header() {
           <div className="px-5 py-4 flex flex-col gap-4 text-sm font-display uppercase">
           <div className="flex flex-col gap-2 text-text-muted">
             <div className="flex justify-between">
-              <span>{workingHours.weekdays.label}</span>
-              <span className="text-text-secondary">{workingHours.weekdays.hours}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>{workingHours.weekends.label}</span>
-              <span className="text-accent font-bold">{workingHours.weekends.hours}</span>
+              <span>{workingHours.daily.label}</span>
+              <span className="text-accent font-bold">{workingHours.daily.hours}</span>
             </div>
           </div>
           <Link

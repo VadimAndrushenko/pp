@@ -22,8 +22,7 @@ export function ContactsGrid() {
           <Clock className="w-6 h-6 shrink-0 mt-1 text-accent"  strokeWidth={1.5} />
           <div>
             <h3 className="text-sm font-display uppercase text-text-primary mb-1">Часы работы</h3>
-            <p className="text-sm text-text-secondary">ПН – ВТ: 07:00 – 02:00</p>
-            <p className="text-sm text-accent">СР – ВС: 24/7</p>
+            <p className="text-sm text-accent">Ежедневно: 24/7</p>
           </div>
         </Card>
 

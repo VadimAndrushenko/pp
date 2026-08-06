@@ -43,11 +43,11 @@ export function ContactsAddress() {
           <div className="mt-4 space-y-3 text-xl max-sm:text-sm max-sm:flex justify-between gap-3">
             <div>
               <p className="font-display font-bold uppercase text-accent">Кухня и бар</p>
-              <p className="text-white">Круглосуточно</p>
+              <p className="text-white">24/7</p>
             </div>
             <div>
               <p className="font-display font-bold uppercase text-accent">Завтраки / Коворкинг</p>
-              <p className="text-text-secondary">Ежедневно с 08:00 до 17:00</p>
+              <p className="text-white">24/7</p>
             </div>
           </div>
         </div>

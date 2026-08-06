@@ -1,14 +1,33 @@
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { MenuCategoryCard } from "@/components/ui/menu-category-card"
-import { menuCategories } from "@/config/menu-items"
-export default function MenuPage() {
-  const largeCards = menuCategories.filter((c) => c.variant === "large")
-  const compactCards = menuCategories.filter((c) => c.variant === "compact")
-  const fullCard = menuCategories.find((c) => c.variant === "full")
+import type { MenuData } from "@/config/menu-data"
+import { menuData } from "@/config/menu-data"
 
+const categoryIcons: Record<string, string> = {
+  zakuski: "skewer",
+  kutaby: "ornament-geometric",
+  pizza: "star",
+  mantas: "bowl-steam",
+  pasta: "lotus",
+  grill: "skewer",
+  goryachee: "cloche",
+  home_kitchen: "ornament-snowflake",
+  soups: "bowl-steam",
+  burgers: "pretzel",
+}
+
+const hookahMenu: MenuData = {
+  id: "hookah",
+  title: "Кальянное меню",
+  subtitle: "Премиальные табаки и чаши",
+  image: "https://images.unsplash.com/photo-1731613705339-f7984b43fe4d?w=1200&h=400&fit=crop",
+  sections: [],
+}
+
+export default function MenuPage() {
   return (
     <>
-      <Breadcrumb />
+      <Breadcrumb items={[{ label: "Меню" }]} />
 
       <h1 className="text-7xl lg:text-8xl max-md:text-6xl font-display font-bold uppercase tracking-tight text-text-primary mb-10">
         Меню
@@ -18,30 +37,17 @@ export default function MenuPage() {
         Основные разделы
       </h2>
       <div className="grid grid-cols-3 gap-5 mb-10 max-lg:grid-cols-2 max-sm:grid-cols-1">
-        {largeCards.map((item, i) => (
-          <MenuCategoryCard key={item.id} item={item} priority={i < 2} />
+        {menuData.map((item, i) => (
+          <MenuCategoryCard key={item.id} item={item} icon={categoryIcons[item.id] ?? "cloche"} priority={i < 2} />
         ))}
       </div>
 
       <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
-        Напитки и закуски
+        Специальное меню
       </h2>
-      <div className="grid grid-cols-3 gap-5 mb-10 max-lg:grid-cols-2 max-sm:grid-cols-1">
-        {compactCards.map((item) => (
-          <MenuCategoryCard key={item.id} item={item} />
-        ))}
+      <div className="mb-10">
+        <MenuCategoryCard item={hookahMenu} icon="hookah" href="/hookah" priority />
       </div>
-
-      {fullCard && (
-        <>
-          <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
-            Специальное меню
-          </h2>
-          <div className="mb-10">
-            <MenuCategoryCard key={fullCard.id} item={fullCard} priority />
-          </div>
-        </>
-      )}
     </>
   )
 }

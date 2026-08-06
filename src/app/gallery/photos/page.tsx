@@ -5,7 +5,7 @@ import { galleryPhotos } from "@/config/gallery-photos"
 export default function GalleryPhotosPage() {
   return (
     <>
-      <Breadcrumb />
+      <Breadcrumb items={[{ label: "Как у нас", href: "/gallery" }, { label: "Фото отчёты" }]} />
       <PhotoAlbums photos={galleryPhotos} />
     </>
   )

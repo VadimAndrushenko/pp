@@ -5,7 +5,7 @@ import { galleryVideos } from "@/config/gallery-videos"
 export default function GalleryVideosPage() {
   return (
     <>
-      <Breadcrumb />
+      <Breadcrumb items={[{ label: "Как у нас", href: "/gallery" }, { label: "Видео отчёты" }]} />
       <VideoAlbums videos={galleryVideos} />
     </>
   )

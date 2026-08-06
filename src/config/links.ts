@@ -18,6 +18,5 @@ export const links = {
 } as const
 
 export const workingHours = {
-  weekdays: { label: "ПН – ВТ", hours: "07:00 – 02:00" },
-  weekends: { label: "СР – ВС", hours: "24/7", highlighted: true },
+  daily: { label: "Ежедневно", hours: "24/7", highlighted: true },
 } as const
