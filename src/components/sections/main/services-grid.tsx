@@ -38,9 +38,9 @@ const iconMap: Record<string, LucideIcon> = {
   "globe": Globe,
 }
 
-export function ServicesGrid({ className }: { className?: string }) {
+export function ServicesGrid() {
   return (
-    <section className={className}>
+    <section className="section-py">
       <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 gap-3" staggerDelay={0.03}>
           {services.map((service) => {
             const Icon = iconMap[service.icon]

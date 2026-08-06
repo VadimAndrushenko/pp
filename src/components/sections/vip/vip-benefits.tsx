@@ -8,9 +8,9 @@ const benefits = [
   { icon: Zap, title: "Эксклюзивные предложения", description: "Только для участников клуба" },
 ]
 
-export function VipBenefits({ className }: { className?: string }) {
+export function VipBenefits() {
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${className ?? ""}`}>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 section-py">
       {benefits.map((b, i) => {
         const Icon = b.icon
         return (

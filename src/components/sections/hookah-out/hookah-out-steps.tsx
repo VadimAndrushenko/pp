@@ -8,9 +8,9 @@ const steps = [
   "Наслаждайтесь отдыхом!",
 ]
 
-export function HookahOutSteps({ className }: { className?: string }) {
+export function HookahOutSteps() {
   return (
-    <div className={`section-heading ${className}`}>
+    <div className="section-heading section-py">
       <h2 className="text-center font-display font-bold uppercase tracking-wide text-text-primary mb-8">
         Как заказать
       </h2>

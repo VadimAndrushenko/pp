@@ -10,17 +10,16 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <QuickNav className="section-py" />
-      <RestaurantVideo className="section-py" />
-      <EventsPreview events={events} className="section-py" />
+      <QuickNav />
+      <RestaurantVideo />
+      <EventsPreview events={events} />
       <EventsPreview
         title="Фото и видеоотчёты"
         events={galleryPreviews}
         linkHref="/gallery#reports"
         linkLabel="Смотреть всё"
-        className="section-py"
       />
-      <ServicesGrid className="section-py" />
+      <ServicesGrid />
     </>
   )
 }

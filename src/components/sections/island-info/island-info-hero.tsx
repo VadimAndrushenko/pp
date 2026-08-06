@@ -1,6 +1,6 @@
-export function IslandInfoHero({ className }: { className?: string }) {
+export function IslandInfoHero() {
   return (
-    <div className={className}>
+    <div className="section-py">
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
         Инфо-Фукуок
       </h1>

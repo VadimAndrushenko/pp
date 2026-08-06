@@ -33,9 +33,9 @@ function dividerClass(index: number, total: number) {
   return classes.join(" ")
 }
 
-export function HookahOutIncluded({ className }: { className?: string }) {
+export function HookahOutIncluded() {
   return (
-    <div className={`section-heading ${className}`}>
+    <div className="section-heading section-py">
       <h2 className="text-center font-display font-bold uppercase tracking-wide text-text-primary mb-8">
         Что входит в услугу
       </h2>

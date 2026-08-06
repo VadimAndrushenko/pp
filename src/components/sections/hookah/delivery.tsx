@@ -3,9 +3,9 @@ import Image from "next/image"
 
 const deliveryImages = ["/images/hookah/delivery-1.png", "/images/hookah/delivery-2.png"]
 
-export function HookahDelivery({ className }: { className?: string }) {
+export function HookahDelivery() {
   return (
-    <section className={className}>
+    <section className="section-py">
       <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary mb-6">
         Выездной кальян на дом или мероприятие
       </h2>

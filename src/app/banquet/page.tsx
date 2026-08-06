@@ -7,9 +7,9 @@ export default function BanquetPage() {
   return (
     <>
       <Breadcrumb />
-      <BanquetHero className="section-py" />
-      <BanquetFeatures className="section-py" />
-      <BanquetCta className="section-py" />
+      <BanquetHero />
+      <BanquetFeatures />
+      <BanquetCta />
     </>
   )
 }

@@ -6,7 +6,7 @@ export default function GalleryPhotosPage() {
   return (
     <>
       <Breadcrumb />
-      <PhotoAlbums photos={galleryPhotos} className="section-py" />
+      <PhotoAlbums photos={galleryPhotos} />
     </>
   )
 }

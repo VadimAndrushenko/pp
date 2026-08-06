@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { Send, CalendarCheck } from "lucide-react"
 
-export function CommunityHero({ className }: { className?: string }) {
+export function CommunityHero() {
   return (
-    <div className={className}>
+    <div className="section-py">
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
         Сообщество
       </h1>

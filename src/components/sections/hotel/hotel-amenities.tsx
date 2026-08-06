@@ -10,9 +10,9 @@ const amenities = [
   { icon: Building, title: "Сейф" },
 ]
 
-export function HotelAmenities({ className }: { className?: string }) {
+export function HotelAmenities() {
   return (
-    <div className={`grid grid-cols-2 sm:grid-cols-3 gap-3 ${className ?? ""}`}>
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 section-py">
       {amenities.map((item, i) => {
         const Icon = item.icon
         return (

@@ -1,6 +1,6 @@
-export function BanquetHero({ className }: { className?: string }) {
+export function BanquetHero() {
   return (
-    <div className={className}>
+    <div className="section-py">
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
         Банкет / Аренда зала
       </h1>

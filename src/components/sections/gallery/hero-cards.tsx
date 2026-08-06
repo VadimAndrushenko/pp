@@ -15,9 +15,9 @@ const cards = [
   },
 ]
 
-export function HeroCards({ className }: { className?: string }) {
+export function HeroCards() {
   return (
-    <div className={`grid grid-cols-2 gap-4 max-sm:gap-3 ${className ?? ""}`}>
+    <div className="grid grid-cols-2 gap-4 max-sm:gap-3 section-py">
       {cards.map((card) => (
         <Card
           key={card.href}

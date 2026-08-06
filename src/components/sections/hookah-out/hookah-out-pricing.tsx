@@ -6,9 +6,9 @@ const zones = [
   { label: "Север острова", price: "1 690 000₫" },
 ]
 
-export function HookahOutPricing({ className }: { className?: string }) {
+export function HookahOutPricing() {
   return (
-    <div className={`section-heading ${className}`}>
+    <div className="section-heading section-py">
       <h2 className="text-center font-display font-bold uppercase tracking-wide text-text-primary mb-6">
         Стоимость доставки
       </h2>

@@ -71,9 +71,9 @@ function RouteIcon() {
   )
 }
 
-export function DeliveryZones({ className }: { className?: string }) {
+export function DeliveryZones() {
   return (
-    <section className={className}>
+    <section className="section-py">
       <Card
         className="neon-card flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 rounded-card px-6 py-8 sm:px-10 sm:py-9 border-[1.5px] border-solid border-accent"
       >

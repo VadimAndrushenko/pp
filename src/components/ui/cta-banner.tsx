@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/components/lib/utils"
 import { Info, Send, MessageCircle } from "lucide-react"
 
-export function CTABanner({ className }: { className?: string }) {
+export function CTABanner() {
   return (
-    <div className={className}>
+    <div className="section-py">
       <Card
         className="relative overflow-hidden flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-4 sm:p-8 border-2 border-accent"
         style={{

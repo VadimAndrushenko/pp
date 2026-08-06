@@ -7,9 +7,9 @@ export default function HotelPage() {
   return (
     <>
       <Breadcrumb />
-      <HotelHero className="section-py" />
-      <HotelAmenities className="section-py" />
-      <HotelCta className="section-py" />
+      <HotelHero />
+      <HotelAmenities />
+      <HotelCta />
     </>
   )
 }

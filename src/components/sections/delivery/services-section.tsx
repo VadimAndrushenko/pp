@@ -68,7 +68,7 @@ const methods = [
 
 type Phase = "idle" | "entering" | "open" | "leaving"
 
-export function ServicesSection({ className }: { className?: string }) {
+export function ServicesSection() {
   const [phase, setPhase] = useState<Phase>("idle")
 
   const open = useCallback(() => setPhase("entering"), [])
@@ -100,7 +100,7 @@ export function ServicesSection({ className }: { className?: string }) {
   }, [])
 
   return (
-    <section className={className}>
+    <section className="section-py">
       <h2 className="section-heading mb-6 font-display">Заказать</h2>
       <div className="grid grid-cols-2 gap-11 max-lg:gap-6 max-sm:gap-3">
         {services.map((s, i) => (

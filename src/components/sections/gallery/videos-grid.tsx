@@ -22,12 +22,12 @@ function groupByDate(videos: GalleryVideo[]): VideoGroup[] {
   return [...map.values()].sort((a, b) => (a.dateKey < b.dateKey ? 1 : -1))
 }
 
-export function VideoAlbums({ videos, className }: { videos: GalleryVideo[]; className?: string }) {
+export function VideoAlbums({ videos }: { videos: GalleryVideo[] }) {
   const [activeAlbum, setActiveAlbum] = useState<{ videos: GalleryVideo[]; index: number } | null>(null)
   const albums = groupByDate(videos)
 
   return (
-    <section id="videos" className={className}>
+    <section id="videos" className="section-py">
       <h2 className="section-heading font-display font-bold uppercase text-text-primary mb-2">
         Видео отчёты
         

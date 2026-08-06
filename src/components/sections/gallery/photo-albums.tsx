@@ -21,12 +21,12 @@ function groupByDate(photos: GalleryPhoto[]): AlbumGroup[] {
   return [...map.values()].sort((a, b) => (a.dateKey < b.dateKey ? 1 : -1))
 }
 
-export function PhotoAlbums({ photos, className }: { photos: GalleryPhoto[]; className?: string }) {
+export function PhotoAlbums({ photos }: { photos: GalleryPhoto[] }) {
   const [activeAlbum, setActiveAlbum] = useState<{ photos: GalleryPhoto[]; index: number } | null>(null)
   const albums = groupByDate(photos)
 
   return (
-    <section id="photos" className={className}>
+    <section id="photos" className="section-py">
       <h2 className="section-heading font-display font-bold uppercase text-text-primary mb-2">
         Фото отчёты
         

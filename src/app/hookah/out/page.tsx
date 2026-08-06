@@ -9,10 +9,10 @@ export default function HookahOutPage() {
   return (
     <>
       <Breadcrumb />
-      <HookahOutHero className="section-py" />
-      <HookahOutPricing className="section-py" />
-      <HookahOutIncluded className="section-py" />
-      <HookahOutSteps className="section-py" />
+      <HookahOutHero />
+      <HookahOutPricing />
+      <HookahOutIncluded />
+      <HookahOutSteps />
       <BookingButton label="Заказать выездной кальян" className="py-6 text-4xl max-lg:text-3xl max-sm:text-lg max-sm:py-3" />
     </>
   )

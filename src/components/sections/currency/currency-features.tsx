@@ -7,9 +7,9 @@ const features = [
   { icon: Clock, title: "Быстро", desc: "Обмен за 2 минуты" },
 ]
 
-export function CurrencyFeatures({ className }: { className?: string }) {
+export function CurrencyFeatures() {
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 ${className ?? ""}`}>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 section-py">
       {features.map((item, i) => {
         const Icon = item.icon
         return (

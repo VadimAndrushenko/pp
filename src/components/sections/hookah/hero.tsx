@@ -1,8 +1,8 @@
 import Image from "next/image"
 
-export function HookahHero({ className }: { className?: string }) {
+export function HookahHero() {
   return (
-    <div className={`relative flex items-center ${className ?? ""} min-h-[320px] max-md:min-h-[auto] min-[550px]:max-md:min-h-[250px]`}>
+    <div className="relative flex items-center section-py min-h-[320px] max-md:min-h-[auto] min-[550px]:max-md:min-h-[250px]">
       <div className="space-y-2.5 w-[40%] max-lg:w-[60%]">
         <h1 className="text-9xl font-display font-bold uppercase tracking-tight text-text-primary mb-7 max-md:mb-0 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
           Кальяны

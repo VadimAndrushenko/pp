@@ -5,9 +5,9 @@ import { MotionDiv } from "@/components/ui/motion-div"
 import { NeonHeading } from "@/components/ui/neon-heading"
 import { site } from "@/config/site"
 
-export function HeroSection({ className }: { className?: string }) {
+export function HeroSection() {
   return (
-    <section className={`relative ${className ?? ""}`}>
+    <section className="relative section-py">
         <div className=" relative">
           <div className="lg:w-[40%] flex flex-col ">
             <MotionDiv direction="left" delay={0.1} className="mb-6">

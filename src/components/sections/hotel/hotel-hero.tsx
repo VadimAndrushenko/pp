@@ -1,6 +1,6 @@
-export function HotelHero({ className }: { className?: string }) {
+export function HotelHero() {
   return (
-    <div className={className}>
+    <div className="section-py">
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
         Отель
       </h1>

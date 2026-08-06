@@ -11,13 +11,13 @@ export default function HookahPage() {
   return (
     <>
       <Breadcrumb />
-      <HookahHero className="section-py" />
-      <HookahMenuCards className="section-py" />
-      <HookahFeatures className="section-py" />
-      <HookahPrices className="section-py" />
-      <HookahDelivery className="section-py" />
-      <CTABanner className="section-py" />
-      {/* <HookahVIP className="section-py" /> */}
+      <HookahHero />
+      <HookahMenuCards />
+      <HookahFeatures />
+      <HookahPrices />
+      <HookahDelivery />
+      <CTABanner />
+      {/* <HookahVIP /> */}
     </>
   )
 }

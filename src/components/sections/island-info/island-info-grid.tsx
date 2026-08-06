@@ -10,9 +10,9 @@ const infoCards = [
   { icon: Globe, title: "Достопримечательности", desc: "Что посмотреть" },
 ]
 
-export function IslandInfoGrid({ className }: { className?: string }) {
+export function IslandInfoGrid() {
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${className ?? ""}`}>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 section-py">
       {infoCards.map((item, i) => {
         const Icon = item.icon
         return (

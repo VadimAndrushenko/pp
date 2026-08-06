@@ -1,6 +1,6 @@
-export function CurrencyHero({ className }: { className?: string }) {
+export function CurrencyHero() {
   return (
-    <div className={className}>
+    <div className="section-py">
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
         Обмен рублей
       </h1>

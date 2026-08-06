@@ -3,15 +3,11 @@
 import { useState } from "react"
 import { Play } from "lucide-react"
 
-interface RestaurantVideoProps {
-  className?: string
-}
-
-export function RestaurantVideo({ className }: RestaurantVideoProps) {
+export function RestaurantVideo() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   return (
-    <div className={className}>
+    <div className="section-py">
       <div
         className="relative w-full aspect-video max-h-[620px] rounded-card overflow-hidden cursor-pointer bg-cover bg-center bg-surface group hover-lift"
         style={{

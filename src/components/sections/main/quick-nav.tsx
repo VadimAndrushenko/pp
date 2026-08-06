@@ -35,10 +35,9 @@ const navItems: NavItem[] = [
 interface QuickNavProps {
   embedded?: boolean
   items?: NavItem[]
-  className?: string
 }
 
-export function QuickNav({ embedded, items, className }: QuickNavProps) {
+export function QuickNav({ embedded, items }: QuickNavProps) {
   const nav = items ?? navItems
   const grid = (
     <StaggerGrid className="grid grid-cols-2 lg:grid-cols-4 gap-4" staggerDelay={0.08}>
@@ -90,5 +89,5 @@ export function QuickNav({ embedded, items, className }: QuickNavProps) {
 
   if (embedded) return grid
 
-  return <div className={className}>{grid}</div>
+  return <div className="section-py">{grid}</div>
 }

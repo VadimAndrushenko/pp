@@ -11,7 +11,6 @@ interface EventsPreviewProps {
   events: EventItem[]
   linkHref?: string
   linkLabel?: string
-  className?: string
 }
 
 export function EventsPreview({
@@ -19,10 +18,9 @@ export function EventsPreview({
   events,
   linkHref,
   linkLabel,
-  className = "",
 }: EventsPreviewProps) {
   return (
-    <section className={className}>
+    <section className="section-py">
         <div className="flex items-center justify-between mb-6">
           <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary">
             {title}
