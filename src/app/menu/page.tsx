@@ -27,7 +27,7 @@ const hookahMenu: MenuData = {
 export default function MenuPage() {
   return (
     <>
-      <Breadcrumb items={[{ label: "Меню" }]} />
+      <Breadcrumb />
 
       <h1 className="text-7xl lg:text-8xl max-md:text-6xl font-display font-bold uppercase tracking-tight text-text-primary mb-10">
         Меню
