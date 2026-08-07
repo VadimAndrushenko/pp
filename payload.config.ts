@@ -3,7 +3,7 @@ import { fileURLToPath } from "url"
 
 import { postgresAdapter } from "@payloadcms/db-postgres"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
-import { buildConfig } from "payload"
+import { buildConfig, type Config } from "payload"
 import sharp from "sharp"
 
 import { Users } from "./src/collections/Users"
@@ -30,5 +30,5 @@ export default buildConfig({
     },
     push: process.env.DATABASE_PUSH === "true",
   }),
-  sharp,
+  sharp: sharp as unknown as Config["sharp"],
 })
