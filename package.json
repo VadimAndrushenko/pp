@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "generate:types": "payload generate:types",
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create",
     "payload": "payload"
   },
   "dependencies": {
