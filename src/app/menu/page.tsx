@@ -20,7 +20,7 @@ const hookahMenu: MenuData = {
   id: "hookah",
   title: "Кальянное меню",
   subtitle: "Премиальные табаки и чаши",
-  image: "https://images.unsplash.com/photo-1731613705339-f7984b43fe4d?w=1200&h=400&fit=crop",
+  image: "/images/hookah/shisha.png",
   sections: [],
 }
 
@@ -43,7 +43,7 @@ export default function MenuPage() {
       </div>
 
       <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
-        Специальное меню
+        Кальянное меню
       </h2>
       <div className="mb-10">
         <MenuCategoryCard item={hookahMenu} icon="hookah" href="/hookah" priority />

@@ -1,5 +1,15 @@
 allowBuilds:
-  sharp: set this to true or false
-  unrs-resolver: set this to true or false
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
 minimumReleaseAgeExclude:
   - lucide-react@1.25.0
+  - '@payloadcms/db-postgres@3.87.1'
+  - '@payloadcms/drizzle@3.87.1'
+  - '@payloadcms/graphql@3.87.1'
+  - '@payloadcms/next@3.87.1'
+  - '@payloadcms/richtext-lexical@3.87.1'
+  - '@payloadcms/translations@3.87.1'
+  - '@payloadcms/ui@3.87.1'
+  - payload@3.87.1
+  - tsx@4.23.11

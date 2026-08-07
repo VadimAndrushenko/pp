@@ -19,7 +19,7 @@ export function MenuSection({ section }: { section: MenuSectionConfig }) {
         <Star className="w-4 h-4 text-accent fill-accent shrink-0" />
         <span className="flex-1 h-[1px] xl:h-[3px] bg-accent/60" />
       </div>
-      <div className="mt-6">
+      <div className="mt-6 space-y-5">
         {section.dishes.map((dish) => (
           <MenuDishRow key={dish.name} dish={dish} />
         ))}

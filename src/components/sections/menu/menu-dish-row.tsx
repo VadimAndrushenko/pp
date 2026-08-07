@@ -1,35 +1,52 @@
 import type { MenuDish } from "@/config/menu-data"
 
 export function MenuDishRow({ dish }: { dish: MenuDish }) {
+  const priceMatch = dish.price.match(/^(.+?)\s*(VND)?$/i)
+  const amount = priceMatch?.[1] ?? dish.price
+  const currency = priceMatch?.[2] ?? ""
+
   return (
-    <div className="group py-4 border-b border-border/30 last:border-b-0 transition-colors duration-200 hover:bg-surface/40 px-3 -mx-3 rounded-sm">
-      <div className="flex items-baseline gap-3">
-        <h3 className="font-display uppercase tracking-wide text-2xl max-sm:text-lg text-text-primary transition-colors duration-200 group-hover:text-accent">
+    <div className="group py-6 px-5 rounded-lg bg-surface/25 border border-border/35 transition-all duration-300 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]">
+      <div className="flex items-baseline gap-4 mb-5 max-sm:flex-col max-sm:items-stretch max-sm:gap-2">
+        <h3 className="font-display uppercase tracking-wide text-3xl max-sm:text-xl text-text-primary transition-colors duration-200 group-hover:text-accent">
           {dish.name}
         </h3>
-        <span className="flex-1 border-b border-dotted border-text-muted/50 translate-y-[-0.3em]" />
-        {dish.weight && (
-          <span className="text-text-muted text-base whitespace-nowrap max-sm:text-[11px]">{dish.weight}</span>
-        )}
-        <span className="font-display text-accent text-xl max-sm:text-sm whitespace-nowrap">{dish.price}</span>
+        <span className="flex-1 border-b border-dotted border-text-muted/50 translate-y-[-0.3em] hidden sm:block" />
+        <div className="flex items-baseline gap-2.5 whitespace-nowrap max-sm:mt-3 max-sm:pt-2.5 max-sm:border-t max-sm:border-border/50">
+          {dish.weight && (
+            <>
+              <span className="font-display text-accent text-2xl whitespace-nowrap order-1 max-sm:order-3 max-sm:text-xl max-sm:text-white">
+                {dish.weight}
+              </span>
+              <span
+                className="w-px self-center h-7 bg-border/70 order-2 max-sm:order-2"
+                aria-hidden="true"
+              />
+            </>
+          )}
+          <span className="font-display text-3xl whitespace-nowrap order-3 max-sm:order-1 max-sm:text-2xl">
+            <span className="text-white">{amount}</span>{" "}
+            {currency && <span className="text-accent">{currency}</span>}
+          </span>
+        </div>
       </div>
 
       {dish.description && (
-        <p className="mt-1.5 max-sm:text-sm sm:max-w-[70%]">
+        <p className="mt-2.5 max-sm:text-sm sm:max-w-[80%] leading-relaxed lg:leading-loose">
           <span className="font-display uppercase tracking-wider text-accent">Описание: </span>
           <span className="text-text-muted">{dish.description}</span>
         </p>
       )}
 
       {dish.base && (
-        <p className="mt-1 max-sm:text-sm sm:max-w-[70%]">
+        <p className="mt-2.5 max-sm:text-sm sm:max-w-[80%] leading-relaxed lg:leading-loose">
           <span className="font-display uppercase tracking-wider text-accent">Основа на выбор: </span>
           <span className="text-text-muted">{dish.base}</span>
         </p>
       )}
 
       {dish.composition && (
-        <p className="mt-1 max-sm:text-sm sm:max-w-[70%]">
+        <p className="mt-2.5 max-sm:text-sm sm:max-w-[80%] leading-relaxed lg:leading-loose">
           <span className="font-display uppercase tracking-wider text-accent">Состав: </span>
           <span className="text-text-muted">{dish.composition}</span>
         </p>
