@@ -39,6 +39,8 @@ export default async function MenuCategoryPage({
     notFound()
   }
 
+  const menuIndex = menuData.findIndex((m) => m.id === slug)
+
   return (
     <>
       <Breadcrumb items={[{ label: "Меню", href: "/menu" }, { label: menu.title }]} />
@@ -48,7 +50,7 @@ export default async function MenuCategoryPage({
 
       <div>
         {menu.sections.map((section) => (
-          <MenuSection key={section.id} section={section} />
+          <MenuSection key={section.id} section={section} index={menuIndex} />
         ))}
       </div>
     </>

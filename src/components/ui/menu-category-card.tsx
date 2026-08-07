@@ -21,7 +21,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; style?: 
 
 const iconSize = "w-10 h-10"
 
-export function MenuCategoryCard({ item, icon, href, priority }: { item: MenuData; icon: string; href?: string; priority?: boolean }) {
+export function MenuCategoryCard({ item, icon, href, priority, index }: { item: MenuData; icon: string; href?: string; priority?: boolean; index?: number }) {
   const Icon = iconMap[icon]
   const link = href ?? `/menu/${item.id}`
 
@@ -30,6 +30,13 @@ export function MenuCategoryCard({ item, icon, href, priority }: { item: MenuDat
       href={link}
       className="relative overflow-hidden rounded-card h-[260px] block group cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:-translate-y-1.5 hover:border-accent active:scale-[0.98] border border-border"
     >
+      {typeof index === "number" && (
+        <span className="absolute top-4 right-5 z-10 font-display text-xl whitespace-nowrap transition-colors duration-300">
+          <span className="text-accent/80">{"|"}</span>
+          <span className="text-white">{index + 1}</span>
+          <span className="text-accent/80">{"|"}</span>
+        </span>
+      )}
       <Image
         src={item.image}
         alt={item.title}

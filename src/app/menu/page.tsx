@@ -38,7 +38,7 @@ export default function MenuPage() {
       </h2>
       <div className="grid grid-cols-3 gap-5 mb-10 max-lg:grid-cols-2 max-sm:grid-cols-1">
         {menuData.map((item, i) => (
-          <MenuCategoryCard key={item.id} item={item} icon={categoryIcons[item.id] ?? "cloche"} priority={i < 2} />
+          <MenuCategoryCard key={item.id} item={item} icon={categoryIcons[item.id] ?? "cloche"} priority={i < 2} index={i} />
         ))}
       </div>
 
