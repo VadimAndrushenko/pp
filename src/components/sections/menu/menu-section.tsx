@@ -1,8 +1,20 @@
 import type { MenuSection as MenuSectionConfig } from "@/config/menu-data"
 import { MenuDishRow } from "@/components/sections/menu/menu-dish-row"
-import { UtensilsCrossed, Star } from "lucide-react"
+import { StarDivider } from "@/components/ui/star-divider"
+import { UtensilsCrossed } from "lucide-react"
 
-export function MenuSection({ section, index }: { section: MenuSectionConfig; index?: number }) {
+export function MenuSection({ section, index, heading = true }: { section: MenuSectionConfig; index?: number; heading?: boolean }) {
+  if (!heading) {
+    return (
+      <section id={section.id} className="scroll-mt-36 pb-10">
+        <div className="mt-6 space-y-5">
+          {section.dishes.map((dish, i) => (
+            <MenuDishRow key={dish.name} dish={dish} index={i} />
+          ))}
+        </div>
+      </section>
+    )
+  }
   return (
     <section id={section.id} className="scroll-mt-36 pb-10">
       <div className="relative flex items-center gap-4 mb-2">
@@ -21,12 +33,8 @@ export function MenuSection({ section, index }: { section: MenuSectionConfig; in
       {section.subtitle && (
         <p className="text-text-muted mb-4">{section.subtitle}</p>
       )}
-      <div className="flex items-center gap-3">
-        <span className="flex-1 h-[1px] xl:h-[3px] bg-accent/60" />
-        <Star className="w-4 h-4 text-accent fill-accent shrink-0" />
-        <span className="flex-1 h-[1px] xl:h-[3px] bg-accent/60" />
-      </div>
-      <div className="mt-6 space-y-5">
+      <StarDivider className="mb-6" />
+      <div className="space-y-5">
         {section.dishes.map((dish, i) => (
           <MenuDishRow key={dish.name} dish={dish} index={i} />
         ))}

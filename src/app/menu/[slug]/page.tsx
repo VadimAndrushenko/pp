@@ -4,10 +4,9 @@ import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { MenuHero } from "@/components/sections/menu/menu-hero"
 import { MenuNav } from "@/components/sections/menu/menu-nav"
 import { MenuSection } from "@/components/sections/menu/menu-section"
-import { BookingButton } from "@/components/ui/booking-button"
+import { StarDivider } from "@/components/ui/star-divider"
 import { menuData } from "@/config/menu-data"
 import { links } from "@/config/links"
-import { Phone } from "lucide-react"
 
 export function generateStaticParams() {
   return menuData.map((menu) => ({ slug: menu.id }))
@@ -45,12 +44,13 @@ export default async function MenuCategoryPage({
     <>
       <Breadcrumb items={[{ label: "Меню", href: "/menu" }, { label: menu.title }]} />
 
-      <MenuHero menu={menu} />
+      <MenuHero menu={menu} index={menuIndex} />
+      {menu.sections.length === 1 && <StarDivider className="mb-8" />}
       <MenuNav sections={menu.sections} />
 
       <div>
         {menu.sections.map((section) => (
-          <MenuSection key={section.id} section={section} index={menuIndex} />
+          <MenuSection key={section.id} section={section} index={menuIndex} heading={menu.sections.length > 1} />
         ))}
       </div>
     </>
