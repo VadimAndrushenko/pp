@@ -1,4 +1,42 @@
 import type { MenuDish } from "@/config/menu-data"
+import { Leaf, CandyOff } from "lucide-react"
+
+type BadgeIcon = React.ComponentType<{ className?: string; strokeWidth?: number }>
+
+const badgeConfig: Record<string, { Icon: BadgeIcon; className: string }> = {
+  "веганское блюдо": {
+    Icon: Leaf,
+    className:
+      "text-success border-success/60 bg-gradient-to-b from-success/30 to-success/10 shadow-[0_0_20px_rgba(62,207,110,0.4),inset_0_0_12px_rgba(62,207,110,0.15)]",
+  },
+  "вегетарианское блюдо": {
+    Icon: Leaf,
+    className:
+      "text-success border-success/60 bg-gradient-to-b from-success/30 to-success/10 shadow-[0_0_20px_rgba(62,207,110,0.4),inset_0_0_12px_rgba(62,207,110,0.15)]",
+  },
+  "без добавленного сахара": {
+    Icon: CandyOff,
+    className:
+      "text-neon-blue border-neon-blue/60 bg-gradient-to-b from-neon-blue/30 to-neon-blue/10 shadow-[0_0_20px_rgba(46,107,255,0.4),inset_0_0_12px_rgba(46,107,255,0.15)]",
+  },
+}
+
+function MenuDishBadge({ label }: { label: string }) {
+  const config = badgeConfig[label.toLowerCase()]
+  const Icon = config?.Icon
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-display font-semibold uppercase tracking-[0.15em] backdrop-blur-sm text-sm max-sm:text-xs ${config?.className ?? ""}`}
+    >
+      {Icon && (
+        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-black/50 ring-1 ring-inset ring-white/15">
+          <Icon className="w-3 h-3" strokeWidth={2.2} />
+        </span>
+      )}
+      {label}
+    </span>
+  )
+}
 
 export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number }) {
   const priceMatch = dish.price.match(/^(.+?)\s*(VND)?$/i)
@@ -45,6 +83,13 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
         </p>
       )}
 
+      {dish.subtitle && (
+        <p className="mt-2.5 max-sm:text-sm sm:max-w-[80%] leading-relaxed lg:leading-loose">
+          <span className="font-display uppercase tracking-wider text-accent">На выбор: </span>
+          <span className="text-text-muted">{dish.subtitle}</span>
+        </p>
+      )}
+
       {dish.base && (
         <p className="mt-2.5 max-sm:text-sm sm:max-w-[80%] leading-relaxed lg:leading-loose">
           <span className="font-display uppercase tracking-wider text-accent">Основа на выбор: </span>
@@ -57,6 +102,14 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
           <span className="font-display uppercase tracking-wider text-accent">Состав: </span>
           <span className="text-text-muted">{dish.composition}</span>
         </p>
+      )}
+
+      {dish.badges && dish.badges.length > 0 && (
+        <div className="mt-6 pt-4 border-t border-border/30 pr-16 max-sm:pr-0 flex flex-wrap gap-2.5">
+          {dish.badges.map((badge) => (
+            <MenuDishBadge key={badge} label={badge} />
+          ))}
+        </div>
       )}
     </div>
   )

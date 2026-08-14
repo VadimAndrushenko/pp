@@ -4,15 +4,22 @@ import type { MenuData } from "@/config/menu-data"
 import { menuData } from "@/config/menu-data"
 
 const categoryIcons: Record<string, string> = {
+  breakfasts: "crescent",
   zakuski: "skewer",
+  salads: "ornament-flower",
+  soups: "bowl-steam",
+  grill: "skewer",
+  home_kitchen: "ornament-snowflake",
   kutaby: "ornament-geometric",
+  shaurma: "crescent",
   pizza: "star",
   mantas: "bowl-steam",
   pasta: "lotus",
-  grill: "skewer",
   goryachee: "cloche",
-  home_kitchen: "ornament-snowflake",
-  soups: "bowl-steam",
+  asian: "lotus",
+  sides: "bowl-steam",
+  "beer-snacks": "glass",
+  sandwiches: "cloche",
   burgers: "pretzel",
 }
 
