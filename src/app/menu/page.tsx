@@ -31,23 +31,23 @@ export default function MenuPage() {
     <>
       <Breadcrumb />
 
-      <h1 className="text-5xl lg:text-6xl max-sm:text-4xl font-display font-bold uppercase tracking-tight text-text-primary mb-5">
+      <h1 className="text-5xl lg:text-6xl max-sm:text-4xl font-display font-bold uppercase tracking-tight text-text-primary mb-5 max-sm:mb-3">
         Меню
       </h1>
 
-      <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3">
+      <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3 max-sm:mb-2">
         Основные разделы
       </h2>
-      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 mb-7 max-sm:gap-1.5">
+      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 mb-7 max-sm:gap-1.5 max-sm:mb-4">
         {menuData.map((item, i) => (
           <MenuCategoryCard key={item.id} item={item} icon={categoryIcons[item.id] ?? "cloche"} priority={i < 2} index={i} />
         ))}
       </div>
 
-      <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3">
+      <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3 max-sm:mb-2">
         Кальянное меню
       </h2>
-      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 max-sm:gap-1.5 mb-7">
+      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 max-sm:gap-1.5 mb-7 max-sm:mb-4">
         <MenuCategoryCard item={hookahMenu} icon="hookah" href="/hookah" priority />
       </div>
     </>

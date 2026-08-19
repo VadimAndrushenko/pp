@@ -55,7 +55,7 @@ export default async function MenuCategoryPage({
 
       <div>
         {menu.sections.map((section, i) => (
-          <MenuSection key={section.id} section={section} index={menuIndex} heading={menu.sections.length > 1} startIndex={i === 0 ? 0 : sectionStarts[i - 1]} />
+          <MenuSection key={section.id} section={section} heading={menu.sections.length > 1} startIndex={i === 0 ? 0 : sectionStarts[i - 1]} />
         ))}
       </div>
     </>

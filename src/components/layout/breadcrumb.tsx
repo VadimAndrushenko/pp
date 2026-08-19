@@ -11,7 +11,7 @@ export function Breadcrumb({ items = [] }: { items?: BreadcrumbItem[] }) {
     return (
       <nav
         aria-label="Хлебные крошки"
-        className="flex items-center flex-wrap gap-x-1.5 gap-y-1 mb-6 font-display uppercase tracking-wider text-xs sm:text-sm md:text-lg"
+        className="flex items-center flex-wrap gap-x-1.5 gap-y-1 mb-6 max-sm:mb-3 font-display uppercase tracking-wider text-xs sm:text-sm md:text-lg"
       >
         <Link
           href="/"
@@ -51,7 +51,7 @@ export function Breadcrumb({ items = [] }: { items?: BreadcrumbItem[] }) {
   return (
     <Link
       href="/"
-      className="group relative inline-flex text-accent items-center gap-2 text-sm md:text-lg font-display uppercase tracking-wider mb-6 transition-all duration-300 hover:drop-shadow-accent hover:scale-105"
+      className="group relative inline-flex text-accent items-center gap-2 text-sm md:text-lg font-display uppercase tracking-wider mb-6 max-sm:mb-3 transition-all duration-300 hover:drop-shadow-accent hover:scale-105"
     >
       <span className="relative inline-flex items-center gap-2">
         <ArrowLeft className="w-4 aspect-square transition-all duration-300 group-hover:-translate-x-1" />

@@ -75,6 +75,12 @@
   }
 }
 
+/* Блокировка прокрутки страницы, пока открыта корзина */
+html:has(#cart-drawer[data-open="true"]),
+body:has(#cart-drawer[data-open="true"]) {
+  overflow: hidden;
+}
+
 /* Вертикальный паддинг секций: единый отступ между блоками, меньше на мобильных */
 @layer utilities {
   .section-py {

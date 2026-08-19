@@ -3,6 +3,9 @@ import { Oswald, Montserrat } from "next/font/google"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { PageTransition } from "@/components/ui/page-transition"
+import { CartProvider } from "@/components/cart/cart-context"
+import { CartButton } from "@/components/cart/cart-button"
+import { CartDrawer } from "@/components/cart/cart-drawer"
 import { site } from "@/config/site"
 import { links } from "@/config/links"
 import "./globals.css"
@@ -95,11 +98,15 @@ export default function RootLayout({
             __html: JSON.stringify(restaurantJsonLd).replace(/</g, "\\u003c"),
           }}
         />
-        <Header />
-        <main className="container py-6 flex-1">
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="container py-6 flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <Footer />
+          <CartButton />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   )
