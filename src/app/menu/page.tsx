@@ -4,23 +4,18 @@ import type { MenuData } from "@/config/menu-data"
 import { menuData } from "@/config/menu-data"
 
 const categoryIcons: Record<string, string> = {
-  breakfasts: "crescent",
+  breakfasts: "egg",
   zakuski: "skewer",
-  salads: "ornament-flower",
-  soups: "bowl-steam",
+  salads: "salad",
+  soups: "soup",
   grill: "skewer",
-  home_kitchen: "ornament-snowflake",
-  kutaby: "ornament-geometric",
-  shaurma: "crescent",
-  pizza: "star",
-  mantas: "bowl-steam",
-  pasta: "lotus",
-  goryachee: "cloche",
-  asian: "lotus",
+  home_kitchen: "chef-hat",
+  eastern: "crescent",
+  pasta: "fork-knife",
+  asian: "bowl-steam",
   sides: "bowl-steam",
-  "beer-snacks": "glass",
-  sandwiches: "cloche",
-  burgers: "pretzel",
+  "beer-snacks": "beer",
+  sandwiches: "sandwich",
 }
 
 const hookahMenu: MenuData = {
@@ -36,23 +31,23 @@ export default function MenuPage() {
     <>
       <Breadcrumb />
 
-      <h1 className="text-7xl lg:text-8xl max-md:text-6xl font-display font-bold uppercase tracking-tight text-text-primary mb-10">
+      <h1 className="text-5xl lg:text-6xl max-sm:text-4xl font-display font-bold uppercase tracking-tight text-text-primary mb-5">
         Меню
       </h1>
 
-      <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
+      <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3">
         Основные разделы
       </h2>
-      <div className="grid grid-cols-3 gap-5 mb-10 max-lg:grid-cols-2 max-sm:grid-cols-1">
+      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 mb-7 max-sm:gap-1.5">
         {menuData.map((item, i) => (
           <MenuCategoryCard key={item.id} item={item} icon={categoryIcons[item.id] ?? "cloche"} priority={i < 2} index={i} />
         ))}
       </div>
 
-      <h2 className=" font-display uppercase tracking-widest text-accent text-xl mb-4">
+      <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3">
         Кальянное меню
       </h2>
-      <div className="mb-10">
+      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 max-sm:gap-1.5 mb-7">
         <MenuCategoryCard item={hookahMenu} icon="hookah" href="/hookah" priority />
       </div>
     </>

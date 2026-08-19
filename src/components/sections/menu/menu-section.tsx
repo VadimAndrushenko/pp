@@ -3,13 +3,13 @@ import { MenuDishRow } from "@/components/sections/menu/menu-dish-row"
 import { StarDivider } from "@/components/ui/star-divider"
 import { UtensilsCrossed } from "lucide-react"
 
-export function MenuSection({ section, index, heading = true }: { section: MenuSectionConfig; index?: number; heading?: boolean }) {
+export function MenuSection({ section, index, heading = true, startIndex = 0 }: { section: MenuSectionConfig; index?: number; heading?: boolean; startIndex?: number }) {
   if (!heading) {
     return (
       <section id={section.id} className="scroll-mt-36 pb-10">
         <div className="mt-6 space-y-5">
           {section.dishes.map((dish, i) => (
-            <MenuDishRow key={dish.name} dish={dish} index={i} />
+            <MenuDishRow key={dish.name} dish={dish} index={section.numbered === false ? undefined : startIndex + i} />
           ))}
         </div>
       </section>
@@ -36,7 +36,7 @@ export function MenuSection({ section, index, heading = true }: { section: MenuS
       <StarDivider className="mb-6" />
       <div className="space-y-5">
         {section.dishes.map((dish, i) => (
-          <MenuDishRow key={dish.name} dish={dish} index={i} />
+          <MenuDishRow key={dish.name} dish={dish} index={section.numbered === false ? undefined : startIndex + i} />
         ))}
       </div>
     </section>

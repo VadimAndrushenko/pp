@@ -39,6 +39,11 @@ export default async function MenuCategoryPage({
   }
 
   const menuIndex = menuData.findIndex((m) => m.id === slug)
+  const sectionStarts = menu.sections.reduce<number[]>((acc, section) => {
+    const prev = acc[acc.length - 1] ?? 0
+    acc.push(prev + (section.numbered === false ? 0 : section.dishes.length))
+    return acc
+  }, [])
 
   return (
     <>
@@ -49,8 +54,8 @@ export default async function MenuCategoryPage({
       <MenuNav sections={menu.sections} />
 
       <div>
-        {menu.sections.map((section) => (
-          <MenuSection key={section.id} section={section} index={menuIndex} heading={menu.sections.length > 1} />
+        {menu.sections.map((section, i) => (
+          <MenuSection key={section.id} section={section} index={menuIndex} heading={menu.sections.length > 1} startIndex={i === 0 ? 0 : sectionStarts[i - 1]} />
         ))}
       </div>
     </>
