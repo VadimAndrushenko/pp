@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import type { MenuDish } from "@/config/menu-data"
 import { Leaf, CandyOff, Plus, Check } from "lucide-react"
 import { useCart } from "@/components/cart/cart-context"
@@ -56,18 +57,27 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
   }
 
   return (
-    <div className="relative group py-6 px-5 max-sm:py-4 max-sm:px-3 rounded-lg bg-surface/25 border border-border/35 transition-all duration-300 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]">
+    <div className="relative group py-6 px-5 max-sm:py-4 max-sm:pb-16 max-sm:px-3 rounded-lg bg-surface/25 border border-border/35 transition-all duration-300 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]">
       {typeof index === "number" && (
-        <span className="absolute right-4 bottom-4 max-sm:bottom-auto max-sm:top-5 z-10 font-display text-2xl whitespace-nowrap">
+        <span className="absolute right-4 bottom-4 z-10 max-sm:hidden font-display text-2xl whitespace-nowrap">
           <span className="text-accent/80">{"|"}</span>
           <span className="text-white">{index + 1}</span>
           <span className="text-accent/80">{"|"}</span>
         </span>
       )}
-      <div className="flex items-baseline gap-4 mb-5 max-sm:flex-col max-sm:items-stretch max-sm:gap-2">
-        <h3 className="font-display uppercase tracking-wide text-3xl max-sm:text-xl max-sm:pr-10 text-text-primary transition-colors duration-200 group-hover:text-accent">
-          {dish.name}
-        </h3>
+      <div className="flex items-baseline gap-4 mb-5 pr-16 max-sm:pr-0 max-sm:flex-col max-sm:items-stretch max-sm:gap-2">
+        <div className="flex items-baseline gap-3 min-w-0 max-sm:w-full">
+          <h3 className="font-display uppercase tracking-wide text-3xl max-sm:text-xl text-text-primary transition-colors duration-200 group-hover:text-accent">
+            {dish.name}
+          </h3>
+          {typeof index === "number" && (
+            <span className="shrink-0 ml-auto sm:hidden font-display text-xl whitespace-nowrap">
+              <span className="text-accent/80">{"|"}</span>
+              <span className="text-white">{index + 1}</span>
+              <span className="text-accent/80">{"|"}</span>
+            </span>
+          )}
+        </div>
         <span className="flex-1 border-b border-dotted border-text-muted/50 translate-y-[-0.3em] hidden sm:block" />
         <div className="flex items-baseline gap-3 whitespace-nowrap max-sm:mt-3 max-sm:pt-2.5 max-sm:border-t max-sm:border-border/50 max-sm:items-center">
           {dish.weight && (
@@ -85,17 +95,61 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
             <span className="text-white">{amount}</span>{" "}
             {currency && <span className="text-accent">{currency}</span>}
           </span>
-          <button
+          <motion.button
             onClick={handleAdd}
             aria-label={`Добавить «${dish.name}» в корзину`}
-            className={`self-center flex items-center justify-center w-10 h-10 max-sm:w-9 max-sm:h-9 rounded-full border-2 transition-all duration-300 active:scale-90 ${
-              added
-                ? "bg-success border-success text-black shadow-[0_0_20px_rgba(62,207,110,0.5)]"
-                : "bg-accent/10 border-accent text-accent hover:bg-accent hover:text-black hover:shadow-[0_0_20px_rgba(255,106,0,0.5)]"
-            }`}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.82 }}
+            className="absolute top-4 right-4 z-20 max-sm:top-auto max-sm:bottom-4 flex items-center justify-center w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full border-2 border-success bg-success/10 text-success shadow-[0_0_16px_rgba(62,207,110,0.25)] transition-[background-color,color,box-shadow] duration-300 hover:bg-success hover:text-black hover:shadow-[0_0_26px_rgba(62,207,110,0.6)]"
           >
-            {added ? <Check className="w-4 h-4" strokeWidth={3} /> : <Plus className="w-4 h-4" strokeWidth={2.6} />}
-          </button>
+            <AnimatePresence mode="wait" initial={false}>
+              {added ? (
+                <motion.span
+                  key="check"
+                  initial={{ scale: 0, rotate: -120 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  exit={{ scale: 0, rotate: 120 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 22 }}
+                >
+                  <Check className="w-5 h-5 max-sm:w-4 max-sm:h-4" strokeWidth={3} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="plus"
+                  initial={{ scale: 0, rotate: 120 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  exit={{ scale: 0, rotate: -120 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 22 }}
+                >
+                  <Plus className="w-5 h-5 max-sm:w-4 max-sm:h-4" strokeWidth={2.6} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+            <AnimatePresence>
+              {added && (
+                <>
+                  <motion.span
+                    key="ripple"
+                    className="absolute inset-0 rounded-full border-2 border-success pointer-events-none"
+                    initial={{ scale: 1, opacity: 0.8 }}
+                    animate={{ scale: 2, opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                  />
+                  <motion.span
+                    key="plus-one"
+                    className="absolute -top-1 left-1/2 -translate-x-1/2 font-display text-sm font-bold text-success pointer-events-none whitespace-nowrap"
+                    initial={{ opacity: 0, y: 2 }}
+                    animate={{ opacity: [0, 1, 1, 0], y: -18 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                  >
+                    +1
+                  </motion.span>
+                </>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
       </div>
 
@@ -128,7 +182,7 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
       )}
 
       {dish.badges && dish.badges.length > 0 && (
-        <div className="mt-6 pt-4 border-t border-border/30 pr-16 max-sm:pr-0 flex flex-wrap gap-2.5">
+        <div className="mt-6 pt-4 border-t border-border/30 pr-16 flex flex-wrap gap-2.5">
           {dish.badges.map((badge) => (
             <MenuDishBadge key={badge} label={badge} />
           ))}
