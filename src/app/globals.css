@@ -357,3 +357,45 @@ html, body {
   color: #0a0908 !important;
   box-shadow: 0 0 18px -2px color-mix(in srgb, var(--glow) 70%, transparent);
 }
+.pp-map-pin {
+  position: relative;
+  width: 26px;
+  height: 26px;
+}
+
+.pp-map-pin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--accent, #ff6a00);
+  border: 3px solid #fff;
+  box-shadow: 0 0 20px rgba(255, 106, 0, 0.8);
+}
+
+.pp-map-pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #fff;
+}
+
+.leaflet-container {
+  background: #0a0a0a;
+  font-family: inherit;
+}
+
+.leaflet-control-attribution {
+  background: rgba(10, 10, 10, 0.7) !important;
+  color: #666 !important;
+  font-size: 9px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #888 !important;
+}

@@ -2,12 +2,41 @@
 
 import { createContext, useContext, useEffect, useMemo, useReducer, useState } from "react"
 import type { MenuDish } from "@/config/menu-data"
+import { menuData } from "@/config/menu-data"
+import { getPrices } from "@/lib/pricing"
+
+function buildDishIndex(): Map<string, MenuDish> {
+  const index = new Map<string, MenuDish>()
+  for (const menu of menuData) {
+    for (const section of menu.sections) {
+      for (const dish of section.dishes) {
+        index.set(dish.name, dish)
+      }
+    }
+  }
+  return index
+}
 
 export interface CartItem {
   key: string
   dish: MenuDish
   quantity: number
 }
+
+export interface OrderHistoryItem {
+  name: string
+  quantity: number
+  price: number
+}
+
+export interface OrderRecord {
+  id: string
+  createdAt: string
+  items: OrderHistoryItem[]
+  total: number
+}
+
+const ORDERS_STORAGE_KEY = "pp-orders"
 
 interface CartState {
   items: CartItem[]
@@ -71,6 +100,7 @@ interface CartContextValue {
   isOpen: boolean
   totalCount: number
   totalAmount: number
+  orders: OrderRecord[]
   openCart: () => void
   closeCart: () => void
   addItem: (key: string, dish: MenuDish) => void
@@ -78,6 +108,8 @@ interface CartContextValue {
   decrement: (key: string) => void
   removeItem: (key: string) => void
   clearCart: () => void
+  addOrder: (record: Omit<OrderRecord, "id" | "createdAt">) => void
+  clearOrders: () => void
 }
 
 const CartContext = createContext<CartContextValue | null>(null)
@@ -85,6 +117,7 @@ const CartContext = createContext<CartContextValue | null>(null)
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] })
   const [isOpen, setIsOpen] = useState(false)
+  const [orders, setOrders] = useState<OrderRecord[]>([])
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
@@ -93,13 +126,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (raw) {
         const parsed = JSON.parse(raw) as CartItem[]
         if (Array.isArray(parsed)) {
-          dispatch({ type: "hydrate", items: parsed })
+          const index = buildDishIndex()
+          const merged = parsed.map((item) => {
+            const fresh = index.get(item.key)
+            return fresh ? { ...item, dish: fresh } : item
+          })
+          dispatch({ type: "hydrate", items: merged })
+        }
+      }
+      const ordersRaw = window.localStorage.getItem(ORDERS_STORAGE_KEY)
+      if (ordersRaw) {
+        const parsedOrders = JSON.parse(ordersRaw) as OrderRecord[]
+        if (Array.isArray(parsedOrders)) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage
+          setOrders(parsedOrders)
         }
       }
     } catch {
       // ignore corrupted storage
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hydration from localStorage
+     
     setHydrated(true)
   }, [])
 
@@ -112,10 +158,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [state.items, hydrated])
 
+  useEffect(() => {
+    if (!hydrated) return
+    try {
+      window.localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders))
+    } catch {
+      // storage full or unavailable
+    }
+  }, [orders, hydrated])
+
   const value = useMemo<CartContextValue>(() => {
     const totalCount = state.items.reduce((acc, item) => acc + item.quantity, 0)
     const totalAmount = state.items.reduce(
-      (acc, item) => acc + parsePrice(item.dish.price) * item.quantity,
+      (acc, item) => acc + getPrices(item.dish).final * item.quantity,
       0,
     )
     return {
@@ -123,6 +178,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       isOpen,
       totalCount,
       totalAmount,
+      orders,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
       addItem: (key, dish) => dispatch({ type: "add", key, dish }),
@@ -130,8 +186,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       decrement: (key) => dispatch({ type: "decrement", key }),
       removeItem: (key) => dispatch({ type: "remove", key }),
       clearCart: () => dispatch({ type: "clear" }),
+      addOrder: (record) =>
+        setOrders((prev) => {
+          // одинаковые заказы повторно не записываем
+          const signature = JSON.stringify({ items: record.items, total: record.total })
+          if (prev.some((o) => JSON.stringify({ items: o.items, total: o.total }) === signature)) {
+            return prev
+          }
+          return [
+            {
+              ...record,
+              id:
+                typeof crypto !== "undefined" && "randomUUID" in crypto
+                  ? crypto.randomUUID()
+                  : `order-${Date.now()}`,
+              createdAt: new Date().toISOString(),
+            },
+            ...prev,
+          ]
+        }),
+      clearOrders: () => setOrders([]),
     }
-  }, [state.items, isOpen])
+  }, [state.items, isOpen, orders])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

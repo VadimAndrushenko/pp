@@ -38,7 +38,7 @@ export function MenuCategoryCard({ item, icon, href, priority, index, large, sho
     <Link
       href={link}
       className={`relative overflow-hidden rounded-card block group cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:-translate-y-1 hover:border-accent active:scale-[0.98] border border-border ${
-        large ? "h-[300px] max-md:h-[280px]" : "h-44 max-sm:h-30"
+        large ? "h-[300px] max-md:h-[280px]" : "h-52 max-sm:h-40"
       }`}
     >
       {typeof index === "number" && (
@@ -53,7 +53,7 @@ export function MenuCategoryCard({ item, icon, href, priority, index, large, sho
         alt={item.title}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 768px) 33vw, 25vw"
+        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 33vw"
         loading={priority ? undefined : "lazy"}
         priority={priority}
       />
@@ -79,7 +79,7 @@ export function MenuCategoryCard({ item, icon, href, priority, index, large, sho
           )}
         </div>
         <h3 className={`font-display uppercase tracking-tight text-white leading-tight break-words drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] transition-colors duration-300 group-hover:text-accent ${
-          large ? "text-2xl max-md:text-xl" : "text-xl max-sm:text-xs"
+          large ? "text-2xl max-md:text-xl" : "text-3xl max-sm:text-xl"
         }`}>
           {item.title}
         </h3>

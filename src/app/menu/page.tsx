@@ -38,7 +38,7 @@ export default function MenuPage() {
       <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3 max-sm:mb-2">
         Основные разделы
       </h2>
-      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 mb-7 max-sm:gap-1.5 max-sm:mb-4">
+      <div className="grid grid-cols-2 gap-2 mb-7 max-sm:gap-1.5 max-sm:mb-4 sm:grid-cols-4 lg:grid-cols-3">
         {menuData.map((item, i) => (
           <MenuCategoryCard key={item.id} item={item} icon={categoryIcons[item.id] ?? "cloche"} priority={i < 2} index={i} />
         ))}
@@ -47,7 +47,7 @@ export default function MenuPage() {
       <h2 className=" font-display uppercase tracking-widest text-accent text-2xl max-sm:text-xl mb-3 max-sm:mb-2">
         Кальянное меню
       </h2>
-      <div className="grid grid-cols-4 max-[542px]:grid-cols-3 gap-2 max-sm:gap-1.5 mb-7 max-sm:mb-4">
+      <div className="grid grid-cols-2 gap-2 max-sm:gap-1.5 mb-7 max-sm:mb-4 sm:grid-cols-4 lg:grid-cols-3">
         <MenuCategoryCard item={hookahMenu} icon="hookah" href="/hookah" priority />
       </div>
     </>
