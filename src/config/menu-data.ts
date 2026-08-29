@@ -24,6 +24,7 @@ export interface MenuData {
   subtitle: string
   image: string
   sections: MenuSection[]
+  group?: "main" | "alcohol" | "non-alcohol"
 }
 
 export const menuData: MenuData[] = [
@@ -1045,3 +1046,30 @@ export const menuData: MenuData[] = [
     ],
   },
 ]
+
+import { alcoholMenus } from "./menu-data-alcohol"
+import { nonAlcoholMenus } from "./menu-data-nonalcohol"
+
+export { alcoholMenuData } from "./menu-data-alcohol"
+export { alcoholMenus } from "./menu-data-alcohol"
+export { nonAlcoholMenuData } from "./menu-data-nonalcohol"
+export { nonAlcoholMenus } from "./menu-data-nonalcohol"
+
+export const allMenuData: MenuData[] = [
+  ...menuData,
+  ...alcoholMenus,
+  ...nonAlcoholMenus,
+]
+
+const menuNumbers: Map<string, number> = new Map()
+{
+  let n = 0
+  for (const menu of allMenuData) {
+    n = n + 1
+    menuNumbers.set(menu.id, n)
+  }
+}
+
+export function getMenuNumber(menuId: string): number | undefined {
+  return menuNumbers.get(menuId)
+}

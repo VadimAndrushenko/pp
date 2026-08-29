@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/components/cart/cart-context"
 import type { MenuDish } from "@/config/menu-data"
@@ -20,15 +19,7 @@ export function AddToCartControl({ dish, variant = "full", compact = false }: { 
       >
         <Minus className={compact ? "w-3 h-3" : "w-3.5 h-3.5"} strokeWidth={2.6} />
       </button>
-      <motion.span
-        key={qty}
-        initial={{ scale: 1.45 }}
-        animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 500, damping: 18 }}
-        className="font-display text-lg font-bold text-text-primary min-w-7 text-center"
-      >
-        {qty}
-      </motion.span>
+      <span key={qty} className="animate-pop-in font-display text-lg font-bold text-text-primary min-w-7 text-center">{qty}</span>
       <button
         onClick={() => increment(dish.name)}
         aria-label="Добавить одну порцию"
@@ -44,12 +35,10 @@ export function AddToCartControl({ dish, variant = "full", compact = false }: { 
   if (variant === "stepper") return stepper
 
   return qty === 0 ? (
-    <motion.button
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.94 }}
+    <button
       onClick={() => addItem(dish.name, dish)}
       aria-label={`Добавить «${dish.name}» в корзину`}
-      className={`group/buy flex w-full items-center justify-center gap-2 rounded-full border-2 border-success bg-success/10 text-success font-display uppercase font-bold shadow-[0_0_14px_rgba(62,207,110,0.2)] transition-[background-color,color,box-shadow] duration-300 hover:bg-success hover:text-black hover:shadow-[0_0_26px_rgba(62,207,110,0.55)] ${
+      className={`group/buy flex w-full items-center justify-center gap-2 rounded-full border-2 border-success bg-success/10 text-success font-display uppercase font-bold shadow-[0_0_14px_rgba(62,207,110,0.2)] transition-all duration-300 hover:bg-success hover:text-black hover:shadow-[0_0_26px_rgba(62,207,110,0.55)] hover:scale-[1.03] active:scale-[0.94] ${
         compact ? "h-9 text-xs tracking-wider" : "h-11 text-sm tracking-widest gap-2.5"
       }`}
     >
@@ -62,7 +51,7 @@ export function AddToCartControl({ dish, variant = "full", compact = false }: { 
       >
         <Plus className={compact ? "w-3 h-3" : "w-3.5 h-3.5"} strokeWidth={3} />
       </span>
-    </motion.button>
+    </button>
   ) : (
     <div
       className={`flex w-full items-center justify-between rounded-full border-2 border-success bg-success/10 shadow-[0_0_18px_rgba(62,207,110,0.25)] ${

@@ -5,11 +5,12 @@ import { MenuHero } from "@/components/sections/menu/menu-hero"
 import { MenuNav } from "@/components/sections/menu/menu-nav"
 import { MenuSection } from "@/components/sections/menu/menu-section"
 import { StarDivider } from "@/components/ui/star-divider"
-import { menuData } from "@/config/menu-data"
+import { allMenuData } from "@/config/menu-data"
+import { getMenuNumber } from "@/config/menu-data"
 import { links } from "@/config/links"
 
 export function generateStaticParams() {
-  return menuData.map((menu) => ({ slug: menu.id }))
+  return allMenuData.map((menu) => ({ slug: menu.id }))
 }
 
 export async function generateMetadata({
@@ -18,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const menu = menuData.find((m) => m.id === slug)
+  const menu = allMenuData.find((m) => m.id === slug)
   if (!menu) return {}
   return {
     title: `${menu.title} — Меню | POIDEM POZHREM!`,
@@ -32,13 +33,14 @@ export default async function MenuCategoryPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const menu = menuData.find((m) => m.id === slug)
+  const menu = allMenuData.find((m) => m.id === slug)
 
   if (!menu) {
     notFound()
   }
 
-  const menuIndex = menuData.findIndex((m) => m.id === slug)
+  const menuIndex = allMenuData.findIndex((m) => m.id === slug)
+  const menuNumber = getMenuNumber(menu.id)
   const sectionStarts = menu.sections.reduce<number[]>((acc, section) => {
     const prev = acc[acc.length - 1] ?? 0
     acc.push(prev + (section.numbered === false ? 0 : section.dishes.length))
@@ -49,7 +51,7 @@ export default async function MenuCategoryPage({
     <>
       <Breadcrumb items={[{ label: "Меню", href: "/menu" }, { label: menu.title }]} />
 
-      <MenuHero menu={menu} index={menuIndex} />
+      <MenuHero menu={menu} index={menuNumber != null ? menuNumber - 1 : menuIndex} />
       {menu.sections.length === 1 && <StarDivider className="mb-8" />}
       <MenuNav sections={menu.sections} />
 

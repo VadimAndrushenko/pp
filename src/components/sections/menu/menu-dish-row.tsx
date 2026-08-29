@@ -1,13 +1,18 @@
 "use client"
 
 import type { MenuDish } from "@/config/menu-data"
-import { Leaf, CandyOff } from "lucide-react"
+import { Leaf, CandyOff, Star } from "lucide-react"
 import { AddToCartControl } from "@/components/cart/add-to-cart-control"
 import { getPrices } from "@/lib/pricing"
 
 type BadgeIcon = React.ComponentType<{ className?: string; strokeWidth?: number }>
 
 const badgeConfig: Record<string, { Icon: BadgeIcon; className: string }> = {
+  "премиум": {
+    Icon: Star,
+    className:
+      "text-[#ffd700] border-[#ffd700]/60 bg-gradient-to-b from-[#ffd700]/30 to-[#ffd700]/10 shadow-[0_0_20px_rgba(255,215,0,0.4),inset_0_0_12px_rgba(255,215,0,0.15)]",
+  },
   "веганское блюдо": {
     Icon: Leaf,
     className:
@@ -46,7 +51,7 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
   const { original, final, hasDiscount } = getPrices(dish)
 
   return (
-    <div className="relative group py-6 px-5 max-sm:py-4 max-sm:px-3 rounded-lg bg-surface/25 border border-border/35 transition-all duration-300 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]">
+    <div className="relative isolate group py-6 px-5 max-sm:py-4 max-sm:px-3 lg:min-h-[13.625rem] rounded-lg bg-surface/25 border border-border/35 transition-all duration-300 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]">
       {hasDiscount && (
         <span className="absolute -top-3 -left-3 z-30 -rotate-[8deg] flex items-center px-3 py-1 bg-gradient-to-r from-success to-[#57e389] shadow-[0_0_22px_rgba(62,207,110,0.65)] font-display text-sm font-bold uppercase tracking-wider text-black whitespace-nowrap">
           Скидка {dish.discount}%
@@ -54,7 +59,7 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
       )}
       <div>
       {typeof index === "number" && (
-        <span className="absolute right-4 bottom-4 z-10 max-lg:hidden font-display text-2xl whitespace-nowrap">
+        <span className="absolute right-4 bottom-4 -z-10 max-lg:hidden font-display text-2xl whitespace-nowrap">
           <span className="text-accent/80">{"|"}</span>
           <span className="text-white">{index + 1}</span>
           <span className="text-accent/80">{"|"}</span>

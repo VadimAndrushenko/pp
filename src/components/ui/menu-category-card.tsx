@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import type { MenuData } from "@/config/menu-data"
 import { Cloche, BowlSteam, Skewer, OrnamentSnowflake, OrnamentFlower, OrnamentGeometric, Star, Lotus, Glass, Bottle, Pretzel, Crescent, Hookah } from "@/components/icons"
-import { Egg, Salad, Soup, ChefHat, Pizza, ForkKnife, Beer, Sandwich, Hamburger } from "lucide-react"
+import { Egg, Salad, Soup, ChefHat, Pizza, ForkKnife, Beer, Sandwich, Hamburger, Coffee, CupSoda, Citrus, Martini, Wine, GlassWater } from "lucide-react"
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number }>> = {
   cloche: Cloche,
@@ -27,6 +27,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; style?: 
   beer: Beer,
   sandwich: Sandwich,
   hamburger: Hamburger,
+  coffee: Coffee,
+  "cup-soda": CupSoda,
+  citrus: Citrus,
+  martini: Martini,
+  wine: Wine,
+  "glass-water": GlassWater,
 }
 
 export function MenuCategoryCard({ item, icon, href, priority, index, large, showSubtitle }: { item: MenuData; icon: string; href?: string; priority?: boolean; index?: number; large?: boolean; showSubtitle?: boolean }) {

@@ -22,9 +22,11 @@ export function MenuHero({ menu, index }: { menu: MenuData; index?: number }) {
             <h1 className="font-display font-bold uppercase tracking-tight text-6xl max-lg:text-5xl max-sm:text-3xl text-white">
               {menu.title}
             </h1>
-            <p className="mt-4 max-sm:mt-2 max-w-xl text-text-secondary text-lg max-sm:text-sm">
-              {menu.subtitle}
-            </p>
+            {menu.subtitle && (
+              <p className="mt-4 max-sm:mt-2 max-w-xl text-text-secondary text-lg max-sm:text-sm">
+                {menu.subtitle}
+              </p>
+            )}
           </div>
           {typeof index === "number" && (
             <span className="font-display text-2xl max-sm:text-xl whitespace-nowrap rounded-sm border border-border/60 bg-black/40 px-2.5 py-1 backdrop-blur-sm shrink-0">

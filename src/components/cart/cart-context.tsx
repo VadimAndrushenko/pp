@@ -2,12 +2,12 @@
 
 import { createContext, useContext, useEffect, useMemo, useReducer, useState } from "react"
 import type { MenuDish } from "@/config/menu-data"
-import { menuData } from "@/config/menu-data"
+import { allMenuData } from "@/config/menu-data"
 import { getPrices } from "@/lib/pricing"
 
 function buildDishIndex(): Map<string, MenuDish> {
   const index = new Map<string, MenuDish>()
-  for (const menu of menuData) {
+  for (const menu of allMenuData) {
     for (const section of menu.sections) {
       for (const dish of section.dishes) {
         index.set(dish.name, dish)
