@@ -7,6 +7,12 @@ import { buildConfig, type Config } from "payload"
 import sharp from "sharp"
 
 import { Users } from "./src/collections/Users"
+import { Settings } from "./src/collections/Settings"
+import { Services } from "./src/collections/Services"
+import { Events } from "./src/collections/Events"
+import { MenuCategories } from "./src/collections/MenuCategories"
+import { GalleryPhotos } from "./src/collections/GalleryPhotos"
+import { GalleryVideos } from "./src/collections/GalleryVideos"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,7 +24,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users],
+  collections: [Users, Services, Events, MenuCategories, GalleryPhotos, GalleryVideos],
+  globals: [Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

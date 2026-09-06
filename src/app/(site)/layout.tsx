@@ -8,7 +8,7 @@ import { CartButton } from "@/components/cart/cart-button"
 import { CartDrawer } from "@/components/cart/cart-drawer"
 import { site } from "@/config/site"
 import { links } from "@/config/links"
-import "./globals.css"
+import "../globals.css"
 
 const oswald = Oswald({
   variable: "--font-display",

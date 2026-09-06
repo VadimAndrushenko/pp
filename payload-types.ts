@@ -68,6 +68,11 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
+    services: Service;
+    events: Event;
+    'menu-categories': MenuCategory;
+    'gallery-photos': GalleryPhoto;
+    'gallery-videos': GalleryVideo;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,6 +81,11 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    'menu-categories': MenuCategoriesSelect<false> | MenuCategoriesSelect<true>;
+    'gallery-photos': GalleryPhotosSelect<false> | GalleryPhotosSelect<true>;
+    'gallery-videos': GalleryVideosSelect<false> | GalleryVideosSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -85,8 +95,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    settings: Setting;
+  };
+  globalsSelect: {
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -142,6 +156,110 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  href: string;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  subtitle?: string | null;
+  slug: string;
+  description: string;
+  category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
+  date: string;
+  month: string;
+  dayOfWeek: string;
+  time: string;
+  image: string;
+  admission: 'free' | 'paid';
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-categories".
+ */
+export interface MenuCategory {
+  id: number;
+  title: string;
+  subtitle: string;
+  image: string;
+  group: 'main' | 'alcohol' | 'non-alcohol';
+  order?: number | null;
+  sections?:
+    | {
+        title: string;
+        subtitle?: string | null;
+        numbered?: boolean | null;
+        dishes?:
+          | {
+              name: string;
+              description?: string | null;
+              subtitle?: string | null;
+              base?: string | null;
+              composition?: string | null;
+              weight?: string | null;
+              price: string;
+              discount?: number | null;
+              badges?:
+                | {
+                    text?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-photos".
+ */
+export interface GalleryPhoto {
+  id: number;
+  title: string;
+  image: string;
+  dateKey: string;
+  dateLabel: string;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-videos".
+ */
+export interface GalleryVideo {
+  id: number;
+  title: string;
+  videoId: string;
+  dateKey: string;
+  dateLabel: string;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -163,10 +281,31 @@ export interface PayloadKv {
  */
 export interface PayloadLockedDocument {
   id: number;
-  document?: {
-    relationTo: 'users';
-    value: number | User;
-  } | null;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'menu-categories';
+        value: number | MenuCategory;
+      } | null)
+    | ({
+        relationTo: 'gallery-photos';
+        value: number | GalleryPhoto;
+      } | null)
+    | ({
+        relationTo: 'gallery-videos';
+        value: number | GalleryVideo;
+      } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -233,6 +372,105 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  icon?: T;
+  href?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  slug?: T;
+  description?: T;
+  category?: T;
+  date?: T;
+  month?: T;
+  dayOfWeek?: T;
+  time?: T;
+  image?: T;
+  admission?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-categories_select".
+ */
+export interface MenuCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  image?: T;
+  group?: T;
+  order?: T;
+  sections?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        numbered?: T;
+        dishes?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              subtitle?: T;
+              base?: T;
+              composition?: T;
+              weight?: T;
+              price?: T;
+              discount?: T;
+              badges?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-photos_select".
+ */
+export interface GalleryPhotosSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  dateKey?: T;
+  dateLabel?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-videos_select".
+ */
+export interface GalleryVideosSelect<T extends boolean = true> {
+  title?: T;
+  videoId?: T;
+  dateKey?: T;
+  dateLabel?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -270,6 +508,92 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  siteName?: string | null;
+  tagline?: string | null;
+  description?: string | null;
+  footerHeart?: string | null;
+  cuisines?: string | null;
+  neonSlogan?: {
+    line1?: string | null;
+    accent1?: string | null;
+    accent2?: string | null;
+    subtitle?: string | null;
+  };
+  phone?: string | null;
+  phoneHref?: string | null;
+  email?: string | null;
+  address?: string | null;
+  addressFull?: string | null;
+  telegram?: string | null;
+  telegramBot?: string | null;
+  whatsapp?: string | null;
+  instagram?: string | null;
+  facebook?: string | null;
+  youtube?: string | null;
+  tiktok?: string | null;
+  zalo?: string | null;
+  googleMaps?: string | null;
+  yandexMaps?: string | null;
+  grab?: string | null;
+  workingHours?: {
+    label?: string | null;
+    hours?: string | null;
+    highlighted?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  tagline?: T;
+  description?: T;
+  footerHeart?: T;
+  cuisines?: T;
+  neonSlogan?:
+    | T
+    | {
+        line1?: T;
+        accent1?: T;
+        accent2?: T;
+        subtitle?: T;
+      };
+  phone?: T;
+  phoneHref?: T;
+  email?: T;
+  address?: T;
+  addressFull?: T;
+  telegram?: T;
+  telegramBot?: T;
+  whatsapp?: T;
+  instagram?: T;
+  facebook?: T;
+  youtube?: T;
+  tiktok?: T;
+  zalo?: T;
+  googleMaps?: T;
+  yandexMaps?: T;
+  grab?: T;
+  workingHours?:
+    | T
+    | {
+        label?: T;
+        hours?: T;
+        highlighted?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

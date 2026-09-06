@@ -385,21 +385,6 @@ html, body {
   background: #fff;
 }
 
-.leaflet-container {
-  background: #0a0a0a;
-  font-family: inherit;
-}
-
-.leaflet-control-attribution {
-  background: rgba(10, 10, 10, 0.7) !important;
-  color: #666 !important;
-  font-size: 9px !important;
-}
-
-.leaflet-control-attribution a {
-  color: #888 !important;
-}
-
 /* Плавные анимации корзины и UI — чистый CSS без framer-motion */
 @keyframes fade-up {
   from {

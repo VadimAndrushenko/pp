@@ -1,5 +1,5 @@
 import type { NextConfig } from "next"
-// import { withPayload } from "@payloadcms/next/withPayload"
+import { withPayload } from "@payloadcms/next/withPayload"
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,6 +10,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-// Админка Payload временно отключена. Чтобы вернуть — раскомментируй строки ниже.
-// export default withPayload(nextConfig)
-export default nextConfig
+export default withPayload(nextConfig)
