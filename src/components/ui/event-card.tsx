@@ -1,6 +1,5 @@
 import { Card } from "./card"
 import { Badge } from "./badge"
-import { cn } from "@/components/lib/utils"
 import type { EventItem } from "@/types"
 import { Clock, ChevronRight } from "lucide-react"
 

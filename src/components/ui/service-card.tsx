@@ -1,19 +1,20 @@
 import { Card } from "./card"
 import { cn } from "@/components/lib/utils"
-import type { LucideIcon } from "lucide-react"
+import { AppIcon } from "./app-icon"
 
 interface ServiceCardProps {
-  icon: LucideIcon
+  icon: string
   title: string
   description: string
   href: string
   className?: string
 }
 
-export function ServiceCard({ icon: Icon, title, description, href, className }: ServiceCardProps) {
+export function ServiceCard({ icon, title, description, href, className }: ServiceCardProps) {
   return (
     <Card as="a" href={href} className={cn("flex items-start gap-4 group", className)}>
-      <Icon
+      <AppIcon
+        name={icon}
         className="w-6 h-6 mt-0.5 shrink-0 text-accent transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_6px_rgba(255,106,0,0.5)]"
         strokeWidth={1.5}
       />

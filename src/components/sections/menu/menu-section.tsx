@@ -9,7 +9,7 @@ export function MenuSection({ section, heading = true, startIndex = 0 }: { secti
       <section id={section.id} className="scroll-mt-36 pb-10">
         <div className="mt-6 space-y-5">
           {section.dishes.map((dish, i) => (
-            <MenuDishRow key={dish.name} dish={dish} index={section.numbered === false ? undefined : startIndex + i} />
+            <MenuDishRow key={dish.name} dish={dish} index={startIndex + i} />
           ))}
         </div>
       </section>
@@ -29,7 +29,7 @@ export function MenuSection({ section, heading = true, startIndex = 0 }: { secti
       <StarDivider className="mb-6" />
       <div className="space-y-5">
         {section.dishes.map((dish, i) => (
-          <MenuDishRow key={dish.name} dish={dish} index={section.numbered === false ? undefined : startIndex + i} />
+          <MenuDishRow key={dish.name} dish={dish} index={startIndex + i} />
         ))}
       </div>
     </section>

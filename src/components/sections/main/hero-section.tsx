@@ -3,9 +3,16 @@
 import Image from "next/image"
 import { MotionDiv } from "@/components/ui/motion-div"
 import { NeonHeading } from "@/components/ui/neon-heading"
-import { site } from "@/config/site"
+import { site as siteFallback } from "@/config/site"
+import type { SiteSettings } from "@/lib/transformData"
+import type { HeroSectionData } from "@/lib/transformData"
 
-export function HeroSection() {
+interface HeroSectionProps {
+  site?: SiteSettings["site"]
+  hero: HeroSectionData
+}
+
+export function HeroSection({ site = siteFallback, hero }: HeroSectionProps) {
   return (
     <section className="relative section-py">
         <div className=" relative">
@@ -13,17 +20,17 @@ export function HeroSection() {
             <MotionDiv direction="left" delay={0.1} className="mb-6">
               <h1 className="leading-[1.1] text-5xl font-display font-bold uppercase tracking-tight mb-4 max-lg:text-4xl max-sm:text-[6.5vw]">
                 <span className="text-text-primary">
-                  Ресторан на Фукуоке, где каждый день
+                  {hero.title.text}
                 </span>{" "}
                 <span className="text-accent">
-                  что-то происходит!
+                  {hero.title.accent}
                 </span>
               </h1>
               <div
                 className="h-0.5 w-16 mb-3 bg-accent"
               />
               <p className="text-base max-[450px]:text-sm md:text-2xl text-text-primary font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
-                {site.cuisines.split("•").map((part, i, arr) =>
+                {hero.cuisines.split("•").map((part, i, arr) =>
                   i < arr.length - 1 ? (
                     <span key={i}>
                       {part}
@@ -40,10 +47,10 @@ export function HeroSection() {
             <div>
               <MotionDiv direction="up" delay={0.25}>
                 <NeonHeading
-                  prefix={site.neonSlogan.line1}
-                  accent1={site.neonSlogan.accent1}
-                  accent2={site.neonSlogan.accent2}
-                  subtitle={site.neonSlogan.subtitle}
+                  prefix={hero.neonSlogan.line1}
+                  accent1={hero.neonSlogan.accent1}
+                  accent2={hero.neonSlogan.accent2}
+                  subtitle={hero.neonSlogan.subtitle}
                   align="left"
                 />
               </MotionDiv>
@@ -58,7 +65,7 @@ export function HeroSection() {
           >
             <div className="relative sm:right-11 rounded-card transition-all duration-500 h-full max-sm:left-10">
               <Image
-                src="/images/people.png"
+                src="/api/blob/images/people.png"
                 alt="People"
                 width={800}
                 height={600}

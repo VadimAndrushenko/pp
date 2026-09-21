@@ -2,11 +2,12 @@ import Image from "next/image"
 
 export function EventBanner() {
   return (
+    <div className="section-py">
     <div
-      className="relative section-py min-h-[230px] flex items-center overflow-hidden rounded-card border border-border aspect-[16/6] max-sm:aspect-auto"
+      className="relative min-h-[230px] flex items-center overflow-hidden rounded-card border border-border aspect-[16/6] max-sm:aspect-auto"
     >
       <Image
-        src="/images/events/karaoke-banner.png"
+        src="/api/blob/images/events/karaoke-banner.png"
         alt="Караоке и танцы"
         fill
         className="relative object-contain max-sm:object-cover max-sm:object-[20%_50%]"
@@ -23,5 +24,6 @@ export function EventBanner() {
         </span>
       </p>
     </div>
+  </div>
   )
 }

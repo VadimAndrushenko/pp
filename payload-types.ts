@@ -68,11 +68,11 @@ export interface Config {
   blocks: {};
   collections: {
     users: User;
-    services: Service;
     events: Event;
     'menu-categories': MenuCategory;
-    'gallery-photos': GalleryPhoto;
     'gallery-videos': GalleryVideo;
+    'gallery-reports': GalleryReport;
+    media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,11 +81,11 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
-    services: ServicesSelect<false> | ServicesSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     'menu-categories': MenuCategoriesSelect<false> | MenuCategoriesSelect<true>;
-    'gallery-photos': GalleryPhotosSelect<false> | GalleryPhotosSelect<true>;
     'gallery-videos': GalleryVideosSelect<false> | GalleryVideosSelect<true>;
+    'gallery-reports': GalleryReportsSelect<false> | GalleryReportsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -97,9 +97,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     settings: Setting;
+    'home-content': HomeContent;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    'home-content': HomeContentSelect<false> | HomeContentSelect<true>;
   };
   locale: null;
   widgets: {
@@ -156,20 +158,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "services".
- */
-export interface Service {
-  id: number;
-  title: string;
-  description: string;
-  icon: string;
-  href: string;
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events".
  */
 export interface Event {
@@ -181,13 +169,81 @@ export interface Event {
   category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
   date: string;
   month: string;
-  dayOfWeek: string;
+  dayOfWeek: 'Понедельник' | 'Вторник' | 'Среда' | 'Четверг' | 'Пятница' | 'Суббота' | 'Воскресенье';
   time: string;
-  image: string;
+  scheduleType: 'recurring' | 'one-off';
+  specificDate?: string | null;
+  image: number | Media;
   admission: 'free' | 'paid';
-  order?: number | null;
+  heroLines?:
+    | {
+        line?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  heroSubtitle?: string | null;
+  programHeading?: string | null;
+  features?:
+    | {
+        icon?: string | null;
+        title?: string | null;
+        desc?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Все изображения сайта. Загружайте сюда картинки для событий, меню и галереи.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Текст для доступности и SEO. Опишите, что изображено на картинке. Например: "Караоке-батл в ресторане, ночная вечеринка"
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -195,16 +251,22 @@ export interface Event {
  */
 export interface MenuCategory {
   id: number;
+  slug: string;
   title: string;
   subtitle: string;
-  image: string;
+  image: number | Media;
   group: 'main' | 'alcohol' | 'non-alcohol';
   order?: number | null;
   sections?:
     | {
+        /**
+         * Если в категории только одна секция — заголовок и подзаголовок на сайте не отображаются.
+         */
         title: string;
+        /**
+         * Если в категории только одна секция — заголовок и подзаголовок на сайте не отображаются.
+         */
         subtitle?: string | null;
-        numbered?: boolean | null;
         dishes?:
           | {
               name: string;
@@ -215,9 +277,12 @@ export interface MenuCategory {
               weight?: string | null;
               price: string;
               discount?: number | null;
+              /**
+               * Выберите бейдж(и) из списка возможных вариантов.
+               */
               badges?:
                 | {
-                    text?: string | null;
+                    text: 'Премиум' | 'Веганское блюдо' | 'Вегетарианское блюдо' | 'Без добавленного сахара';
                     id?: string | null;
                   }[]
                 | null;
@@ -229,20 +294,7 @@ export interface MenuCategory {
     | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gallery-photos".
- */
-export interface GalleryPhoto {
-  id: number;
-  title: string;
-  image: string;
-  dateKey: string;
-  dateLabel: string;
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -250,13 +302,68 @@ export interface GalleryPhoto {
  */
 export interface GalleryVideo {
   id: number;
+  /**
+   * Например: «Караоке батл», «DJ вечеринка». Можно оставить пустым, если в группе есть названия роликов.
+   */
   title: string;
-  videoId: string;
+  /**
+   * Добавьте ссылки YouTube на все ролики этого дня. ID подставится автоматически.
+   */
+  videos: {
+    /**
+     * Необязательно — подставится название отчёта.
+     */
+    title?: string | null;
+    videoUrl: string;
+    videoId: string;
+    id?: string | null;
+  }[];
+  videoId?: string | null;
+  reportDate?: string | null;
   dateKey: string;
   dateLabel: string;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-reports".
+ */
+export interface GalleryReport {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
+  reportDate?: string | null;
+  date: string;
+  month: string;
+  dayOfWeek: string;
+  time: string;
+  /**
+   * Используется на главной странице. Остальные фото добавляйте ниже.
+   */
+  image: number | Media;
+  /**
+   * Добавьте все фото мероприятия этого дня. Первое фото используется как обложка, если главное фото не задано.
+   */
+  photos?:
+    | {
+        /**
+         * Необязательно — подставится название отчёта.
+         */
+        title?: string | null;
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  admission: 'free' | 'paid';
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -287,10 +394,6 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
-        relationTo: 'services';
-        value: number | Service;
-      } | null)
-    | ({
         relationTo: 'events';
         value: number | Event;
       } | null)
@@ -299,12 +402,16 @@ export interface PayloadLockedDocument {
         value: number | MenuCategory;
       } | null)
     | ({
-        relationTo: 'gallery-photos';
-        value: number | GalleryPhoto;
-      } | null)
-    | ({
         relationTo: 'gallery-videos';
         value: number | GalleryVideo;
+      } | null)
+    | ({
+        relationTo: 'gallery-reports';
+        value: number | GalleryReport;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -372,19 +479,6 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "services_select".
- */
-export interface ServicesSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  icon?: T;
-  href?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events_select".
  */
 export interface EventsSelect<T extends boolean = true> {
@@ -397,17 +491,36 @@ export interface EventsSelect<T extends boolean = true> {
   month?: T;
   dayOfWeek?: T;
   time?: T;
+  scheduleType?: T;
+  specificDate?: T;
   image?: T;
   admission?: T;
-  order?: T;
+  heroLines?:
+    | T
+    | {
+        line?: T;
+        id?: T;
+      };
+  heroSubtitle?: T;
+  programHeading?: T;
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        desc?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menu-categories_select".
  */
 export interface MenuCategoriesSelect<T extends boolean = true> {
+  slug?: T;
   title?: T;
   subtitle?: T;
   image?: T;
@@ -418,7 +531,6 @@ export interface MenuCategoriesSelect<T extends boolean = true> {
     | {
         title?: T;
         subtitle?: T;
-        numbered?: T;
         dishes?:
           | T
           | {
@@ -442,19 +554,7 @@ export interface MenuCategoriesSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gallery-photos_select".
- */
-export interface GalleryPhotosSelect<T extends boolean = true> {
-  title?: T;
-  image?: T;
-  dateKey?: T;
-  dateLabel?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -462,12 +562,102 @@ export interface GalleryPhotosSelect<T extends boolean = true> {
  */
 export interface GalleryVideosSelect<T extends boolean = true> {
   title?: T;
+  videos?:
+    | T
+    | {
+        title?: T;
+        videoUrl?: T;
+        videoId?: T;
+        id?: T;
+      };
   videoId?: T;
+  reportDate?: T;
   dateKey?: T;
   dateLabel?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-reports_select".
+ */
+export interface GalleryReportsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  category?: T;
+  reportDate?: T;
+  date?: T;
+  month?: T;
+  dayOfWeek?: T;
+  time?: T;
+  image?: T;
+  photos?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        id?: T;
+      };
+  admission?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -552,6 +742,61 @@ export interface Setting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-content".
+ */
+export interface HomeContent {
+  id: number;
+  title?: {
+    text?: string | null;
+    accent?: string | null;
+  };
+  /**
+   * Кухни разделяются значком •
+   */
+  cuisines?: string | null;
+  neonSlogan?: {
+    line1?: string | null;
+    accent1?: string | null;
+    accent2?: string | null;
+    subtitle?: string | null;
+  };
+  services?:
+    | {
+        icon?: string | null;
+        title: string;
+        description: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Строго 4 пункта: текст, ссылка и иконка.
+   */
+  quickNav?:
+    | {
+        icon: string;
+        label: string;
+        desc: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Выберите фотоотчёты из списка. Если ничего не выбрано — покажутся все.
+   */
+  galleryPhotos?: (number | GalleryReport)[] | null;
+  /**
+   * Выберите видеоотчёты из списка. Если ничего не выбрано — покажутся все.
+   */
+  galleryVideos?: (number | GalleryVideo)[] | null;
+  menuTitle?: string | null;
+  eventsTitle?: string | null;
+  galleryTitle?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
@@ -591,6 +836,53 @@ export interface SettingsSelect<T extends boolean = true> {
         hours?: T;
         highlighted?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-content_select".
+ */
+export interface HomeContentSelect<T extends boolean = true> {
+  title?:
+    | T
+    | {
+        text?: T;
+        accent?: T;
+      };
+  cuisines?: T;
+  neonSlogan?:
+    | T
+    | {
+        line1?: T;
+        accent1?: T;
+        accent2?: T;
+        subtitle?: T;
+      };
+  services?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        href?: T;
+        id?: T;
+      };
+  quickNav?:
+    | T
+    | {
+        icon?: T;
+        label?: T;
+        desc?: T;
+        href?: T;
+        id?: T;
+      };
+  galleryPhotos?: T;
+  galleryVideos?: T;
+  menuTitle?: T;
+  eventsTitle?: T;
+  galleryTitle?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -2,59 +2,38 @@
 
 import { ServiceCard } from "@/components/ui/service-card"
 import { StaggerGrid, StaggerItem } from "@/components/ui/stagger-grid"
-import { services } from "@/config/services"
-import {
-  UtensilsCrossed,
-  CalendarClock,
-  Phone,
-  MapPin,
-  PartyPopper,
-  Percent,
-  Cigarette,
-  Truck,
-  Camera,
-  Banknote,
-  MessageCircleQuestion,
-  Building,
-  Users,
-  Globe,
-  type LucideIcon,
-} from "lucide-react"
+import { services as servicesFallback } from "@/config/services"
+import type { ServiceItem } from "@/types"
 
-const iconMap: Record<string, LucideIcon> = {
-  "utensils-crossed": UtensilsCrossed,
-  "calendar-clock": CalendarClock,
-  "phone": Phone,
-  "map-pin": MapPin,
-  "party-popper": PartyPopper,
-  "percent": Percent,
-  "cigarette": Cigarette,
-  "truck": Truck,
-  "camera": Camera,
-  "banknote": Banknote,
-  "message-circle-question": MessageCircleQuestion,
-  "building": Building,
-  "users": Users,
-  "globe": Globe,
+interface ServicesGridProps {
+  services?: ServiceItem[]
+  title?: string
 }
 
-export function ServicesGrid() {
+export function ServicesGrid({ services = servicesFallback, title }: ServicesGridProps) {
   return (
     <section className="section-py">
+      {title && (
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="section-heading font-display font-bold uppercase tracking-tight text-text-primary">
+            {title}
+          </h2>
+          <a href="/services" className="text-sm uppercase tracking-wider link-underline text-accent shrink-0">
+            Все услуги
+          </a>
+        </div>
+      )}
       <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 gap-3" staggerDelay={0.03}>
-          {services.map((service) => {
-            const Icon = iconMap[service.icon]
-            return (
+          {services.map((service) => (
               <StaggerItem key={service.id}>
                 <ServiceCard
-                  icon={Icon}
+                  icon={service.icon}
                   title={service.title}
                   description={service.description}
                   href={service.href}
                 />
               </StaggerItem>
-            )
-          })}
+            ))}
         </StaggerGrid>
     </section>
   )

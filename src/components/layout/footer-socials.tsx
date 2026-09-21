@@ -1,14 +1,19 @@
-import { links } from "@/config/links"
+import { links as linksFallback } from "@/config/links"
+import type { SiteSettings } from "@/lib/transformData"
 import { InstagramIcon, YoutubeIcon, TikTokIcon } from "@/components/ui/social-icons"
 import type { CSSProperties } from "react"
 
-const SOCIALS = [
-  { icon: InstagramIcon, label: "Instagram", href: links.instagram, color: "#E4405F" },
-  { icon: YoutubeIcon, label: "YouTube", href: links.youtube, color: "#FF0000" },
-  { icon: TikTokIcon, label: "TikTok", href: links.tiktok, color: "#00F2EA" },
-] as const
+interface FooterSocialsProps {
+  links?: SiteSettings["links"]
+}
 
-export function FooterSocials() {
+export function FooterSocials({ links = linksFallback }: FooterSocialsProps) {
+  const SOCIALS = [
+    { icon: InstagramIcon, label: "Instagram", href: links.instagram, color: "#E4405F" },
+    { icon: YoutubeIcon, label: "YouTube", href: links.youtube, color: "#FF0000" },
+    { icon: TikTokIcon, label: "TikTok", href: links.tiktok, color: "#00F2EA" },
+  ] as const
+
   return (
     <div className="flex flex-wrap items-center gap-3">
       {SOCIALS.map((s) => {

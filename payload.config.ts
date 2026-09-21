@@ -3,16 +3,19 @@ import { fileURLToPath } from "url"
 
 import { postgresAdapter } from "@payloadcms/db-postgres"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
+import { cloudStoragePlugin } from "@payloadcms/plugin-cloud-storage"
 import { buildConfig, type Config } from "payload"
 import sharp from "sharp"
 
 import { Users } from "./src/collections/Users"
 import { Settings } from "./src/collections/Settings"
-import { Services } from "./src/collections/Services"
+import { HomeContent } from "./src/globals/HomeContent"
 import { Events } from "./src/collections/Events"
 import { MenuCategories } from "./src/collections/MenuCategories"
-import { GalleryPhotos } from "./src/collections/GalleryPhotos"
 import { GalleryVideos } from "./src/collections/GalleryVideos"
+import { GalleryReports } from "./src/collections/GalleryReports"
+import { Media } from "./src/collections/Media"
+import { vercelBlobPrivateAdapter } from "./src/lib/blobAdapter"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,8 +27,15 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Services, Events, MenuCategories, GalleryPhotos, GalleryVideos],
-  globals: [Settings],
+  collections: [
+    Users,
+    Events,
+    MenuCategories,
+    GalleryVideos,
+    GalleryReports,
+    Media,
+  ],
+  globals: [Settings, HomeContent],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -38,4 +48,13 @@ export default buildConfig({
     push: process.env.DATABASE_PUSH === "true",
   }),
   sharp: sharp as unknown as Config["sharp"],
+  plugins: [
+    cloudStoragePlugin({
+      collections: {
+        media: {
+          adapter: vercelBlobPrivateAdapter,
+        },
+      },
+    }),
+  ],
 })

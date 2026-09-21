@@ -113,7 +113,7 @@ export default function Slider({
 
   const slides = useMemo(() => {
     return Children.map(children, (child, index) => (
-      <div key={index} className={`${slideClass} flex flex-col h-full [&>*]:flex-1`}>
+      <div key={index} className={`${slideClass} flex flex-col [&>*]:flex-1 `}>
         {child}
       </div>
     ));
@@ -159,7 +159,7 @@ export default function Slider({
 
       <div
         ref={emblaRef}
-        className="overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-4"
+        className="overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-4 px-4 -mx-4"
       >
         <div className="flex items-stretch" style={{ gap: gapValue }}>
           {slides}

@@ -1,7 +1,7 @@
 import Image from "next/image"
 // import Link from "next/link"
 
-const deliveryImages = ["/images/hookah/delivery-1.png", "/images/hookah/delivery-2.png"]
+const deliveryImages = ["/api/blob/images/hookah/delivery-1.png", "/api/blob/images/hookah/delivery-2.png"]
 
 export function HookahDelivery() {
   return (

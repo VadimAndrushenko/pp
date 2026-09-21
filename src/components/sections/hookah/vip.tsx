@@ -10,7 +10,7 @@ export function HookahVIP({ className }: { className?: string }) {
     >
       <div className="absolute inset-0 transition-all duration-300 group-hover:scale-105">
         <Image
-          src="/images/hookah/vip-hookah-bg.png"
+          src="/api/blob/images/hookah/vip-hookah-bg.png"
           alt=""
           fill
           className="object-cover object-right opacity-70 transition-all duration-300 group-hover:opacity-100"
@@ -31,7 +31,7 @@ export function HookahVIP({ className }: { className?: string }) {
               className="absolute inset-4 -z-10 blur-xl opacity-25 bg-accent transition-all duration-300 group-hover:opacity-50 group-hover:blur-2xl"
             />
             <Image
-              src="/images/hookah/vip-card.png"
+              src="/api/blob/images/hookah/vip-card.png"
               alt="VIP Club карта"
               width={600}
               height={380}

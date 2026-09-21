@@ -21,6 +21,7 @@ export interface EventItem {
   dayOfWeek: string
   title: string
   subtitle?: string
+  tagline?: string
   category: EventCategory
   time: string
   image: string
@@ -68,14 +69,6 @@ export interface DeliveryZone {
   time: string
 }
 
-export interface GalleryItem {
-  id: string
-  image: string
-  title: string
-  date: string
-  type: "photo" | "video"
-}
-
 export interface GalleryPhoto {
   id: string
   image: string
@@ -83,6 +76,8 @@ export interface GalleryPhoto {
   dateKey: string
   dateLabel: string
 }
+
+export type GalleryReleaseType = "photo" | "video"
 
 export interface GalleryVideo {
   id: string

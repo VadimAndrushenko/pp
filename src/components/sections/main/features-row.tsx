@@ -24,7 +24,7 @@ interface FeaturesRowProps {
 
 export function FeaturesRow({ embedded }: FeaturesRowProps) {
   const grid = (
-    <StaggerGrid className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4" staggerDelay={0.08}>
+    <StaggerGrid className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 relative z-50" staggerDelay={0.08}>
       {features.map((feature, index) => {
         const Icon = feature.icon
         return (

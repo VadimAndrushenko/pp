@@ -16,7 +16,7 @@ export function HookahHero() {
       </div>
       <div className="absolute bottoom-11 right-0 w-[100%] h-[150%] rounded-card -z-10 min-[460px]:max-sm:h-[170%]">
         <Image
-          src="/images/hookah/shisha.png"
+          src="/api/blob/images/hookah/shisha.png"
           alt="Кальян"
           fill
           className="lg:object-contain max-lg:object-cover"

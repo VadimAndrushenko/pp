@@ -23,7 +23,7 @@ export function BookingButton({
       variant="solid"
       size={size}
       as="a"
-      href={href}
+      // href={href}
       className={"gap-3 " + (className ?? "")}
     >
       {icon}

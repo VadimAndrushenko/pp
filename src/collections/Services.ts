@@ -2,6 +2,9 @@ import type { CollectionConfig } from "payload"
 
 export const Services: CollectionConfig = {
   slug: "services",
+  versions: {
+    drafts: true,
+  },
   admin: {
     useAsTitle: "title",
     group: "Контент",
@@ -24,6 +27,11 @@ export const Services: CollectionConfig = {
       type: "text",
       label: "Иконка (Lucide)",
       required: true,
+      admin: {
+        components: {
+          Field: "/src/collections/components/IconPickerField",
+        },
+      },
     },
     {
       name: "href",

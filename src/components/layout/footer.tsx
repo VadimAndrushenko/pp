@@ -1,12 +1,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Heart, MessageCircle } from "lucide-react"
-import { site } from "@/config/site"
-import { links } from "@/config/links"
+import { site as siteFallback } from "@/config/site"
+import { links as linksFallback } from "@/config/links"
+import type { SiteSettings } from "@/lib/transformData"
 import { FooterNav } from "@/components/layout/footer-nav"
 import { FooterContacts } from "@/components/layout/footer-contacts"
 import { FooterSocials } from "@/components/layout/footer-socials"
 import { BookingButton } from "@/components/ui/booking-button"
+import { workingHours as workingHoursFallback } from "@/config/links"
 
 const NAV_LINKS = [
   { label: "Меню", href: "/menu" },
@@ -26,7 +28,17 @@ const SERVICE_LINKS = [
   { label: "Инфо-Фукуок", href: "/island-info" },
 ] as const
 
-export function Footer() {
+interface FooterProps {
+  site?: SiteSettings["site"]
+  links?: SiteSettings["links"]
+  workingHours?: SiteSettings["workingHours"]
+}
+
+export function Footer({
+  site = siteFallback,
+  links = linksFallback,
+  workingHours = workingHoursFallback,
+}: FooterProps) {
   return (
     <footer className="relative border-t border-border">
       <div
@@ -40,7 +52,7 @@ export function Footer() {
           <div className="flex flex-col gap-6 sm:col-span-2 lg:col-span-1 xl:col-span-2">
             <Link href="/" aria-label="POIDEM POZHREM — на главную" className="hover-glow-accent inline-flex self-start">
               <Image
-                src="/logo.png"
+                src="/api/blob/logo.png"
                 alt="POIDEM POZHREM"
                 width={200}
                 height={70}
@@ -54,7 +66,7 @@ export function Footer() {
               />
               {site.footerHeart}
             </p>
-            <FooterSocials />
+            <FooterSocials links={links} />
             <BookingButton
               href={links.whatsapp}
               label="Забронировать столик"
@@ -73,7 +85,7 @@ export function Footer() {
           </nav>
 
           <div className="sm:col-span-2 lg:col-span-1">
-            <FooterContacts />
+            <FooterContacts links={links} workingHours={workingHours} />
           </div>
         </div>
 

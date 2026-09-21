@@ -4,10 +4,15 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ChevronDown, Phone } from "lucide-react"
-import { workingHours } from "@/config/links"
+import { workingHours as workingHoursFallback } from "@/config/links"
+import type { SiteSettings } from "@/lib/transformData"
 import { cn } from "@/components/lib/utils"
 
-export function Header() {
+interface HeaderProps {
+  workingHours?: SiteSettings["workingHours"]
+}
+
+export function Header({ workingHours = workingHoursFallback }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
@@ -45,7 +50,7 @@ export function Header() {
     >
       <div className="container flex items-center justify-between py-3">
         <Link href="/" className="shrink-0 group">
-          <Image src="/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
+          <Image src="/api/blob/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-6 text-xs font-display uppercase tracking-wider">

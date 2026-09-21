@@ -1,7 +1,16 @@
 import { MapPin, Phone, Clock, Mail } from "lucide-react"
-import { links, workingHours } from "@/config/links"
+import { links as linksFallback, workingHours as workingHoursFallback } from "@/config/links"
+import type { SiteSettings } from "@/lib/transformData"
 
-export function FooterContacts() {
+interface FooterContactsProps {
+  links?: SiteSettings["links"]
+  workingHours?: SiteSettings["workingHours"]
+}
+
+export function FooterContacts({
+  links = linksFallback,
+  workingHours = workingHoursFallback,
+}: FooterContactsProps) {
   return (
     <div>
       <h2 className="font-display font-bold uppercase text-xs tracking-widest text-accent">

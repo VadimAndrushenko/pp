@@ -1,4 +1,4 @@
-import { EVENT_ICONS } from "./event-icons"
+import { AppIcon } from "@/components/ui/app-icon"
 
 interface EventInfoProps {
   time: string
@@ -7,18 +7,16 @@ interface EventInfoProps {
 
 export function EventInfo({ time, dayOfWeek }: EventInfoProps) {
   const items = [
-    { icon: "Clock", label: "СТАРТ", value: time },
-    { icon: "Calendar", label: "ДЕНЬ", value: dayOfWeek.toUpperCase() },
-    { icon: "MapPin", label: "МЕСТО", value: "POIDEM POZHREM" },
-    { icon: "ShieldCheck", label: "ВОЗРАСТ", value: "18+" },
+    { icon: "clock", label: "СТАРТ", value: time },
+    { icon: "calendar", label: "ДЕНЬ", value: dayOfWeek.toUpperCase() },
+    { icon: "map-pin", label: "МЕСТО", value: "POIDEM POZHREM" },
+    { icon: "shield-check", label: "ВОЗРАСТ", value: "18+" },
   ]
 
   return (
     <div className="section-py">
       <div className="neon-card grid grid-cols-2 gap-y-4 rounded-card border border-border py-5 sm:grid-cols-4 lg:py-8">
-      {items.map((item, i) => {
-        const Icon = EVENT_ICONS[item.icon]
-        return (
+      {items.map((item, i) => (
           <div
             key={item.label}
             className={`flex flex-col items-center gap-1 px-2 text-center lg:gap-2 ${
@@ -27,7 +25,7 @@ export function EventInfo({ time, dayOfWeek }: EventInfoProps) {
               i > 0 ? "sm:border-l sm:border-border" : ""
             }`}
           >
-            <Icon className="h-5 w-5 text-accent lg:h-8 lg:w-8" strokeWidth={1.5} />
+            <AppIcon name={item.icon} className="h-5 w-5 text-accent lg:h-8 lg:w-8" strokeWidth={1.5} />
             <span className="text-[10px] uppercase tracking-wide text-text-secondary lg:text-sm">
               {item.label}
             </span>
@@ -35,8 +33,7 @@ export function EventInfo({ time, dayOfWeek }: EventInfoProps) {
               {item.value}
             </span>
           </div>
-        )
-      })}
+        ))}
       </div>
     </div>
   )

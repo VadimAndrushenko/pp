@@ -2,11 +2,22 @@ import type { CollectionConfig } from "payload"
 
 export const MenuCategories: CollectionConfig = {
   slug: "menu-categories",
+  versions: {
+    drafts: true,
+  },
   admin: {
     useAsTitle: "title",
     group: "Меню",
   },
   fields: [
+    {
+      name: "slug",
+      type: "text",
+      label: "Slug",
+      required: true,
+      unique: true,
+      index: true,
+    },
     {
       name: "title",
       type: "text",
@@ -21,8 +32,9 @@ export const MenuCategories: CollectionConfig = {
     },
     {
       name: "image",
-      type: "text",
-      label: "URL изображения",
+      type: "upload",
+      relationTo: "media",
+      label: "Изображение",
       required: true,
     },
     {
@@ -53,17 +65,19 @@ export const MenuCategories: CollectionConfig = {
           type: "text",
           label: "Название секции",
           required: true,
+          admin: {
+            description:
+              "Если в категории только одна секция — заголовок и подзаголовок на сайте не отображаются.",
+          },
         },
         {
           name: "subtitle",
           type: "text",
           label: "Подзаголовок",
-        },
-        {
-          name: "numbered",
-          type: "checkbox",
-          label: "Нумерованный список",
-          defaultValue: false,
+          admin: {
+            description:
+              "Если в категории только одна секция — заголовок и подзаголовок на сайте не отображаются.",
+          },
         },
         {
           name: "dishes",
@@ -118,11 +132,21 @@ export const MenuCategories: CollectionConfig = {
               name: "badges",
               type: "array",
               label: "Бейджи",
+              admin: {
+                description: "Выберите бейдж(и) из списка возможных вариантов.",
+              },
               fields: [
                 {
                   name: "text",
-                  type: "text",
-                  label: "Текст бейджа",
+                  type: "select",
+                  label: "Бейдж",
+                  required: true,
+                  options: [
+                    { label: "Премиум", value: "Премиум" },
+                    { label: "Веганское блюдо", value: "Веганское блюдо" },
+                    { label: "Вегетарианское блюдо", value: "Вегетарианское блюдо" },
+                    { label: "Без добавленного сахара", value: "Без добавленного сахара" },
+                  ],
                 },
               ],
             },
