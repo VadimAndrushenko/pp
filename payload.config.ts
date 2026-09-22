@@ -4,8 +4,7 @@ import { fileURLToPath } from "url"
 import { postgresAdapter } from "@payloadcms/db-postgres"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
 import { cloudStoragePlugin } from "@payloadcms/plugin-cloud-storage"
-import { buildConfig, type Config } from "payload"
-import sharp from "sharp"
+import { buildConfig } from "payload"
 
 import { Users } from "./src/collections/Users"
 import { Settings } from "./src/collections/Settings"
@@ -47,7 +46,6 @@ export default buildConfig({
     },
     push: process.env.DATABASE_PUSH === "true",
   }),
-  sharp: sharp as unknown as Config["sharp"],
   plugins: [
     cloudStoragePlugin({
       collections: {

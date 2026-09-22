@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import type { GalleryVideo } from "@/types"
 import { Card } from "@/components/ui/card"
 import { VideoLightbox } from "@/components/ui/video-lightbox"
@@ -62,9 +62,11 @@ function VideoThumb({ video, onClick }: { video: GalleryVideo; onClick: () => vo
 
 export function VideoAlbums({ videos }: { videos: GalleryVideo[] }) {
   const [activeAlbum, setActiveAlbum] = useState<{ videos: GalleryVideo[]; index: number } | null>(null)
-  const albums = groupByDate(videos)
+  const albums = useMemo(() => groupByDate(videos), [videos])
+  const deepLinkHandled = useRef(false)
 
   useEffect(() => {
+    if (deepLinkHandled.current) return
     const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""))
     const release = new URLSearchParams(window.location.search).get("release") || ""
     if (!hash || !release) return
@@ -72,6 +74,7 @@ export function VideoAlbums({ videos }: { videos: GalleryVideo[] }) {
     const target = albums.find((a) => `album-${a.dateKey}` === hash && a.dateKey === release)
     if (!target) return
 
+    deepLinkHandled.current = true
     const timer = window.setTimeout(() => {
       window.document.getElementById(`album-${target.dateKey}`)?.scrollIntoView({
         behavior: "smooth",
@@ -81,7 +84,6 @@ export function VideoAlbums({ videos }: { videos: GalleryVideo[] }) {
     }, 100)
 
     return () => window.clearTimeout(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [albums])
 
   return (

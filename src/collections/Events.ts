@@ -3,6 +3,7 @@ import {
   computeDateForDayOfWeek,
   computePartsFromIsoDate,
 } from "./components/dateTimeUtils"
+import { publishedStatusField } from "./statusField"
 
 function resolveSchedule(siblingData: Record<string, unknown>) {
   const scheduleType = siblingData?.scheduleType as string | undefined
@@ -34,16 +35,23 @@ export const Events: CollectionConfig = {
     },
   },
   fields: [
+    publishedStatusField,
     {
       name: "title",
       type: "text",
       label: "Название",
       required: true,
+      admin: {
+        description: "Название события. Например: «Караоке-батл»",
+      },
     },
     {
       name: "subtitle",
       type: "text",
       label: "Подзаголовок",
+      admin: {
+        description: "Короткая фраза под названием. Можно оставить пустым.",
+      },
     },
     {
       name: "slug",
@@ -51,12 +59,18 @@ export const Events: CollectionConfig = {
       label: "Slug",
       required: true,
       unique: true,
+      admin: {
+        description: "Английскими буквами, без пробелов. Например: karaoke-battle. Используется в адресе страницы.",
+      },
     },
     {
       name: "description",
       type: "textarea",
       label: "Описание",
       required: true,
+      admin: {
+        description: "Короткое описание события для карточки на главной и на странице события.",
+      },
     },
     {
       name: "category",
@@ -72,6 +86,9 @@ export const Events: CollectionConfig = {
         { label: "Шоу", value: "show" },
       ],
       defaultValue: "all",
+      admin: {
+        description: "Раздел, в котором событие показывается на сайте. «Все» — общий случай.",
+      },
     },
     {
       name: "date",
@@ -171,6 +188,9 @@ export const Events: CollectionConfig = {
         { label: "Платно", value: "paid" },
       ],
       defaultValue: "free",
+      admin: {
+        description: "Показывать «Вход свободный» или «Платно» на сайте.",
+      },
     },
     {
       type: "tabs",
@@ -187,11 +207,18 @@ export const Events: CollectionConfig = {
                   type: "array",
                   label: "Строки заголовка (до 3)",
                   maxRows: 3,
+                  admin: {
+                    description:
+                      "Крупный заголовок на странице события. Можно разбить на 2–3 строки для красоты.",
+                  },
                   fields: [
                     {
                       name: "line",
                       type: "text",
                       label: "Строка",
+                      admin: {
+                        description: "Одна строка заголовка. Например: «Караоке-батл каждый четверг»",
+                      },
                     },
                   ],
                 },
@@ -199,17 +226,27 @@ export const Events: CollectionConfig = {
                   name: "heroSubtitle",
                   type: "text",
                   label: "Подзаголовок события",
+                  admin: {
+                    description: "Фраза под крупным заголовком. Например: «Зажигаем в четверг!»",
+                  },
                 },
                 {
                   name: "programHeading",
                   type: "text",
                   label: "Заголовок программы",
                   defaultValue: "В ПРОГРАММЕ",
+                  admin: {
+                    description: "Заголовок блока программы. По умолчанию: «В ПРОГРАММЕ»",
+                  },
                 },
                 {
                   name: "features",
                   type: "array",
                   label: "Пункты программы",
+                  admin: {
+                    description:
+                      "Чем интересно событие. Например: «живой звук», «розыгрыши», «хиты 90-х».",
+                  },
                   fields: [
                     {
                       name: "icon",
@@ -225,11 +262,17 @@ export const Events: CollectionConfig = {
                       name: "title",
                       type: "text",
                       label: "Название",
+                      admin: {
+                        description: "Короткое название пункта. Например: «Живой звук»",
+                      },
                     },
                     {
                       name: "desc",
                       type: "text",
                       label: "Описание",
+                      admin: {
+                        description: "Пара слов о пункте. Например: «Музыка вживую до полуночи»",
+                      },
                     },
                   ],
                 },

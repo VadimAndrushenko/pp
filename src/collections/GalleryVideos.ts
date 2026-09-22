@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload"
 import { formatDateLabel } from "./components/dateTimeUtils"
 import { extractYouTubeVideoId } from "./components/youtubeUtils"
+import { publishedStatusField } from "./statusField"
 
 function resolveYoutubeId(siblingData: Record<string, unknown>) {
   const videoUrl = siblingData?.videoUrl as string | undefined
@@ -32,6 +33,7 @@ export const GalleryVideos: CollectionConfig = {
     defaultColumns: ["title", "dateLabel", "updatedAt"],
   },
   fields: [
+    publishedStatusField,
     {
       name: "title",
       type: "text",
@@ -64,6 +66,10 @@ export const GalleryVideos: CollectionConfig = {
           type: "text",
           label: "Ссылка YouTube",
           required: true,
+          admin: {
+            description:
+              "Ссылка на видео. Пример: https://youtube.com/watch?v=XXXXXXXXXXX (из «Поделиться» → «Копировать»).",
+          },
           validate: (value: string | null | undefined) => {
             if (!value) return true
             return extractYouTubeVideoId(value) ? true : "Введите корректную ссылку YouTube"
@@ -81,6 +87,15 @@ export const GalleryVideos: CollectionConfig = {
                 return id ?? value
               },
             ],
+          },
+        },
+        {
+          name: "featured",
+          type: "checkbox",
+          label: "Показывать на главной",
+          defaultValue: false,
+          admin: {
+            description: "Этот ролик попадёт в подборку на главной странице.",
           },
         },
       ],
@@ -134,6 +149,9 @@ export const GalleryVideos: CollectionConfig = {
       type: "number",
       label: "Порядок",
       defaultValue: 0,
+      admin: {
+        description: "Чем меньше число — тем выше отчёт в списке. Например: 0, 1, 2…",
+      },
     },
   ],
 }

@@ -13,35 +13,23 @@ export const Media: CollectionConfig = {
   admin: {
     useAsTitle: "filename",
     defaultColumns: ["filename", "alt", "updatedAt"],
-    description: "Все изображения сайта. Загружайте сюда картинки для событий, меню и галереи.",
+    description:
+      "Каталог изображений сайта. Загрузите файл-картинку и выберите её в нужном месте. Размеры подгоняются автоматически.",
   },
 
   upload: {
     mimeTypes: ["image/*"],
-    imageSizes: [
-      {
-        name: "thumbnail",
-        width: 400,
-        height: 300,
-        position: "centre",
-      },
-      {
-        name: "card",
-        width: 768,
-        height: 576,
-        position: "centre",
-      },
-      {
-        name: "hero",
-        width: 1920,
-        height: 1080,
-        position: "centre",
-      },
-    ],
   },
 
-  versions: {
-    maxPerDoc: 10,
+  hooks: {
+    beforeChange: [
+      ({ data, req }) => {
+        if (!data.alt) {
+          data.alt = req.file?.name?.replace(/\.[^.]+$/, "") || data.filename || ""
+        }
+        return data
+      },
+    ],
   },
 
   fields: [
@@ -49,12 +37,9 @@ export const Media: CollectionConfig = {
       name: "alt",
       type: "text",
       label: "Альтернативный текст",
-      required: true,
-      minLength: 3,
-      maxLength: 200,
       admin: {
         description:
-          'Текст для доступности и SEO. Опишите, что изображено на картинке. Например: "Караоке-батл в ресторане, ночная вечеринка"',
+          'Короткое описание картинки — видно при наведении и для SEO. Например: "Караоке-батл, ночная вечеринка". Можно оставить пустым — подставится имя файла.',
       },
     },
   ],

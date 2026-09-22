@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
-import { X } from "lucide-react"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import type { GalleryPhoto } from "@/types"
 
 type Phase = "idle" | "entering" | "open" | "leaving"
@@ -90,6 +90,23 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             className="absolute top-4 right-4 z-20 flex aspect-square w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-200 hover:rotate-90 hover:bg-white/20"
           >
             <X size={20} strokeWidth={2.5} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => emblaApi?.scrollPrev()}
+            aria-label="Предыдущее фото"
+            className="absolute left-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
+          >
+            <ChevronLeft size={24} strokeWidth={2.5} />
+          </button>
+          <button
+            type="button"
+            onClick={() => emblaApi?.scrollNext()}
+            aria-label="Следующее фото"
+            className="absolute right-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
+          >
+            <ChevronRight size={24} strokeWidth={2.5} />
           </button>
 
           <div ref={emblaRef} className="h-full overflow-hidden">

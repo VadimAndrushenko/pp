@@ -17,18 +17,27 @@ export const HomeContent: GlobalConfig = {
               name: "title",
               type: "group",
               label: "Заголовок",
+              admin: {
+                description: "Главный заголовок на первом экране.",
+              },
               fields: [
                 {
                   name: "text",
                   type: "text",
                   label: "Текст",
                   defaultValue: "Ресторан на Фукуоке, где каждый день",
+                  admin: {
+                    description: "Основная часть заголовка. Например: «Ресторан на Фукуоке, где каждый день»",
+                  },
                 },
                 {
                   name: "accent",
                   type: "text",
                   label: "Акцент (цветной)",
                   defaultValue: "что-то происходит!",
+                  admin: {
+                    description: "Цветная часть заголовка. Например: «что-то происходит!»",
+                  },
                 },
               ],
             },
@@ -45,11 +54,14 @@ export const HomeContent: GlobalConfig = {
               name: "neonSlogan",
               type: "group",
               label: "Неоновый слоган",
+              admin: {
+                description: "Светящаяся строка на главной из 3 коротких слов + подзаголовок.",
+              },
               fields: [
-                { name: "line1", type: "text", label: "Строка 1", defaultValue: "Я ВЫБИРАЮ" },
-                { name: "accent1", type: "text", label: "Акцент 1", defaultValue: "ВКУСНО" },
-                { name: "accent2", type: "text", label: "Акцент 2", defaultValue: "ЖИТЬ!" },
-                { name: "subtitle", type: "text", label: "Подзаголовок", defaultValue: "И ЭТО ЛУЧШЕЕ РЕШЕНИЕ СЕГОДНЯ" },
+                { name: "line1", type: "text", label: "Строка 1", defaultValue: "Я ВЫБИРАЮ", admin: { description: "Первое слово слогана. Например: «Я ВЫБИРАЮ»" } },
+                { name: "accent1", type: "text", label: "Акцент 1", defaultValue: "ВКУСНО", admin: { description: "Второе слово, обычно цветное. Например: «ВКУСНО»" } },
+                { name: "accent2", type: "text", label: "Акцент 2", defaultValue: "ЖИТЬ!", admin: { description: "Третье слово. Например: «ЖИТЬ!»" } },
+                { name: "subtitle", type: "text", label: "Подзаголовок", defaultValue: "И ЭТО ЛУЧШЕЕ РЕШЕНИЕ СЕГОДНЯ", admin: { description: "Фраза под неоновыми словами." } },
               ],
             },
           ],
@@ -64,6 +76,9 @@ export const HomeContent: GlobalConfig = {
               labels: { singular: "услуга", plural: "услуги" },
               minRows: 6,
               maxRows: 12,
+              admin: {
+                description: "Сетка услуг на главной. Рекомендуем 6–8 плиток (до 12).",
+              },
               fields: [
                 {
                   name: "icon",
@@ -73,11 +88,12 @@ export const HomeContent: GlobalConfig = {
                     components: {
                       Field: "/src/collections/components/IconPickerField",
                     },
+                    description: "Выберите иконку из списка.",
                   },
                 },
-                { name: "title", type: "text", label: "Название", required: true },
-                { name: "description", type: "text", label: "Описание", required: true },
-                { name: "href", type: "text", label: "Ссылка", required: true },
+                { name: "title", type: "text", label: "Название", required: true, admin: { description: "Например: «Наше меню»" } },
+                { name: "description", type: "text", label: "Описание", required: true, admin: { description: "Коротко о разделе. Например: «Кавказская и азиатская кухня»" } },
+                { name: "href", type: "text", label: "Ссылка", required: true, admin: { description: "Куда ведёт плитка. Пример: /menu, /events" } },
               ],
             },
           ],
@@ -105,11 +121,12 @@ export const HomeContent: GlobalConfig = {
                     components: {
                       Field: "/src/collections/components/IconPickerField",
                     },
+                    description: "Выберите иконку из списка.",
                   },
                 },
-                { name: "label", type: "text", label: "Текст", required: true },
-                { name: "desc", type: "text", label: "Подтекст", required: true },
-                { name: "href", type: "text", label: "Ссылка", required: true },
+                { name: "label", type: "text", label: "Текст", required: true, admin: { description: "Например: «Что сегодня?»" } },
+                { name: "desc", type: "text", label: "Подтекст", required: true, admin: { description: "Пояснение. Например: «Каждый день — мероприятия»" } },
+                { name: "href", type: "text", label: "Ссылка", required: true, admin: { description: "Куда ведёт плитка. Пример: /menu, /events" } },
               ],
             },
           ],
@@ -125,7 +142,7 @@ export const HomeContent: GlobalConfig = {
               label: "Фото отчёты на главной",
               admin: {
                 description:
-                  "Выберите фотоотчёты из списка. Если ничего не выбрано — покажутся все.",
+                  "Выберите фотоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные фотографии — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.",
               },
             },
             {
@@ -136,7 +153,7 @@ export const HomeContent: GlobalConfig = {
               label: "Видео отчёты на главной",
               admin: {
                 description:
-                  "Выберите видеоотчёты из списка. Если ничего не выбрано — покажутся все.",
+                  "Выберите видеоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные ролики — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.",
               },
             },
           ],
@@ -149,18 +166,27 @@ export const HomeContent: GlobalConfig = {
               type: "text",
               label: "Заголовок «Меню»",
               defaultValue: "МЕНЮ",
+              admin: {
+                description: "Заголовок секции меню на главной.",
+              },
             },
             {
               name: "eventsTitle",
               type: "text",
               label: "Заголовок «Расписание на неделю»",
               defaultValue: "РАСПИСАНИЕ НА НЕДЕЛЮ",
+              admin: {
+                description: "Заголовок секции расписания на главной.",
+              },
             },
             {
               name: "galleryTitle",
               type: "text",
               label: "Заголовок «Фото и видеоотчёты»",
               defaultValue: "ФОТО И ВИДЕООТЧЁТЫ",
+              admin: {
+                description: "Заголовок секции галереи на главной.",
+              },
             },
           ],
         },

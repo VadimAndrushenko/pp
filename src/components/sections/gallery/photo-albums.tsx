@@ -1,10 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import type { GalleryPhoto } from "@/types"
 import { Card } from "@/components/ui/card"
 import { Lightbox } from "@/components/ui/lightbox"
-import { useNaturalAspect } from "@/hooks/use-natural-aspect"
 
 interface AlbumGroup {
   dateKey: string
@@ -27,24 +26,17 @@ function scrollToDate(dateKey: string) {
 }
 
 function PhotoThumb({ photo, onOpen }: { photo: GalleryPhoto; onOpen: () => void }) {
-  const ratio = useNaturalAspect(photo.image)
-
   return (
     <Card
       className="relative cursor-pointer overflow-hidden p-0"
       onClick={onOpen}
     >
-      {/* Фото растягивается на весь контейнер карточки, сохраняя натуральные
-          пропорции; всё, что выходит за пределы карточки, обрезается overflow-hidden */}
-      <div
-        className="relative w-full overflow-hidden bg-surface"
-        style={{ aspectRatio: `${ratio} / 1` }}
-      >
+      <div className="relative w-full aspect-square overflow-hidden bg-surface">
         <img
           src={photo.image}
           alt={photo.title}
-          width={1600}
-          height={1200}
+          width={800}
+          height={800}
           className="block h-full w-full"
           style={{ objectFit: "cover", objectPosition: "center" }}
         />
@@ -58,9 +50,11 @@ function PhotoThumb({ photo, onOpen }: { photo: GalleryPhoto; onOpen: () => void
 
 export function PhotoAlbums({ photos }: { photos: GalleryPhoto[] }) {
   const [activeAlbum, setActiveAlbum] = useState<{ photos: GalleryPhoto[]; index: number } | null>(null)
-  const albums = groupByDate(photos)
+  const albums = useMemo(() => groupByDate(photos), [photos])
+  const deepLinkHandled = useRef(false)
 
   useEffect(() => {
+    if (deepLinkHandled.current) return
     const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""))
     const release = new URLSearchParams(window.location.search).get("release") || ""
     if (!hash || !release) return
@@ -68,6 +62,7 @@ export function PhotoAlbums({ photos }: { photos: GalleryPhoto[] }) {
     const target = albums.find((a) => `album-${a.dateKey}` === hash && a.dateKey === release)
     if (!target) return
 
+    deepLinkHandled.current = true
     const timer = window.setTimeout(() => {
       window.document.getElementById(`album-${target.dateKey}`)?.scrollIntoView({
         behavior: "smooth",
@@ -77,7 +72,6 @@ export function PhotoAlbums({ photos }: { photos: GalleryPhoto[] }) {
     }, 100)
 
     return () => window.clearTimeout(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [albums])
 
   return (

@@ -1,4 +1,4 @@
-import { put, del, get } from "@vercel/blob"
+import { del, get, put } from "@vercel/blob"
 import type { Adapter } from "@payloadcms/plugin-cloud-storage/types"
 
 const token = process.env.BLOB_READ_WRITE_TOKEN
@@ -9,7 +9,10 @@ export const vercelBlobPrivateAdapter: Adapter = ({ collection }) => {
   return {
     name: "vercel-blob-private",
 
-    generateURL: ({ filename, prefix }) => {
+    generateURL: ({ data, filename, prefix }) => {
+      if (data?.url && !data.url.startsWith("/api/")) {
+        return data.url
+      }
       const key = [slug, prefix, filename].filter(Boolean).join("/")
       return `/api/blob/${key}`
     },
@@ -36,13 +39,10 @@ export const vercelBlobPrivateAdapter: Adapter = ({ collection }) => {
     staticHandler: async (_req, { params }) => {
       const { filename, prefix: urlPrefix } = params
       const key = [slug, urlPrefix, filename].filter(Boolean).join("/")
-
       const result = await get(key, { access: "private" })
-
       if (!result?.stream) {
         return new Response("Not found", { status: result?.statusCode ?? 404 })
       }
-
       return new Response(result.stream, {
         headers: {
           "Content-Type": result.blob.contentType ?? "application/octet-stream",

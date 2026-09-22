@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload"
 import { computePartsFromIsoDate } from "./components/dateTimeUtils"
+import { publishedStatusField } from "./statusField"
 
 function resolveDate(siblingData: Record<string, unknown>) {
   const reportDate = siblingData?.reportDate as string | undefined
@@ -21,11 +22,15 @@ export const GalleryReports: CollectionConfig = {
     group: "Контент",
   },
   fields: [
+    publishedStatusField,
     {
       name: "title",
       type: "text",
       label: "Название",
       required: true,
+      admin: {
+        description: "Название отчёта. Например: «Караоке-батл»",
+      },
     },
     {
       name: "slug",
@@ -34,18 +39,23 @@ export const GalleryReports: CollectionConfig = {
       required: true,
       unique: true,
       index: true,
+      admin: {
+        description: "Английскими буквами, без пробелов. Например: karaoke-battle-19-09",
+      },
     },
     {
       name: "description",
       type: "textarea",
       label: "Описание",
-      required: true,
+      defaultValue: "",
+      admin: {
+        hidden: true,
+      },
     },
     {
       name: "category",
       type: "select",
       label: "Категория",
-      required: true,
       options: [
         { label: "Все", value: "all" },
         { label: "Караоке", value: "karaoke" },
@@ -55,6 +65,9 @@ export const GalleryReports: CollectionConfig = {
         { label: "Шоу", value: "show" },
       ],
       defaultValue: "all",
+      admin: {
+        hidden: true,
+      },
     },
     {
       name: "reportDate",
@@ -110,8 +123,10 @@ export const GalleryReports: CollectionConfig = {
       name: "time",
       type: "text",
       label: "Время",
-      required: true,
       defaultValue: "20:00",
+      admin: {
+        hidden: true,
+      },
     },
     {
       name: "image",
@@ -128,7 +143,7 @@ export const GalleryReports: CollectionConfig = {
       type: "array",
       label: "Фотографии за дату",
       admin: {
-        description: "Добавьте все фото мероприятия этого дня. Первое фото используется как обложка, если главное фото не задано.",
+        description: "Добавьте все фото мероприятия этого дня. Отмечайте «Показывать на главной», чтобы фото попало в подборку на главной странице.",
       },
       fields: [
         {
@@ -146,24 +161,38 @@ export const GalleryReports: CollectionConfig = {
           label: "Фото",
           required: true,
         },
+        {
+          name: "featured",
+          type: "checkbox",
+          label: "Показывать на главной",
+          defaultValue: false,
+          admin: {
+            description: "Это фото попадёт в подборку на главной странице.",
+          },
+        },
       ],
     },
     {
       name: "admission",
       type: "select",
       label: "Вход",
-      required: true,
       options: [
         { label: "Бесплатно", value: "free" },
         { label: "Платно", value: "paid" },
       ],
       defaultValue: "free",
+      admin: {
+        hidden: true,
+      },
     },
     {
       name: "order",
       type: "number",
       label: "Порядок",
       defaultValue: 0,
+      admin: {
+        hidden: true,
+      },
     },
   ],
 }

@@ -162,10 +162,25 @@ export interface User {
  */
 export interface Event {
   id: number;
+  /**
+   * Название события. Например: «Караоке-батл»
+   */
   title: string;
+  /**
+   * Короткая фраза под названием. Можно оставить пустым.
+   */
   subtitle?: string | null;
+  /**
+   * Английскими буквами, без пробелов. Например: karaoke-battle. Используется в адресе страницы.
+   */
   slug: string;
+  /**
+   * Короткое описание события для карточки на главной и на странице события.
+   */
   description: string;
+  /**
+   * Раздел, в котором событие показывается на сайте. «Все» — общий случай.
+   */
   category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
   date: string;
   month: string;
@@ -174,19 +189,43 @@ export interface Event {
   scheduleType: 'recurring' | 'one-off';
   specificDate?: string | null;
   image: number | Media;
+  /**
+   * Показывать «Вход свободный» или «Платно» на сайте.
+   */
   admission: 'free' | 'paid';
+  /**
+   * Крупный заголовок на странице события. Можно разбить на 2–3 строки для красоты.
+   */
   heroLines?:
     | {
+        /**
+         * Одна строка заголовка. Например: «Караоке-батл каждый четверг»
+         */
         line?: string | null;
         id?: string | null;
       }[]
     | null;
+  /**
+   * Фраза под крупным заголовком. Например: «Зажигаем в четверг!»
+   */
   heroSubtitle?: string | null;
+  /**
+   * Заголовок блока программы. По умолчанию: «В ПРОГРАММЕ»
+   */
   programHeading?: string | null;
+  /**
+   * Чем интересно событие. Например: «живой звук», «розыгрыши», «хиты 90-х».
+   */
   features?:
     | {
         icon?: string | null;
+        /**
+         * Короткое название пункта. Например: «Живой звук»
+         */
         title?: string | null;
+        /**
+         * Пара слов о пункте. Например: «Музыка вживую до полуночи»
+         */
         desc?: string | null;
         id?: string | null;
       }[]
@@ -196,7 +235,7 @@ export interface Event {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Все изображения сайта. Загружайте сюда картинки для событий, меню и галереи.
+ * Каталог изображений сайта. Загрузите файл-картинку и выберите её в нужном месте. Размеры подгоняются автоматически.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -204,9 +243,9 @@ export interface Event {
 export interface Media {
   id: number;
   /**
-   * Текст для доступности и SEO. Опишите, что изображено на картинке. Например: "Караоке-батл в ресторане, ночная вечеринка"
+   * Короткое описание картинки — видно при наведении и для SEO. Например: "Караоке-батл, ночная вечеринка". Можно оставить пустым — подставится имя файла.
    */
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -218,32 +257,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    card?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    hero?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -251,16 +264,34 @@ export interface Media {
  */
 export interface MenuCategory {
   id: number;
+  /**
+   * Английскими буквами, без пробелов. Например: shashlyk, drinks
+   */
   slug: string;
+  /**
+   * Название категории. Например: «Шашлык и мангал»
+   */
   title: string;
+  /**
+   * Короткое описание категории для меню. Например: «Мясо и овощи на углях»
+   */
   subtitle: string;
+  /**
+   * Фото блюда категории — показывается в меню.
+   */
   image: number | Media;
+  /**
+   * Раздел меню на сайте: основное меню, алкоголь или безалкоголь.
+   */
   group: 'main' | 'alcohol' | 'non-alcohol';
+  /**
+   * Чем меньше число — тем выше категория в меню. Например: 0, 1, 2…
+   */
   order?: number | null;
   sections?:
     | {
         /**
-         * Если в категории только одна секция — заголовок и подзаголовок на сайте не отображаются.
+         * Если в категории только одна секция — заголовок и подзаголовок на сайте не отображаются. Пример: «Горячие блюда»
          */
         title: string;
         /**
@@ -269,13 +300,37 @@ export interface MenuCategory {
         subtitle?: string | null;
         dishes?:
           | {
+              /**
+               * Название блюда. Например: «Люля-кебаб из баранины»
+               */
               name: string;
+              /**
+               * Продающее описание блюда. Например: «Подаётся с лавашом, зеленью и соусом ткемали».
+               */
               description?: string | null;
+              /**
+               * Короткая пометка под названием. Например: «На открытом огне»
+               */
               subtitle?: string | null;
+              /**
+               * Из чего и как подаётся. Например: «Баранина, 300 г»
+               */
               base?: string | null;
+              /**
+               * Ингредиенты через запятую. Например: «говядина, лук, специи, лаваш».
+               */
               composition?: string | null;
+              /**
+               * Вес блюда или объём напитка. Например: «300 г», «1 л»
+               */
               weight?: string | null;
+              /**
+               * Цена цифрами, можно с валютой. Пример: 450000 или 450 000₫
+               */
               price: string;
+              /**
+               * Процент скидки от 0 до 100. Например: 20
+               */
               discount?: number | null;
               /**
                * Выберите бейдж(и) из списка возможных вариантов.
@@ -314,14 +369,24 @@ export interface GalleryVideo {
      * Необязательно — подставится название отчёта.
      */
     title?: string | null;
+    /**
+     * Ссылка на видео. Пример: https://youtube.com/watch?v=XXXXXXXXXXX (из «Поделиться» → «Копировать»).
+     */
     videoUrl: string;
     videoId: string;
+    /**
+     * Этот ролик попадёт в подборку на главной странице.
+     */
+    featured?: boolean | null;
     id?: string | null;
   }[];
   videoId?: string | null;
   reportDate?: string | null;
   dateKey: string;
   dateLabel: string;
+  /**
+   * Чем меньше число — тем выше отчёт в списке. Например: 0, 1, 2…
+   */
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -333,21 +398,27 @@ export interface GalleryVideo {
  */
 export interface GalleryReport {
   id: number;
+  /**
+   * Название отчёта. Например: «Караоке-батл»
+   */
   title: string;
+  /**
+   * Английскими буквами, без пробелов. Например: karaoke-battle-19-09
+   */
   slug: string;
-  description: string;
-  category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
+  description?: string | null;
+  category?: ('all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show') | null;
   reportDate?: string | null;
   date: string;
   month: string;
   dayOfWeek: string;
-  time: string;
+  time?: string | null;
   /**
    * Используется на главной странице. Остальные фото добавляйте ниже.
    */
   image: number | Media;
   /**
-   * Добавьте все фото мероприятия этого дня. Первое фото используется как обложка, если главное фото не задано.
+   * Добавьте все фото мероприятия этого дня. Отмечайте «Показывать на главной», чтобы фото попало в подборку на главной странице.
    */
   photos?:
     | {
@@ -356,10 +427,14 @@ export interface GalleryReport {
          */
         title?: string | null;
         image: number | Media;
+        /**
+         * Это фото попадёт в подборку на главной странице.
+         */
+        featured?: boolean | null;
         id?: string | null;
       }[]
     | null;
-  admission: 'free' | 'paid';
+  admission?: ('free' | 'paid') | null;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -568,6 +643,7 @@ export interface GalleryVideosSelect<T extends boolean = true> {
         title?: T;
         videoUrl?: T;
         videoId?: T;
+        featured?: T;
         id?: T;
       };
   videoId?: T;
@@ -599,6 +675,7 @@ export interface GalleryReportsSelect<T extends boolean = true> {
     | {
         title?: T;
         image?: T;
+        featured?: T;
         id?: T;
       };
   admission?: T;
@@ -624,40 +701,6 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        card?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        hero?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -705,36 +748,126 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Setting {
   id: number;
+  /**
+   * Название ресторана, как в шапке сайта.
+   */
   siteName?: string | null;
+  /**
+   * Фраза-слоган, используется в описании сайта.
+   */
   tagline?: string | null;
+  /**
+   * Короткое описание для поисковиков (показывается в выдаче Google).
+   */
   description?: string | null;
+  /**
+   * Строка внизу каждой страницы.
+   */
   footerHeart?: string | null;
+  /**
+   * Перечень кухонь. Кухни разделяются значком •
+   */
   cuisines?: string | null;
+  /**
+   * Светящаяся строка на главной из 3 коротких слов + подзаголовок.
+   */
   neonSlogan?: {
+    /**
+     * Первое слово слогана. Например: «Я ВЫБИРАЮ»
+     */
     line1?: string | null;
+    /**
+     * Второе слово, обычно цветное. Например: «ВКУСНО»
+     */
     accent1?: string | null;
+    /**
+     * Третье слово. Например: «ЖИТЬ!»
+     */
     accent2?: string | null;
+    /**
+     * Фраза под неоновыми словами.
+     */
     subtitle?: string | null;
   };
+  /**
+   * Телефон в виде текста, как показывается на сайте.
+   */
   phone?: string | null;
+  /**
+   * Ссылка для звонка. Формат: tel:+цифры без пробелов
+   */
   phoneHref?: string | null;
+  /**
+   * Почта для связи.
+   */
   email?: string | null;
+  /**
+   * Короткий адрес для шапки и футера.
+   */
   address?: string | null;
+  /**
+   * Подробное описание, как добраться.
+   */
   addressFull?: string | null;
+  /**
+   * Ссылка на канал. Формат: https://t.me/название
+   */
   telegram?: string | null;
+  /**
+   * Ссылка на бот. Формат: https://t.me/название_bot
+   */
   telegramBot?: string | null;
+  /**
+   * Формат: https://wa.me/код_страны+цифры
+   */
   whatsapp?: string | null;
+  /**
+   * Ссылка, которая откроется по кнопке Instagram.
+   */
   instagram?: string | null;
+  /**
+   * Ссылка на страницу Facebook.
+   */
   facebook?: string | null;
+  /**
+   * Ссылка на канал YouTube.
+   */
   youtube?: string | null;
+  /**
+   * Ссылка на профиль TikTok.
+   */
   tiktok?: string | null;
+  /**
+   * Ссылка на профиль Zalo.
+   */
   zalo?: string | null;
+  /**
+   * Ссылка на ресторан в Google Maps.
+   */
   googleMaps?: string | null;
+  /**
+   * Ссылка на ресторан в Яндекс Картах.
+   */
   yandexMaps?: string | null;
+  /**
+   * Ссылка на заказ доставки в Grab.
+   */
   grab?: string | null;
+  /**
+   * Режим работы ресторана — показывается в контактах.
+   */
   workingHours?: {
+    /**
+     * Текст слева. Например: «Ежедневно»
+     */
     label?: string | null;
+    /**
+     * Время работы. Например: «с 12:00 до 02:00»
+     */
     hours?: string | null;
+    /**
+     * Отметить, чтобы выделить часы работы на сайте.
+     */
     highlighted?: boolean | null;
   };
   updatedAt?: string | null;
@@ -746,25 +879,64 @@ export interface Setting {
  */
 export interface HomeContent {
   id: number;
+  /**
+   * Главный заголовок на первом экране.
+   */
   title?: {
+    /**
+     * Основная часть заголовка. Например: «Ресторан на Фукуоке, где каждый день»
+     */
     text?: string | null;
+    /**
+     * Цветная часть заголовка. Например: «что-то происходит!»
+     */
     accent?: string | null;
   };
   /**
    * Кухни разделяются значком •
    */
   cuisines?: string | null;
+  /**
+   * Светящаяся строка на главной из 3 коротких слов + подзаголовок.
+   */
   neonSlogan?: {
+    /**
+     * Первое слово слогана. Например: «Я ВЫБИРАЮ»
+     */
     line1?: string | null;
+    /**
+     * Второе слово, обычно цветное. Например: «ВКУСНО»
+     */
     accent1?: string | null;
+    /**
+     * Третье слово. Например: «ЖИТЬ!»
+     */
     accent2?: string | null;
+    /**
+     * Фраза под неоновыми словами.
+     */
     subtitle?: string | null;
   };
+  /**
+   * Сетка услуг на главной. Рекомендуем 6–8 плиток (до 12).
+   */
   services?:
     | {
+        /**
+         * Выберите иконку из списка.
+         */
         icon?: string | null;
+        /**
+         * Например: «Наше меню»
+         */
         title: string;
+        /**
+         * Коротко о разделе. Например: «Кавказская и азиатская кухня»
+         */
         description: string;
+        /**
+         * Куда ведёт плитка. Пример: /menu, /events
+         */
         href: string;
         id?: string | null;
       }[]
@@ -774,23 +946,44 @@ export interface HomeContent {
    */
   quickNav?:
     | {
+        /**
+         * Выберите иконку из списка.
+         */
         icon: string;
+        /**
+         * Например: «Что сегодня?»
+         */
         label: string;
+        /**
+         * Пояснение. Например: «Каждый день — мероприятия»
+         */
         desc: string;
+        /**
+         * Куда ведёт плитка. Пример: /menu, /events
+         */
         href: string;
         id?: string | null;
       }[]
     | null;
   /**
-   * Выберите фотоотчёты из списка. Если ничего не выбрано — покажутся все.
+   * Выберите фотоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные фотографии — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.
    */
   galleryPhotos?: (number | GalleryReport)[] | null;
   /**
-   * Выберите видеоотчёты из списка. Если ничего не выбрано — покажутся все.
+   * Выберите видеоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные ролики — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.
    */
   galleryVideos?: (number | GalleryVideo)[] | null;
+  /**
+   * Заголовок секции меню на главной.
+   */
   menuTitle?: string | null;
+  /**
+   * Заголовок секции расписания на главной.
+   */
   eventsTitle?: string | null;
+  /**
+   * Заголовок секции галереи на главной.
+   */
   galleryTitle?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
