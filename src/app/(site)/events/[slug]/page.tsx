@@ -50,8 +50,22 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const allEventsData = await getEvents().then(transformEvents)
   const allEvents = sortEventsByStart(allEventsData)
 
+  const hexRaw = event.accentColor?.trim().replace(/^#/, "")
+  const accentCss =
+    hexRaw && /^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hexRaw)
+      ? [
+          `--color-accent:#${hexRaw}`,
+          "--color-accent-hover:color-mix(in srgb, var(--color-accent) 80%, #000)",
+          "--color-accent-dim:color-mix(in srgb, var(--color-accent) 60%, transparent)",
+          "--color-border:color-mix(in srgb, var(--color-accent) 60%, transparent)",
+        ].join(";")
+      : null
+
   return (
     <div>
+      {accentCss && (
+        <style dangerouslySetInnerHTML={{ __html: `:root:root{${accentCss}}` }} />
+      )}
       <Breadcrumb />
       <EventHero
         event={event}

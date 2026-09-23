@@ -33,7 +33,7 @@ export function EventDayCard({ events, className }: EventDayCardProps) {
     <div
       onClick={() => router.push(`/events/${first.slug}`)}
       className={cn(
-        "group flex h-full w-full cursor-pointer flex-col border border-border/60 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card",
+        "group flex h-full w-full cursor-pointer flex-col border border-border/60 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card",
         className,
       )}
     >
@@ -67,7 +67,7 @@ export function EventDayCard({ events, className }: EventDayCardProps) {
               key={event.id}
               href={`/events/${event.slug}`}
               onClick={(e) => e.stopPropagation()}
-              className="group/chip flex flex-col gap-1.5 rounded-lg border-2 border-accent/40 bg-gradient-to-br from-black/60 to-accent/10 px-3 py-2.5 text-left transition-all duration-200 hover:border-accent hover:bg-accent/20 hover:shadow-[0_0_20px_rgba(255,106,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="group/chip flex flex-col gap-1.5 rounded-lg border-2 border-accent/40 bg-gradient-to-br from-black/60 to-accent/10 px-3 py-2.5 text-left transition-all duration-200 hover:border-accent hover:bg-accent/20 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_25%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span className="flex items-center justify-between gap-2">
                 <span className="shrink-0 font-display text-xs font-bold uppercase tracking-wider text-accent md:text-[13px] lg:text-sm xl:text-base">

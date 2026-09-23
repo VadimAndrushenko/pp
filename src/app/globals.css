@@ -184,10 +184,10 @@ html, body {
 
 @keyframes glow-pulse {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(255, 106, 0, 0.2);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 20%, transparent);
   }
   50% {
-    box-shadow: 0 0 20px rgba(255, 106, 0, 0.4);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-accent) 40%, transparent);
   }
 }
 
@@ -312,7 +312,7 @@ html, body {
 
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(255, 106, 0, 0.12);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-accent) 12%, transparent);
 }
 
 /* Accent glow on hover */
@@ -321,7 +321,7 @@ html, body {
 }
 
 .hover-glow-accent:hover {
-  filter: drop-shadow(0 0 8px rgba(255, 106, 0, 0.5));
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent) 50%, transparent));
 }
 
 /* Text link accent hover */
@@ -368,9 +368,9 @@ html, body {
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  background: var(--accent, #ff6a00);
+  background: var(--color-accent, #ff6a00);
   border: 3px solid #fff;
-  box-shadow: 0 0 20px rgba(255, 106, 0, 0.8);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--color-accent) 80%, transparent);
 }
 
 .pp-map-pin::after {

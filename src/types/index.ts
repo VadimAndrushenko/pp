@@ -28,6 +28,7 @@ export interface EventItem {
   description: string
   admission: "free" | "paid"
   slug: string
+  accentColor?: string
 }
 
 export type EventCategory =

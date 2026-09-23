@@ -18,7 +18,7 @@ export function CartButton() {
         } ${
           delivery.free
             ? "bg-black/90 border border-success/60 shadow-[0_0_20px_rgba(62,207,110,0.45)]"
-            : "bg-black/90 border border-accent/60 shadow-[0_0_20px_rgba(255,106,0,0.45)]"
+            : "bg-black/90 border border-accent/60 shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_45%,transparent)]"
         }`}
       >
         <Truck
@@ -38,7 +38,7 @@ export function CartButton() {
       <button
         onClick={openCart}
         aria-label="Открыть корзину"
-        className={`fixed bottom-5 right-5 z-[70] flex h-14 items-center gap-3 rounded-full bg-gradient-to-br from-accent to-accent-hover pl-[1.15rem] pr-[1.15rem] text-black shadow-[0_0_30px_rgba(255,106,0,0.5)] transition-all duration-300 ease-out hover:shadow-[0_0_45px_rgba(255,106,0,0.75)] active:scale-95 ${
+        className={`fixed bottom-5 right-5 z-[70] flex h-14 items-center gap-3 rounded-full bg-gradient-to-br from-accent to-accent-hover pl-[1.15rem] pr-[1.15rem] text-black shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] transition-all duration-300 ease-out hover:shadow-[0_0_45px_color-mix(in_srgb,var(--color-accent)_75%,transparent)] active:scale-95 ${
           isOpen ? "pointer-events-none opacity-0 translate-y-3 scale-90" : "opacity-100 translate-y-0 scale-100"
         }`}
       >
@@ -54,7 +54,7 @@ export function CartButton() {
         {totalCount > 0 && (
           <span
             key={totalCount}
-            className="absolute -top-1 -right-1 flex items-center justify-center min-w-6 h-6 px-1.5 rounded-full bg-black text-accent border border-accent/60 text-xs font-display font-bold shadow-[0_0_12px_rgba(255,106,0,0.6)] animate-scale-pop"
+            className="absolute -top-1 -right-1 flex items-center justify-center min-w-6 h-6 px-1.5 rounded-full bg-black text-accent border border-accent/60 text-xs font-display font-bold shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_60%,transparent)] animate-scale-pop"
           >
             {totalCount}
           </span>

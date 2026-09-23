@@ -31,7 +31,7 @@ export function FeaturesRow({ embedded }: FeaturesRowProps) {
           <StaggerItem key={index}>
             <div
               className={cn(
-                "flex flex-col items-center text-center gap-3 px-2 py-4 rounded-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(255,106,0,0.1)]",
+                "flex flex-col items-center text-center gap-3 px-2 py-4 rounded-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_20px_color-mix(in_srgb,var(--color-accent)_10%,transparent)]",
                 "lg:border-r lg:border-border",
                 index === features.length - 1 && "lg:border-r-0",
               )}

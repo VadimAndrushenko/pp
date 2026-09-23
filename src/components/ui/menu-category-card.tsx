@@ -43,7 +43,7 @@ export function MenuCategoryCard({ item, icon, href, priority, index, large, sho
   return (
     <Link
       href={link}
-      className={`relative overflow-hidden rounded-card block group cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:-translate-y-1 hover:border-accent active:scale-[0.98] border border-border ${
+      className={`relative overflow-hidden rounded-card block group cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] hover:-translate-y-1 hover:border-accent active:scale-[0.98] border border-border ${
         large ? "h-[300px] max-md:h-[280px]" : "h-52 max-sm:h-40"
       }`}
     >
@@ -70,7 +70,7 @@ export function MenuCategoryCard({ item, icon, href, priority, index, large, sho
       <div className={`absolute inset-x-0 bottom-0 z-10 ${large ? "p-5" : "p-3 max-sm:p-2"}`}>
         <div className={`flex items-center gap-2 ${large ? "mb-3" : "mb-1.5 max-sm:gap-1.5 max-sm:mb-1"}`}>
           {Icon && (
-            <span className={`flex items-center justify-center rounded-sm border border-accent/40 bg-accent/10 shrink-0 transition-all duration-300 group-hover:bg-accent/20 group-hover:border-accent/70 group-hover:shadow-[0_0_14px_rgba(255,106,0,0.35)] ${
+            <span className={`flex items-center justify-center rounded-sm border border-accent/40 bg-accent/10 shrink-0 transition-all duration-300 group-hover:bg-accent/20 group-hover:border-accent/70 group-hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] ${
               large ? "w-11 h-11" : "w-10 h-10 max-sm:w-5.5 max-sm:h-5.5"
             }`}>
               <Icon className={`text-accent ${large ? "w-6 h-6" : "w-5 h-5 max-sm:w-3 max-sm:h-3"}`} strokeWidth={1.5} />

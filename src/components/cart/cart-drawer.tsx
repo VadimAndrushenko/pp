@@ -64,12 +64,12 @@ const DEFAULT_CHECKOUT_FORM: CheckoutForm = {
 const CHECKOUT_STORAGE_KEY = "pp-checkout"
 
 const FIELD_CLS =
-  "w-full px-4 py-3.5 rounded-xl bg-bg/70 border border-border/50 text-base text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:shadow-[0_0_14px_rgba(255,106,0,0.25)]"
+  "w-full px-4 py-3.5 rounded-xl bg-bg/70 border border-border/50 text-base text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]"
 
 const LABEL_CLS = "block font-display uppercase tracking-wider text-sm text-text-secondary mb-2"
 
 const ICON_BTN_CLS =
-  "flex items-center justify-center w-9 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_rgba(255,106,0,0.35)]"
+  "flex items-center justify-center w-9 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
 
 const ALL_DISHES = allMenuData.flatMap((menu) =>
   menu.sections.flatMap((section) =>
@@ -256,7 +256,7 @@ function CartSearch({
           <button
             onClick={onBack}
             aria-label="Выйти из поиска"
-            className="flex items-center justify-center w-9 h-9 shrink-0 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_rgba(255,106,0,0.35)]"
+            className="flex items-center justify-center w-9 h-9 shrink-0 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
           >
             <ArrowLeft className="w-4 h-4" strokeWidth={2.2} />
           </button>
@@ -267,7 +267,7 @@ function CartSearch({
               value={query}
               onChange={(e) => onQueryChange(e.target.value)}
               placeholder="Поиск по названию, описанию, составу…"
-              className="w-full py-2.5 pl-10 pr-10 rounded-full bg-bg/70 border border-accent/40 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:shadow-[0_0_16px_rgba(255,106,0,0.35)]"
+              className="w-full py-2.5 pl-10 pr-10 rounded-full bg-bg/70 border border-accent/40 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:shadow-[0_0_16px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
             />
             {query && (
               <button
@@ -287,7 +287,7 @@ function CartSearch({
               onClick={() => onBadgeChange(filter.value)}
               className={`shrink-0 px-3 py-1.5 rounded-full font-display uppercase tracking-wider text-xs border transition-all duration-200 ${
                 badge === filter.value
-                  ? "bg-accent border-accent text-black shadow-[0_0_14px_rgba(255,106,0,0.5)]"
+                  ? "bg-accent border-accent text-black shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_50%,transparent)]"
                   : "border-border/50 text-text-secondary hover:text-accent hover:border-accent"
               }`}
             >
@@ -327,7 +327,7 @@ function CartSearch({
             {visibleCount < results.length && (
               <button
                 onClick={() => setVisibleCount((c) => c + VISIBLE_STEP)}
-                className="w-full py-3 rounded-full border border-accent/50 bg-accent/10 text-accent font-display uppercase tracking-wider text-xs transition-all duration-200 hover:bg-accent hover:text-black hover:shadow-[0_0_14px_rgba(255,106,0,0.4)] active:scale-[0.98] animate-fade-in"
+                className="w-full py-3 rounded-full border border-accent/50 bg-accent/10 text-accent font-display uppercase tracking-wider text-xs transition-all duration-200 hover:bg-accent hover:text-black hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_40%,transparent)] active:scale-[0.98] animate-fade-in"
               >
                 Показать ещё {Math.min(results.length - visibleCount, VISIBLE_STEP)}
               </button>
@@ -601,7 +601,7 @@ export function CartDrawer() {
                             setSearchOpen(false)
                           }}
                           aria-label="Мои заказы"
-                          className="flex items-center justify-center gap-1.5 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_rgba(255,106,0,0.35)] px-3 max-sm:px-2 max-sm:gap-1"
+                          className="flex items-center justify-center gap-1.5 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] px-3 max-sm:px-2 max-sm:gap-1"
                         >
                           <Clock className="w-3.5 h-3.5 shrink-0" strokeWidth={2.2} />
                           <span className="font-display uppercase tracking-wider text-xs max-sm:text-[11px] whitespace-nowrap">
@@ -611,7 +611,7 @@ export function CartDrawer() {
                         <button
                           onClick={() => setSearchOpen(true)}
                           aria-label="Поиск блюд"
-                          className="flex items-center justify-center w-9 h-9 max-sm:w-8 max-sm:h-8 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_rgba(255,106,0,0.35)]"
+                          className="flex items-center justify-center w-9 h-9 max-sm:w-8 max-sm:h-8 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
                         >
                           <Search className="w-4 h-4" strokeWidth={2.2} />
                         </button>
@@ -669,7 +669,7 @@ export function CartDrawer() {
                             </ul>
                             <button
                               onClick={() => repeatOrder(order)}
-                              className="mt-3 w-full py-2.5 rounded-full border border-accent/50 bg-accent/10 text-accent font-display uppercase tracking-wider text-xs transition-all duration-200 hover:bg-accent hover:text-black hover:shadow-[0_0_14px_rgba(255,106,0,0.4)] active:scale-[0.98]"
+                              className="mt-3 w-full py-2.5 rounded-full border border-accent/50 bg-accent/10 text-accent font-display uppercase tracking-wider text-xs transition-all duration-200 hover:bg-accent hover:text-black hover:shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_40%,transparent)] active:scale-[0.98]"
                             >
                               Повторить заказ
                             </button>
@@ -716,7 +716,7 @@ export function CartDrawer() {
                             onClick={() => updateForm({ contact: id })}
                             className={`flex flex-col items-center gap-1.5 py-3 rounded-xl border transition-all duration-200 ${
                               form.contact === id
-                                ? "bg-accent/10 border-accent text-accent shadow-[0_0_14px_rgba(255,106,0,0.25)]"
+                                ? "bg-accent/10 border-accent text-accent shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]"
                                 : "border-border/50 text-text-secondary hover:text-accent hover:border-accent"
                             }`}
                           >
@@ -729,7 +729,7 @@ export function CartDrawer() {
                         href={RESTAURANT_CONTACTS[form.contact]}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex w-full items-center justify-center gap-2.5 py-3.5 rounded-full border-2 border-accent/60 bg-accent/10 text-accent font-display uppercase tracking-widest font-bold text-sm transition-all duration-300 hover:bg-accent hover:text-black hover:shadow-[0_0_26px_rgba(255,106,0,0.5)] active:scale-[0.97]"
+                        className="flex w-full items-center justify-center gap-2.5 py-3.5 rounded-full border-2 border-accent/60 bg-accent/10 text-accent font-display uppercase tracking-widest font-bold text-sm transition-all duration-300 hover:bg-accent hover:text-black hover:shadow-[0_0_26px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] active:scale-[0.97]"
                       >
                         {(() => {
                           const Icon = CONTACTS.find((c) => c.id === form.contact)?.Icon ?? Send
@@ -740,7 +740,7 @@ export function CartDrawer() {
                     </div>
                     <button
                       onClick={handleClose}
-                      className="px-8 py-3 rounded-full bg-gradient-to-r from-accent to-accent-hover font-display uppercase tracking-widest font-bold text-black text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_26px_rgba(255,106,0,0.5)] active:scale-[0.97]"
+                      className="px-8 py-3 rounded-full bg-gradient-to-r from-accent to-accent-hover font-display uppercase tracking-widest font-bold text-black text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_26px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] active:scale-[0.97]"
                     >
                       Отлично
                     </button>
@@ -828,7 +828,7 @@ export function CartDrawer() {
                               onClick={() => updateForm({ contact: id })}
                               className={`flex flex-col items-center gap-2 py-4 rounded-xl border transition-all duration-200 ${
                                 form.contact === id
-                                  ? "bg-accent/10 border-accent text-accent shadow-[0_0_14px_rgba(255,106,0,0.25)]"
+                                  ? "bg-accent/10 border-accent text-accent shadow-[0_0_14px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]"
                                   : "border-border/50 text-text-secondary hover:text-accent hover:border-accent"
                               }`}
                             >
@@ -939,8 +939,8 @@ export function CartDrawer() {
                         </div>
                       </div>
 
-                      <div className="flex items-start gap-3.5 rounded-2xl border-2 border-accent/60 bg-accent/10 px-5 py-5 shadow-[0_0_28px_rgba(255,106,0,0.25)]">
-                        <span className="flex shrink-0 items-center justify-center w-11 h-11 rounded-full bg-accent text-black shadow-[0_0_18px_rgba(255,106,0,0.55)]">
+                      <div className="flex items-start gap-3.5 rounded-2xl border-2 border-accent/60 bg-accent/10 px-5 py-5 shadow-[0_0_28px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]">
+                        <span className="flex shrink-0 items-center justify-center w-11 h-11 rounded-full bg-accent text-black shadow-[0_0_18px_color-mix(in_srgb,var(--color-accent)_55%,transparent)]">
                           <CircleAlert className="w-7 h-7" strokeWidth={2.2} />
                         </span>
                         <div>
@@ -961,7 +961,7 @@ export function CartDrawer() {
                         onClick={handleSubmit}
                         className={`w-full py-3.5 rounded-full bg-gradient-to-r from-accent to-accent-hover font-display uppercase tracking-widest font-bold text-black text-sm transition-all duration-300 active:scale-[0.98] ${
                           canSubmit
-                            ? "hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,106,0,0.55)]"
+                            ? "hover:scale-[1.02] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_55%,transparent)]"
                             : "opacity-40 cursor-not-allowed"
                         }`}
                       >
@@ -1114,7 +1114,7 @@ export function CartDrawer() {
                         className={`flex items-center gap-2.5 mt-2.5 rounded-xl border px-3.5 py-2.5 ${
                           freeDelivery
                             ? "border-success/60 bg-success/10 shadow-[0_0_16px_rgba(62,207,110,0.3)]"
-                            : "border-accent/50 bg-accent/10 shadow-[0_0_16px_rgba(255,106,0,0.3)]"
+                            : "border-accent/50 bg-accent/10 shadow-[0_0_16px_color-mix(in_srgb,var(--color-accent)_30%,transparent)]"
                         }`}
                       >
                         <Truck
@@ -1139,7 +1139,7 @@ export function CartDrawer() {
                           setBadge(null)
                           setExpandedKey(null)
                         }}
-                        className="w-full py-3.5 mt-3 rounded-full bg-gradient-to-r from-accent to-accent-hover font-display uppercase tracking-widest font-bold text-black text-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,106,0,0.55)] active:scale-[0.98]"
+                        className="w-full py-3.5 mt-3 rounded-full bg-gradient-to-r from-accent to-accent-hover font-display uppercase tracking-widest font-bold text-black text-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_55%,transparent)] active:scale-[0.98]"
                       >
                         Оформить заказ
                       </button>

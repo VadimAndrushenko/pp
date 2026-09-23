@@ -288,7 +288,7 @@ export default function MapPickerInner({ initial, initialAddress, onPick }: MapP
         value={query}
         onChange={(e) => handleQueryChange(e.target.value)}
         placeholder="Поиск: дом, улица, отель…"
-        className="w-full py-2.5 pl-10 pr-10 rounded-full bg-bg/70 border border-accent/40 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:shadow-[0_0_16px_rgba(255,106,0,0.35)]"
+        className="w-full py-2.5 pl-10 pr-10 rounded-full bg-bg/70 border border-accent/40 text-sm text-text-primary placeholder:text-text-muted outline-none transition-all duration-300 focus:border-accent focus:shadow-[0_0_16px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
       />
       {searching && (
         <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-accent animate-spin" />
@@ -322,7 +322,7 @@ export default function MapPickerInner({ initial, initialAddress, onPick }: MapP
             onClick={() => setFullscreenOpen(true)}
             aria-label="Открыть карту на весь экран"
             title="Открыть карту на весь экран"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-border/50 text-accent shadow-[0_4px_14px_rgba(0,0,0,0.5)] transition-all duration-200 hover:border-accent hover:shadow-[0_0_16px_rgba(255,106,0,0.4)] active:scale-90"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-border/50 text-accent shadow-[0_4px_14px_rgba(0,0,0,0.5)] transition-all duration-200 hover:border-accent hover:shadow-[0_0_16px_color-mix(in_srgb,var(--color-accent)_40%,transparent)] active:scale-90"
           >
             <Maximize2 className="w-5 h-5" strokeWidth={2} />
           </button>
@@ -331,7 +331,7 @@ export default function MapPickerInner({ initial, initialAddress, onPick }: MapP
           onClick={handleLocate}
           aria-label="Моя геолокация"
           title="Моя геолокация"
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-border/50 text-accent shadow-[0_4px_14px_rgba(0,0,0,0.5)] transition-all duration-200 hover:border-accent hover:shadow-[0_0_16px_rgba(255,106,0,0.4)] active:scale-90"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-surface border border-border/50 text-accent shadow-[0_4px_14px_rgba(0,0,0,0.5)] transition-all duration-200 hover:border-accent hover:shadow-[0_0_16px_color-mix(in_srgb,var(--color-accent)_40%,transparent)] active:scale-90"
         >
           <LocateFixed className="w-5 h-5" strokeWidth={2} />
         </button>

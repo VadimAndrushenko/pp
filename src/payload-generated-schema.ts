@@ -276,6 +276,7 @@ export const events = pgTable(
     admission: enum_events_admission("admission").default("free"),
     heroSubtitle: varchar("hero_subtitle"),
     programHeading: varchar("program_heading").default("В ПРОГРАММЕ"),
+    accentColor: varchar("accent_color"),
     updatedAt: timestamp("updated_at", {
       mode: "string",
       withTimezone: true,
@@ -375,6 +376,7 @@ export const _events_v = pgTable(
     version_programHeading: varchar("version_program_heading").default(
       "В ПРОГРАММЕ",
     ),
+    version_accentColor: varchar("version_accent_color"),
     version_updatedAt: timestamp("version_updated_at", {
       mode: "string",
       withTimezone: true,

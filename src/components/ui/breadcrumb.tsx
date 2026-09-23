@@ -5,7 +5,7 @@ export function Breadcrumb(){
   return (
     <Link
       href="/"
-      className="group relative inline-flex text-accent items-center gap-2 text-lg font-display uppercase tracking-wider mb-6 transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(255,106,0,0.5)] hover:scale-105"
+      className="group relative inline-flex text-accent items-center gap-2 text-lg font-display uppercase tracking-wider mb-6 transition-all duration-300 hover:drop-shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] hover:scale-105"
     >
       <span className="relative inline-flex items-center gap-2">
         <ArrowLeft className="w-4 aspect-square transition-all duration-300 group-hover:-translate-x-1.5" />

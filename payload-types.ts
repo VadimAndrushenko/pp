@@ -170,9 +170,6 @@ export interface Event {
    * Короткая фраза под названием. Можно оставить пустым.
    */
   subtitle?: string | null;
-  /**
-   * Английскими буквами, без пробелов. Например: karaoke-battle. Используется в адресе страницы.
-   */
   slug: string;
   /**
    * Короткое описание события для карточки на главной и на странице события.
@@ -193,6 +190,10 @@ export interface Event {
    * Показывать «Вход свободный» или «Платно» на сайте.
    */
   admission: 'free' | 'paid';
+  /**
+   * Цвет кнопок, заголовков и свечений на этой странице события. Например: #2E6BFF. Пусто — стандартный оранжевый.
+   */
+  accentColor?: string | null;
   /**
    * Крупный заголовок на странице события. Можно разбить на 2–3 строки для красоты.
    */
@@ -232,7 +233,10 @@ export interface Event {
     | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  /**
+   * Черновик — запись не видна на сайте.
+   */
+  _status: 'draft' | 'published';
 }
 /**
  * Каталог изображений сайта. Загрузите файл-картинку и выберите её в нужном месте. Размеры подгоняются автоматически.
@@ -264,9 +268,6 @@ export interface Media {
  */
 export interface MenuCategory {
   id: number;
-  /**
-   * Английскими буквами, без пробелов. Например: shashlyk, drinks
-   */
   slug: string;
   /**
    * Название категории. Например: «Шашлык и мангал»
@@ -349,7 +350,10 @@ export interface MenuCategory {
     | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  /**
+   * Черновик — запись не видна на сайте.
+   */
+  _status: 'draft' | 'published';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -374,10 +378,6 @@ export interface GalleryVideo {
      */
     videoUrl: string;
     videoId: string;
-    /**
-     * Этот ролик попадёт в подборку на главной странице.
-     */
-    featured?: boolean | null;
     id?: string | null;
   }[];
   videoId?: string | null;
@@ -390,7 +390,10 @@ export interface GalleryVideo {
   order?: number | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  /**
+   * Черновик — запись не видна на сайте.
+   */
+  _status: 'draft' | 'published';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -402,9 +405,6 @@ export interface GalleryReport {
    * Название отчёта. Например: «Караоке-батл»
    */
   title: string;
-  /**
-   * Английскими буквами, без пробелов. Например: karaoke-battle-19-09
-   */
   slug: string;
   description?: string | null;
   category?: ('all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show') | null;
@@ -418,7 +418,7 @@ export interface GalleryReport {
    */
   image: number | Media;
   /**
-   * Добавьте все фото мероприятия этого дня. Отмечайте «Показывать на главной», чтобы фото попало в подборку на главной странице.
+   * Добавьте все фото мероприятия этого дня — все они попадут в подборку на главной странице.
    */
   photos?:
     | {
@@ -427,10 +427,6 @@ export interface GalleryReport {
          */
         title?: string | null;
         image: number | Media;
-        /**
-         * Это фото попадёт в подборку на главной странице.
-         */
-        featured?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -438,7 +434,10 @@ export interface GalleryReport {
   order?: number | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  /**
+   * Черновик — запись не видна на сайте.
+   */
+  _status: 'draft' | 'published';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -570,6 +569,7 @@ export interface EventsSelect<T extends boolean = true> {
   specificDate?: T;
   image?: T;
   admission?: T;
+  accentColor?: T;
   heroLines?:
     | T
     | {
@@ -643,7 +643,6 @@ export interface GalleryVideosSelect<T extends boolean = true> {
         title?: T;
         videoUrl?: T;
         videoId?: T;
-        featured?: T;
         id?: T;
       };
   videoId?: T;
@@ -675,7 +674,6 @@ export interface GalleryReportsSelect<T extends boolean = true> {
     | {
         title?: T;
         image?: T;
-        featured?: T;
         id?: T;
       };
   admission?: T;
@@ -966,13 +964,29 @@ export interface HomeContent {
       }[]
     | null;
   /**
-   * Выберите фотоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные фотографии — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.
+   * Отметьте отдельные фотографии из отчётов — они по одной попадут на главную. Если ничего не выбрано, секция не показывается.
    */
-  galleryPhotos?: (number | GalleryReport)[] | null;
+  galleryPhotoPicks?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
-   * Выберите видеоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные ролики — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.
+   * Отметьте отдельные видео из отчётов — они по одному попадут на главную. Если ничего не выбрано, секция не показывается.
    */
-  galleryVideos?: (number | GalleryVideo)[] | null;
+  galleryVideoPicks?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   /**
    * Заголовок секции меню на главной.
    */
@@ -1071,8 +1085,8 @@ export interface HomeContentSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
-  galleryPhotos?: T;
-  galleryVideos?: T;
+  galleryPhotoPicks?: T;
+  galleryVideoPicks?: T;
   menuTitle?: T;
   eventsTitle?: T;
   galleryTitle?: T;

@@ -44,7 +44,7 @@ export function Footer({
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent"
         style={{
-          boxShadow: "0 0 12px rgba(255, 106, 0, 0.6)",
+          boxShadow: "0 0 12px color-mix(in srgb, var(--color-accent) 60%, transparent)",
         }}
       />
       <div className="container pb-10 pt-14">

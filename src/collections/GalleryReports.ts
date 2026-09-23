@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload"
 import { computePartsFromIsoDate } from "./components/dateTimeUtils"
+import { slugify } from "./components/slugify"
 import { publishedStatusField } from "./statusField"
 
 function resolveDate(siblingData: Record<string, unknown>) {
@@ -20,6 +21,7 @@ export const GalleryReports: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     group: "Контент",
+    defaultColumns: ["title", "_status", "date", "updatedAt"],
   },
   fields: [
     publishedStatusField,
@@ -40,7 +42,17 @@ export const GalleryReports: CollectionConfig = {
       unique: true,
       index: true,
       admin: {
-        description: "Английскими буквами, без пробелов. Например: karaoke-battle-19-09",
+        hidden: true,
+      },
+      hooks: {
+        beforeValidate: [
+          ({ siblingData, value }) =>
+            value
+              ? (value as string)
+              : slugify((siblingData?.title as string) || "") ||
+                (siblingData?.reportDate as string) ||
+                "report",
+        ],
       },
     },
     {
@@ -143,7 +155,8 @@ export const GalleryReports: CollectionConfig = {
       type: "array",
       label: "Фотографии за дату",
       admin: {
-        description: "Добавьте все фото мероприятия этого дня. Отмечайте «Показывать на главной», чтобы фото попало в подборку на главной странице.",
+        description:
+          "Добавьте все фото мероприятия этого дня — все они попадут в подборку на главной странице.",
       },
       fields: [
         {
@@ -160,15 +173,6 @@ export const GalleryReports: CollectionConfig = {
           relationTo: "media",
           label: "Фото",
           required: true,
-        },
-        {
-          name: "featured",
-          type: "checkbox",
-          label: "Показывать на главной",
-          defaultValue: false,
-          admin: {
-            description: "Это фото попадёт в подборку на главной странице.",
-          },
         },
       ],
     },

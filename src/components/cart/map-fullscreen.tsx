@@ -64,7 +64,7 @@ export function MapFullscreen({
             onClick={onClose}
             aria-label="Закрыть карту"
             title="Закрыть карту"
-            className="flex items-center justify-center w-9 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_rgba(255,106,0,0.35)] active:scale-90 shrink-0"
+            className="flex items-center justify-center w-9 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] active:scale-90 shrink-0"
           >
             <X className="w-4 h-4" strokeWidth={2.2} />
           </button>

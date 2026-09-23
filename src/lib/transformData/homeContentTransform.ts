@@ -1,6 +1,7 @@
 import { transformEvents, transformEvent, transformEventBySlug, sortEventsByStart } from "./eventsTransform"
-import type { HomeContent, GalleryReport, GalleryVideo } from "@payload-types"
+import type { HomeContent } from "@payload-types"
 import type { ServiceItem } from "@/types"
+import type { GalleryPick } from "@/globals/components/galleryPicksShared"
 import { site as siteFallback } from "@/config/site"
 
 export interface QuickNavItemData {
@@ -35,14 +36,20 @@ export interface HomeContentData {
   sectionTitles: HomeSectionTitles
   hero: HeroSectionData
   quickNav: QuickNavItemData[]
-  galleryPhotoIds: string[]
-  galleryVideoIds: string[]
+  galleryPhotoPicks: GalleryPick[]
+  galleryVideoPicks: GalleryPick[]
 }
 
-const relIds = (values: (number | GalleryReport | GalleryVideo)[] | null | undefined): string[] =>
-  (values ?? [])
-    .map((v) => String(typeof v === "object" && v !== null ? v.id : v))
-    .filter(Boolean)
+const picksOf = (value: unknown): GalleryPick[] => {
+  if (Array.isArray(value)) {
+    const valid = value.filter(
+      (item): item is GalleryPick =>
+        item && typeof item === "object" && typeof item.reportId === "string" && typeof item.key === "string",
+    )
+    return valid
+  }
+  return []
+}
 
 const quickNavFallback: QuickNavItemData[] = [
   {
@@ -55,7 +62,7 @@ const quickNavFallback: QuickNavItemData[] = [
     icon: "calendar-check",
     label: "ЧТО СЕГОДНЯ?",
     desc: "Каждый день — мероприятия",
-    href: "/events",
+    href: "/today",
   },
   {
     icon: "cigarette",
@@ -106,9 +113,14 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
           icon: item.icon || "circle",
           label: item.label,
           desc: item.desc || "",
-          href: item.href,
+          href:
+            item.href === "/events" ||
+            item.href === "/today" ||
+            /сегодня/i.test(item.label ?? "")
+              ? "/today"
+              : item.href,
         }))
       : quickNavFallback,
-  galleryPhotoIds: relIds(home?.galleryPhotos),
-  galleryVideoIds: relIds(home?.galleryVideos),
+  galleryPhotoPicks: picksOf(home?.galleryPhotoPicks),
+  galleryVideoPicks: picksOf(home?.galleryVideoPicks),
 })

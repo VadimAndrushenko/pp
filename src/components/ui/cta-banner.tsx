@@ -10,8 +10,10 @@ export function CTABanner() {
       <Card
         className="relative overflow-hidden flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-4 sm:p-8 border-2 border-accent"
         style={{
-          boxShadow: "0 0 45px rgba(255,106,0,0.18), inset 0 0 45px rgba(255,106,0,0.04)",
-          background: "linear-gradient(135deg, rgba(255,106,0,0.06) 0%, transparent 50%)",
+          boxShadow:
+            "0 0 45px color-mix(in srgb, var(--color-accent) 18%, transparent), inset 0 0 45px color-mix(in srgb, var(--color-accent) 4%, transparent)",
+          background:
+            "linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 6%, transparent) 0%, transparent 50%)",
         }}
       >
         <div
@@ -26,7 +28,7 @@ export function CTABanner() {
 
         <div className="relative flex items-center gap-4 flex-1 z-10">
           <div
-            className="flex items-center justify-center w-12 h-12 rounded-full shrink-0 shadow-[0_0_20px_rgba(255,106,0,0.4)] bg-accent"
+            className="flex items-center justify-center w-12 h-12 rounded-full shrink-0 shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_40%,transparent)] bg-accent"
           >
             <Info className="w-6 h-6 text-white" strokeWidth={2} />
           </div>
@@ -59,7 +61,7 @@ export function CTABanner() {
 
           <Button
             variant="solid"
-            className="rounded-full px-10 py-4 shrink-0 whitespace-nowrap text-base font-bold tracking-wider uppercase shadow-[0_0_30px_rgba(255,106,0,0.5)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_rgba(255,106,0,0.7)] animate-pulse hover:animate-none max-sm:px-8"
+            className="rounded-full px-10 py-4 shrink-0 whitespace-nowrap text-base font-bold tracking-wider uppercase shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] transition-all duration-300 hover:scale-110 hover:shadow-[0_0_50px_color-mix(in_srgb,var(--color-accent)_70%,transparent)] animate-pulse hover:animate-none max-sm:px-8"
           >
             Заказать
           </Button>

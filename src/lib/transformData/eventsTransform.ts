@@ -56,6 +56,7 @@ export const transformEvents = (events: Event[], now: Date = new Date()): EventI
         description: event.description,
         admission: event.admission,
         slug: event.slug,
+        accentColor: event.accentColor?.trim() || undefined,
       }
     }),
   )

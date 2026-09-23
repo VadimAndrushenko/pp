@@ -30,7 +30,7 @@ export const GalleryVideos: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     group: "Контент",
-    defaultColumns: ["title", "dateLabel", "updatedAt"],
+    defaultColumns: ["title", "_status", "dateLabel", "updatedAt"],
   },
   fields: [
     publishedStatusField,
@@ -87,15 +87,6 @@ export const GalleryVideos: CollectionConfig = {
                 return id ?? value
               },
             ],
-          },
-        },
-        {
-          name: "featured",
-          type: "checkbox",
-          label: "Показывать на главной",
-          defaultValue: false,
-          admin: {
-            description: "Этот ролик попадёт в подборку на главной странице.",
           },
         },
       ],

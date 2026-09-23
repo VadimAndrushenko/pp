@@ -26,7 +26,7 @@ export function HookahMenuCards() {
         <Link
           key={card.href}
           href={card.href}
-          className="group relative overflow-hidden rounded-card border border-border aspect-[4/2.3] transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_30px_rgba(255,106,0,0.35)]"
+          className="group relative overflow-hidden rounded-card border border-border aspect-[4/2.3] transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
         >
           <Image
             src={card.image}
@@ -60,7 +60,7 @@ export function HookahMenuCards() {
                 inline-flex items-center gap-2 px-6 py-3 rounded-card 
                 border border-border font-display uppercase tracking-wider text-sm 
                 text-text-primary transition-all duration-300 group-hover:bg-accent 
-                group-hover:border-accent group-hover:text-white group-hover:shadow-[0_0_20px_rgba(255,106,0,0.4)]
+                group-hover:border-accent group-hover:text-white group-hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_40%,transparent)]
 
                 max-lg:px-4 max-lg:py-2 max-lg:text-xs
               ">

@@ -3,6 +3,8 @@ import { default as default_e25c73f206b2abfc70d34811c565e601 } from '../../../..
 import { default as default_faddd52e6b634091d7078c99baf66a85 } from '../../../../src/collections/components/EventsDaysTabs'
 import { default as default_f2ea9fa6ce57e247048af091fcaaee9c } from '../../../../src/collections/components/VideoReportDateField'
 import { default as default_6d8328c61cf27292c2b9bd0d3c398f62 } from '../../../../src/collections/components/ReportDateField'
+import { default as default_c7e1baae7d09b5ac1d66c12d34e994a4 } from '../../../../src/globals/components/GalleryPhotoPickField'
+import { default as default_0be983b1b5059cf91f8b850edb5d4b1b } from '../../../../src/globals/components/GalleryVideoPickField'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -12,5 +14,7 @@ export const importMap = {
   "/src/collections/components/EventsDaysTabs#default": default_faddd52e6b634091d7078c99baf66a85,
   "/src/collections/components/VideoReportDateField#default": default_f2ea9fa6ce57e247048af091fcaaee9c,
   "/src/collections/components/ReportDateField#default": default_6d8328c61cf27292c2b9bd0d3c398f62,
+  "/src/globals/components/GalleryPhotoPickField#default": default_c7e1baae7d09b5ac1d66c12d34e994a4,
+  "/src/globals/components/GalleryVideoPickField#default": default_0be983b1b5059cf91f8b850edb5d4b1b,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

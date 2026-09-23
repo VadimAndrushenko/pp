@@ -63,7 +63,7 @@ export function Header({ workingHours = workingHoursFallback }: HeaderProps) {
 
           <Link
             href="/contacts"
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-display font-bold uppercase text-xs tracking-wider border-2 border-accent text-accent transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,106,0,0.4)]"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-display font-bold uppercase text-xs tracking-wider border-2 border-accent text-accent transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_40%,transparent)]"
           >
             <Phone className="w-3.5 h-3.5" />
             Контакты

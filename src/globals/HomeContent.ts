@@ -135,25 +135,27 @@ export const HomeContent: GlobalConfig = {
           label: "Фото и видеоотчёты",
           fields: [
             {
-              name: "galleryPhotos",
-              type: "relationship",
-              relationTo: "gallery-reports",
-              hasMany: true,
-              label: "Фото отчёты на главной",
+              name: "galleryPhotoPicks",
+              type: "json",
+              label: "Фото на главной (поштучно)",
               admin: {
                 description:
-                  "Выберите фотоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные фотографии — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.",
+                  "Отметьте отдельные фотографии из отчётов — они по одной попадут на главную. Если ничего не выбрано, секция не показывается.",
+                components: {
+                  Field: "/src/globals/components/GalleryPhotoPickField",
+                },
               },
             },
             {
-              name: "galleryVideos",
-              type: "relationship",
-              relationTo: "gallery-videos",
-              hasMany: true,
-              label: "Видео отчёты на главной",
+              name: "galleryVideoPicks",
+              type: "json",
+              label: "Видео на главной (поштучно)",
               admin: {
                 description:
-                  "Выберите видеоотчёты. Внутри каждого отчёта отметьте галочкой «Показывать на главной» нужные ролики — они по отдельности попадут на главную. Если ничего не выбрано — берутся все отчёты.",
+                  "Отметьте отдельные видео из отчётов — они по одному попадут на главную. Если ничего не выбрано, секция не показывается.",
+                components: {
+                  Field: "/src/globals/components/GalleryVideoPickField",
+                },
               },
             },
           ],

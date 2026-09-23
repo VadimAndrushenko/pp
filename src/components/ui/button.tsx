@@ -12,16 +12,16 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const glowStyle = {
   outline: {
-    default: "0 0 0px rgba(255, 106, 0, 0)",
-    hover: "0 0 15px rgba(255, 106, 0, 0.3)",
+    default: "0 0 0px color-mix(in srgb, var(--color-accent) 0%, transparent)",
+    hover: "0 0 15px color-mix(in srgb, var(--color-accent) 30%, transparent)",
   },
   solid: {
-    default: "0 0 10px rgba(255, 106, 0, 0.2)",
-    hover: "0 0 25px rgba(255, 106, 0, 0.5)",
+    default: "0 0 10px color-mix(in srgb, var(--color-accent) 20%, transparent)",
+    hover: "0 0 25px color-mix(in srgb, var(--color-accent) 50%, transparent)",
   },
   ghost: {
-    default: "0 0 0px rgba(255, 106, 0, 0)",
-    hover: "0 0 0px rgba(255, 106, 0, 0)",
+    default: "0 0 0px color-mix(in srgb, var(--color-accent) 0%, transparent)",
+    hover: "0 0 0px color-mix(in srgb, var(--color-accent) 0%, transparent)",
   },
 }
 

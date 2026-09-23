@@ -16,7 +16,7 @@ export function QuickNav({ items }: QuickNavProps) {
             className="
               group flex flex-col items-center justify-center gap-4 p-5 h-full rounded-card border 
               border-border bg-transparent transition-all duration-300 hover:-translate-y-2 
-              hover:shadow-[0_0_40px_rgba(255,106,0,0.18)] hover:border-accent hover:bg-surface/50 
+              hover:shadow-[0_0_40px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] hover:border-accent hover:bg-surface/50 
               focus-visible:ring-2 focus-visible:ring-accent
               
               max-sm:p-3 max-sm:gap-2 
@@ -26,7 +26,7 @@ export function QuickNav({ items }: QuickNavProps) {
               name={item.icon}
               className="
                 w-12 h-12 text-accent transition-all duration-300 group-hover:scale-125 
-                group-hover:drop-shadow-[0_0_10px_rgba(255,106,0,0.5)] 
+                group-hover:drop-shadow-[0_0_10px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] 
                 
                 max-sm:w-10 max-sm:h-10
               "

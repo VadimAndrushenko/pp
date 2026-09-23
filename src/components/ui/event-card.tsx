@@ -33,7 +33,7 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
     return (
       <a
         href={`/events/${event.slug}`}
-        className="group w-full border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_rgba(255,106,0,0.35)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
+        className="group w-full border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
       >
         <div
           className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-contain bg-center bg-surface"

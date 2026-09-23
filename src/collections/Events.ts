@@ -3,6 +3,7 @@ import {
   computeDateForDayOfWeek,
   computePartsFromIsoDate,
 } from "./components/dateTimeUtils"
+import { slugify } from "./components/slugify"
 import { publishedStatusField } from "./statusField"
 
 function resolveSchedule(siblingData: Record<string, unknown>) {
@@ -30,6 +31,7 @@ export const Events: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     group: "Контент",
+    defaultColumns: ["title", "_status", "date", "updatedAt"],
     components: {
       beforeList: ["/src/collections/components/EventsDaysTabs"],
     },
@@ -59,8 +61,17 @@ export const Events: CollectionConfig = {
       label: "Slug",
       required: true,
       unique: true,
+      index: true,
       admin: {
-        description: "Английскими буквами, без пробелов. Например: karaoke-battle. Используется в адресе страницы.",
+        hidden: true,
+      },
+      hooks: {
+        beforeValidate: [
+          ({ siblingData, value }) =>
+            value
+              ? (value as string)
+              : slugify((siblingData?.title as string) || "") || "event",
+        ],
       },
     },
     {
@@ -198,6 +209,22 @@ export const Events: CollectionConfig = {
         {
           label: "Страница события",
           fields: [
+            {
+              name: "accentColor",
+              type: "text",
+              label: "Цвет акцента страницы (hex)",
+              admin: {
+                description:
+                  "Цвет кнопок, заголовков и свечений на этой странице события. Например: #2E6BFF. Пусто — стандартный оранжевый.",
+              },
+              validate: (value: unknown) => {
+                if (!value) return true
+                const hex = String(value).trim().replace(/^#/, "")
+                return /^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hex)
+                  ? true
+                  : "Введите HEX-цвет, например #2E6BFF"
+              },
+            },
             {
               type: "collapsible",
               label: "Hero и программа",

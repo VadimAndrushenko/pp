@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload"
+import { slugify } from "./components/slugify"
 import { publishedStatusField } from "./statusField"
 
 export const MenuCategories: CollectionConfig = {
@@ -9,6 +10,7 @@ export const MenuCategories: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     group: "Меню",
+    defaultColumns: ["title", "_status", "group", "updatedAt"],
   },
   fields: [
     publishedStatusField,
@@ -20,7 +22,15 @@ export const MenuCategories: CollectionConfig = {
       unique: true,
       index: true,
       admin: {
-        description: "Английскими буквами, без пробелов. Например: shashlyk, drinks",
+        hidden: true,
+      },
+      hooks: {
+        beforeValidate: [
+          ({ siblingData, value }) =>
+            value
+              ? (value as string)
+              : slugify((siblingData?.title as string) || "") || "category",
+        ],
       },
     },
     {
