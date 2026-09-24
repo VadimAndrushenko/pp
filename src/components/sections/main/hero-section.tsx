@@ -65,7 +65,7 @@ export function HeroSection({ site = siteFallback, hero }: HeroSectionProps) {
           >
             <div className="relative sm:right-11 rounded-card transition-all duration-500 h-full max-sm:left-10">
               <Image
-                src="/api/blob/images/people.png"
+                src="/images/people.png"
                 alt="People"
                 width={800}
                 height={600}

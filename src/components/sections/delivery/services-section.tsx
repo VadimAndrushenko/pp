@@ -35,11 +35,11 @@ function IconOwnDelivery({ color }: { color: string }) {
 
 const services = [
   {
-    image: "/api/blob/images/delivery/food.png",
+    image: "/images/delivery/food.png",
     items: ["Блюда", "Напитки", "Полуфабрикаты"],
   },
   {
-    image: "/api/blob/images/delivery/hookah.png",
+    image: "/images/delivery/hookah.png",
     href: "/hookah/out",
     items: ["Выездной кальян", "Табак", "Кальян в аренду"],
   },

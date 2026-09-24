@@ -50,7 +50,7 @@ export function Header({ workingHours = workingHoursFallback }: HeaderProps) {
     >
       <div className="container flex items-center justify-between py-3">
         <Link href="/" className="shrink-0 group">
-          <Image src="/api/blob/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
+          <Image src="/logo.png" alt="POIDEM POZHREM" width={200} height={70} className="h-14 w-auto object-contain" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-6 text-xs font-display uppercase tracking-wider">

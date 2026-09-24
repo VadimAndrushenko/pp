@@ -3,7 +3,7 @@ import { fileURLToPath } from "url"
 
 import { postgresAdapter } from "@payloadcms/db-postgres"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
-import { cloudStoragePlugin } from "@payloadcms/plugin-cloud-storage"
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob"
 import { buildConfig } from "payload"
 
 import { Users } from "./src/collections/Users"
@@ -14,7 +14,6 @@ import { MenuCategories } from "./src/collections/MenuCategories"
 import { GalleryVideos } from "./src/collections/GalleryVideos"
 import { GalleryReports } from "./src/collections/GalleryReports"
 import { Media } from "./src/collections/Media"
-import { vercelBlobPrivateAdapter } from "./src/lib/blobAdapter"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -47,12 +46,11 @@ export default buildConfig({
     push: process.env.DATABASE_PUSH === "true",
   }),
   plugins: [
-    cloudStoragePlugin({
+    vercelBlobStorage({
       collections: {
-        media: {
-          adapter: vercelBlobPrivateAdapter,
-        },
+        media: true,
       },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
     }),
   ],
 })

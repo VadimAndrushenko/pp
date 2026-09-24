@@ -64,7 +64,7 @@ const hookahMenu: MenuData = {
   id: "hookah",
   title: "Кальянное меню",
   subtitle: "Премиальные табаки и чаши",
-  image: "/api/blob/images/hookah/shisha.png",
+  image: "/images/hookah/shisha.png",
   sections: [],
 }
 

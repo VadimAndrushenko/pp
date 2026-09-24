@@ -52,7 +52,7 @@ export function Footer({
           <div className="flex flex-col gap-6 sm:col-span-2 lg:col-span-1 xl:col-span-2">
             <Link href="/" aria-label="POIDEM POZHREM — на главную" className="hover-glow-accent inline-flex self-start">
               <Image
-                src="/api/blob/logo.png"
+                src="/logo.png"
                 alt="POIDEM POZHREM"
                 width={200}
                 height={70}

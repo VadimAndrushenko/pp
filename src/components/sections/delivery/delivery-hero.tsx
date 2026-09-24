@@ -16,7 +16,7 @@ export function DeliveryHero() {
       </div>
       <div className="absolute  right-0 w-[100%] h-[150%] rounded-card -z-10 min-[460px]:max-sm:h-[170%]">
         <Image
-          src="/api/blob/images/delivery/delivery-hero.png"
+          src="/images/delivery/delivery-hero.png"
           alt="Доставка еды и кальянов"
           fill
           className="lg:object-contain max-lg:object-cover"

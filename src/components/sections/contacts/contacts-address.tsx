@@ -7,7 +7,7 @@ export function ContactsAddress() {
       <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
         <div className="relative a w-full overflow-hidden rounded-card border border-border min-h-[300px]">
           <Image
-            src="/api/blob/images/contacts/facade.png"
+            src="/images/contacts/facade.png"
             alt="Фасад ресторана Poidem Pozhrem"
             fill
             className="object-cover"

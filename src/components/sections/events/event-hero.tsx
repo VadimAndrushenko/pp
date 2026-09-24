@@ -46,7 +46,7 @@ export function EventHero({
       </div>
       <div className="absolute left-0 right-0 top- h-[150%] rounded-card -z-10">
         <Image
-          src={event.image || "/api/blob/images/events/monday-afterparty.png"}
+          src={event.image || "/images/events/monday-afterparty.png"}
           alt={event.title}
           fill
           className="lg:object-contain max-lg:object-cover"

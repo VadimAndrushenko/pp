@@ -7,14 +7,14 @@ const cards = [
     href: "/menu/hookah.pdf",
     title: "Кальянное меню",
     subtitle: "Выбери вкус и крепость по своему настроению",
-    image: "/api/blob/images/hookah/menu-cover.png",
+    image: "/images/hookah/menu-cover.png",
     buttonLabel: "Смотреть меню",
   },
   {
     href: "/hookah/out",
     title: "Выездной кальян",
     subtitle: "Привезём и установим в любую точку",
-    image: "/api/blob/images/hookah/delivery-cover.png",
+    image: "/images/hookah/delivery-cover.png",
     buttonLabel: "Подробнее",
   },
 ]
