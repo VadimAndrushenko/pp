@@ -24,7 +24,7 @@ export function BookingButton({
       size={size}
       as="a"
       // href={href}
-      className={"gap-3 " + (className ?? "")}
+      className={"gap-3 max-sm:gap-2 " + (className ?? "")}
     >
       {icon}
       {label}

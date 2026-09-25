@@ -1,6 +1,14 @@
 import type { NextConfig } from "next"
 import { withPayload } from "@payloadcms/next/withPayload"
 
+console.log(
+  "[SA-KEY]",
+  "set:", Boolean(process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY),
+  "len:", process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY?.length,
+  "first8:", process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY?.slice(0, 8),
+  "last8:", process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY?.slice(-8),
+)
+
 const nextConfig: NextConfig = {
   // Временное решение для payload#16824: в dev Strict Mode дважды выполняет
   // mount-эффекты, из-за чего ListDrawerContent в медиа-пикере шлёт второй

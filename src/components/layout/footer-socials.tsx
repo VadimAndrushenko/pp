@@ -10,13 +10,10 @@ import type { CSSProperties } from "react"
 
 interface FooterSocialsProps {
   links?: SiteSettings["links"]
-  /** Обёртка с рамкой и фоном под соцсети (Блок A из ТЗ футера) */
-  variant?: "plain" | "pill"
 }
 
 export function FooterSocials({
   links = linksFallback,
-  variant = "plain",
 }: FooterSocialsProps) {
   const SOCIALS = [
     { icon: InstagramIcon, label: "Instagram", href: links.instagram, color: "#E4405F" },
@@ -30,13 +27,16 @@ export function FooterSocials({
     },
   ] as const
 
-  const wrapperClass =
-    variant === "pill"
-      ? "flex flex-wrap items-center justify-center gap-4 rounded-card border border-border bg-transparent px-6 py-4"
-      : "flex flex-wrap items-center gap-3"
-
   return (
-    <div className={wrapperClass} data-testid="footer-socials">
+    <div 
+      className="
+        flex flex-wrap items-center justify-center 
+        gap-4 rounded-card border border-border bg-transparent px-6 py-4
+        max-sm:py-2 max-sm:px-4 max-sm:gap-2
+      "  
+      data-testid="footer-socials"
+      
+    >
       {SOCIALS.map((s) => {
         const Icon = s.icon
         return (
@@ -47,7 +47,7 @@ export function FooterSocials({
             rel="noopener noreferrer"
             aria-label={s.label}
             data-testid={`footer-social-${s.label.toLowerCase()}`}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface text-text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-(--brand) hover:text-(--brand) hover:shadow-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="flex h-11 w-11 max-sm:h-9 max-sm:w-9 items-center justify-center rounded-full border border-border bg-surface text-text-secondary transition-all duration-300 hover:-translate-y-1 hover:border-(--brand) hover:text-(--brand) hover:shadow-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             style={{ "--brand": s.color } as CSSProperties}
           >
             <Icon className="h-5 w-5" />

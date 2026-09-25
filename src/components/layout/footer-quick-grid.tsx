@@ -54,18 +54,19 @@ function FooterQuickCard({ icon: Icon, label, href }: FooterQuickCardProps) {
     <Link
       href={href}
       data-testid={`footer-quick-${href.replace(/^\//, "") || "home"}`}
-      className="group relative flex items-center justify-between gap-4 rounded-card border border-border bg-transparent p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_28px_-4px_color-mix(in_srgb,var(--color-accent)_45%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="group relative flex items-center justify-between gap-4 max-sm:gap-2 rounded-card border border-border bg-transparent p-5 max-sm:p-3 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_28px_-4px_color-mix(in_srgb,var(--color-accent)_45%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
-      <span className="flex items-center gap-4 min-w-0">
+      <span className="flex items-center gap-4 max-sm:gap-2 min-w-0">
         <Icon
-          className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_color-mix(in_srgb,var(--color-accent)_60%,transparent)]"
+          className="h-9 w-9 max-sm:h-7 max-sm:w-7 sm:h-10 sm:w-10 shrink-0 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_color-mix(in_srgb,var(--color-accent)_60%,transparent)]"
         />
-        <span className="truncate font-display font-bold uppercase tracking-wide text-lg sm:text-xl lg:text-2xl text-text-primary">
+        <span className="truncate font-display font-bold uppercase tracking-wide text-lg max-sm:text-sm sm:text-xl lg:text-2xl text-text-primary">
           {label}
         </span>
       </span>
+
       <ChevronRight
-        className="h-6 w-6 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1"
+        className="h-6 w-6 max-sm:h-4 max-sm:w-4 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1"
         strokeWidth={2.25}
       />
     </Link>
@@ -82,7 +83,7 @@ export const footerQuickLinks: readonly FooterQuickCardProps[] = [
 export function FooterQuickGrid() {
   return (
     <div
-      className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+      className="grid grid-cols-2 gap-4"
       data-testid="footer-quick-grid"
     >
       {footerQuickLinks.map((item) => (
