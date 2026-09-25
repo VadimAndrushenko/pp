@@ -19,6 +19,10 @@ import { Media } from "./src/collections/Media"
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+type SharpDependency = NonNullable<Parameters<typeof buildConfig>[0]["sharp"]>
+
+const sharpDependency = sharp as unknown as SharpDependency
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -37,7 +41,7 @@ export default buildConfig({
   globals: [Settings, HomeContent],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
-  sharp,
+  sharp: sharpDependency,
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },

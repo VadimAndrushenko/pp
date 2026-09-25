@@ -86,7 +86,7 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
           icon: service.icon || "",
           title: service.title,
           description: service.description,
-          href: service.href,
+          href: service.title === "Забронировать стол" ? "/contacts" : service.href,
         }))
       : [],
   sectionTitles: {
