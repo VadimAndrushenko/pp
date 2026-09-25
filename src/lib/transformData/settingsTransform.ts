@@ -22,6 +22,11 @@ export interface SiteSettings {
     telegram: string
     telegramBot: string
     whatsapp: string
+    menu: string
+    events: string
+    delivery: string
+    contacts: string
+    bookingForm: string
     grab: string
     instagram: string
     facebook: string
@@ -63,6 +68,11 @@ export const transformSettings = (setting: Setting | null): SiteSettings => ({
     telegram: setting?.telegram || linksFallback.telegram,
     telegramBot: setting?.telegramBot || linksFallback.telegramBot,
     whatsapp: setting?.whatsapp || linksFallback.whatsapp,
+    menu: setting?.menu || linksFallback.menu,
+    events: setting?.events || linksFallback.events,
+    delivery: setting?.delivery || linksFallback.delivery,
+    contacts: setting?.contacts || linksFallback.contacts,
+    bookingForm: setting?.bookingForm || linksFallback.bookingForm || linksFallback.whatsapp,
     grab: setting?.grab || linksFallback.grab,
     instagram: setting?.instagram || linksFallback.instagram,
     facebook: setting?.facebook || linksFallback.facebook,

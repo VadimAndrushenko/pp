@@ -16,6 +16,14 @@ export function TikTokIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+export function TelegramIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M21.94 4.3 19.2 19.1c-.2 1-.8 1.25-1.62.78l-4.48-3.3-2.16 2.08c-.24.24-.44.44-.9.44l.32-4.56 8.3-7.5c.36-.32-.08-.5-.56-.18L7.66 13.6l-4.4-1.38c-.96-.3-.98-.96.2-1.42l17.2-6.63c.8-.3 1.5.18 1.28 1.13z" />
+    </svg>
+  )
+}
+
 export function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>

@@ -1,5 +1,6 @@
 import type { NextConfig } from "next"
 import { withPayload } from "@payloadcms/next/withPayload"
+import { randomUUID } from "crypto"
 
 console.log(
   "[SA-KEY]",
@@ -10,6 +11,10 @@ console.log(
 )
 
 const nextConfig: NextConfig = {
+  // Идентификатор деплоя: при смене сборки клиент обнаружит несовпадение
+  // и сделает полный reload вместо вызова Server Function со старым ID
+  // ("Failed to find Server Action"). На Vercel берётся коммит, локально — новый UUID на сборку.
+  deploymentId: process.env.VERCEL_GIT_COMMIT_SHA ?? randomUUID(),
   // Временное решение для payload#16824: в dev Strict Mode дважды выполняет
   // mount-эффекты, из-за чего ListDrawerContent в медиа-пикере шлёт второй
   // render-list server action со stale action ID.

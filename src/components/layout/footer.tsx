@@ -45,7 +45,7 @@ export function Footer({
           </div>
 
           <BookingButton
-            href={links.whatsapp}
+            href={links.bookingForm || links.whatsapp}
             label="Забронировать столик"
             icon={<Calendar className="h-6 w-6 shrink-0" strokeWidth={2} />}
             size="lg"
@@ -55,7 +55,7 @@ export function Footer({
 
         {/* ─────────── Блок B — Quick Nav Grid ─────────── */}
         <div className="mt-4 sm:mt-8 lg:mt-10">
-          <FooterQuickGrid />
+          <FooterQuickGrid links={links} />
         </div>
 
         {/* ─────────── Блок C — Info Strip ─────────── */}

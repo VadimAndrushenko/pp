@@ -4,6 +4,7 @@ import {
   InstagramIcon,
   YoutubeIcon,
   TikTokIcon,
+  TelegramIcon,
 
 } from "@/components/ui/social-icons"
 import type { CSSProperties } from "react"
@@ -20,7 +21,7 @@ export function FooterSocials({
     { icon: YoutubeIcon, label: "YouTube", href: links.youtube, color: "#FF0000" },
     { icon: TikTokIcon, label: "TikTok", href: links.tiktok, color: "#00F2EA" },
     {
-      icon: TikTokIcon,
+      icon: TelegramIcon,
       label: "Telegram",
       href: links.telegram,
       color: "var(--color-telegram)",

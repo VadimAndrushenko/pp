@@ -1,6 +1,8 @@
-import Link from "next/link"
 import { ChevronRight, FileText, Phone } from "lucide-react"
 import type { ComponentType, SVGProps } from "react"
+
+import { links as linksFallback } from "@/config/links"
+import type { SiteSettings } from "@/lib/transformData"
 
 /** Кастомный SVG: скутер для доставки (в lucide-react подходящей иконки нет) */
 function ScooterIcon(props: SVGProps<SVGSVGElement>) {
@@ -44,16 +46,17 @@ function CalendarStarIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 export interface FooterQuickCardProps {
+  id: string
   icon: ComponentType<SVGProps<SVGSVGElement>>
   label: string
   href: string
 }
 
-function FooterQuickCard({ icon: Icon, label, href }: FooterQuickCardProps) {
+function FooterQuickCard({ id, icon: Icon, label, href }: FooterQuickCardProps) {
   return (
-    <Link
+    <a
       href={href}
-      data-testid={`footer-quick-${href.replace(/^\//, "") || "home"}`}
+      data-testid={`footer-quick-${id}`}
       className="group relative flex items-center justify-between gap-4 max-sm:gap-2 rounded-card border border-border bg-transparent p-5 max-sm:p-3 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_0_28px_-4px_color-mix(in_srgb,var(--color-accent)_45%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
       <span className="flex items-center gap-4 max-sm:gap-2 min-w-0">
@@ -69,25 +72,38 @@ function FooterQuickCard({ icon: Icon, label, href }: FooterQuickCardProps) {
         className="h-6 w-6 max-sm:h-4 max-sm:w-4 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1"
         strokeWidth={2.25}
       />
-    </Link>
+    </a>
   )
 }
 
-export const footerQuickLinks: readonly FooterQuickCardProps[] = [
-  { icon: FileText, label: "Меню", href: "/menu" },
-  { icon: CalendarStarIcon, label: "Афиша мероприятий", href: "/events" },
-  { icon: ScooterIcon, label: "Доставка", href: "/delivery" },
-  { icon: Phone, label: "Контакты", href: "/contacts" },
+export const getFooterQuickLinks = (
+  links: SiteSettings["links"] = linksFallback
+): readonly FooterQuickCardProps[] => [
+  { id: "menu", icon: FileText, label: "Меню", href: links.menu },
+  {
+    id: "events",
+    icon: CalendarStarIcon,
+    label: "Афиша мероприятий",
+    href: links.events,
+  },
+  { id: "delivery", icon: ScooterIcon, label: "Доставка", href: links.delivery },
+  { id: "contacts", icon: Phone, label: "Контакты", href: links.contacts },
 ] as const
 
-export function FooterQuickGrid() {
+interface FooterQuickGridProps {
+  links?: SiteSettings["links"]
+}
+
+export function FooterQuickGrid({
+  links = linksFallback,
+}: FooterQuickGridProps) {
   return (
     <div
       className="grid grid-cols-2 gap-4"
       data-testid="footer-quick-grid"
     >
-      {footerQuickLinks.map((item) => (
-        <FooterQuickCard key={item.href} {...item} />
+      {getFooterQuickLinks(links).map((item) => (
+        <FooterQuickCard key={item.id} {...item} />
       ))}
     </div>
   )

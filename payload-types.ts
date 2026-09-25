@@ -916,6 +916,26 @@ export interface Setting {
    */
   grab?: string | null;
   /**
+   * Ссылка на страницу меню.
+   */
+  menu?: string | null;
+  /**
+   * Ссылка на страницу расписания всех мероприятий.
+   */
+  events?: string | null;
+  /**
+   * Ссылка на страницу доставки.
+   */
+  delivery?: string | null;
+  /**
+   * Ссылка на страницу контактов.
+   */
+  contacts?: string | null;
+  /**
+   * Ссылка на форму бронирования стола. Если пусто — кнопка ведёт в WhatsApp.
+   */
+  bookingForm?: string | null;
+  /**
    * Режим работы ресторана — показывается в контактах.
    */
   workingHours?: {
@@ -1100,6 +1120,11 @@ export interface SettingsSelect<T extends boolean = true> {
   googleMaps?: T;
   yandexMaps?: T;
   grab?: T;
+  menu?: T;
+  events?: T;
+  delivery?: T;
+  contacts?: T;
+  bookingForm?: T;
   workingHours?:
     | T
     | {

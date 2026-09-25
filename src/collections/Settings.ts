@@ -86,22 +86,32 @@ export const Settings: GlobalConfig = {
         {
           label: "Соцсети и мессенджеры",
           fields: [
-            { name: "telegram", type: "text", label: "Telegram", defaultValue: "https://t.me/poidem_pozhrem", admin: { description: "Ссылка на канал. Формат: https://t.me/название" } },
+            { name: "telegram", type: "text", label: "Telegram", defaultValue: "https://t.me/poidem_po_zhrem", admin: { description: "Ссылка на канал. Формат: https://t.me/название" } },
             { name: "telegramBot", type: "text", label: "Telegram Bot", defaultValue: "https://t.me/poidem_pozhrem_bot", admin: { description: "Ссылка на бот. Формат: https://t.me/название_bot" } },
             { name: "whatsapp", type: "text", label: "WhatsApp", defaultValue: "https://wa.me/84783779879", admin: { description: "Формат: https://wa.me/код_страны+цифры" } },
             { name: "instagram", type: "text", label: "Instagram", defaultValue: "https://instagram.com/poidem_po_zhrem", admin: { description: "Ссылка, которая откроется по кнопке Instagram." } },
             { name: "facebook", type: "text", label: "Facebook", defaultValue: "https://facebook.com/PoidemPozhrem", admin: { description: "Ссылка на страницу Facebook." } },
-            { name: "youtube", type: "text", label: "YouTube", defaultValue: "https://youtube.com/@poidempozhrEM", admin: { description: "Ссылка на канал YouTube." } },
-            { name: "tiktok", type: "text", label: "TikTok", defaultValue: "https://tiktok.com/@poidem_pozhrem", admin: { description: "Ссылка на профиль TikTok." } },
+            { name: "youtube", type: "text", label: "YouTube", defaultValue: "https://youtube.com/@poidempozhrem", admin: { description: "Ссылка на канал YouTube." } },
+            { name: "tiktok", type: "text", label: "TikTok", defaultValue: "https://tiktok.com/@poidem.po.zhrem", admin: { description: "Ссылка на профиль TikTok." } },
             { name: "zalo", type: "text", label: "Zalo", defaultValue: "https://zalo.me/84783779879", admin: { description: "Ссылка на профиль Zalo." } },
           ],
         },
         {
           label: "Карты и доставка",
           fields: [
-            { name: "googleMaps", type: "text", label: "Google Maps", defaultValue: "https://maps.google.com/?q=97+Tran+Hung+Dao+Duong+Dong+Phu+Quoc", admin: { description: "Ссылка на ресторан в Google Maps." } },
+            { name: "googleMaps", type: "text", label: "Google Maps", defaultValue: "https://maps.app.goo.gl/wnerDY6EdTK7AzfJ8", admin: { description: "Ссылка на ресторан в Google Maps." } },
             { name: "yandexMaps", type: "text", label: "Яндекс Карты", defaultValue: "https://yandex.ru/maps/?pt=103.9530,10.2100&z=17&l=map", admin: { description: "Ссылка на ресторан в Яндекс Картах." } },
             { name: "grab", type: "text", label: "Grab", defaultValue: "https://r.grab.com/g/6-20260801_223246_0BD425829C55464F9ACF75301A16722E_MEXMPS-5-C76UNTW3VLBDTT", admin: { description: "Ссылка на заказ доставки в Grab." } },
+          ],
+        },
+        {
+          label: "Ссылки страниц",
+          fields: [
+            { name: "menu", type: "text", label: "Меню", defaultValue: "https://poidempozhrem.com/menu", admin: { description: "Ссылка на страницу меню." } },
+            { name: "events", type: "text", label: "Афиша мероприятий", defaultValue: "https://poidempozhrem.com/events", admin: { description: "Ссылка на страницу расписания всех мероприятий." } },
+            { name: "delivery", type: "text", label: "Доставка", defaultValue: "https://poidempozhrem.com/delivery", admin: { description: "Ссылка на страницу доставки." } },
+            { name: "contacts", type: "text", label: "Контакты", defaultValue: "https://poidempozhrem.com/contacts", admin: { description: "Ссылка на страницу контактов." } },
+            { name: "bookingForm", type: "text", label: "Форма бронирования", admin: { description: "Ссылка на форму бронирования стола. Если пусто — кнопка ведёт в WhatsApp." } },
           ],
         },
         {
