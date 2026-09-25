@@ -1,32 +1,15 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Heart, MessageCircle } from "lucide-react"
+import { Calendar, Clock, MapPin, Phone } from "lucide-react"
+
 import { site as siteFallback } from "@/config/site"
-import { links as linksFallback } from "@/config/links"
+import { links as linksFallback, workingHours as workingHoursFallback } from "@/config/links"
 import type { SiteSettings } from "@/lib/transformData"
-import { FooterNav } from "@/components/layout/footer-nav"
-import { FooterContacts } from "@/components/layout/footer-contacts"
+
 import { FooterSocials } from "@/components/layout/footer-socials"
+
 import { BookingButton } from "@/components/ui/booking-button"
-import { workingHours as workingHoursFallback } from "@/config/links"
-
-const NAV_LINKS = [
-  { label: "Меню", href: "/menu" },
-  { label: "Доставка", href: "/delivery" },
-  { label: "Кальяны", href: "/hookah" },
-  { label: "Выездной кальян", href: "/hookah/out" },
-  { label: "Банкеты", href: "/banquet" },
-  { label: "Акции", href: "/promotions" },
-] as const
-
-const SERVICE_LINKS = [
-  { label: "Фото и видео", href: "/gallery" },
-  // { label: "VIP Club", href: "/vip" },
-  { label: "Отель", href: "/hotel" },
-  { label: "Сообщество", href: "/community" },
-  { label: "Обмен рублей", href: "/currency" },
-  { label: "Инфо-Фукуок", href: "/island-info" },
-] as const
+import { FooterQuickGrid } from "./footer-quick-grid"
 
 interface FooterProps {
   site?: SiteSettings["site"]
@@ -35,72 +18,124 @@ interface FooterProps {
 }
 
 export function Footer({
-  site = siteFallback,
+  site: _site = siteFallback,
   links = linksFallback,
   workingHours = workingHoursFallback,
 }: FooterProps) {
   return (
-    <footer className="relative border-t border-border">
+    <footer
+      className="relative border-t border-border"
+      data-testid="site-footer"
+    >
+      {/* Верхняя градиентная неон-линия — не трогали */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent"
         style={{
           boxShadow: "0 0 12px color-mix(in srgb, var(--color-accent) 60%, transparent)",
         }}
       />
-      <div className="container pb-10 pt-14">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-          <div className="flex flex-col gap-6 sm:col-span-2 lg:col-span-1 xl:col-span-2">
-            <Link href="/" aria-label="POIDEM POZHREM — на главную" className="hover-glow-accent inline-flex self-start">
-              <Image
-                src="/logo.png"
-                alt="POIDEM POZHREM"
-                width={200}
-                height={70}
-                className="h-12 w-auto object-contain"
-              />
-            </Link>
-            <p className="flex items-start gap-2 text-sm leading-relaxed text-text-secondary">
-              <Heart
-                className="mt-1 h-4 w-4 shrink-0 text-accent"
-                fill="currentColor"
-              />
-              {site.footerHeart}
-            </p>
-            <FooterSocials links={links} />
-            <BookingButton
-              href={links.whatsapp}
-              label="Забронировать столик"
-              icon={<MessageCircle className="h-4 w-4" />}
-              size="md"
-              className="w-fit"
-            />
+
+      <div className="container pb-10 pt-12 lg:pt-14">
+        {/* ─────────── Блок A — Action Bar ─────────── */}
+        <div
+          className="flex flex-col gap-4 sm:flex-row sm:items-stretch"
+          data-testid="footer-action-bar"
+        >
+          <div className="sm:shrink-0">
+            <FooterSocials links={links} variant="pill" />
           </div>
 
-          <nav
-            aria-label="Навигация в подвале"
-            className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:col-span-2 lg:col-span-2"
-          >
-            <FooterNav title="Навигация" links={NAV_LINKS} />
-            <FooterNav title="Развлечения и услуги" links={SERVICE_LINKS} />
-          </nav>
-
-          <div className="sm:col-span-2 lg:col-span-1">
-            <FooterContacts links={links} workingHours={workingHours} />
-          </div>
+          <BookingButton
+            href={links.whatsapp}
+            label="Забронировать столик"
+            icon={<Calendar className="h-6 w-6 shrink-0" strokeWidth={2} />}
+            size="lg"
+            className="w-full sm:flex-1 justify-center text-lg lg:text-xl py-5"
+          />
         </div>
 
+        {/* ─────────── Блок B — Quick Nav Grid ─────────── */}
+        <div className="mt-8 lg:mt-10">
+          <FooterQuickGrid />
+        </div>
+
+        {/* ─────────── Блок C — Info Strip ─────────── */}
         <div
-          className="mt-14 flex flex-col items-center gap-4 border-t border-border pt-6 sm:flex-row sm:justify-between"
+          className="mt-10 lg:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 lg:divide-x lg:divide-border"
+          data-testid="footer-info-strip"
         >
-          <p className="text-xs text-text-muted">
-            © {new Date().getFullYear()} POIDEM POZHREM!
-          </p>
-          <div className="flex items-center gap-6 text-xs">
-            <Link href="/contacts" className="link-accent text-text-secondary">
-              Контакты
+          {/* Колонка 1 — Лого */}
+          <div className="flex flex-col items-start gap-2 lg:pr-8">
+            <Link
+              href="/"
+              aria-label="POIDEM POZHREM — на главную"
+              className="hover-glow-accent inline-flex"
+            >
+              <Image
+                src="/logo.png"
+                alt="POIDEM POZHREM — ресторан, бар, караоке, клуб"
+                width={260}
+                height={110}
+                className="h-20 lg:h-24 w-auto object-contain"
+                priority={false}
+              />
             </Link>
-            <span className="text-text-muted">Все права защищены</span>
+            <p className="text-[11px] font-display tracking-[0.25em] uppercase text-text-muted">
+              Restaurant · Bar · Karaoke · Club
+            </p>
           </div>
+
+          {/* Колонка 2 — Телефон + часы */}
+          <address className="not-italic flex flex-col justify-center gap-4 border-t border-border pt-6 lg:border-t-0 lg:pt-0 lg:px-8">
+            <a
+              href={links.phoneHref}
+              className="link-accent flex items-center gap-3 text-xl font-semibold text-text-primary"
+              data-testid="footer-phone"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/40 text-accent">
+                <Phone className="h-5 w-5" strokeWidth={2} />
+              </span>
+              <span>{links.phone}</span>
+            </a>
+
+            <div className="flex items-center gap-3 text-base text-text-secondary">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/40 text-accent">
+                <Clock className="h-5 w-5" strokeWidth={2} />
+              </span>
+              <span>
+                {workingHours.daily.label}:{" "}
+                <span className="font-semibold text-accent">
+                  {workingHours.daily.hours}
+                </span>
+              </span>
+            </div>
+          </address>
+
+          {/* Колонка 3 — Адрес */}
+          <a
+            href={links.googleMaps}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-accent flex items-start gap-3 border-t border-border pt-6 lg:border-t-0 lg:pt-0 lg:pl-8 text-base leading-relaxed text-text-secondary"
+            data-testid="footer-address"
+          >
+            <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent/40 text-accent">
+              <MapPin className="h-5 w-5" strokeWidth={2} />
+            </span>
+            <span>{links.addressFull}</span>
+          </a>
+        </div>
+
+        {/* ─────────── Блок D — Copyright bar ─────────── */}
+        <div
+          className="mt-10 lg:mt-12 flex items-center gap-6"
+          data-testid="footer-copyright"
+        >
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent to-border" />
+          <p className="shrink-0 text-xs sm:text-sm tracking-[0.2em] uppercase text-text-muted">
+            © {new Date().getFullYear()} POIDEM POZHREM
+          </p>
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent to-border" />
         </div>
       </div>
     </footer>

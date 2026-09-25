@@ -12,7 +12,7 @@ export const Media: CollectionConfig = {
 
   admin: {
     useAsTitle: 'filename',
-    defaultColumns: ['filename', 'alt', 'updatedAt'],
+    defaultColumns: ['thumbnail', 'filename', 'alt', 'updatedAt'],
     description: 'Все изображения сайта. Загружайте сюда картинки для статей, разделов и обложек.',
   },
 
