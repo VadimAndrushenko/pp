@@ -1,20 +1,12 @@
 import type { NextConfig } from "next"
 import { withPayload } from "@payloadcms/next/withPayload"
-import { randomUUID } from "crypto"
-
-console.log(
-  "[SA-KEY]",
-  "set:", Boolean(process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY),
-  "len:", process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY?.length,
-  "first8:", process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY?.slice(0, 8),
-  "last8:", process.env.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY?.slice(-8),
-)
+import { randomBytes } from "crypto"
 
 const nextConfig: NextConfig = {
-  // Идентификатор деплоя: при смене сборки клиент обнаружит несовпадение
-  // и сделает полный reload вместо вызова Server Function со старым ID
-  // ("Failed to find Server Action"). На Vercel берётся коммит, локально — новый UUID на сборку.
-  deploymentId: process.env.VERCEL_GIT_COMMIT_SHA ?? randomUUID(),
+  // Идентификатор деплоя (максимум 32 символа, иначе Vercel отклоняет сборку).
+  // Нужен, чтобы при смене сборки клиент сделал полный reload, а не вызвал
+  // Server Function со старым ID ("Failed to find Server Action").
+  deploymentId: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 32) ?? randomBytes(16).toString("hex"),
   // Временное решение для payload#16824: в dev Strict Mode дважды выполняет
   // mount-эффекты, из-за чего ListDrawerContent в медиа-пикере шлёт второй
   // render-list server action со stale action ID.
