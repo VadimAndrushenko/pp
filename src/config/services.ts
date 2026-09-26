@@ -26,8 +26,8 @@ export const services: ServiceItem[] = [
     id: "route",
     icon: "map-pin",
     title: "Как добраться",
-    description: "Google Maps, Яндекс.Карты",
-    href: "https://maps.google.com/?q=97+Tran+Hung+Dao+Duong+Dong+Phu+Quoc",
+    description: "Адрес, карта и 4 шага",
+    href: "/find-us",
   },
   {
     id: "banquet",
