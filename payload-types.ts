@@ -908,6 +908,10 @@ export interface Setting {
    */
   googleMaps?: string | null;
   /**
+   * Embed-ссылка из Google Maps (Поделиться → Встроить карту). Используется в iframe на страницах «Как нас найти» и «Контакты».
+   */
+  googleMapsEmbed?: string | null;
+  /**
    * Ссылка на ресторан в Яндекс Картах.
    */
   yandexMaps?: string | null;
@@ -1118,6 +1122,7 @@ export interface SettingsSelect<T extends boolean = true> {
   tiktok?: T;
   zalo?: T;
   googleMaps?: T;
+  googleMapsEmbed?: T;
   yandexMaps?: T;
   grab?: T;
   menu?: T;

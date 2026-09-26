@@ -100,6 +100,7 @@ export const Settings: GlobalConfig = {
           label: "Карты и доставка",
           fields: [
             { name: "googleMaps", type: "text", label: "Google Maps", defaultValue: "https://maps.app.goo.gl/wnerDY6EdTK7AzfJ8", admin: { description: "Ссылка на ресторан в Google Maps." } },
+            { name: "googleMapsEmbed", type: "text", label: "Google Maps — встроенная карта (embed)", defaultValue: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1428.975517871165!2d103.96382863259639!3d10.2056387725145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a78dcc750e2e1b%3A0xb5338d32fc7decc6!2sPOIDEM%20POZHREM%20%E2%80%94%20Russian%2C%20Caucasian%2C%20European%20%26%20Eastern%20Cuisine!5e0!3m2!1sru!2sil!4v1790443017625!5m2!1sru!2sil", admin: { description: "Embed-ссылка из Google Maps (Поделиться → Встроить карту). Используется в iframe на страницах «Как нас найти» и «Контакты»." } },
             { name: "yandexMaps", type: "text", label: "Яндекс Карты", defaultValue: "https://yandex.ru/maps/?pt=103.9530,10.2100&z=17&l=map", admin: { description: "Ссылка на ресторан в Яндекс Картах." } },
             { name: "grab", type: "text", label: "Grab", defaultValue: "https://r.grab.com/g/6-20260801_223246_0BD425829C55464F9ACF75301A16722E_MEXMPS-5-C76UNTW3VLBDTT", admin: { description: "Ссылка на заказ доставки в Grab." } },
           ],

@@ -27,6 +27,7 @@ export interface EventItem {
   image: string
   description: string
   admission: "free" | "paid"
+  scheduleType?: "recurring" | "one-off"
   slug: string
   accentColor?: string
 }

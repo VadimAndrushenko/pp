@@ -18,6 +18,7 @@ export interface SiteSettings {
   }
   links: {
     googleMaps: string
+    googleMapsEmbed: string
     yandexMaps: string
     telegram: string
     telegramBot: string
@@ -48,6 +49,23 @@ export interface SiteSettings {
   }
 }
 
+/** Хост нашего же сайта — по нему определяем «внутренние» ссылки */
+const INTERNAL_HOST = new URL(linksFallback.menu).host.replace(/^www\./, "")
+
+/**
+ * Абсолютный URL нашего домена превращаем в относительный путь,
+ * иначе на localhost клики уводят на прод.
+ */
+const toInternalPath = (url: string): string => {
+  if (!url) return url
+  try {
+    const { host, pathname, search, hash } = new URL(url)
+    return host.replace(/^www\./, "") === INTERNAL_HOST ? `${pathname}${search}${hash}` : url
+  } catch {
+    return url
+  }
+}
+
 export const transformSettings = (setting: Setting | null): SiteSettings => ({
   site: {
     name: setting?.siteName || siteFallback.name,
@@ -64,15 +82,18 @@ export const transformSettings = (setting: Setting | null): SiteSettings => ({
   },
   links: {
     googleMaps: setting?.googleMaps || linksFallback.googleMaps,
+    googleMapsEmbed: setting?.googleMapsEmbed || linksFallback.googleMapsEmbed,
     yandexMaps: setting?.yandexMaps || linksFallback.yandexMaps,
     telegram: setting?.telegram || linksFallback.telegram,
     telegramBot: setting?.telegramBot || linksFallback.telegramBot,
     whatsapp: setting?.whatsapp || linksFallback.whatsapp,
-    menu: setting?.menu || linksFallback.menu,
-    events: setting?.events || linksFallback.events,
-    delivery: setting?.delivery || linksFallback.delivery,
-    contacts: setting?.contacts || linksFallback.contacts,
-    bookingForm: setting?.bookingForm || linksFallback.bookingForm || linksFallback.whatsapp,
+    menu: toInternalPath(setting?.menu || linksFallback.menu),
+    events: toInternalPath(setting?.events || linksFallback.events),
+    delivery: toInternalPath(setting?.delivery || linksFallback.delivery),
+    contacts: toInternalPath(setting?.contacts || linksFallback.contacts),
+    bookingForm: toInternalPath(
+      setting?.bookingForm || linksFallback.bookingForm || linksFallback.whatsapp
+    ),
     grab: setting?.grab || linksFallback.grab,
     instagram: setting?.instagram || linksFallback.instagram,
     facebook: setting?.facebook || linksFallback.facebook,

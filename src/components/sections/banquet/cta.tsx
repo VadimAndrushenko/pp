@@ -1,20 +1,20 @@
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { PartyPopper } from "lucide-react"
+import { ContactFormBase } from "@/components/ui/contact-form-base";
 
 export function BanquetCta() {
   return (
-    <Card className="p-6 text-center section-py">
-      <PartyPopper className="w-12 h-12 mx-auto mb-4 text-accent"  strokeWidth={1.5} />
-      <h2 className="text-xl font-display font-bold uppercase text-text-primary mb-3">
-        Заказать банкет
-      </h2>
-      <p className="text-sm text-text-secondary mb-6">
-        Свяжитесь с нами для обсуждения деталей
-      </p>
-      <Button variant="solid" size="lg" as="a" href="https://wa.me/84855559797">
-        Связаться
-      </Button>
-    </Card>
+    <ContactFormBase
+      id="zayavka"
+      title="Оставить заявку"
+      showContactMeta={false}
+      showSocials={false}
+      withDate
+      withTime
+      messageLabel="Доп. вопросы"
+      messagePlaceholder="Расскажите про мероприятие: повод, количество гостей, пожелания..."
+      messageOptional
+      submitLabel="Оставить заявку"
+      submittedLabel="Заявка принята!"
+      footerHint="Мы свяжемся с вами в ближайшее время и обсудим все детали."
+    />
   )
 }

@@ -1,5 +1,7 @@
 export const links = {
   googleMaps: "https://maps.app.goo.gl/wnerDY6EdTK7AzfJ8",
+  googleMapsEmbed:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1428.975517871165!2d103.96382863259639!3d10.2056387725145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a78dcc750e2e1b%3A0xb5338d32fc7decc6!2sPOIDEM%20POZHREM%20%E2%80%94%20Russian%2C%20Caucasian%2C%20European%20%26%20Eastern%20Cuisine!5e0!3m2!1sru!2sil!4v1790443017625!5m2!1sru!2sil",
   yandexMaps: "https://yandex.ru/maps/?pt=103.9530,10.2100&z=17&l=map",
   telegram: "https://t.me/poidem_po_zhrem",
   telegramBot: "https://t.me/poidem_pozhrem_bot",

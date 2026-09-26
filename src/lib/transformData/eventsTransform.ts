@@ -55,6 +55,7 @@ export const transformEvents = (events: Event[], now: Date = new Date()): EventI
         image: resolveImageUrl(event.image),
         description: event.description,
         admission: event.admission,
+        scheduleType: event.scheduleType,
         slug: event.slug,
         accentColor: event.accentColor?.trim() || undefined,
       }
