@@ -1,18 +1,13 @@
 import type { CollectionConfig } from "payload"
-import { publishedStatusField } from "./statusField"
 
 export const Services: CollectionConfig = {
   slug: "services",
-  versions: {
-    drafts: true,
-  },
   admin: {
     useAsTitle: "title",
     group: "Контент",
-    defaultColumns: ["title", "_status", "href", "updatedAt"],
+    defaultColumns: ["title", "href", "updatedAt"],
   },
   fields: [
-    publishedStatusField,
     {
       name: "title",
       type: "text",

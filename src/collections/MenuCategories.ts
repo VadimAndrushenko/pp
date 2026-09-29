@@ -1,19 +1,14 @@
 import type { CollectionConfig } from "payload"
 import { slugify } from "./components/slugify"
-import { publishedStatusField } from "./statusField"
 
 export const MenuCategories: CollectionConfig = {
   slug: "menu-categories",
-  versions: {
-    drafts: true,
-  },
   admin: {
     useAsTitle: "title",
     group: "Меню",
-    defaultColumns: ["title", "_status", "group", "updatedAt"],
+    defaultColumns: ["title", "group", "updatedAt"],
   },
   fields: [
-    publishedStatusField,
     {
       name: "slug",
       type: "text",

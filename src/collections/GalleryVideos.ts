@@ -1,7 +1,6 @@
 import type { CollectionConfig } from "payload"
 import { formatDateLabel } from "./components/dateTimeUtils"
 import { extractYouTubeVideoId } from "./components/youtubeUtils"
-import { publishedStatusField } from "./statusField"
 
 function resolveYoutubeId(siblingData: Record<string, unknown>) {
   const videoUrl = siblingData?.videoUrl as string | undefined
@@ -24,16 +23,12 @@ function resolveVideoDate(siblingData: Record<string, unknown>) {
 
 export const GalleryVideos: CollectionConfig = {
   slug: "gallery-videos",
-  versions: {
-    drafts: true,
-  },
   admin: {
     useAsTitle: "title",
     group: "Контент",
-    defaultColumns: ["title", "_status", "dateLabel", "updatedAt"],
+    defaultColumns: ["title", "dateLabel", "updatedAt"],
   },
   fields: [
-    publishedStatusField,
     {
       name: "title",
       type: "text",

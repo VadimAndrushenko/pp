@@ -1,18 +1,20 @@
-import "@payloadcms/next/css"
-import config from "@payload-config"
-import { RootLayout, handleServerFunctions } from "@payloadcms/next/layouts"
-import type { ServerFunctionClient } from "payload"
-import React from "react"
-import { importMap } from "./admin/importMap"
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
+import config from '@payload-config'
+import '@payloadcms/next/css'
+import type { ServerFunctionClient } from 'payload'
+import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
+import React from 'react'
 
-export { metadata } from "@payloadcms/next/layouts"
+import { importMap } from './admin/importMap.js'
+import './custom.scss'
 
 type Args = {
   children: React.ReactNode
 }
 
-const serverFunction: ServerFunctionClient = async (args) => {
-  "use server"
+const serverFunction: ServerFunctionClient = async function (args) {
+  'use server'
   return handleServerFunctions({
     ...args,
     config,
@@ -20,14 +22,10 @@ const serverFunction: ServerFunctionClient = async (args) => {
   })
 }
 
-export default function PayloadLayout({ children }: Args) {
-  return (
-    <RootLayout
-      config={Promise.resolve(config)}
-      importMap={importMap}
-      serverFunction={serverFunction}
-    >
-      {children}
-    </RootLayout>
-  )
-}
+const Layout = ({ children }: Args) => (
+  <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
+    {children}
+  </RootLayout>
+)
+
+export default Layout

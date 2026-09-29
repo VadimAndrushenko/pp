@@ -234,10 +234,6 @@ export interface Event {
     | null;
   updatedAt: string;
   createdAt: string;
-  /**
-   * Черновик — запись не видна на сайте.
-   */
-  _status: 'draft' | 'published';
 }
 /**
  * Все изображения сайта. Загружайте сюда картинки для статей, разделов и обложек.
@@ -378,10 +374,6 @@ export interface MenuCategory {
     | null;
   updatedAt: string;
   createdAt: string;
-  /**
-   * Черновик — запись не видна на сайте.
-   */
-  _status: 'draft' | 'published';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -418,10 +410,6 @@ export interface GalleryVideo {
   order?: number | null;
   updatedAt: string;
   createdAt: string;
-  /**
-   * Черновик — запись не видна на сайте.
-   */
-  _status: 'draft' | 'published';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -462,10 +450,6 @@ export interface GalleryReport {
   order?: number | null;
   updatedAt: string;
   createdAt: string;
-  /**
-   * Черновик — запись не видна на сайте.
-   */
-  _status: 'draft' | 'published';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -617,7 +601,6 @@ export interface EventsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -658,7 +641,6 @@ export interface MenuCategoriesSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -681,7 +663,6 @@ export interface GalleryVideosSelect<T extends boolean = true> {
   order?: T;
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -709,7 +690,6 @@ export interface GalleryReportsSelect<T extends boolean = true> {
   order?: T;
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,7 +1,6 @@
 import type { CollectionConfig } from "payload"
 import { computePartsFromIsoDate } from "./components/dateTimeUtils"
 import { slugify } from "./components/slugify"
-import { publishedStatusField } from "./statusField"
 
 function resolveDate(siblingData: Record<string, unknown>) {
   const reportDate = siblingData?.reportDate as string | undefined
@@ -15,16 +14,12 @@ function resolveDate(siblingData: Record<string, unknown>) {
 
 export const GalleryReports: CollectionConfig = {
   slug: "gallery-reports",
-  versions: {
-    drafts: true,
-  },
   admin: {
     useAsTitle: "title",
     group: "Контент",
-    defaultColumns: ["title", "_status", "date", "updatedAt"],
+    defaultColumns: ["title", "date", "updatedAt"],
   },
   fields: [
-    publishedStatusField,
     {
       name: "title",
       type: "text",

@@ -4,7 +4,6 @@ import {
   computePartsFromIsoDate,
 } from "./components/dateTimeUtils"
 import { slugify } from "./components/slugify"
-import { publishedStatusField } from "./statusField"
 
 function resolveSchedule(siblingData: Record<string, unknown>) {
   const scheduleType = siblingData?.scheduleType as string | undefined
@@ -25,19 +24,15 @@ function resolveSchedule(siblingData: Record<string, unknown>) {
 
 export const Events: CollectionConfig = {
   slug: "events",
-  versions: {
-    drafts: true,
-  },
   admin: {
     useAsTitle: "title",
     group: "Контент",
-    defaultColumns: ["title", "_status", "date", "updatedAt"],
+    defaultColumns: ["title", "date", "updatedAt"],
     components: {
       beforeList: ["/src/collections/components/EventsDaysTabs"],
     },
   },
   fields: [
-    publishedStatusField,
     {
       name: "title",
       type: "text",
