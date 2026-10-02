@@ -24,6 +24,7 @@ export interface MenuData {
   image: string
   sections: MenuSection[]
   group?: "main" | "alcohol" | "non-alcohol"
+  order?: number
 }
 
 export const menuData: MenuData[] = [

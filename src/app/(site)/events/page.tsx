@@ -254,9 +254,9 @@ function EventCard({ event }: { event: EventItem }) {
         <h3 className="text-xl max-sm:text-base md:text-2xl font-black uppercase leading-tight tracking-tight">
           {event.title}
         </h3>
-        {event.subtitle && (
+        {event.tagline && (
           <p className="mt-1 text-sm max-sm:text-xs uppercase tracking-widest" style={{ color: accent }}>
-            {event.subtitle}
+            {event.tagline}
           </p>
         )}
 

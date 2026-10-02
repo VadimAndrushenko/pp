@@ -74,7 +74,7 @@ export default async function MenuPage() {
   const menus = dbMenus.length > 0 ? dbMenus : allMenuData
 
   const menuNumbers = new Map<string, number>()
-  menus.forEach((menu, index) => menuNumbers.set(menu.id, index + 1))
+  menus.forEach((menu, index) => menuNumbers.set(menu.id, menu.order ?? index + 1))
 
   const menuBlocks: {
     title: string

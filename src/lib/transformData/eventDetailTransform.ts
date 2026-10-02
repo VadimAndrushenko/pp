@@ -26,7 +26,7 @@ export const transformEventDetail = (event: Event | null): EventDetail | null =>
     titleLine1: lines[0] || event.title.toUpperCase(),
     titleLine2: lines[1],
     titleLine3: lines[2],
-    subtitle: event.heroSubtitle || event.subtitle || "",
+    subtitle: event.heroSubtitle || "",
     featuresHeading: event.programHeading || "В ПРОГРАММЕ",
     features: (event.features || [])
       .filter((feature) => feature.title || feature.desc)

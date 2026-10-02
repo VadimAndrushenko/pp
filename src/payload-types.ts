@@ -167,18 +167,11 @@ export interface Event {
    * Название события. Например: «Караоке-батл»
    */
   title: string;
-  /**
-   * Короткая фраза под названием. Можно оставить пустым.
-   */
-  subtitle?: string | null;
   slug: string;
   /**
    * Короткое описание события для карточки на главной и на странице события.
    */
   description: string;
-  /**
-   * Раздел, в котором событие показывается на сайте. «Все» — общий случай.
-   */
   category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
   date: string;
   month: string;
@@ -232,6 +225,18 @@ export interface Event {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Заголовок в выдаче поиска. Оставьте пустым — подставится название события.
+   */
+  seoTitle: string;
+  /**
+   * Описание под заголовком в выдаче. Оптимально 140–160 символов. Оставьте пустым — подставится описание события.
+   */
+  seoDescription: string;
+  /**
+   * Через запятую. Поисковики их не учитывают, но помогают вам самим находить событие в админке. Пример: караоке, фукуок, четверг
+   */
+  seoKeywords: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -372,6 +377,18 @@ export interface MenuCategory {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Заголовок в выдаче поиска. Оставьте пустым — подставится название автоматически.
+   */
+  seoTitle: string;
+  /**
+   * Описание под заголовком в выдаче. Оптимально 140–160 символов. Оставьте пустым — подставится автоматически.
+   */
+  seoDescription: string;
+  /**
+   * Через запятую. Поисковики их не учитывают, но помогают вам самим находить категорию в админке. Пример: меню, завтраки, фукуок
+   */
+  seoKeywords: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -570,7 +587,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
-  subtitle?: T;
   slug?: T;
   description?: T;
   category?: T;
@@ -599,6 +615,9 @@ export interface EventsSelect<T extends boolean = true> {
         desc?: T;
         id?: T;
       };
+  seoTitle?: T;
+  seoDescription?: T;
+  seoKeywords?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -639,6 +658,9 @@ export interface MenuCategoriesSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  seoTitle?: T;
+  seoDescription?: T;
+  seoKeywords?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -791,47 +813,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Setting {
   id: number;
   /**
-   * Название ресторана, как в шапке сайта.
-   */
-  siteName?: string | null;
-  /**
-   * Фраза-слоган, используется в описании сайта.
-   */
-  tagline?: string | null;
-  /**
-   * Короткое описание для поисковиков (показывается в выдаче Google).
-   */
-  description?: string | null;
-  /**
-   * Строка внизу каждой страницы.
-   */
-  footerHeart?: string | null;
-  /**
-   * Перечень кухонь. Кухни разделяются значком •
-   */
-  cuisines?: string | null;
-  /**
-   * Светящаяся строка на главной из 3 коротких слов + подзаголовок.
-   */
-  neonSlogan?: {
-    /**
-     * Первое слово слогана. Например: «Я ВЫБИРАЮ»
-     */
-    line1?: string | null;
-    /**
-     * Второе слово, обычно цветное. Например: «ВКУСНО»
-     */
-    accent1?: string | null;
-    /**
-     * Третье слово. Например: «ЖИТЬ!»
-     */
-    accent2?: string | null;
-    /**
-     * Фраза под неоновыми словами.
-     */
-    subtitle?: string | null;
-  };
-  /**
    * Телефон в виде текста, как показывается на сайте.
    */
   phone?: string | null;
@@ -900,26 +881,6 @@ export interface Setting {
    */
   grab?: string | null;
   /**
-   * Ссылка на страницу меню.
-   */
-  menu?: string | null;
-  /**
-   * Ссылка на страницу расписания всех мероприятий.
-   */
-  events?: string | null;
-  /**
-   * Ссылка на страницу доставки.
-   */
-  delivery?: string | null;
-  /**
-   * Ссылка на страницу контактов.
-   */
-  contacts?: string | null;
-  /**
-   * Ссылка на форму бронирования стола. Если пусто — кнопка ведёт в WhatsApp.
-   */
-  bookingForm?: string | null;
-  /**
    * Режим работы ресторана — показывается в контактах.
    */
   workingHours?: {
@@ -984,30 +945,6 @@ export interface HomeContent {
     subtitle?: string | null;
   };
   /**
-   * Сетка услуг на главной. Рекомендуем 6–8 плиток (до 12).
-   */
-  services?:
-    | {
-        /**
-         * Выберите иконку из списка.
-         */
-        icon?: string | null;
-        /**
-         * Например: «Наше меню»
-         */
-        title: string;
-        /**
-         * Коротко о разделе. Например: «Кавказская и азиатская кухня»
-         */
-        description: string;
-        /**
-         * Куда ведёт плитка. Пример: /menu, /events
-         */
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
    * Строго 4 пункта: текст, ссылка и иконка.
    */
   quickNav?:
@@ -1056,6 +993,30 @@ export interface HomeContent {
     | boolean
     | null;
   /**
+   * Сетка услуг на главной. Количество плиток любое — столько, сколько добавишь. Рекомендуем 6–8.
+   */
+  services?:
+    | {
+        /**
+         * Выберите иконку из списка.
+         */
+        icon?: string | null;
+        /**
+         * Например: «Наше меню»
+         */
+        title: string;
+        /**
+         * Коротко о разделе. Например: «Кавказская и азиатская кухня»
+         */
+        description: string;
+        /**
+         * Куда ведёт плитка. Пример: /menu, /events
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * Заголовок секции меню на главной.
    */
   menuTitle?: string | null;
@@ -1067,6 +1028,18 @@ export interface HomeContent {
    * Заголовок секции галереи на главной.
    */
   galleryTitle?: string | null;
+  /**
+   * Заголовок в выдаче поиска.
+   */
+  seoTitle: string;
+  /**
+   * Описание под заголовком в выдаче. Оптимально 140–160 символов.
+   */
+  seoDescription: string;
+  /**
+   * Через запятую. Поисковики их не учитывают, но помогают вам самим ориентироваться. Пример: ресторан фукуок, кальян фукуок, караоке
+   */
+  seoKeywords: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1075,19 +1048,6 @@ export interface HomeContent {
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
-  siteName?: T;
-  tagline?: T;
-  description?: T;
-  footerHeart?: T;
-  cuisines?: T;
-  neonSlogan?:
-    | T
-    | {
-        line1?: T;
-        accent1?: T;
-        accent2?: T;
-        subtitle?: T;
-      };
   phone?: T;
   phoneHref?: T;
   email?: T;
@@ -1105,11 +1065,6 @@ export interface SettingsSelect<T extends boolean = true> {
   googleMapsEmbed?: T;
   yandexMaps?: T;
   grab?: T;
-  menu?: T;
-  events?: T;
-  delivery?: T;
-  contacts?: T;
-  bookingForm?: T;
   workingHours?:
     | T
     | {
@@ -1141,15 +1096,6 @@ export interface HomeContentSelect<T extends boolean = true> {
         accent2?: T;
         subtitle?: T;
       };
-  services?:
-    | T
-    | {
-        icon?: T;
-        title?: T;
-        description?: T;
-        href?: T;
-        id?: T;
-      };
   quickNav?:
     | T
     | {
@@ -1161,9 +1107,21 @@ export interface HomeContentSelect<T extends boolean = true> {
       };
   galleryPhotoPicks?: T;
   galleryVideoPicks?: T;
+  services?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        href?: T;
+        id?: T;
+      };
   menuTitle?: T;
   eventsTitle?: T;
   galleryTitle?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  seoKeywords?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

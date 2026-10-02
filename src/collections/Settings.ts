@@ -10,70 +10,6 @@ export const Settings: GlobalConfig = {
       type: "tabs",
       tabs: [
         {
-          label: "Основное",
-          fields: [
-            {
-              name: "siteName",
-              type: "text",
-              label: "Название сайта",
-              defaultValue: "POIDEM POZHREM!",
-              admin: {
-                description: "Название ресторана, как в шапке сайта.",
-              },
-            },
-            {
-              name: "tagline",
-              type: "text",
-              label: "Слоган",
-              defaultValue: "Ресторан на Фукуоке, где каждый день что-то происходит!",
-              admin: {
-                description: "Фраза-слоган, используется в описании сайта.",
-              },
-            },
-            {
-              name: "description",
-              type: "textarea",
-              label: "Описание сайта",
-              defaultValue: "Сообщество и поддержка русскоязычных на Фукуоке",
-              admin: {
-                description: "Короткое описание для поисковиков (показывается в выдаче Google).",
-              },
-            },
-            {
-              name: "footerHeart",
-              type: "text",
-              label: "Текст в футере",
-              defaultValue: "POIDEM POZHREM — в этом ресторане реально жизнь становится вкусной!",
-              admin: {
-                description: "Строка внизу каждой страницы.",
-              },
-            },
-            {
-              name: "cuisines",
-              type: "text",
-              label: "Кухни",
-              defaultValue: "РУССКАЯ • КАВКАЗСКАЯ • ВОСТОЧНАЯ • ЕВРОПЕЙСКАЯ • АЗИАТСКАЯ КУХНЯ",
-              admin: {
-                description: "Перечень кухонь. Кухни разделяются значком •",
-              },
-            },
-            {
-              type: "group",
-              name: "neonSlogan",
-              label: "Неоновый слоган",
-              admin: {
-                description: "Светящаяся строка на главной из 3 коротких слов + подзаголовок.",
-              },
-              fields: [
-                { name: "line1", type: "text", label: "Строка 1", defaultValue: "Я ВЫБИРАЮ", admin: { description: "Первое слово слогана. Например: «Я ВЫБИРАЮ»" } },
-                { name: "accent1", type: "text", label: "Акцент 1", defaultValue: "ВКУСНО", admin: { description: "Второе слово, обычно цветное. Например: «ВКУСНО»" } },
-                { name: "accent2", type: "text", label: "Акцент 2", defaultValue: "ЖИТЬ!", admin: { description: "Третье слово. Например: «ЖИТЬ!»" } },
-                { name: "subtitle", type: "text", label: "Подзаголовок", defaultValue: "И ЭТО ЛУЧШЕЕ РЕШЕНИЕ СЕГОДНЯ", admin: { description: "Фраза под неоновыми словами." } },
-              ],
-            },
-          ],
-        },
-        {
           label: "Контакты",
           fields: [
             { name: "phone", type: "text", label: "Телефон", defaultValue: "+84 783 779 879", admin: { description: "Телефон в виде текста, как показывается на сайте." } },
@@ -103,16 +39,6 @@ export const Settings: GlobalConfig = {
             { name: "googleMapsEmbed", type: "text", label: "Google Maps — встроенная карта (embed)", defaultValue: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1428.975517871165!2d103.96382863259639!3d10.2056387725145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a78dcc750e2e1b%3A0xb5338d32fc7decc6!2sPOIDEM%20POZHREM%20%E2%80%94%20Russian%2C%20Caucasian%2C%20European%20%26%20Eastern%20Cuisine!5e0!3m2!1sru!2sil!4v1790443017625!5m2!1sru!2sil", admin: { description: "Embed-ссылка из Google Maps (Поделиться → Встроить карту). Используется в iframe на страницах «Как нас найти» и «Контакты»." } },
             { name: "yandexMaps", type: "text", label: "Яндекс Карты", defaultValue: "https://yandex.ru/maps/?pt=103.9530,10.2100&z=17&l=map", admin: { description: "Ссылка на ресторан в Яндекс Картах." } },
             { name: "grab", type: "text", label: "Grab", defaultValue: "https://r.grab.com/g/6-20260801_223246_0BD425829C55464F9ACF75301A16722E_MEXMPS-5-C76UNTW3VLBDTT", admin: { description: "Ссылка на заказ доставки в Grab." } },
-          ],
-        },
-        {
-          label: "Ссылки страниц",
-          fields: [
-            { name: "menu", type: "text", label: "Меню", defaultValue: "https://poidempozhrem.com/menu", admin: { description: "Ссылка на страницу меню." } },
-            { name: "events", type: "text", label: "Афиша мероприятий", defaultValue: "https://poidempozhrem.com/events", admin: { description: "Ссылка на страницу расписания всех мероприятий." } },
-            { name: "delivery", type: "text", label: "Доставка", defaultValue: "https://poidempozhrem.com/delivery", admin: { description: "Ссылка на страницу доставки." } },
-            { name: "contacts", type: "text", label: "Контакты", defaultValue: "https://poidempozhrem.com/contacts", admin: { description: "Ссылка на страницу контактов." } },
-            { name: "bookingForm", type: "text", label: "Форма бронирования", admin: { description: "Ссылка на форму бронирования стола. Если пусто — кнопка ведёт в WhatsApp." } },
           ],
         },
         {

@@ -36,10 +36,24 @@ export const transformMenuCategory = (category: MenuCategory): MenuData => ({
     transformSection(section, category.slug, index),
   ),
   group: category.group,
+  order: toOrderNumber(category.order),
 })
 
+const toOrderNumber = (value: number | string | null | undefined): number | undefined => {
+  const parsed = typeof value === "string" ? Number(value) : value
+  return typeof parsed === "number" && Number.isFinite(parsed) ? parsed : undefined
+}
+
 export const transformMenuCategories = (categories: MenuCategory[]): MenuData[] =>
-  categories.map(transformMenuCategory)
+  categories
+    .map((category, index) => ({ menu: transformMenuCategory(category), index }))
+    .sort((a, b) => {
+      const orderA = a.menu.order ?? Number.MAX_SAFE_INTEGER
+      const orderB = b.menu.order ?? Number.MAX_SAFE_INTEGER
+      if (orderA !== orderB) return orderA - orderB
+      return a.index - b.index
+    })
+    .map(({ menu }) => menu)
 
 export const transformMenuNumber = (categories: MenuCategory[]): Map<string, number> => {
   const numbers = new Map<string, number>()

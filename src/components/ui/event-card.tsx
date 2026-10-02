@@ -81,8 +81,8 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
         <h3 className="text-base font-display uppercase text-text-primary mb-1">
           {event.title}
         </h3>
-        {event.subtitle && (
-          <p className="text-sm text-accent font-display uppercase mb-1">{event.subtitle}</p>
+        {event.tagline && (
+          <p className="text-sm text-accent font-display uppercase mb-1">{event.tagline}</p>
         )}
         <p className="text-xs text-text-secondary mb-2 line-clamp-2">{event.description}</p>
         <div className="flex items-center gap-2 text-sm text-text-muted">

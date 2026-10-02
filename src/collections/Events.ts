@@ -43,14 +43,6 @@ export const Events: CollectionConfig = {
       },
     },
     {
-      name: "subtitle",
-      type: "text",
-      label: "Подзаголовок",
-      admin: {
-        description: "Короткая фраза под названием. Можно оставить пустым.",
-      },
-    },
-    {
       name: "slug",
       type: "text",
       label: "Slug",
@@ -91,9 +83,12 @@ export const Events: CollectionConfig = {
         { label: "Бизнес", value: "business" },
         { label: "Шоу", value: "show" },
       ],
-      defaultValue: "all",
+      defaultValue: "show",
       admin: {
-        description: "Раздел, в котором событие показывается на сайте. «Все» — общий случай.",
+        hidden: true,
+      },
+      hooks: {
+        beforeValidate: [() => "show"],
       },
     },
     {
@@ -299,6 +294,66 @@ export const Events: CollectionConfig = {
                   ],
                 },
               ],
+            },
+          ],
+        },
+        {
+          label: "SEO",
+          admin: {
+            description: "Как страница выглядит в поиске и при отправке ссылки в мессенджер.",
+          },
+          fields: [
+            {
+              name: "seoTitle",
+              type: "text",
+              label: "Title страницы",
+              required: true,
+              maxLength: 70,
+              admin: {
+                description:
+                  "Заголовок в выдаче поиска. Оставьте пустым — подставится название события.",
+              },
+              hooks: {
+                beforeValidate: [
+                  ({ siblingData, value }) =>
+                    (value as string) ||
+                    `${(siblingData?.title as string) || "Событие"} | POIDEM POZHREM!`,
+                ],
+              },
+            },
+            {
+              name: "seoDescription",
+              type: "textarea",
+              label: "Description страницы",
+              required: true,
+              maxLength: 180,
+              admin: {
+                description:
+                  "Описание под заголовком в выдаче. Оптимально 140–160 символов. Оставьте пустым — подставится описание события.",
+              },
+              hooks: {
+                beforeValidate: [
+                  ({ siblingData, value }) =>
+                    (value as string) || ((siblingData?.description as string) || ""),
+                ],
+              },
+            },
+            {
+              name: "seoKeywords",
+              type: "text",
+              label: "Ключевые слова",
+              required: true,
+              admin: {
+                description:
+                  "Через запятую. Поисковики их не учитывают, но помогают вам самим находить событие в админке. Пример: караоке, фукуок, четверг",
+              },
+              hooks: {
+                beforeValidate: [
+                  ({ siblingData, value }) =>
+                    (value as string) ||
+                    `${(siblingData?.title as string) || "событие"}, POIDEM POZHREM, Фукуок`,
+                ],
+              },
             },
           ],
         },

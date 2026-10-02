@@ -7,6 +7,8 @@ import { CartProvider } from "@/components/cart/cart-context"
 import { CartButton } from "@/components/cart/cart-button"
 import { CartDrawer } from "@/components/cart/cart-drawer"
 import { getSiteSettings } from "@/lib/data/settings"
+import { RestaurantStructuredData, WebSiteStructuredData } from "@/components/seo/StructuredData"
+import { DEFAULT_OG_IMAGE, SITE_NAME, siteUrl } from "@/lib/seo/config"
 import "../globals.css"
 
 const oswald = Oswald({
@@ -24,31 +26,32 @@ const montserrat = Montserrat({
 
 
 
-const SITE_URL = "https://poidempozhrem.com"
+const FALLBACK_DESCRIPTION =
+  "Ресторан на Фукуоке, где каждый день что-то происходит! Русская, кавказская, восточная, европейская, азиатская кухня. Кальяны, мероприятия, доставка."
 
 export async function generateMetadata(): Promise<Metadata> {
   const { site } = await getSiteSettings()
 
+  const description = site.description || FALLBACK_DESCRIPTION
+
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(siteUrl),
     title: `${site.name} — Ресторан на Фукуоке`,
-    description:
-      site.description ||
-      "Ресторан на Фукуоке, где каждый день что-то происходит! Русская, кавказская, восточная, европейская, азиатская кухня. Кальяны, мероприятия, доставка.",
+    description,
     openGraph: {
       title: `${site.name} — Ресторан на Фукуоке`,
-      description:
-        site.description ||
-        "Ресторан на Фукуоке, где каждый день что-то происходит! Русская, кавказская, восточная, европейская, азиатская кухня. Кальяны, мероприятия, доставка.",
+      description,
       type: "website",
-      url: SITE_URL,
-      siteName: site.name,
+      url: siteUrl,
+      siteName: SITE_NAME,
       locale: "ru_RU",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${site.name} — Ресторан на Фукуоке`,
-      description: site.description,
+      description,
+      images: [DEFAULT_OG_IMAGE],
     },
   }
 }
@@ -60,41 +63,6 @@ export default async function RootLayout({
 }>) {
   const { site, links, workingHours } = await getSiteSettings()
 
-  const restaurantJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    name: site.name,
-    description: site.description,
-    url: SITE_URL,
-    telephone: links.phone,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "97 Trần Hưng Đạo, 2 этаж (вход через Holiday Center)",
-      addressLocality: "Duong Dong",
-      addressRegion: "Phu Quoc",
-      addressCountry: "VN",
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        opens: "00:00",
-        closes: "23:59",
-      },
-    ],
-    servesCuisine: site.cuisines,
-    priceRange: "$$",
-    sameAs: [
-      links.telegram,
-      links.whatsapp,
-      links.instagram,
-      links.facebook,
-      links.youtube,
-      links.zalo,
-    ],
-    hasMap: links.googleMaps,
-  }
-
   return (
     <html
       lang="ru"
@@ -102,12 +70,8 @@ export default async function RootLayout({
       className={`${oswald.variable} ${montserrat.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-bg text-text-primary font-body antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(restaurantJsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
+        <WebSiteStructuredData />
+        <RestaurantStructuredData site={site} links={links} workingHours={workingHours} />
         <CartProvider>
           <Header workingHours={workingHours} />
           <main className="container py-6 flex-1">

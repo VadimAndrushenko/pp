@@ -2,6 +2,7 @@ import { transformEvents, transformEvent, transformEventBySlug, sortEventsByStar
 import type { HomeContent } from "@payload-types"
 import type { ServiceItem } from "@/types"
 import type { GalleryPick } from "@/globals/components/galleryPicksShared"
+import type { SeoFields } from "@/lib/seo/metadata"
 import { site as siteFallback } from "@/config/site"
 
 export interface QuickNavItemData {
@@ -33,6 +34,7 @@ export interface HeroSectionData {
 
 export interface HomeContentData {
   services: ServiceItem[]
+  seo: SeoFields
   sectionTitles: HomeSectionTitles
   hero: HeroSectionData
   quickNav: QuickNavItemData[]
@@ -89,6 +91,11 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
           href: service.title === "Забронировать стол" ? "/contacts" : service.href,
         }))
       : [],
+  seo: {
+    seoTitle: home?.seoTitle || "",
+    seoDescription: home?.seoDescription || "",
+    seoKeywords: home?.seoKeywords || "",
+  },
   sectionTitles: {
     menu: home?.menuTitle || "МЕНЮ",
     events: home?.eventsTitle || "РАСПИСАНИЕ НА НЕДЕЛЮ",

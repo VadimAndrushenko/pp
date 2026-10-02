@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 
 import { BookingButton } from "@/components/ui/booking-button"
 import { Breadcrumb } from "@/components/layout/breadcrumb"
@@ -17,24 +18,46 @@ import {
   transformEventDetail,
   sortEventsByStart,
 } from "@/lib/transformData"
+import { resolveImageUrlNullable } from "@/lib/transformData/resolveImageUrl"
+import { buildMetadata } from "@/lib/seo/metadata"
+import { EventStructuredData } from "@/components/seo/StructuredData"
+import { links } from "@/config/links"
 
 export const revalidate = 30
 
 async function getEventWithDetails(
   slug: string,
-): Promise<{ event: EventItem; details: EventDetail } | null> {
+): Promise<{ event: EventItem; details: EventDetail; dbEvent: Awaited<ReturnType<typeof getEventBySlug>> } | null> {
   const dbEvent = await getEventBySlug(slug)
   if (!dbEvent) return null
 
   const details = transformEventDetail(dbEvent)
   if (!details) return null
 
-  return { event: transformEvent(dbEvent), details }
+  return { event: transformEvent(dbEvent), details, dbEvent }
 }
 
 export async function generateStaticParams() {
   const events = await getEvents()
   return events.map((event) => ({ slug: event.slug }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const event = await getEventBySlug(slug)
+  if (!event) return {}
+
+  return buildMetadata({
+    seo: event,
+    title: event.title,
+    description: event.description,
+    path: `/events/${event.slug}`,
+    image: resolveImageUrlNullable(event.image),
+  })
 }
 
 export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -45,12 +68,24 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
     notFound()
   }
 
-  const { event, details } = data
+  const { event, details, dbEvent } = data
 
   const allEventsData = await getEvents().then(transformEvents)
   const allEvents = sortEventsByStart(allEventsData)
 
   const hexRaw = event.accentColor?.trim().replace(/^#/, "")
+  const schemaEvent = dbEvent ?? {
+    title: event.title,
+    slug: event.slug,
+    description: event.description,
+    date: "",
+    time: event.time,
+    scheduleType: "recurring" as const,
+    specificDate: null,
+    image: 0,
+    admission: "free" as const,
+  }
+
   const accentCss =
     hexRaw && /^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hexRaw)
       ? [
@@ -66,7 +101,8 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {accentCss && (
         <style dangerouslySetInnerHTML={{ __html: `:root:root{${accentCss}}` }} />
       )}
-      <Breadcrumb />
+      <Breadcrumb items={[{ label: "События", href: "/events" }, { label: event.title }]} />
+      <EventStructuredData event={schemaEvent} links={links} />
       <EventHero
         event={event}
         titleLine1={details.titleLine1}

@@ -48,7 +48,6 @@ export const transformEvents = (events: Event[], now: Date = new Date()): EventI
         month,
         dayOfWeek,
         title: event.title,
-        subtitle: event.subtitle ?? undefined,
         tagline: event.heroSubtitle ?? undefined,
         category: event.category,
         time: event.time,

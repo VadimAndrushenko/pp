@@ -8,6 +8,9 @@ import { StarDivider } from "@/components/ui/star-divider"
 import type { MenuData } from "@/config/menu-data"
 import { allMenuData } from "@/config/menu-data"
 import { links } from "@/config/links"
+import { buildMetadata } from "@/lib/seo/metadata"
+import { MenuStructuredData } from "@/components/seo/StructuredData"
+import { resolveImageUrlNullable } from "@/lib/transformData/resolveImageUrl"
 import { getMenuCategories } from "@/lib/payload/menu"
 import { transformMenuCategories } from "@/lib/transformData/menuTransform"
 
@@ -30,13 +33,27 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const menus = await getMenus()
-  const menu = menus.find((m) => m.id === slug)
-  if (!menu) return {}
-  return {
-    title: `${menu.title} — Меню | POIDEM POZHREM!`,
-    description: `${menu.subtitle}. ${links.address}`,
+  const categories = await getMenuCategories()
+  const category = categories.find((c) => c.slug === slug)
+
+  if (!category) {
+    const menu = allMenuData.find((m) => m.id === slug)
+    if (!menu) return {}
+    return buildMetadata({
+      title: menu.title,
+      description: menu.subtitle,
+      path: `/menu/${slug}`,
+      image: menu.image,
+    })
   }
+
+  return buildMetadata({
+    seo: category,
+    title: category.title,
+    description: category.subtitle,
+    path: `/menu/${slug}`,
+    image: resolveImageUrlNullable(category.image),
+  })
 }
 
 export default async function MenuCategoryPage({
@@ -52,7 +69,8 @@ export default async function MenuCategoryPage({
     notFound()
   }
 
-  const menuIndex = menus.findIndex((m) => m.id === slug)
+  const menuPosition = menus.findIndex((m) => m.id === slug)
+  const menuIndex = (menus[menuPosition]?.order ?? menuPosition + 1) - 1
   const sectionStarts = menu.sections.reduce<number[]>((acc, section) => {
     const prev = acc[acc.length - 1] ?? 0
     acc.push(prev + section.dishes.length)
@@ -62,6 +80,7 @@ export default async function MenuCategoryPage({
   return (
     <>
       <Breadcrumb items={[{ label: "Меню", href: "/menu" }, { label: menu.title }]} />
+      <MenuStructuredData menu={menu} />
 
       <MenuHero menu={menu} index={menuIndex} />
       {menu.sections.length === 1 && <StarDivider className="mb-8" />}

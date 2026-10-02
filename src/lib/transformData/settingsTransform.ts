@@ -68,17 +68,12 @@ const toInternalPath = (url: string): string => {
 
 export const transformSettings = (setting: Setting | null): SiteSettings => ({
   site: {
-    name: setting?.siteName || siteFallback.name,
-    tagline: setting?.tagline || siteFallback.tagline,
-    description: setting?.description || siteFallback.description,
-    footerHeart: setting?.footerHeart || siteFallback.footerHeart,
-    cuisines: setting?.cuisines || siteFallback.cuisines,
-    neonSlogan: {
-      line1: setting?.neonSlogan?.line1 || siteFallback.neonSlogan.line1,
-      accent1: setting?.neonSlogan?.accent1 || siteFallback.neonSlogan.accent1,
-      accent2: setting?.neonSlogan?.accent2 || siteFallback.neonSlogan.accent2,
-      subtitle: setting?.neonSlogan?.subtitle || siteFallback.neonSlogan.subtitle,
-    },
+    name: siteFallback.name,
+    tagline: siteFallback.tagline,
+    description: siteFallback.description,
+    footerHeart: siteFallback.footerHeart,
+    cuisines: siteFallback.cuisines,
+    neonSlogan: { ...siteFallback.neonSlogan },
   },
   links: {
     googleMaps: setting?.googleMaps || linksFallback.googleMaps,
@@ -87,13 +82,11 @@ export const transformSettings = (setting: Setting | null): SiteSettings => ({
     telegram: setting?.telegram || linksFallback.telegram,
     telegramBot: setting?.telegramBot || linksFallback.telegramBot,
     whatsapp: setting?.whatsapp || linksFallback.whatsapp,
-    menu: toInternalPath(setting?.menu || linksFallback.menu),
-    events: toInternalPath(setting?.events || linksFallback.events),
-    delivery: toInternalPath(setting?.delivery || linksFallback.delivery),
-    contacts: toInternalPath(setting?.contacts || linksFallback.contacts),
-    bookingForm: toInternalPath(
-      setting?.bookingForm || linksFallback.bookingForm || linksFallback.whatsapp
-    ),
+    menu: toInternalPath(linksFallback.menu),
+    events: toInternalPath(linksFallback.events),
+    delivery: toInternalPath(linksFallback.delivery),
+    contacts: toInternalPath(linksFallback.contacts),
+    bookingForm: toInternalPath(linksFallback.bookingForm || linksFallback.whatsapp),
     grab: setting?.grab || linksFallback.grab,
     instagram: setting?.instagram || linksFallback.instagram,
     facebook: setting?.facebook || linksFallback.facebook,

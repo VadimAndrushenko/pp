@@ -67,38 +67,6 @@ export const HomeContent: GlobalConfig = {
           ],
         },
         {
-          label: "Услуги",
-          fields: [
-            {
-              name: "services",
-              type: "array",
-              label: "Услуги (сетка на главной)",
-              labels: { singular: "услуга", plural: "услуги" },
-              minRows: 6,
-              maxRows: 12,
-              admin: {
-                description: "Сетка услуг на главной. Рекомендуем 6–8 плиток (до 12).",
-              },
-              fields: [
-                {
-                  name: "icon",
-                  type: "text",
-                  label: "Иконка (Lucide)",
-                  admin: {
-                    components: {
-                      Field: "/src/collections/components/IconPickerField",
-                    },
-                    description: "Выберите иконку из списка.",
-                  },
-                },
-                { name: "title", type: "text", label: "Название", required: true, admin: { description: "Например: «Наше меню»" } },
-                { name: "description", type: "text", label: "Описание", required: true, admin: { description: "Коротко о разделе. Например: «Кавказская и азиатская кухня»" } },
-                { name: "href", type: "text", label: "Ссылка", required: true, admin: { description: "Куда ведёт плитка. Пример: /menu, /events" } },
-              ],
-            },
-          ],
-        },
-        {
           label: "Быстрая навигация",
           fields: [
             {
@@ -161,6 +129,37 @@ export const HomeContent: GlobalConfig = {
           ],
         },
         {
+          label: "Услуги",
+          fields: [
+            {
+              name: "services",
+              type: "array",
+              label: "Услуги (сетка на главной)",
+              labels: { singular: "услуга", plural: "услуги" },
+              admin: {
+                description:
+                  "Сетка услуг на главной. Количество плиток любое — столько, сколько добавишь. Рекомендуем 6–8.",
+              },
+              fields: [
+                {
+                  name: "icon",
+                  type: "text",
+                  label: "Иконка (Lucide)",
+                  admin: {
+                    components: {
+                      Field: "/src/collections/components/IconPickerField",
+                    },
+                    description: "Выберите иконку из списка.",
+                  },
+                },
+                { name: "title", type: "text", label: "Название", required: true, admin: { description: "Например: «Наше меню»" } },
+                { name: "description", type: "text", label: "Описание", required: true, admin: { description: "Коротко о разделе. Например: «Кавказская и азиатская кухня»" } },
+                { name: "href", type: "text", label: "Ссылка", required: true, admin: { description: "Куда ведёт плитка. Пример: /menu, /events" } },
+              ],
+            },
+          ],
+        },
+        {
           label: "Заголовки секций",
           fields: [
             {
@@ -188,6 +187,49 @@ export const HomeContent: GlobalConfig = {
               defaultValue: "ФОТО И ВИДЕООТЧЁТЫ",
               admin: {
                 description: "Заголовок секции галереи на главной.",
+              },
+            },
+          ],
+        },
+        {
+          label: "SEO",
+          admin: {
+            description: "Как главная страница выглядит в поиске и при отправке ссылки в мессенджер.",
+          },
+          fields: [
+            {
+              name: "seoTitle",
+              type: "text",
+              label: "Title главной",
+              required: true,
+              maxLength: 70,
+              defaultValue: "Ресторан на Фукуоке POIDEM POZHREM — меню, события, доставка",
+              admin: {
+                description: "Заголовок в выдаче поиска.",
+              },
+            },
+            {
+              name: "seoDescription",
+              type: "textarea",
+              label: "Description главной",
+              required: true,
+              maxLength: 180,
+              defaultValue:
+                "Русская, кавказская, восточная, европейская и азиатская кухня на Фукуоке. Кальяны, живые события каждый день, доставка блюд.",
+              admin: {
+                description: "Описание под заголовком в выдаче. Оптимально 140–160 символов.",
+              },
+            },
+            {
+              name: "seoKeywords",
+              type: "text",
+              label: "Ключевые слова",
+              required: true,
+              defaultValue:
+                "ресторан фукуок, ресторан русский, кальян фукуок, караоке фукуок, меню фукуок, доставка фукуок",
+              admin: {
+                description:
+                  "Через запятую. Поисковики их не учитывают, но помогают вам самим ориентироваться. Пример: ресторан фукуок, кальян фукуок, караоке",
               },
             },
           ],
