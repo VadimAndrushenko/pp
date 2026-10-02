@@ -20,7 +20,7 @@ export const services: ServiceItem[] = [
     icon: "phone",
     title: "Забронировать стол",
     description: "Telegram, WhatsApp, телефон",
-    href: "/contacts",
+    href: "/booking",
   },
   {
     id: "route",

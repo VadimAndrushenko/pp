@@ -116,7 +116,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       <EventInfo time={event.time} dayOfWeek={event.dayOfWeek} />
       <section className="section-py">
         <BookingButton
-          href="https://wa.me/84855559797"
+          href={links.bookingForm}
           label="ЗАБРОНИРОВАТЬ СТОЛ"
           className="text-black lg:py-6 lg:text-2xl"
         />

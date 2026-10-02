@@ -14,6 +14,13 @@ export const SITE_NAME = 'POIDEM POZHREM!'
 
 export const DEFAULT_OG_IMAGE = `${siteUrl}/og-default.jpg`
 
+/**
+ * Иконка вкладки браузера по умолчанию.
+ * Подменяется в «Содержание главной страницы → SEO → Иконка вкладки браузера».
+ */
+export const DEFAULT_FAVICON = '/icon.png'
+export const DEFAULT_APPLE_ICON = '/apple-icon.png'
+
 export const GEO = {
   latitude: 10.2056387725145,
   longitude: 103.96382863259639,

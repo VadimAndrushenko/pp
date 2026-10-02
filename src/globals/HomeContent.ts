@@ -231,6 +231,16 @@ export const HomeContent: GlobalConfig = {
               },
             },
             {
+              name: "seoFavicon",
+              type: "upload",
+              relationTo: "media",
+              label: "Иконка вкладки браузера (favicon)",
+              admin: {
+                description:
+                  "Маленькая иконка, которая стоит рядом с адресом сайта во вкладке браузера и в закладках. Это НЕ картинка для ссылки — для неё есть поле выше. Квадратная, от 64×64 до 512×512. Ставится на всём сайте сразу.",
+              },
+            },
+            {
               name: "seoKeywords",
               type: "text",
               label: "Ключевые слова",

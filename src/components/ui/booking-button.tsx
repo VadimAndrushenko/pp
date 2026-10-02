@@ -12,7 +12,7 @@ interface BookingButtonProps {
 }
 
 export function BookingButton({
-  href = links.whatsapp,
+  href = links.bookingForm,
   label = "Забронировать стол",
   icon = <Phone className="h-8 w-8 max-sm:h-6 max-sm:w-6" />,
   size = "full",

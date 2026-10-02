@@ -1041,6 +1041,10 @@ export interface HomeContent {
    */
   seoImage?: (number | null) | Media;
   /**
+   * Маленькая иконка, которая стоит рядом с адресом сайта во вкладке браузера и в закладках. Это НЕ картинка для ссылки — для неё есть поле выше. Квадратная, от 64×64 до 512×512. Ставится на всём сайте сразу.
+   */
+  seoFavicon?: (number | null) | Media;
+  /**
    * Через запятую. Поисковики их не учитывают, но помогают вам самим ориентироваться. Пример: ресторан фукуок, кальян фукуок, караоке
    */
   seoKeywords: string;
@@ -1126,6 +1130,7 @@ export interface HomeContentSelect<T extends boolean = true> {
   seoTitle?: T;
   seoDescription?: T;
   seoImage?: T;
+  seoFavicon?: T;
   seoKeywords?: T;
   updatedAt?: T;
   createdAt?: T;

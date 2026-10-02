@@ -89,7 +89,7 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
           icon: service.icon || "",
           title: service.title,
           description: service.description,
-          href: service.title === "Забронировать стол" ? "/contacts" : service.href,
+          href: service.title === "Забронировать стол" ? "/booking" : service.href,
         }))
       : [],
   seo: {
@@ -100,6 +100,7 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
     seoImageAlt:
       (typeof home?.seoImage === "object" && home?.seoImage ? home.seoImage.alt : null) ||
       "",
+    seoFaviconUrl: resolveImageUrlNullable(home?.seoFavicon),
   },
   sectionTitles: {
     menu: home?.menuTitle || "МЕНЮ",

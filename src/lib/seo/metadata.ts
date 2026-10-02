@@ -8,6 +8,8 @@ export interface SeoFields {
   /** Картинка превью из контента (главная). Подставляется, если не передан image. */
   seoImageUrl?: string | null
   seoImageAlt?: string | null
+  /** Иконка вкладки браузера из контента (главная). */
+  seoFaviconUrl?: string | null
 }
 
 const clean = (value?: string | null): string => (value ?? '').trim()

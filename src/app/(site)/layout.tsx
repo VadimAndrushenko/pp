@@ -9,7 +9,7 @@ import { CartDrawer } from "@/components/cart/cart-drawer"
 import { getSiteSettings } from "@/lib/data/settings"
 import { getHomeContentData } from "@/lib/data/homeContent"
 import { RestaurantStructuredData, WebSiteStructuredData } from "@/components/seo/StructuredData"
-import { DEFAULT_OG_IMAGE, SITE_NAME, siteUrl } from "@/lib/seo/config"
+import { DEFAULT_APPLE_ICON, DEFAULT_FAVICON, DEFAULT_OG_IMAGE, SITE_NAME, siteUrl } from "@/lib/seo/config"
 import "../globals.css"
 
 const oswald = Oswald({
@@ -40,10 +40,17 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImage = home.seo.seoImageUrl || DEFAULT_OG_IMAGE
   const ogImageAlt = home.seo.seoImageAlt || SITE_NAME
 
+  // Иконка вкладки браузера — тоже одна на весь сайт, из SEO главной.
+  const favicon = home.seo.seoFaviconUrl || DEFAULT_FAVICON
+
   return {
     metadataBase: new URL(siteUrl),
     title: `${site.name} — Ресторан на Фукуоке`,
     description,
+    icons: {
+      icon: [{ url: favicon, type: "image/png" }],
+      apple: [{ url: DEFAULT_APPLE_ICON, type: "image/png", sizes: "180x180" }],
+    },
     openGraph: {
       title: `${site.name} — Ресторан на Фукуоке`,
       description,

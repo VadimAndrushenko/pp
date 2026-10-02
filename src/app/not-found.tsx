@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Oswald, Montserrat } from "next/font/google"
-import { SITE_NAME } from "@/lib/seo/config"
+import { DEFAULT_APPLE_ICON, DEFAULT_FAVICON, SITE_NAME } from "@/lib/seo/config"
+import { getHomeContentData } from "@/lib/data/homeContent"
 import "./globals.css"
 
 const oswald = Oswald({
@@ -16,10 +17,20 @@ const montserrat = Montserrat({
   display: "swap",
 })
 
-export const metadata: Metadata = {
-  title: "Страница не найдена",
-  description: "Такой страницы нет. Вернитесь на главную или откройте меню и расписание событий.",
-  robots: { index: false, follow: true },
+export async function generateMetadata(): Promise<Metadata> {
+  // Та же иконка вкладки, что и на остальном сайте.
+  const home = await getHomeContentData()
+  const favicon = home.seo.seoFaviconUrl || DEFAULT_FAVICON
+
+  return {
+    title: "Страница не найдена",
+    description: "Такой страницы нет. Вернитесь на главную или откройте меню и расписание событий.",
+    robots: { index: false, follow: true },
+    icons: {
+      icon: [{ url: favicon, type: "image/png" }],
+      apple: [{ url: DEFAULT_APPLE_ICON, type: "image/png", sizes: "180x180" }],
+    },
+  }
 }
 
 export default function NotFound() {

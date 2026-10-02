@@ -6,10 +6,8 @@ export function ContactsActions() {
   return (
     <section className="section-py">
       <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-        <a
-          href={links.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href={links.bookingForm}
           className="group relative overflow-hidden rounded-card bg-gradient-to-br from-surface to-black p-5 border border-border shadow-card-glow hover:border-accent hover:shadow-card-glow-hover hover:-translate-y-1 transition-all duration-500"
         >
           <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-accent-dim to-transparent group-hover:from-accent transition-all duration-500" />
@@ -22,7 +20,7 @@ export function ContactsActions() {
               <p className="font-bold text-lg text-text-primary">Забронировать столик</p>
             </div>
           </div>
-        </a>
+        </Link>
         <Link
           href="/delivery"
           className="group relative overflow-hidden rounded-card bg-gradient-to-br from-surface to-black p-5 border border-border shadow-card-glow hover:border-accent hover:shadow-card-glow-hover hover:-translate-y-1 transition-all duration-500"

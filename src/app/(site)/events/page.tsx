@@ -6,6 +6,7 @@ import { Breadcrumb } from '@/components/layout/breadcrumb'
 import { getEvents } from '@/lib/payload/events'
 import { transformEvents } from '@/lib/transformData'
 import type { EventCategory, EventItem } from '@/types'
+import { links } from '@/config/links'
 
 export const revalidate = 60
 
@@ -149,7 +150,7 @@ export default async function EventsPage({
               Напишите нам — забронируем стол у сцены и подскажем, что ждёт в этот вечер.
             </p>
             <Link
-              href="/contacts"
+              href={links.bookingForm}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent hover:bg-accent-hover text-black font-semibold px-6 py-3 uppercase tracking-wider text-sm shadow-[0_0_25px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] transition"
             >
               Забронировать <ChevronRight className="h-4 w-4" />
