@@ -5,6 +5,9 @@ export interface SeoFields {
   seoTitle?: string | null
   seoDescription?: string | null
   seoKeywords?: string | null
+  /** Картинка превью из контента (главная). Подставляется, если не передан image. */
+  seoImageUrl?: string | null
+  seoImageAlt?: string | null
 }
 
 const clean = (value?: string | null): string => (value ?? '').trim()
@@ -50,8 +53,8 @@ export const buildMetadata = ({
   const keywords = keywordsList(seo?.seoKeywords)
   const url = `${siteUrl}${path}`
 
-  const ogImage = clean(image) || DEFAULT_OG_IMAGE
-  const ogAlt = clean(imageAlt) || seoTitle || `${SITE_NAME}`
+  const ogImage = clean(image) || clean(seo?.seoImageUrl) || DEFAULT_OG_IMAGE
+  const ogAlt = clean(imageAlt) || clean(seo?.seoImageAlt) || seoTitle || `${SITE_NAME}`
 
   const ogBase = {
     url,

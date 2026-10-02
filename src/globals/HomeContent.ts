@@ -221,6 +221,16 @@ export const HomeContent: GlobalConfig = {
               },
             },
             {
+              name: "seoImage",
+              type: "upload",
+              relationTo: "media",
+              label: "Картинка для ссылки (OG)",
+              admin: {
+                description:
+                  "Эта картинка показывается рядом с заголовком, когда гость отправляет ссылку на сайт в мессенджере или соцсети. Оптимальный размер 1200×630. Если не выбрана — используется общая обложка og-default.jpg.",
+              },
+            },
+            {
               name: "seoKeywords",
               type: "text",
               label: "Ключевые слова",

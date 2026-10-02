@@ -1037,6 +1037,10 @@ export interface HomeContent {
    */
   seoDescription: string;
   /**
+   * Эта картинка показывается рядом с заголовком, когда гость отправляет ссылку на сайт в мессенджере или соцсети. Оптимальный размер 1200×630. Если не выбрана — используется общая обложка og-default.jpg.
+   */
+  seoImage?: (number | null) | Media;
+  /**
    * Через запятую. Поисковики их не учитывают, но помогают вам самим ориентироваться. Пример: ресторан фукуок, кальян фукуок, караоке
    */
   seoKeywords: string;
@@ -1121,6 +1125,7 @@ export interface HomeContentSelect<T extends boolean = true> {
   galleryTitle?: T;
   seoTitle?: T;
   seoDescription?: T;
+  seoImage?: T;
   seoKeywords?: T;
   updatedAt?: T;
   createdAt?: T;

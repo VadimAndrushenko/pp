@@ -6,7 +6,7 @@ export const links = {
   telegram: "https://t.me/poidem_po_zhrem",
   telegramBot: "https://t.me/poidem_pozhrem_bot",
   whatsapp: "https://wa.me/84783779879",
-  bookingForm: "",
+  bookingForm: "/booking",
   menu: "https://poidempozhrem.com/menu",
   events: "https://poidempozhrem.com/events",
   delivery: "https://poidempozhrem.com/delivery",

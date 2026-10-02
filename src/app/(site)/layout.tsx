@@ -7,6 +7,7 @@ import { CartProvider } from "@/components/cart/cart-context"
 import { CartButton } from "@/components/cart/cart-button"
 import { CartDrawer } from "@/components/cart/cart-drawer"
 import { getSiteSettings } from "@/lib/data/settings"
+import { getHomeContentData } from "@/lib/data/homeContent"
 import { RestaurantStructuredData, WebSiteStructuredData } from "@/components/seo/StructuredData"
 import { DEFAULT_OG_IMAGE, SITE_NAME, siteUrl } from "@/lib/seo/config"
 import "../globals.css"
@@ -30,9 +31,14 @@ const FALLBACK_DESCRIPTION =
   "Ресторан на Фукуоке, где каждый день что-то происходит! Русская, кавказская, восточная, европейская, азиатская кухня. Кальяны, мероприятия, доставка."
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { site } = await getSiteSettings()
+  const [{ site }, home] = await Promise.all([getSiteSettings(), getHomeContentData()])
 
   const description = site.description || FALLBACK_DESCRIPTION
+
+  // Общая превью-картинка для всего сайта: берём ту, что выбрана
+  // в «Содержание главной страницы → SEO», иначе — og-default.jpg.
+  const ogImage = home.seo.seoImageUrl || DEFAULT_OG_IMAGE
+  const ogImageAlt = home.seo.seoImageAlt || SITE_NAME
 
   return {
     metadataBase: new URL(siteUrl),
@@ -45,13 +51,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: siteUrl,
       siteName: SITE_NAME,
       locale: "ru_RU",
-      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: ogImageAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${site.name} — Ресторан на Фукуоке`,
       description,
-      images: [DEFAULT_OG_IMAGE],
+      images: [ogImage],
     },
   }
 }

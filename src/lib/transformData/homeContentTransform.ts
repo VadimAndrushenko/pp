@@ -4,6 +4,7 @@ import type { ServiceItem } from "@/types"
 import type { GalleryPick } from "@/globals/components/galleryPicksShared"
 import type { SeoFields } from "@/lib/seo/metadata"
 import { site as siteFallback } from "@/config/site"
+import { resolveImageUrlNullable } from "./resolveImageUrl"
 
 export interface QuickNavItemData {
   icon: string
@@ -95,6 +96,10 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
     seoTitle: home?.seoTitle || "",
     seoDescription: home?.seoDescription || "",
     seoKeywords: home?.seoKeywords || "",
+    seoImageUrl: resolveImageUrlNullable(home?.seoImage),
+    seoImageAlt:
+      (typeof home?.seoImage === "object" && home?.seoImage ? home.seoImage.alt : null) ||
+      "",
   },
   sectionTitles: {
     menu: home?.menuTitle || "МЕНЮ",
