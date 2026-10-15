@@ -29,7 +29,7 @@ export function HeroSection({ site = siteFallback, hero }: HeroSectionProps) {
               <div
                 className="h-0.5 w-16 mb-3 bg-accent"
               />
-              <p className="text-base max-[450px]:text-sm md:text-2xl text-text-primary font-display uppercase tracking-wider leading-relaxed max-w-lg min-[460]:max-md:max-w-[250px] ">
+              <p className="text-base max-[450px]:text-sm md:text-2xl text-text-primary font-display uppercase tracking-wider leading-relaxed max-w-lg min-[450]:max-md:max-w-[250px] ">
                 {hero.cuisines.split("•").map((part, i, arr) =>
                   i < arr.length - 1 ? (
                     <span key={i}>
@@ -61,9 +61,13 @@ export function HeroSection({ site = siteFallback, hero }: HeroSectionProps) {
           <MotionDiv
             direction="right"
             delay={0.2}
-            className="absolute bottom-0 right-0 h-full pointer-events-none -z-10 max-lg:max-h-[80%] max-[450px]:max-h-[75%] max-[450px]:translate-y-14"
+            className="
+                absolute bottom-0 right-0 h-full pointer-events-none -z-10  
+                max-lg:translate-y-15
+                max-[450px]:max-h-[75%] max-[450px]:translate-y-14
+              "
           >
-            <div className="relative sm:right-11 rounded-card transition-all duration-500 h-full max-sm:left-10">
+            <div className="relative sm:right-0 max-lg:left-24 rounded-card transition-all duration-500 h-full max-sm:left-10">
               <Image
                 src="/images/people.png"
                 alt="People"
