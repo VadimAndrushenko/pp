@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { PageTransition } from "@/components/ui/page-transition"
 import { CartProvider } from "@/components/cart/cart-context"
+import { SiteLinksProvider } from "@/components/site-links-provider"
 import { CartButton } from "@/components/cart/cart-button"
 import { CartDrawer } from "@/components/cart/cart-drawer"
 import { getSiteSettings } from "@/lib/data/settings"
@@ -85,15 +86,17 @@ export default async function RootLayout({
       <body className="min-h-screen flex flex-col bg-bg text-text-primary font-body antialiased">
         <WebSiteStructuredData />
         <RestaurantStructuredData site={site} links={links} workingHours={workingHours} />
-        <CartProvider>
-          <Header workingHours={workingHours} />
-          <main className="container py-6 flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer site={site} links={links} workingHours={workingHours} />
-          <CartButton />
-          <CartDrawer />
-        </CartProvider>
+        <SiteLinksProvider links={links}>
+          <CartProvider>
+            <Header workingHours={workingHours} />
+            <main className="container py-6 flex-1">
+              <PageTransition>{children}</PageTransition>
+            </main>
+            <Footer site={site} links={links} workingHours={workingHours} />
+            <CartButton />
+            <CartDrawer />
+          </CartProvider>
+        </SiteLinksProvider>
       </body>
     </html>
   )

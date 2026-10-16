@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { Phone, MessageCircle } from "lucide-react"
-import { links } from "@/config/links"
+import { getSiteSettings } from "@/lib/data/settings"
 
-export function ContactsActions() {
+export async function ContactsActions() {
+  const { links } = await getSiteSettings()
   return (
     <section className="section-py">
       <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">

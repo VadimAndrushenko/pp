@@ -8,6 +8,8 @@ import type { MenuDish } from "@/config/menu-data"
 import { getPrices } from "@/lib/pricing"
 import { DELIVERY_ETA, FREE_DELIVERY_FROM, getDelivery } from "@/lib/delivery"
 import { AddToCartControl } from "@/components/cart/add-to-cart-control"
+import { useSiteLinks } from "@/components/site-links-provider"
+import { sendTelegramMessage } from "@/lib/telegram"
 import { allMenuData } from "@/config/menu-data"
 
 const formatOrderDate = (iso: string) =>
@@ -32,13 +34,6 @@ const CONTACTS = [
 ] as const
 
 type ContactId = (typeof CONTACTS)[number]["id"]
-
-// TODO: заменить на реальные контакты ресторана
-const RESTAURANT_CONTACTS: Record<ContactId, string> = {
-  telegram: "https://t.me/poidem_pozhrem",
-  whatsapp: "https://wa.me/84000000000",
-  zalo: "https://zalo.me/0000000000",
-}
 
 interface CheckoutForm {
   name: string
@@ -157,11 +152,11 @@ const SearchResultCard = memo(function SearchResultCard({
         <div className="flex flex-col items-end gap-1.5 shrink-0">
           {prices.hasDiscount && (
             <span className="font-display text-xs text-text-muted/70 line-through whitespace-nowrap">
-              {prices.original.toLocaleString("ru-RU")} VND
+              {prices.original.toLocaleString("de-DE")} VND
             </span>
           )}
           <span className="font-display text-base whitespace-nowrap">
-            <span className="text-text-primary">{prices.final.toLocaleString("ru-RU")}</span>{" "}
+            <span className="text-text-primary">{prices.final.toLocaleString("de-DE")}</span>{" "}
             <span className="text-accent text-xs">VND</span>
           </span>
           <div className="w-32 max-sm:w-28">
@@ -342,6 +337,13 @@ export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, clearCart, totalCount, totalAmount, addOrder, orders, clearOrders, addItem } =
     useCart()
 
+  const siteLinks = useSiteLinks()
+  const restaurantContacts: Record<ContactId, string> = {
+    telegram: siteLinks.telegram,
+    whatsapp: siteLinks.whatsapp,
+    zalo: siteLinks.zalo,
+  }
+
   const [searchOpen, setSearchOpen] = useState(false)
   const [historyOpen, setHistoryOpen] = useState(false)
   const [confirmClear, setConfirmClear] = useState(false)
@@ -351,6 +353,8 @@ export function CartDrawer() {
   const [step, setStep] = useState<"cart" | "checkout" | "done">("cart")
   const [form, setForm] = useState<CheckoutForm>(DEFAULT_CHECKOUT_FORM)
   const [mapNotice, setMapNotice] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState(false)
 
   const [lastOpen, setLastOpen] = useState(isOpen)
   const [face, setFace] = useState(0)
@@ -427,37 +431,67 @@ export function CartDrawer() {
       setQuery("")
       setBadge(null)
       setMapNotice(false)
+      setSendError(false)
       setHistoryOpen(false)
       setStep("cart")
     }
   }
 
-  const handleSubmit = () => {
-    if (!canSubmit || step !== "checkout") return
-    addOrder({
-      items: items.map((i) => ({
+  const handleSubmit = async () => {
+    if (!canSubmit || step !== "checkout" || sending) return
+
+    const orderItems = items.map((i) => {
+      const p = getPrices(i.dish)
+      return {
         name: i.dish.name,
         quantity: i.quantity,
-        price: getPrices(i.dish).final,
-      })),
-      total: grandTotal,
+        price: p.final,
+        original: p.original,
+        discount: p.hasDiscount ? i.dish.discount : undefined,
+      }
     })
-    // TODO: отправка в Telegram-бота (адрес + location + состав заказа)
-    console.log("order:", {
-      name: form.name.trim(),
-      address: form.address,
-      location: form.location,
-      contact: form.contact,
-      contactHandle,
-      deliveryFee,
-      total: grandTotal,
-      items: items.map((i) => ({ name: i.dish.name, quantity: i.quantity })),
-    })
+
+    const message = [
+      "НОВЫЙ ЗАКАЗ",
+      "",
+      `Имя: ${form.name.trim()}`,
+      `Адрес доставки: ${form.address.trim()}`,
+      `${CONTACTS.find((c) => c.id === form.contact)?.label}: ${contactHandle}`,
+      form.comment.trim() ? `Комментарий: ${form.comment.trim()}` : null,
+      "",
+      "Состав заказа:",
+      ...orderItems.map((i, index) => {
+        const total = (i.price * i.quantity).toLocaleString("de-DE")
+        const line = `${index + 1}. ${i.name} ×${i.quantity} — ${total} VND`
+        if (!i.discount) return line
+        const was = (i.original * i.quantity).toLocaleString("de-DE")
+        return `${line} (скидка ${i.discount}%, было ${was} VND)`
+      }),
+      "",
+      `Доставка: ${deliveryFee > 0 ? `${deliveryFee.toLocaleString("de-DE")} VND` : "бесплатно"}`,
+      `ИТОГО: ${grandTotal.toLocaleString("de-DE")} VND`,
+      "",
+      new Date().toLocaleString("de-DE"),
+    ]
+      .filter((line): line is string => line !== null)
+      .join("\n")
+
+    setSending(true)
+    setSendError(false)
+    const success = await sendTelegramMessage(message)
+    setSending(false)
+
+    if (!success) {
+      setSendError(true)
+      return
+    }
+
+    addOrder({ items: orderItems, total: grandTotal })
     setStep("done")
     clearCart()
   }
 
-  const formattedTotal = totalAmount.toLocaleString("ru-RU")
+  const formattedTotal = totalAmount.toLocaleString("de-DE")
 
   const repeatOrder = (order: OrderRecord) => {
     let added = 0
@@ -639,7 +673,7 @@ export function CartDrawer() {
                                 {formatOrderDate(order.createdAt)}
                               </span>
                               <span className="font-display text-base whitespace-nowrap">
-                                <span className="text-text-primary">{order.total.toLocaleString("ru-RU")}</span>{" "}
+                                <span className="text-text-primary">{order.total.toLocaleString("de-DE")}</span>{" "}
                                 <span className="text-accent text-xs">VND</span>
                               </span>
                             </div>
@@ -654,7 +688,7 @@ export function CartDrawer() {
                                     ×{item.quantity}
                                   </span>
                                   <span className="ml-auto shrink-0 font-display whitespace-nowrap text-text-primary text-xs">
-                                    {(item.price * item.quantity).toLocaleString("ru-RU")}
+                                    {(item.price * item.quantity).toLocaleString("de-DE")}
                                   </span>
                                 </li>
                               ))}
@@ -718,7 +752,7 @@ export function CartDrawer() {
                         ))}
                       </div>
                       <a
-                        href={RESTAURANT_CONTACTS[form.contact]}
+                        href={restaurantContacts[form.contact]}
                         target="_blank"
                         rel="noreferrer"
                         className="flex w-full items-center justify-center gap-2.5 py-3.5 rounded-full border-2 border-accent/60 bg-accent/10 text-accent font-display uppercase tracking-widest font-bold text-sm transition-all duration-300 hover:bg-accent hover:text-black hover:shadow-[0_0_26px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] active:scale-[0.97]"
@@ -878,7 +912,7 @@ export function CartDrawer() {
                                 </span>
                                 <span className="font-display whitespace-nowrap shrink-0 ml-auto">
                                   <span className="text-text-primary">
-                                    {(prices.final * item.quantity).toLocaleString("ru-RU")}
+                                    {(prices.final * item.quantity).toLocaleString("de-DE")}
                                   </span>{" "}
                                   <span className="text-accent text-sm">VND</span>
                                 </span>
@@ -893,7 +927,7 @@ export function CartDrawer() {
                               <span className="font-display text-success">Бесплатно</span>
                             ) : (
                               <span className="font-display whitespace-nowrap">
-                                <span className="text-text-primary">{deliveryFee.toLocaleString("ru-RU")}</span>{" "}
+                                <span className="text-text-primary">{deliveryFee.toLocaleString("de-DE")}</span>{" "}
                                 <span className="text-accent text-sm">VND</span>
                               </span>
                             )}
@@ -909,13 +943,13 @@ export function CartDrawer() {
                               Итого
                             </span>
                             <span className="font-display text-2xl font-bold whitespace-nowrap">
-                              <span className="text-text-primary">{grandTotal.toLocaleString("ru-RU")}</span>{" "}
+                              <span className="text-text-primary">{grandTotal.toLocaleString("de-DE")}</span>{" "}
                               <span className="text-accent text-base">VND</span>
                             </span>
                           </div>
                           {!freeDelivery && (
                             <p className="text-xs text-text-muted leading-relaxed">
-                              При заказе от {FREE_DELIVERY_FROM.toLocaleString("ru-RU")} VND доставка за
+                              При заказе от {FREE_DELIVERY_FROM.toLocaleString("de-DE")} VND доставка за
                               наш счёт
                             </p>
                           )}
@@ -939,16 +973,21 @@ export function CartDrawer() {
                      </div>
 
                      <div className="px-5 py-4 border-t border-border/30 bg-bg/40">
+                      {sendError && (
+                        <p className="mb-3 rounded-xl border border-neon-red/50 bg-neon-red/10 px-4 py-3 text-sm text-neon-red">
+                          Не удалось отправить заказ в Telegram. Попробуйте ещё раз.
+                        </p>
+                      )}
                       <button
-                        disabled={!canSubmit}
+                        disabled={!canSubmit || sending}
                         onClick={handleSubmit}
                         className={`w-full py-3.5 rounded-full bg-gradient-to-r from-accent to-accent-hover font-display uppercase tracking-widest font-bold text-black text-sm transition-all duration-300 active:scale-[0.98] ${
-                          canSubmit
+                          canSubmit && !sending
                             ? "hover:scale-[1.02] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_55%,transparent)]"
                             : "opacity-40 cursor-not-allowed"
                         }`}
                       >
-                        Отправить заказ
+                        {sending ? "Отправляем..." : "Отправить заказ"}
                       </button>
                       <p className="text-center text-xs text-text-muted mt-2.5">
                         Заказ будет отправлен оператору в {CONTACTS.find((c) => c.id === form.contact)?.label}
@@ -1031,12 +1070,12 @@ export function CartDrawer() {
                               <span className="flex flex-col items-end leading-tight">
                                 {prices.hasDiscount && (
                                   <span className="font-display text-xs text-text-muted/70 line-through whitespace-nowrap">
-                                    {(prices.original * item.quantity).toLocaleString("ru-RU")} VND
+                                    {(prices.original * item.quantity).toLocaleString("de-DE")} VND
                                   </span>
                                 )}
                                 <span className="font-display text-lg whitespace-nowrap">
                                   <span className="text-text-primary">
-                                    {(prices.final * item.quantity).toLocaleString("ru-RU")}
+                                    {(prices.final * item.quantity).toLocaleString("de-DE")}
                                   </span>{" "}
                                   <span className="text-accent text-sm">VND</span>
                                 </span>
@@ -1106,11 +1145,11 @@ export function CartDrawer() {
                         />
                         {freeDelivery ? (
                           <span className="text-xs font-display uppercase tracking-wider text-success leading-snug">
-                            Доставка за наш счёт — заказ от {FREE_DELIVERY_FROM.toLocaleString("ru-RU")} VND
+                            Доставка за наш счёт — заказ от {FREE_DELIVERY_FROM.toLocaleString("de-DE")} VND
                           </span>
                         ) : (
                           <span className="text-xs font-display uppercase tracking-wider text-accent leading-snug">
-                            Ещё {deliveryRemaining.toLocaleString("ru-RU")} VND — и доставка за наш счёт
+                            Ещё {deliveryRemaining.toLocaleString("de-DE")} VND — и доставка за наш счёт
                           </span>
                         )}
                       </div>

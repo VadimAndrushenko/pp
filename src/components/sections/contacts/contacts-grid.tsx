@@ -1,8 +1,14 @@
 import { Card } from "@/components/ui/card"
-import { links } from "@/config/links"
+import { getSiteSettings } from "@/lib/data/settings"
 import { MapPin, Phone, MessageCircle, Send, Clock } from "lucide-react"
 
-export function ContactsGrid() {
+const instagramHandle = (url: string, fallback: string) => {
+  const match = url.match(/instagram\.com\/([^/?]+)/)
+  return match ? `@${match[1]}` : fallback
+}
+
+export async function ContactsGrid() {
+  const { links, workingHours } = await getSiteSettings()
   return (
     <>
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary mb-6">
@@ -22,7 +28,7 @@ export function ContactsGrid() {
           <Clock className="w-6 h-6 shrink-0 mt-1 text-accent"  strokeWidth={1.5} />
           <div>
             <h3 className="text-sm font-display uppercase text-text-primary mb-1">Часы работы</h3>
-            <p className="text-sm text-accent">Ежедневно: 24/7</p>
+            <p className="text-sm text-accent">{workingHours.daily.label}: {workingHours.daily.hours}</p>
           </div>
         </Card>
 
@@ -54,7 +60,7 @@ export function ContactsGrid() {
           <span className="w-6 h-6 shrink-0 mt-1 flex items-center justify-center text-lg">📷</span>
           <div>
             <h3 className="text-sm font-display uppercase text-text-primary mb-1">Instagram</h3>
-            <p className="text-sm text-text-secondary">@poidem_pozhrem</p>
+            <p className="text-sm text-text-secondary">{instagramHandle(links.instagram, "@poidem_po_zhrem")}</p>
           </div>
         </Card>
       </div>

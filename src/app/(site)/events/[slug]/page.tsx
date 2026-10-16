@@ -21,7 +21,7 @@ import {
 import { resolveImageUrlNullable } from "@/lib/transformData/resolveImageUrl"
 import { buildMetadata } from "@/lib/seo/metadata"
 import { EventStructuredData } from "@/components/seo/StructuredData"
-import { links } from "@/config/links"
+import { getSiteSettings } from "@/lib/data/settings"
 
 export const revalidate = 5400
 
@@ -69,6 +69,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   }
 
   const { event, details, dbEvent } = data
+  const { links } = await getSiteSettings()
 
   const allEventsData = await getEvents().then(transformEvents)
   const allEvents = sortEventsByStart(allEventsData)

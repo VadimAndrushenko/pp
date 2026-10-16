@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { Send, CalendarCheck } from "lucide-react"
+import { getSiteSettings } from "@/lib/data/settings"
 
-export function CommunityHero() {
+export async function CommunityHero() {
+  const { links } = await getSiteSettings()
   return (
     <div className="section-py">
       <h1 className="text-4xl max-md:text-3xl font-display font-bold uppercase tracking-tight text-text-primary">
@@ -15,7 +17,7 @@ export function CommunityHero() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Card as="a" href="https://t.me/poidem_pozhrem" className="flex items-center gap-4 p-5">
+        <Card as="a" href={links.telegram} className="flex items-center gap-4 p-5">
           <Send className="w-8 h-8 shrink-0 text-telegram"  />
           <div>
             <h3 className="text-sm font-display uppercase text-text-primary">Telegram чат</h3>

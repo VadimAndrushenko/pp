@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { ArrowRight, X, Truck, Package } from "lucide-react"
 import { Card } from "@/components/ui/card"
-import { links } from "@/config/links"
+import { useSiteLinks } from "@/components/site-links-provider"
 
 function IconGrab({ className, color }: { className?: string; color: string }) {
   return (
@@ -50,7 +50,7 @@ const methods = [
     key: "grab", 
     label: "Grab Доставка", 
     description: "Быстрая доставка через приложение",
-    href: links.grab, 
+    href: "",
     color: "#00B14F",
     bgGradient: "from-emerald-500/10 to-emerald-500/5",
     glowColor: "rgba(0,177,79,0.2)"
@@ -69,6 +69,7 @@ const methods = [
 type Phase = "idle" | "entering" | "open" | "leaving"
 
 export function ServicesSection() {
+  const links = useSiteLinks()
   const [phase, setPhase] = useState<Phase>("idle")
 
   const open = useCallback(() => setPhase("entering"), [])
@@ -168,11 +169,12 @@ export function ServicesSection() {
               {/* Карточки методов */}
               <div className="flex gap-4 max-[420px]:flex-col">
                 {methods.map((m) => {
-                  const Tag = m.href ? "a" : "button"
+                  const href = m.key === "grab" ? links.grab : m.href
+                  const Tag = href ? "a" : "button"
                   return (
                     <Tag
                       key={m.key}
-                      href={m.href ?? undefined}
+                      href={href ?? undefined}
                       className="group/method relative flex-1 flex flex-col items-center gap-4 rounded-xl border-2 px-6 py-8 text-center transition-all duration-300 hover:-translate-y-1 max-sm:px-4 max-sm:py-6 max-[420px]:w-full overflow-hidden"
                       style={{ 
                         borderColor: m.color,
@@ -208,7 +210,7 @@ export function ServicesSection() {
 
                       {/* Индикатор действия */}
                       <div className="relative mt-1 flex items-center gap-1 text-xs lg:text-sm font-medium opacity-0 group-hover/method:opacity-100 transition-all duration-300 translate-y-1 group-hover/method:translate-y-0">
-                        <span>{m.href ? "Перейти" : "Заказать"}</span>
+                        <span>{href ? "Перейти" : "Заказать"}</span>
                         <ArrowRight className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform duration-300 group-hover/method:translate-x-0.5" />
                       </div>
                     </Tag>

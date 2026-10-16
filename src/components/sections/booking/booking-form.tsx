@@ -3,16 +3,18 @@
 import { useState } from "react"
 import {
   AlarmClock,
+  AtSign,
   Calendar,
   Check,
   Hash,
   Loader2,
   MapPin,
-  Phone,
   Send,
   Sparkles,
   Users,
 } from "lucide-react"
+
+import { sendTelegramMessage } from "@/lib/telegram"
 
 /* ─────────── визуальные константы в стиле сайта ─────────── */
 
@@ -44,14 +46,53 @@ const OCCASIONS = [
 /* ─────────── компонент ─────────── */
 
 export function BookingForm() {
-  // Временно: заявка никуда не отправляется и нигде не сохраняется,
-  // только имитация успешной отправки. Валидации нет.
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle")
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle")
+  const [showValidation, setShowValidation] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const REQUIRED_FIELDS = ["guestName", "contact", "date", "time", "guestsCount"] as const
+
+  function updateValidity(form: HTMLFormElement): boolean {
+    const data = new FormData(form)
+    const filled = (name: string) => String(data.get(name) ?? "").trim().length > 0
+    const ok = REQUIRED_FIELDS.every(filled)
+    if (ok) setShowValidation(false)
+    return ok
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const form = e.currentTarget
+    const ok = updateValidity(form)
+
+    if (!ok || status === "sending") {
+      if (!ok) setShowValidation(true)
+      return
+    }
+
+    const data = new FormData(form)
+    const val = (name: string) => String(data.get(name) ?? "").trim()
+
     setStatus("sending")
-    setTimeout(() => setStatus("sent"), 800)
+
+    const message = [
+      "БРОНИРОВАНИЕ СТОЛА",
+      "",
+      `Имя: ${val("guestName")}`,
+      `Контакт: ${val("contact")}`,
+      `Дата: ${val("date")}`,
+      `Время: ${val("time")}`,
+      `Гостей: ${val("guestsCount")}`,
+      `Зона: ${ZONES.find((z) => z.value === data.get("zone"))?.label ?? ""}`,
+      `Повод: ${OCCASIONS.find((o) => o.value === data.get("occasion"))?.label ?? ""}`,
+      val("comment") ? `Пожелания: ${val("comment")}` : null,
+      "",
+      new Date().toLocaleString("ru-RU"),
+    ]
+      .filter((line): line is string => line !== null)
+      .join("\n")
+
+    const success = await sendTelegramMessage(message)
+    setStatus(success ? "sent" : "error")
   }
 
   // Минимальная дата — сегодня, чтобы нельзя было выбрать прошлое.
@@ -85,6 +126,7 @@ export function BookingForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      onChange={(e) => updateValidity(e.currentTarget)}
       data-testid="booking-form"
       noValidate
       className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] via-transparent to-accent/[0.05] p-5 shadow-card-glow backdrop-blur-sm sm:p-8"
@@ -123,19 +165,19 @@ export function BookingForm() {
           />
         </div>
 
-        {/* ── Телефон ── */}
+        {/* ── Контакт ── */}
         <div className="lg:col-span-1">
-          <label htmlFor="phone" className={LABEL}>
-            <Phone className="h-3.5 w-3.5 text-accent" /> Телефон
+          <label htmlFor="contact" className={LABEL}>
+            <AtSign className="h-3.5 w-3.5 text-accent" /> Email / Telegram / WhatsApp
             <span className="text-[#ef4444]">*</span>
           </label>
           <input
-            id="phone"
-            name="phone"
-            type="tel"
+            id="contact"
+            name="contact"
+            type="text"
             required
-            autoComplete="tel"
-            placeholder="+84 783 779 879"
+            autoComplete="off"
+            placeholder="example@mail.com / @username / +1234567890"
             className={FIELD}
           />
         </div>
@@ -241,10 +283,25 @@ export function BookingForm() {
           />
         </div>
 
+        {/* ── Ошибка ── */}
+        {status === "error" && (
+          <p className="rounded-xl border border-[#ef4444]/50 bg-[#ef4444]/10 px-4 py-3 text-sm text-[#ef4444] lg:col-span-2">
+            Не удалось отправить заявку в Telegram. Попробуйте ещё раз.
+          </p>
+        )}
+
+        {/* ── Подсказка о незаполненных полях ── */}
+        {showValidation && (
+          <p className="rounded-xl border border-[#ef4444]/50 bg-[#ef4444]/10 px-4 py-3 text-center text-sm text-[#ef4444] lg:col-span-2">
+            Заполните обязательные поля: Ваше имя, Email / Telegram / WhatsApp, Дата, Время, Сколько
+            вас будет
+          </p>
+        )}
+
         {/* ── Кнопка ── */}
         <button
           type="submit"
-          disabled={status !== "idle"}
+          disabled={status === "sending"}
           data-testid="booking-submit"
           className="hover-lift group flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 font-display text-sm font-bold uppercase tracking-widest text-black shadow-[0_0_25px_color-mix(in_srgb,var(--color-accent)_50%,transparent)] transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60 lg:col-span-2"
         >

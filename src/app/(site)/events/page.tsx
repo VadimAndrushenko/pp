@@ -5,7 +5,7 @@ import { Breadcrumb } from '@/components/layout/breadcrumb'
 import { EventsList } from '@/components/sections/events/events-list'
 import { getEvents } from '@/lib/payload/events'
 import { transformEvents, sortEventsByStart } from '@/lib/transformData'
-import { links } from '@/config/links'
+import { getSiteSettings } from '@/lib/data/settings'
 
 export const revalidate = 5400
 
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 export default async function EventsPage() {
   const events = sortEventsByStart(await getEvents().then((docs) => transformEvents(docs)))
+  const { links } = await getSiteSettings()
 
   return (
     <main className="relative min-h-screen text-white overflow-hidden">

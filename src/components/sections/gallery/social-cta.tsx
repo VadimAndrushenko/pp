@@ -1,7 +1,9 @@
 import { Card } from "@/components/ui/card"
 import { Send } from "lucide-react"
+import { getSiteSettings } from "@/lib/data/settings"
 
-export function SocialCta({ className }: { className?: string }) {
+export async function SocialCta({ className }: { className?: string }) {
+  const { links } = await getSiteSettings()
   return (
     <Card className={`p-5 text-center ${className ?? ""}`}>
       <p className="text-sm text-text-secondary mb-4">
@@ -9,7 +11,7 @@ export function SocialCta({ className }: { className?: string }) {
       </p>
       <div className="flex justify-center gap-3">
         <a
-          href="https://instagram.com/poidem_pozhrem"
+          href={links.instagram}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 rounded-sm text-xs font-display uppercase border border-border text-text-secondary"
@@ -18,7 +20,7 @@ export function SocialCta({ className }: { className?: string }) {
           Instagram
         </a>
         <a
-          href="https://t.me/poidem_pozhrem"
+          href={links.telegram}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 rounded-sm text-xs font-display uppercase border border-border text-text-secondary"

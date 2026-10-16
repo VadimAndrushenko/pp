@@ -1,50 +1,60 @@
 import Link from "next/link"
 import { Phone, MessageCircle, MessageSquare, Send } from "lucide-react"
 import type { ComponentType } from "react"
+import { getSiteSettings } from "@/lib/data/settings"
 
-const CONTACT_METHODS: Array<{
+interface Method {
   icon: ComponentType<{ className?: string; strokeWidth?: number }>
   label: string
   value: string
   hint: string
   href: string
   color: string
-}> = [
-  {
-    icon: Phone,
-    label: "ТЕЛЕФОН",
-    value: "+84 783 779 879",
-    hint: "Звоните нам",
-    href: "tel:+84783779879",
-    color: "#FF3B30",
-  },
-  {
-    icon: MessageCircle,
-    label: "WHATSAPP",
-    value: "+84 783 779 879",
-    hint: "Напишите нам",
-    href: "https://wa.me/84783779879",
-    color: "#25D366",
-  },
-  {
-    icon: Send,
-    label: "TELEGRAM",
-    value: "@poidem_pozhrem",
-    hint: "Напишите нам",
-    href: "https://t.me/poidem_pozhrem",
-    color: "#229ED9",
-  },
-  {
-    icon: MessageSquare,
-    label: "ZALO",
-    value: "+84 783 779 879",
-    hint: "Напишите нам",
-    href: "https://zalo.me/84783779879",
-    color: "#0068FF",
-  },
-]
+}
 
-export function ContactsMethods() {
+const telegramHandle = (url: string, fallback: string) => {
+  const match = url.match(/t\.me\/([^/?]+)/)
+  return match ? `@${match[1]}` : fallback
+}
+
+export async function ContactsMethods() {
+  const { links } = await getSiteSettings()
+
+  const CONTACT_METHODS: Method[] = [
+    {
+      icon: Phone,
+      label: "ТЕЛЕФОН",
+      value: links.phone,
+      hint: "Звоните нам",
+      href: links.phoneHref,
+      color: "#FF3B30",
+    },
+    {
+      icon: MessageCircle,
+      label: "WHATSAPP",
+      value: links.phone,
+      hint: "Напишите нам",
+      href: links.whatsapp,
+      color: "#25D366",
+    },
+    {
+      icon: Send,
+      label: "TELEGRAM",
+      value: telegramHandle(links.telegram, "@poidem_po_zhrem"),
+      hint: "Напишите нам",
+      href: links.telegram,
+      color: "#229ED9",
+    },
+    {
+      icon: MessageSquare,
+      label: "ZALO",
+      value: links.phone,
+      hint: "Напишите нам",
+      href: links.zalo,
+      color: "#0068FF",
+    },
+  ]
+
   return (
     <section className="section-py">
       <h2 className="section-heading font-display font-bold uppercase text-accent text-center tracking-widest mb-6">

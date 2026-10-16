@@ -2,8 +2,8 @@ import { Card } from "@/components/ui/card"
 import { MapPin } from "lucide-react"
 
 const zones = [
-  { label: "Центр города", price: "1 490 000₫" },
-  { label: "Север острова", price: "1 690 000₫" },
+  { label: "Центр города", price: "1.490.000₫" },
+  { label: "Север острова", price: "1.690.000₫" },
 ]
 
 export function HookahOutPricing() {

@@ -31,7 +31,7 @@ export function CartButton() {
           </span>
         ) : (
           <span className="text-xs font-display uppercase tracking-wider text-accent truncate">
-            Ещё {(delivery.remaining).toLocaleString("ru-RU")} VND — доставка бесплатно
+            Ещё {(delivery.remaining).toLocaleString("de-DE")} VND — доставка бесплатно
           </span>
         )}
       </div>
@@ -46,7 +46,7 @@ export function CartButton() {
         {totalCount > 0 && (
           <span className="flex items-center gap-3 overflow-hidden whitespace-nowrap animate-fade-in">
             <span className="font-display text-lg font-bold leading-none">
-              {totalAmount.toLocaleString("ru-RU")}
+              {totalAmount.toLocaleString("de-DE")}
               <span className="ml-1 text-xs font-semibold opacity-75">VND</span>
             </span>
           </span>

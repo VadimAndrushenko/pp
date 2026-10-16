@@ -13,15 +13,16 @@ import {
   User,
   AtSign,
 } from "lucide-react"
-import { links } from "@/config/links"
+import { sendTelegramMessage } from "@/lib/telegram"
+import { useSiteLinks } from "@/components/site-links-provider"
 import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/social-icons"
 
 const SOCIALS = [
-  { icon: Send, label: "t.me/poidem_pozhrem", href: links.telegram },
-  { icon: InstagramIcon, label: "instagram.com/poidem_po_zhrem", href: links.instagram },
-  { icon: FacebookIcon, label: "facebook.com/PoidemPozhrem", href: links.facebook },
-  { icon: YoutubeIcon, label: "youtube.com/@poidempozhrEM", href: links.youtube },
-]
+  { icon: Send, label: "Telegram", key: "telegram" },
+  { icon: InstagramIcon, label: "Instagram", key: "instagram" },
+  { icon: FacebookIcon, label: "Facebook", key: "facebook" },
+  { icon: YoutubeIcon, label: "YouTube", key: "youtube" },
+] as const
 
 export interface ContactFormBaseProps {
   /** Заголовок карточки формы */
@@ -66,13 +67,32 @@ export function ContactFormBase({
   id,
   className,
 }: ContactFormBaseProps) {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle")
+  const links = useSiteLinks()
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle")
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const data = new FormData(e.currentTarget)
+    const val = (name: string) => String(data.get(name) ?? "").trim()
+
     setStatus("sending")
-    // Временно: заявка никуда не отправляется, только UX-имитация
-    setTimeout(() => setStatus("sent"), 800)
+
+    const message = [
+      title.toUpperCase(),
+      "",
+      `Имя: ${val("name")}`,
+      `Контакт: ${val("contact")}`,
+      withDate && val("date") ? `Дата: ${val("date")}` : null,
+      withTime && val("time") ? `Время: ${val("time")}` : null,
+      val("message") ? `Сообщение: ${val("message")}` : null,
+      "",
+      new Date().toLocaleString("ru-RU"),
+    ]
+      .filter((line): line is string => line !== null)
+      .join("\n")
+
+    const success = await sendTelegramMessage(message)
+    setStatus(success ? "sent" : "error")
   }
 
   const showExtras = withDate || withTime
@@ -99,7 +119,7 @@ export function ContactFormBase({
           {showContactMeta && (
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
               <span className="flex items-center gap-1">
-                <Mail className="h-3.5 w-3.5 text-accent" /> poidempozhrem@gmail.com
+                <Mail className="h-3.5 w-3.5 text-accent" /> {links.email}
               </span>
               <span className="flex items-center gap-1">
                 <Globe className="h-3.5 w-3.5 text-accent" /> poidempozhrem.com
@@ -196,10 +216,16 @@ export function ContactFormBase({
             />
           </label>
 
+          {status === "error" && (
+            <p className="rounded-sm border border-[#ef4444]/50 bg-[#ef4444]/10 px-4 py-3 text-sm text-[#ef4444] lg:col-span-2">
+              Не удалось отправить сообщение в Telegram. Попробуйте ещё раз.
+            </p>
+          )}
+
           <button
             type="submit"
             data-testid="contact-form-submit"
-            disabled={status !== "idle"}
+            disabled={status === "sending" || status === "sent"}
             className="hover-lift group flex items-center justify-center gap-2 rounded-card bg-accent py-4 font-display text-sm font-bold uppercase tracking-wider text-black transition-colors hover:bg-accent-hover disabled:opacity-70 lg:col-span-2"
           >
             {status === "sending" ? (
@@ -221,8 +247,8 @@ export function ContactFormBase({
               const Icon = s.icon
               return (
                 <Link
-                  key={s.href}
-                  href={s.href}
+                  key={s.key}
+                  href={links[s.key]}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="link-accent flex items-center gap-1.5 text-xs text-text-secondary"

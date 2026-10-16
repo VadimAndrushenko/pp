@@ -94,17 +94,17 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
           {hasDiscount ? (
             <span className="flex flex-col items-start leading-tight order-3 max-lg:order-1">
               <span className="font-display text-xl max-sm:text-base text-text-muted/70 line-through whitespace-nowrap">
-                {original.toLocaleString("ru-RU")}{" "}
+                {original.toLocaleString("de-DE")}{" "}
                 <span className="text-accent/70">VND</span>
               </span>
               <span className="font-display text-3xl max-sm:text-2xl text-white whitespace-nowrap">
-                {final.toLocaleString("ru-RU")}{" "}
+                {final.toLocaleString("de-DE")}{" "}
                 <span className="text-accent">VND</span>
               </span>
             </span>
           ) : (
             <span className="font-display text-3xl whitespace-nowrap order-3 max-lg:order-1 max-sm:text-2xl">
-              <span className="text-white">{original.toLocaleString("ru-RU")}</span>{" "}
+              <span className="text-white">{original.toLocaleString("de-DE")}</span>{" "}
               <span className="text-accent">VND</span>
             </span>
           )}

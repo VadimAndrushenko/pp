@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Crown } from "lucide-react"
+import { getSiteSettings } from "@/lib/data/settings"
 
-export function VipCard() {
+export async function VipCard() {
+  const { links } = await getSiteSettings()
   return (
     <Card className="p-6 text-center section-py">
       <Crown className="w-12 h-12 mx-auto mb-4 text-accent"  strokeWidth={1.5} />
@@ -13,10 +15,10 @@ export function VipCard() {
         Свяжитесь с нами для получения персональной VIP-карты
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button variant="solid" size="lg" as="a" href="https://wa.me/84855559797">
+        <Button variant="solid" size="lg" as="a" href={links.whatsapp}>
           WhatsApp
         </Button>
-        <Button variant="outline" size="lg" as="a" href="https://t.me/poidem_pozhrem">
+        <Button variant="outline" size="lg" as="a" href={links.telegram}>
           Telegram
         </Button>
       </div>

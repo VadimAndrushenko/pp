@@ -76,7 +76,7 @@ export const services: ServiceItem[] = [
     icon: "message-circle-question",
     title: "Задать вопрос",
     description: "Мы на связи 24/7, ответим на всё",
-    href: "https://t.me/poidem_pozhrem",
+    href: "https://t.me/poidem_po_zhrem",
   },
   {
     id: "hotel",
