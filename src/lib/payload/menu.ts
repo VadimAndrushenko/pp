@@ -1,7 +1,8 @@
 import type { MenuCategory } from "@payload-types"
+import { cache } from "react"
 import { getPayloadClient } from "./payload"
 
-export async function getMenuCategories(): Promise<MenuCategory[]> {
+export const getMenuCategories = cache(async (): Promise<MenuCategory[]> => {
   try {
     const payload = await getPayloadClient()
 
@@ -18,9 +19,9 @@ export async function getMenuCategories(): Promise<MenuCategory[]> {
     console.error("❌ Ошибка getMenuCategories:", error)
     return []
   }
-}
+})
 
-export async function getMenuCategoryBySlug(slug: string): Promise<MenuCategory | null> {
+export const getMenuCategoryBySlug = cache(async (slug: string): Promise<MenuCategory | null> => {
   try {
     const payload = await getPayloadClient()
 
@@ -39,4 +40,4 @@ export async function getMenuCategoryBySlug(slug: string): Promise<MenuCategory 
     console.error("❌ Ошибка getMenuCategoryBySlug:", error)
     return null
   }
-}
+})

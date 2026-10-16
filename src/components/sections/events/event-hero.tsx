@@ -3,7 +3,7 @@ import { Clock } from "lucide-react"
 import type { EventItem } from "@/types"
 
 interface EventHeroProps {
-  event: Pick<EventItem, "dayOfWeek" | "time" | "title" | "image">
+  event: Pick<EventItem, "dayOfWeek" | "time" | "title" | "image" | "imageLarge">
   titleLine1: string
   titleLine2?: string
   titleLine3?: string
@@ -46,7 +46,7 @@ export function EventHero({
       </div>
       <div className="absolute left-0 right-0 top- h-[150%] rounded-card -z-10">
         <Image
-          src={event.image || "/images/events/monday-afterparty.png"}
+          src={event.imageLarge || event.image || "/images/events/monday-afterparty.webp"}
           alt={event.title}
           fill
           className="lg:object-contain max-lg:object-cover"

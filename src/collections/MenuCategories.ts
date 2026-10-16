@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload"
 import { slugify } from "./components/slugify"
+import { revalidateSite } from "@/lib/revalidate"
 
 export const MenuCategories: CollectionConfig = {
   slug: "menu-categories",
@@ -7,6 +8,20 @@ export const MenuCategories: CollectionConfig = {
     useAsTitle: "title",
     group: "Меню",
     defaultColumns: ["title", "group", "updatedAt"],
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await revalidateSite([`/menu/${doc.slug}`])
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateSite([`/menu/${doc.slug}`])
+        return doc
+      },
+    ],
   },
   fields: [
     {

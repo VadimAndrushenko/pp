@@ -15,7 +15,8 @@ export const transformGalleryPhotos = (reports: GalleryReport[]): GalleryPhoto[]
     const items =
       report.photos?.map((photo, index) => ({
         id: `${report.id}-${index}`,
-        image: resolveImageUrl(photo.image),
+        image: resolveImageUrl(photo.image, "", "card"),
+        imageLarge: resolveImageUrl(photo.image, "", "hero"),
         title: photo.title || report.title,
         dateKey,
         dateLabel,
@@ -26,7 +27,8 @@ export const transformGalleryPhotos = (reports: GalleryReport[]): GalleryPhoto[]
     return [
       {
         id: String(report.id),
-        image: resolveImageUrl(report.image),
+        image: resolveImageUrl(report.image, "", "card"),
+        imageLarge: resolveImageUrl(report.image, "", "hero"),
         title: report.title,
         dateKey,
         dateLabel,

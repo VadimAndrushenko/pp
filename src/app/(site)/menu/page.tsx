@@ -5,7 +5,7 @@ import { allMenuData } from "@/config/menu-data"
 import { getMenuCategories } from "@/lib/payload/menu"
 import { transformMenuCategories } from "@/lib/transformData/menuTransform"
 
-export const revalidate = 30
+export const revalidate = 5400
 
 const categoryIcons: Record<string, string> = {
   breakfasts: "egg",
@@ -64,7 +64,7 @@ const hookahMenu: MenuData = {
   id: "hookah",
   title: "Кальянное меню",
   subtitle: "Премиальные табаки и чаши",
-  image: "/images/hookah/shisha.png",
+  image: "/images/hookah/shisha.webp",
   sections: [],
 }
 

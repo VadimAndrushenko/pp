@@ -5,6 +5,8 @@ import { HookahOutIncluded } from "@/components/sections/hookah-out/hookah-out-i
 import { HookahOutSteps } from "@/components/sections/hookah-out/hookah-out-steps"
 import { BookingButton } from "@/components/ui/booking-button"
 
+export const revalidate = 5400
+
 export default function HookahOutPage() {
   return (
     <>

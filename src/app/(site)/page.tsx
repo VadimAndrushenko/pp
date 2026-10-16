@@ -16,7 +16,7 @@ import { selectGalleryReleases } from "@/lib/transformData/galleryReleasesTransf
 import { transformHomeContent } from "@/lib/transformData/homeContentTransform"
 import { buildMetadata } from "@/lib/seo/metadata"
 
-export const revalidate = 30
+export const revalidate = 5400
 
 export async function generateMetadata(): Promise<Metadata> {
   const home = await getHomeContent().then(transformHomeContent)

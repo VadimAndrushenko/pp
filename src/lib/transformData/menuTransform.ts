@@ -31,7 +31,7 @@ export const transformMenuCategory = (category: MenuCategory): MenuData => ({
   id: category.slug,
   title: category.title,
   subtitle: category.subtitle,
-  image: resolveImageUrl(category.image),
+  image: resolveImageUrl(category.image, "", "card"),
   sections: (category.sections || []).map((section, index) =>
     transformSection(section, category.slug, index),
   ),

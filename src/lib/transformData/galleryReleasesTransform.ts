@@ -44,7 +44,7 @@ export function buildPhotoReleases(report: GalleryReport, picks: GalleryPick[]):
       type: "photo",
       id: `photo-${report.id}-${index}`,
       title: photo.title || report.title,
-      image: resolveImageUrl(photo.image),
+      image: resolveImageUrl(photo.image, "", "card"),
       dateKey,
       dateLabel: dateLabelFor(report),
       href: `/gallery/photos?release=${encodeURIComponent(dateKey)}#album-${encodeURIComponent(dateKey)}`,

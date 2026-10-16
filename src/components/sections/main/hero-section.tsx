@@ -69,7 +69,7 @@ export function HeroSection({ site = siteFallback, hero }: HeroSectionProps) {
           >
             <div className="relative sm:right-0 max-lg:left-24 rounded-card transition-all duration-500 h-full max-sm:left-10">
               <Image
-                src="/images/people.png"
+                src="/images/people.webp"
                 alt="People"
                 width={800}
                 height={600}

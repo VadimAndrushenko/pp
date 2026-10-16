@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload"
 import { computePartsFromIsoDate } from "./components/dateTimeUtils"
 import { slugify } from "./components/slugify"
+import { revalidateSite } from "@/lib/revalidate"
 
 function resolveDate(siblingData: Record<string, unknown>) {
   const reportDate = siblingData?.reportDate as string | undefined
@@ -18,6 +19,20 @@ export const GalleryReports: CollectionConfig = {
     useAsTitle: "title",
     group: "Контент",
     defaultColumns: ["title", "date", "updatedAt"],
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await revalidateSite([`/gallery/photos`])
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateSite([`/gallery/photos`])
+        return doc
+      },
+    ],
   },
   fields: [
     {

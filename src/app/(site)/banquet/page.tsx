@@ -3,6 +3,8 @@ import { BanquetHero } from "@/components/sections/banquet/hero"
 import { BanquetFeatures, BanquetOccasions } from "@/components/sections/banquet/features"
 import { BanquetCta } from "@/components/sections/banquet/cta"
 
+export const revalidate = 5400
+
 export const metadata = {
   title: "Аренда зала и выступления — Пойдём Пожрём",
   description:

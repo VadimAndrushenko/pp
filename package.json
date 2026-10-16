@@ -6,7 +6,9 @@
   "type": "module",
   "packageManager": "pnpm@10.28.0",
   "scripts": {
+    "prebuild": "node scripts/sync-revalidate.mjs",
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "revalidate:sync": "node scripts/sync-revalidate.mjs",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",

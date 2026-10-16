@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
+import Image from "next/image"
 import type { GalleryPhoto } from "@/types"
 import { Card } from "@/components/ui/card"
 import { Lightbox } from "@/components/ui/lightbox"
@@ -32,13 +33,12 @@ function PhotoThumb({ photo, onOpen }: { photo: GalleryPhoto; onOpen: () => void
       onClick={onOpen}
     >
       <div className="relative w-full aspect-square overflow-hidden bg-surface">
-        <img
+        <Image
           src={photo.image}
           alt={photo.title}
-          width={800}
-          height={800}
-          className="block h-full w-full"
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          fill
+          sizes="(max-width: 640px) 50vw, 25vw"
+          className="object-cover object-center"
         />
       </div>
       <div className="border-t border-border bg-surface p-3">

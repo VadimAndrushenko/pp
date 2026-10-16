@@ -6,6 +6,8 @@ import { ContactsAddress } from "@/components/sections/contacts/contacts-address
 import { ContactsMap } from "@/components/sections/contacts/contacts-map"
 import { ContactsForm } from "@/components/sections/contacts/contacts-form"
 
+export const revalidate = 5400
+
 export default function ContactsPage() {
   return (
     <>

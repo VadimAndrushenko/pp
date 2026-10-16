@@ -5,6 +5,8 @@ import { HookahFeatures } from "@/components/sections/hookah/features"
 import { HookahPrices } from "@/components/sections/hookah/prices"
 import { HookahDelivery } from "@/components/sections/hookah/delivery"
 import { CTABanner } from "@/components/ui/cta-banner"
+
+export const revalidate = 5400
 // import { HookahVIP } from "@/components/sections/hookah/vip"
 
 export default function HookahPage() {

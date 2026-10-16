@@ -11,7 +11,7 @@ export function RestaurantVideo() {
       <div
         className="relative w-full aspect-video max-h-[620px] rounded-card overflow-hidden cursor-pointer bg-cover bg-center bg-surface group hover-lift"
         style={{
-          backgroundImage: isPlaying ? "none" : "url('https://picsum.photos/seed/poidem-interior/800/450')",
+          backgroundImage: isPlaying ? "none" : "url('/images/contacts/facade.webp')",
         }}
         onClick={() => !isPlaying && setIsPlaying(true)}
       >
@@ -20,7 +20,7 @@ export function RestaurantVideo() {
             className="w-full h-full object-cover"
             controls
             autoPlay
-            poster="https://picsum.photos/seed/poidem-interior/800/450"
+            poster="/images/contacts/facade.webp"
           >
             <source src="/video/restaurant.mp4" type="video/mp4" />
           </video>

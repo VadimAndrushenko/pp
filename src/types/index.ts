@@ -25,6 +25,7 @@ export interface EventItem {
   category: EventCategory
   time: string
   image: string
+  imageLarge?: string
   description: string
   admission: "free" | "paid"
   scheduleType?: "recurring" | "one-off"
@@ -74,6 +75,7 @@ export interface DeliveryZone {
 export interface GalleryPhoto {
   id: string
   image: string
+  imageLarge?: string
   title: string
   dateKey: string
   dateLabel: string

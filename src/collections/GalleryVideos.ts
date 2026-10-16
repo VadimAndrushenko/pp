@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload"
 import { formatDateLabel } from "./components/dateTimeUtils"
 import { extractYouTubeVideoId } from "./components/youtubeUtils"
+import { revalidateSite } from "@/lib/revalidate"
 
 function resolveYoutubeId(siblingData: Record<string, unknown>) {
   const videoUrl = siblingData?.videoUrl as string | undefined
@@ -27,6 +28,20 @@ export const GalleryVideos: CollectionConfig = {
     useAsTitle: "title",
     group: "Контент",
     defaultColumns: ["title", "dateLabel", "updatedAt"],
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await revalidateSite([`/gallery/videos`])
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateSite([`/gallery/videos`])
+        return doc
+      },
+    ],
   },
   fields: [
     {

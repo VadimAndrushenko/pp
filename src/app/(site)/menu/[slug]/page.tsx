@@ -14,7 +14,7 @@ import { resolveImageUrlNullable } from "@/lib/transformData/resolveImageUrl"
 import { getMenuCategories } from "@/lib/payload/menu"
 import { transformMenuCategories } from "@/lib/transformData/menuTransform"
 
-export const revalidate = 30
+export const revalidate = 5400
 
 async function getMenus(): Promise<MenuData[]> {
   const categories = await getMenuCategories()

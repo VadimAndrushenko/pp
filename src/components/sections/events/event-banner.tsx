@@ -7,7 +7,7 @@ export function EventBanner() {
       className="relative min-h-[230px] flex items-center overflow-hidden rounded-card border border-border aspect-[16/6] max-sm:aspect-auto"
     >
       <Image
-        src="/images/events/karaoke-banner.png"
+        src="/images/events/karaoke-banner.webp"
         alt="Караоке и танцы"
         fill
         className="relative object-contain max-sm:object-cover max-sm:object-[20%_50%]"

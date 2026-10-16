@@ -4,6 +4,8 @@ import { MapPin, ExternalLink } from 'lucide-react'
 import { Breadcrumb } from '@/components/layout/breadcrumb'
 import { getSiteSettings } from '@/lib/data/settings'
 
+export const revalidate = 5400
+
 export const metadata: Metadata = {
   title: 'Как найти POIDEM POZHREM — Holiday Center, 2 этаж',
   description:
@@ -15,28 +17,28 @@ const STEPS = [
     n: 1,
     title: 'Найдите\nHoliday Center',
     desc: 'Мы находимся на главной улице Dương Đông',
-    img: '/IMG_0935.PNG',
+    img: '/IMG_0935.webp',
     alt: 'Витрина Holiday Center с вывеской POIDEM POZHREM',
   },
   {
     n: 2,
     title: 'Зайдите\nв главный вход',
     desc: 'Широкая лестница ведёт внутрь',
-    img: '/IMG_0935.PNG',
+    img: '/IMG_0935.webp',
     alt: 'Главный вход в Holiday Center с широкой лестницей',
   },
   {
     n: 3,
     title: 'Поднимитесь\nна 2 этаж',
     desc: 'Следуйте по лестнице прямо вверх',
-    img: '/IMG_0935.PNG',
+    img: '/IMG_0935.webp',
     alt: 'Красная лестница ведущая на второй этаж',
   },
   {
     n: 4,
     title: 'Вы\nна 2 этаже',
     desc: 'Поверните направо и следуйте указателям POIDEM POZHREM',
-    img: '/IMG_0935.PNG',
+    img: '/IMG_0935.webp',
     alt: 'Указатель POIDEM POZHREM на втором этаже',
   },
 ]

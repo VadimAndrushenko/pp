@@ -5,6 +5,8 @@ import { ServicesSection } from "@/components/sections/delivery/services-section
 import { DeliveryZones } from "@/components/sections/delivery/zones-section"
 import { CTABanner } from "@/components/ui/cta-banner"
 
+export const revalidate = 5400
+
 export default function DeliveryPage() {
   return (
     <>

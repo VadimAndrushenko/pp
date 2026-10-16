@@ -96,7 +96,7 @@ export const transformHomeContent = (home: HomeContent | null): HomeContentData 
     seoTitle: home?.seoTitle || "",
     seoDescription: home?.seoDescription || "",
     seoKeywords: home?.seoKeywords || "",
-    seoImageUrl: resolveImageUrlNullable(home?.seoImage),
+    seoImageUrl: resolveImageUrlNullable(home?.seoImage, "hero"),
     seoImageAlt:
       (typeof home?.seoImage === "object" && home?.seoImage ? home.seoImage.alt : null) ||
       "",

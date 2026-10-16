@@ -23,7 +23,7 @@ import { buildMetadata } from "@/lib/seo/metadata"
 import { EventStructuredData } from "@/components/seo/StructuredData"
 import { links } from "@/config/links"
 
-export const revalidate = 30
+export const revalidate = 5400
 
 async function getEventWithDetails(
   slug: string,

@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card"
 import { Gem, Cherry } from "lucide-react"
 import Slider from "@/components/ui/Slider"
 
-const hookahPrice = ["/images/hookah/light.png", "/images/hookah/medium.png", "/images/hookah/strong.png"]
+const hookahPrice = ["/images/hookah/light.webp", "/images/hookah/medium.webp", "/images/hookah/strong.webp"]
 
 export function HookahPrices() {
   return (

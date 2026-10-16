@@ -1,9 +1,18 @@
 import type { GlobalConfig } from "payload"
+import { revalidateSite } from "@/lib/revalidate"
 
 export const Settings: GlobalConfig = {
   slug: "settings",
   admin: {
     group: "Настройки",
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await revalidateSite()
+        return doc
+      },
+    ],
   },
   fields: [
     {

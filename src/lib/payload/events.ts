@@ -1,7 +1,8 @@
 import type { Event } from "@payload-types"
+import { cache } from "react"
 import { getPayloadClient } from "./payload"
 
-export async function getEvents(): Promise<Event[]> {
+export const getEvents = cache(async (): Promise<Event[]> => {
   try {
     const payload = await getPayloadClient()
 
@@ -18,9 +19,9 @@ export async function getEvents(): Promise<Event[]> {
     console.error("❌ Ошибка getEvents:", error)
     return []
   }
-}
+})
 
-export async function getEventBySlug(slug: string): Promise<Event | null> {
+export const getEventBySlug = cache(async (slug: string): Promise<Event | null> => {
   try {
     const payload = await getPayloadClient()
 
@@ -39,4 +40,4 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
     console.error("❌ Ошибка getEventBySlug:", error)
     return null
   }
-}
+})

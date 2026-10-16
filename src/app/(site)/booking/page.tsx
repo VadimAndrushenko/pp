@@ -15,7 +15,7 @@ import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { BookingForm } from "@/components/sections/booking/booking-form"
 import { getSiteSettings } from "@/lib/data/settings"
 
-export const revalidate = 60
+export const revalidate = 5400
 
 export const metadata: Metadata = {
   title: "Забронировать столик — Poidem Pozhrem",

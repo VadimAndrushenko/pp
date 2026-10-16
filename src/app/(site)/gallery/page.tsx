@@ -4,6 +4,8 @@ import { GalleryReportsHeading } from "@/components/sections/gallery/gallery-rep
 import { HeroCards } from "@/components/sections/gallery/hero-cards"
 import { RestaurantVideo } from "@/components/ui/restaurant-video"
 
+export const revalidate = 5400
+
 export default function GalleryPage() {
   return (
     <>

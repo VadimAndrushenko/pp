@@ -4,6 +4,7 @@ import {
   computePartsFromIsoDate,
 } from "./components/dateTimeUtils"
 import { slugify } from "./components/slugify"
+import { revalidateSite } from "@/lib/revalidate"
 
 function resolveSchedule(siblingData: Record<string, unknown>) {
   const scheduleType = siblingData?.scheduleType as string | undefined
@@ -31,6 +32,20 @@ export const Events: CollectionConfig = {
     components: {
       beforeList: ["/src/collections/components/EventsDaysTabs"],
     },
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await revalidateSite([`/events/${doc.slug}`])
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateSite([`/events/${doc.slug}`])
+        return doc
+      },
+    ],
   },
   fields: [
     {

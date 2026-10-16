@@ -1,7 +1,8 @@
 import type { GalleryReport, GalleryVideo } from "@payload-types"
+import { cache } from "react"
 import { getPayloadClient } from "./payload"
 
-export async function getGalleryVideos(): Promise<GalleryVideo[]> {
+export const getGalleryVideos = cache(async (): Promise<GalleryVideo[]> => {
   try {
     const payload = await getPayloadClient()
 
@@ -17,9 +18,9 @@ export async function getGalleryVideos(): Promise<GalleryVideo[]> {
     console.error("❌ Ошибка getGalleryVideos:", error)
     return []
   }
-}
+})
 
-export async function getGalleryReports(): Promise<GalleryReport[]> {
+export const getGalleryReports = cache(async (): Promise<GalleryReport[]> => {
   try {
     const payload = await getPayloadClient()
 
@@ -36,8 +37,8 @@ export async function getGalleryReports(): Promise<GalleryReport[]> {
     console.error("❌ Ошибка getGalleryReports:", error)
     return []
   }
-}
+})
 
-export async function getGalleryPhotos(): Promise<GalleryReport[]> {
+export const getGalleryPhotos = cache(async (): Promise<GalleryReport[]> => {
   return getGalleryReports()
-}
+})

@@ -5,7 +5,7 @@ import type { GalleryPhoto } from "@/types"
 import { getGalleryPhotos } from "@/lib/payload/gallery"
 import { transformGalleryPhotos } from "@/lib/transformData/galleryPhotosTransform"
 
-export const revalidate = 30
+export const revalidate = 5400
 
 export default async function GalleryPhotosPage() {
   const photosData = await getGalleryPhotos().then(transformGalleryPhotos)
