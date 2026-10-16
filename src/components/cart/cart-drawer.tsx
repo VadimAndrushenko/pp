@@ -1,14 +1,13 @@
 "use client"
 
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useState } from "react"
-import { ArrowLeft, Check, ChevronDown, CircleAlert, Clock, LocateFixed, MapPin, MapPinned, MessageCircle, MessageSquare, Search, Send, ShoppingBag, Trash2, Truck, User, X } from "lucide-react"
+import { ArrowLeft, Check, ChevronDown, CircleAlert, Clock, MapPin, MapPinned, MessageCircle, MessageSquare, Search, Send, ShoppingBag, Trash2, Truck, User, X } from "lucide-react"
 import { useCart } from "@/components/cart/cart-context"
 import type { OrderRecord } from "@/components/cart/cart-context"
 import type { MenuDish } from "@/config/menu-data"
 import { getPrices } from "@/lib/pricing"
 import { DELIVERY_ETA, FREE_DELIVERY_FROM, getDelivery } from "@/lib/delivery"
 import { AddToCartControl } from "@/components/cart/add-to-cart-control"
-import { MapPicker } from "@/components/cart/map-picker"
 import { allMenuData } from "@/config/menu-data"
 
 const formatOrderDate = (iso: string) =>
@@ -351,7 +350,7 @@ export function CartDrawer() {
   const [expandedKey, setExpandedKey] = useState<string | null>(null)
   const [step, setStep] = useState<"cart" | "checkout" | "done">("cart")
   const [form, setForm] = useState<CheckoutForm>(DEFAULT_CHECKOUT_FORM)
-  const [mapOpen, setMapOpen] = useState(false)
+  const [mapNotice, setMapNotice] = useState(false)
 
   const [lastOpen, setLastOpen] = useState(isOpen)
   const [face, setFace] = useState(0)
@@ -405,13 +404,6 @@ export function CartDrawer() {
     }
   }, [form])
 
-  const handleMapPick = useCallback(
-    (lat: number, lng: number, address: string) => {
-      setForm((f) => ({ ...f, location: { lat, lng }, address }))
-    },
-    [],
-  )
-
   const tgValid = /^@[A-Za-z0-9_]{3,}$/.test(form.telegram.trim())
   const phoneValid = /^\+\d{8,14}$/.test(form.phone.trim())
 
@@ -434,7 +426,7 @@ export function CartDrawer() {
       setSearchOpen(false)
       setQuery("")
       setBadge(null)
-      setMapOpen(false)
+      setMapNotice(false)
       setHistoryOpen(false)
       setStep("cart")
     }
@@ -771,11 +763,12 @@ export function CartDrawer() {
                             Адрес доставки
                           </label>
                           <button
-                            onClick={() => setMapOpen((v) => !v)}
+                            type="button"
+                            onClick={() => setMapNotice((v) => !v)}
                             className="flex items-center gap-1.5 mb-2 text-xs font-display uppercase tracking-wider text-accent hover:text-accent-hover transition-colors duration-150"
                           >
                             <MapPinned className="w-3.5 h-3.5" strokeWidth={2} />
-                            {mapOpen ? "Скрыть карту" : "На карте"}
+                            На карте
                           </button>
                         </div>
                         <div className="relative">
@@ -784,24 +777,14 @@ export function CartDrawer() {
                             id="checkout-address"
                             value={form.address}
                             onChange={(e) => updateForm({ address: e.target.value })}
-                            placeholder="Улица, дом, квартира…"
+                            placeholder="Ваш адрес или ссылка из Google Maps"
                             className={`${FIELD_CLS} pl-10`}
                           />
                         </div>
-                        {form.location && !mapOpen && (
-                          <p className="mt-1.5 text-sm text-text-muted flex items-center gap-1.5">
-                            <LocateFixed className="w-3.5 h-3.5 shrink-0 text-accent" />
-                            Точка на карте: {form.location.lat.toFixed(5)}, {form.location.lng.toFixed(5)}
+                        {mapNotice && (
+                          <p className="mt-1.5 text-sm text-text-muted animate-fade-up">
+                            Пока в разработке
                           </p>
-                        )}
-                        {mapOpen && (
-                          <div className="animate-fade-up pt-3">
-                            <MapPicker
-                              initial={form.location}
-                              initialAddress={form.address || null}
-                              onPick={handleMapPick}
-                            />
-                          </div>
                         )}
                       </div>
 
