@@ -207,6 +207,16 @@ export const MenuCategories: CollectionConfig = {
                       },
                     },
                     {
+                      name: "outOfStock",
+                      type: "checkbox",
+                      label: "Временно отсутствует в наличии",
+                      defaultValue: false,
+                      admin: {
+                        description:
+                          "Галочка у конкретного блюда: на сайте название будет зачёркнуто, рядом появится пометка «Временно отсутствует в наличии», а кнопку «Купить» заменит подсказка. Добавить такое блюдо в корзину нельзя.",
+                      },
+                    },
+                    {
                       name: "badges",
                       type: "array",
                       label: "Бейджи",

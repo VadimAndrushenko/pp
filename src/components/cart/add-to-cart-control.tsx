@@ -2,11 +2,23 @@
 
 import { Minus, Plus, ShoppingBag } from "lucide-react"
 import { useCart } from "@/components/cart/cart-context"
+import { OutOfStockBadge } from "@/components/ui/out-of-stock"
 import type { MenuDish } from "@/config/menu-data"
 
 export function AddToCartControl({ dish, variant = "full", compact = false }: { dish: MenuDish; variant?: "full" | "stepper"; compact?: boolean }) {
   const { items, addItem, increment, decrement } = useCart()
   const qty = items.find((i) => i.key === dish.name)?.quantity ?? 0
+
+  if (dish.outOfStock) {
+    if (variant === "stepper") return <OutOfStockBadge className="px-3 py-1.5 text-[10px]" />
+    return (
+      <div className="flex w-full justify-center">
+        <OutOfStockBadge
+          className={compact ? "w-full px-2.5 py-1.5 text-[10px]" : "w-full px-4 py-3 text-xs"}
+        />
+      </div>
+    )
+  }
 
   const stepper = (
     <>

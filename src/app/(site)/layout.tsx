@@ -9,6 +9,9 @@ import { CartButton } from "@/components/cart/cart-button"
 import { CartDrawer } from "@/components/cart/cart-drawer"
 import { getSiteSettings } from "@/lib/data/settings"
 import { getHomeContentData } from "@/lib/data/homeContent"
+import { getMenuCategories } from "@/lib/payload/menu"
+import { transformMenuCategories } from "@/lib/transformData/menuTransform"
+import { allMenuData } from "@/config/menu-data"
 import { RestaurantStructuredData, WebSiteStructuredData } from "@/components/seo/StructuredData"
 import { DEFAULT_APPLE_ICON, DEFAULT_FAVICON, DEFAULT_OG_IMAGE, SITE_NAME, siteUrl } from "@/lib/seo/config"
 import "../globals.css"
@@ -76,6 +79,8 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const { site, links, workingHours } = await getSiteSettings()
+  const dbMenus = transformMenuCategories(await getMenuCategories())
+  const menuData = dbMenus.length > 0 ? dbMenus : allMenuData
 
   return (
     <html
@@ -87,7 +92,7 @@ export default async function RootLayout({
         <WebSiteStructuredData />
         <RestaurantStructuredData site={site} links={links} workingHours={workingHours} />
         <SiteLinksProvider links={links}>
-          <CartProvider>
+          <CartProvider menuData={menuData}>
             <Header workingHours={workingHours} />
             <main className="container py-6 flex-1">
               <PageTransition>{children}</PageTransition>

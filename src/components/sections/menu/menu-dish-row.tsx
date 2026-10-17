@@ -3,6 +3,7 @@
 import type { MenuDish } from "@/config/menu-data"
 import { Leaf, CandyOff, Star } from "lucide-react"
 import { AddToCartControl } from "@/components/cart/add-to-cart-control"
+import { OutOfStockOverlay } from "@/components/ui/out-of-stock"
 import { getPrices } from "@/lib/pricing"
 
 type BadgeIcon = React.ComponentType<{ className?: string; strokeWidth?: number }>
@@ -49,10 +50,17 @@ function MenuDishBadge({ label }: { label: string }) {
 
 export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number }) {
   const { original, final, hasDiscount } = getPrices(dish)
+  const outOfStock = !!dish.outOfStock
 
   return (
-    <div className="relative isolate group py-6 px-5 max-sm:py-4 max-sm:px-3 lg:min-h-[13.625rem] rounded-lg bg-surface/25 border border-border/35 transition-all duration-300 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]">
-      {hasDiscount && (
+    <div
+      className={`relative isolate group py-6 px-5 max-sm:py-4 max-sm:px-3 lg:min-h-[13.625rem] rounded-lg border border-border/35 transition-all duration-300 ${
+        outOfStock
+          ? "bg-black/55"
+          : "bg-surface/25 hover:bg-surface/40 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.25)]"
+      }`}
+    >
+      {hasDiscount && !outOfStock && (
         <span className="absolute -top-3 -left-3 z-30 -rotate-[8deg] flex items-center px-3 py-1 bg-gradient-to-r from-success to-[#57e389] shadow-[0_0_22px_rgba(62,207,110,0.65)] font-display text-sm font-bold uppercase tracking-wider text-black whitespace-nowrap">
           Скидка {dish.discount}%
         </span>
@@ -67,8 +75,14 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
       )}
       <div className="flex items-baseline gap-4 mb-5 max-lg:flex-col max-lg:items-stretch max-lg:gap-2">
         <div className="flex items-baseline gap-3 min-w-0 max-lg:w-full">
-          <h3 className="font-display uppercase tracking-wide text-3xl max-sm:text-xl text-text-primary transition-colors duration-200 group-hover:text-accent">
-            {dish.name}
+          <h3
+            className={`font-display uppercase tracking-wide text-3xl max-sm:text-xl transition-colors duration-200 ${
+              outOfStock
+                ? "text-text-muted group-hover:text-text-muted"
+                : "text-text-primary group-hover:text-accent"
+            }`}
+          >
+            <span className={outOfStock ? "dish-strike" : undefined}>{dish.name}</span>
           </h3>
           {typeof index === "number" && (
             <span className="shrink-0 ml-auto lg:hidden font-display text-xl whitespace-nowrap">
@@ -79,7 +93,11 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
           )}
         </div>
         <span className="flex-1 border-b border-dotted border-text-muted/50 translate-y-[-0.3em] hidden lg:block" />
-        <div className="flex items-baseline gap-3 whitespace-nowrap max-lg:mt-3 max-lg:pt-2.5 max-lg:border-t max-lg:border-border/50 max-lg:items-center">
+        <div
+          className={`flex items-baseline gap-3 whitespace-nowrap max-lg:mt-3 max-lg:pt-2.5 max-lg:border-t max-lg:border-border/50 max-lg:items-center ${
+            outOfStock ? "opacity-50" : ""
+          }`}
+        >
           {dish.weight && (
             <>
               <span className="font-display text-accent text-2xl whitespace-nowrap order-1 max-lg:order-3 max-sm:text-xl max-sm:text-white">
@@ -108,9 +126,11 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
               <span className="text-accent">VND</span>
             </span>
           )}
-          <div className="order-4 lg:hidden ml-auto w-32">
-            <AddToCartControl dish={dish} compact />
-          </div>
+          {!outOfStock && (
+            <div className="order-4 lg:hidden ml-auto w-32">
+              <AddToCartControl dish={dish} compact />
+            </div>
+          )}
         </div>
       </div>
 
@@ -144,9 +164,11 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
             </p>
           )}
         </div>
-        <div className="lg:w-[30%] max-lg:hidden">
-          <AddToCartControl dish={dish} />
-        </div>
+        {!outOfStock && (
+          <div className="lg:w-[30%] max-lg:hidden">
+            <AddToCartControl dish={dish} />
+          </div>
+        )}
       </div>
 
       {dish.badges && dish.badges.length > 0 && (
@@ -157,6 +179,7 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
         </div>
       )}
       </div>
+      {outOfStock && <OutOfStockOverlay />}
     </div>
   )
 }

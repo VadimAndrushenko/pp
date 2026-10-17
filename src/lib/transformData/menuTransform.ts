@@ -13,6 +13,7 @@ const transformDish = (
   weight: dish.weight ?? undefined,
   price: dish.price,
   discount: dish.discount ?? undefined,
+  outOfStock: dish.outOfStock ?? false,
   badges: (dish.badges || []).map((badge) => badge.text).filter(Boolean),
 })
 

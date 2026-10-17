@@ -8,6 +8,8 @@ export interface MenuDish {
   price: string
   discount?: number
   badges?: string[]
+  /** Блюдо временно недоступно: зачёркнуто на сайте, в корзину не добавляется */
+  outOfStock?: boolean
 }
 
 export interface MenuSection {

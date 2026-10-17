@@ -4,13 +4,13 @@ import { memo, useCallback, useDeferredValue, useEffect, useMemo, useState } fro
 import { ArrowLeft, Check, ChevronDown, CircleAlert, Clock, MapPin, MapPinned, MessageCircle, MessageSquare, Search, Send, ShoppingBag, Trash2, Truck, User, X } from "lucide-react"
 import { useCart } from "@/components/cart/cart-context"
 import type { OrderRecord } from "@/components/cart/cart-context"
-import type { MenuDish } from "@/config/menu-data"
+import type { MenuData, MenuDish } from "@/config/menu-data"
 import { getPrices } from "@/lib/pricing"
 import { DELIVERY_ETA, FREE_DELIVERY_FROM, getDelivery } from "@/lib/delivery"
 import { AddToCartControl } from "@/components/cart/add-to-cart-control"
+import { OutOfStockBadge, OutOfStockOverlay, OUT_OF_STOCK_TEXT } from "@/components/ui/out-of-stock"
 import { useSiteLinks } from "@/components/site-links-provider"
 import { sendTelegramMessage } from "@/lib/telegram"
-import { allMenuData } from "@/config/menu-data"
 
 const formatOrderDate = (iso: string) =>
   new Date(iso).toLocaleString("ru-RU", {
@@ -65,22 +65,32 @@ const LABEL_CLS = "block font-display uppercase tracking-wider text-sm text-text
 const ICON_BTN_CLS =
   "flex items-center justify-center w-9 h-9 rounded-full border border-border/50 text-text-secondary transition-all duration-200 hover:text-accent hover:border-accent hover:shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent)_35%,transparent)]"
 
-const ALL_DISHES = allMenuData.flatMap((menu) =>
-  menu.sections.flatMap((section) =>
-    section.dishes.map((dish) => ({
-      key: `${menu.id}::${section.id}::${dish.name}`,
-      dish,
-      menuTitle: menu.title,
-      sectionTitle: section.title,
-      menuGroup:
-        menu.group === "alcohol"
-          ? "Алкогольное меню"
-          : menu.group === "non-alcohol"
-            ? "Безалкогольное меню"
-            : "Основное меню",
-    })),
-  ),
-)
+interface AllDish {
+  key: string
+  dish: MenuDish
+  menuTitle: string
+  sectionTitle: string
+  menuGroup: string
+}
+
+function buildAllDishes(menuData: MenuData[]): AllDish[] {
+  return menuData.flatMap((menu) =>
+    menu.sections.flatMap((section) =>
+      section.dishes.map((dish) => ({
+        key: `${menu.id}::${section.id}::${dish.name}`,
+        dish,
+        menuTitle: menu.title,
+        sectionTitle: section.title,
+        menuGroup:
+          menu.group === "alcohol"
+            ? "Алкогольное меню"
+            : menu.group === "non-alcohol"
+              ? "Безалкогольное меню"
+              : "Основное меню",
+      })),
+    ),
+  )
+}
 
 const INITIAL_VISIBLE = 24
 const VISIBLE_STEP = 60
@@ -99,9 +109,14 @@ const SearchResultCard = memo(function SearchResultCard({
   onToggle: () => void
 }) {
   const prices = getPrices(dish)
+  const outOfStock = !!dish.outOfStock
   return (
-    <div className="relative rounded-card bg-bg/60 border border-border/30 hover:border-accent/50 transition-colors duration-300">
-      {prices.hasDiscount && (
+    <div
+      className={`relative rounded-card border border-border/30 transition-colors duration-300 ${
+        outOfStock ? "bg-black/55" : "bg-bg/60 hover:border-accent/50"
+      }`}
+    >
+      {prices.hasDiscount && !outOfStock && (
         <span className="absolute -top-2.5 -left-2.5 z-20 -rotate-[8deg] flex items-center px-2 py-0.5 bg-gradient-to-r from-success to-[#57e389] shadow-[0_0_16px_rgba(62,207,110,0.6)] font-display text-[10px] font-bold uppercase tracking-wider text-black whitespace-nowrap">
           Скидка {dish.discount}%
         </span>
@@ -113,7 +128,13 @@ const SearchResultCard = memo(function SearchResultCard({
           className="min-w-0 flex-1 text-left"
         >
           <span className="flex items-start gap-2">
-            <span className="font-display uppercase tracking-wide text-sm text-text-primary leading-snug break-words">
+            <span
+              className={`font-display uppercase tracking-wide text-sm leading-snug break-words ${
+                outOfStock
+                  ? "text-text-muted dish-strike"
+                  : "text-text-primary"
+              }`}
+            >
               {dish.name}
             </span>
             <ChevronDown
@@ -160,7 +181,7 @@ const SearchResultCard = memo(function SearchResultCard({
             <span className="text-accent text-xs">VND</span>
           </span>
           <div className="w-32 max-sm:w-28">
-            <AddToCartControl dish={dish} compact />
+            {!outOfStock && <AddToCartControl dish={dish} compact />}
           </div>
         </div>
       </div>
@@ -200,6 +221,7 @@ const SearchResultCard = memo(function SearchResultCard({
           )}
         </div>
       )}
+      {outOfStock && <OutOfStockOverlay />}
     </div>
   )
 })
@@ -210,12 +232,14 @@ function CartSearch({
   badge,
   onBadgeChange,
   onBack,
+  dishes,
 }: {
   query: string
   onQueryChange: (v: string) => void
   badge: string | null
   onBadgeChange: (v: string | null) => void
   onBack: () => void
+  dishes: AllDish[]
 }) {
   const deferredQuery = useDeferredValue(query)
   const [expandedKey, setExpandedKey] = useState<string | null>(null)
@@ -223,7 +247,7 @@ function CartSearch({
 
   const results = useMemo(() => {
     const q = deferredQuery.trim().toLowerCase()
-    return ALL_DISHES.filter(({ dish, menuTitle, sectionTitle, menuGroup }) => {
+    return dishes.filter(({ dish, menuTitle, sectionTitle, menuGroup }) => {
       const text = [dish.name, dish.description, dish.composition, dish.subtitle, dish.base, menuTitle, sectionTitle, menuGroup]
         .filter(Boolean)
         .join(" ")
@@ -232,7 +256,7 @@ function CartSearch({
       const matchBadge = !badge || (dish.badges ?? []).some((b) => b.toLowerCase() === badge)
       return matchQuery && matchBadge
     })
-  }, [deferredQuery, badge])
+  }, [dishes, deferredQuery, badge])
 
   const filterKey = `${deferredQuery}\u0000${badge ?? ""}`
   const [lastFilterKey, setLastFilterKey] = useState(filterKey)
@@ -334,8 +358,10 @@ function CartSearch({
 }
 
 export function CartDrawer() {
-  const { items, isOpen, closeCart, removeItem, clearCart, totalCount, totalAmount, addOrder, orders, clearOrders, addItem } =
+  const { items, isOpen, closeCart, removeItem, clearCart, totalCount, totalAmount, addOrder, orders, clearOrders, addItem, menuData } =
     useCart()
+
+  const allDishes = useMemo(() => buildAllDishes(menuData), [menuData])
 
   const siteLinks = useSiteLinks()
   const restaurantContacts: Record<ContactId, string> = {
@@ -448,6 +474,7 @@ export function CartDrawer() {
         price: p.final,
         original: p.original,
         discount: p.hasDiscount ? i.dish.discount : undefined,
+        outOfStock: !!i.dish.outOfStock,
       }
     })
 
@@ -462,10 +489,13 @@ export function CartDrawer() {
       "Состав заказа:",
       ...orderItems.map((i, index) => {
         const total = (i.price * i.quantity).toLocaleString("de-DE")
-        const line = `${index + 1}. ${i.name} ×${i.quantity} — ${total} VND`
-        if (!i.discount) return line
-        const was = (i.original * i.quantity).toLocaleString("de-DE")
-        return `${line} (скидка ${i.discount}%, было ${was} VND)`
+        let line = `${index + 1}. ${i.name} ×${i.quantity} — ${total} VND`
+        if (i.discount) {
+          const was = (i.original * i.quantity).toLocaleString("de-DE")
+          line += ` (скидка ${i.discount}%, было ${was} VND)`
+        }
+        if (i.outOfStock) line += ` — ⚠ ${OUT_OF_STOCK_TEXT}`
+        return line
       }),
       "",
       `Доставка: ${deliveryFee > 0 ? `${deliveryFee.toLocaleString("de-DE")} VND` : "бесплатно"}`,
@@ -496,7 +526,7 @@ export function CartDrawer() {
   const repeatOrder = (order: OrderRecord) => {
     let added = 0
     for (const item of order.items) {
-      const entry = ALL_DISHES.find((d) => d.dish.name === item.name)
+      const entry = allDishes.find((d) => d.dish.name === item.name)
       if (!entry) continue
       for (let i = 0; i < item.quantity; i++) {
         addItem(item.name, entry.dish)
@@ -545,6 +575,7 @@ export function CartDrawer() {
                 onQueryChange={setQuery}
                 badge={badge}
                 onBadgeChange={setBadge}
+                dishes={allDishes}
                 onBack={() => {
                   setSearchOpen(false)
                   setQuery("")
@@ -905,17 +936,30 @@ export function CartDrawer() {
                           {items.map((item) => {
                             const prices = getPrices(item.dish)
                             return (
-                              <li key={item.key} className="flex items-baseline gap-2 text-base">
-                                <span className="text-text-muted truncate min-w-0">{item.dish.name}</span>
-                                <span className="shrink-0 text-accent font-display whitespace-nowrap">
-                                  ×{item.quantity}
-                                </span>
-                                <span className="font-display whitespace-nowrap shrink-0 ml-auto">
-                                  <span className="text-text-primary">
-                                    {(prices.final * item.quantity).toLocaleString("de-DE")}
-                                  </span>{" "}
-                                  <span className="text-accent text-sm">VND</span>
-                                </span>
+                              <li key={item.key} className="space-y-1.5">
+                                <div className="flex items-baseline gap-2 text-base">
+                                  <span
+                                    className={`truncate min-w-0 ${
+                                      item.dish.outOfStock
+                                        ? "text-text-muted dish-strike"
+                                        : "text-text-muted"
+                                    }`}
+                                  >
+                                    {item.dish.name}
+                                  </span>
+                                  <span className="shrink-0 text-accent font-display whitespace-nowrap">
+                                    ×{item.quantity}
+                                  </span>
+                                  <span className="font-display whitespace-nowrap shrink-0 ml-auto">
+                                    <span className="text-text-primary">
+                                      {(prices.final * item.quantity).toLocaleString("de-DE")}
+                                    </span>{" "}
+                                    <span className="text-accent text-sm">VND</span>
+                                  </span>
+                                </div>
+                                {item.dish.outOfStock && (
+                                  <OutOfStockBadge className="w-fit px-3 py-1 text-[10px]" />
+                                )}
                               </li>
                             )
                           })}
@@ -1033,7 +1077,13 @@ export function CartDrawer() {
                               className="w-full text-left pr-8"
                             >
                               <span className="flex items-start gap-2">
-                                <span className="font-display uppercase tracking-wide text-sm text-text-primary leading-snug">
+                                <span
+                                  className={`font-display uppercase tracking-wide text-sm leading-snug ${
+                                    item.dish.outOfStock
+                                      ? "text-text-muted dish-strike"
+                                      : "text-text-primary"
+                                  }`}
+                                >
                                   {item.dish.name}
                                 </span>
                                 <ChevronDown
@@ -1062,6 +1112,11 @@ export function CartDrawer() {
                                       {b}
                                     </span>
                                   ))}
+                                </span>
+                              )}
+                              {item.dish.outOfStock && (
+                                <span className="block mt-1.5">
+                                  <OutOfStockBadge className="w-fit px-3 py-1 text-[10px]" />
                                 </span>
                               )}
                             </button>

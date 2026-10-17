@@ -363,6 +363,10 @@ export interface MenuCategory {
                */
               discount?: number | null;
               /**
+               * Галочка у конкретного блюда: на сайте название будет зачёркнуто, рядом появится пометка «Временно отсутствует в наличии», а кнопку «Купить» заменит подсказка. Добавить такое блюдо в корзину нельзя.
+               */
+              outOfStock?: boolean | null;
+              /**
                * Выберите бейдж(и) из списка возможных вариантов.
                */
               badges?:
@@ -648,6 +652,7 @@ export interface MenuCategoriesSelect<T extends boolean = true> {
               weight?: T;
               price?: T;
               discount?: T;
+              outOfStock?: T;
               badges?:
                 | T
                 | {

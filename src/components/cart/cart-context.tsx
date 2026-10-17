@@ -1,13 +1,12 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useReducer, useState } from "react"
-import type { MenuDish } from "@/config/menu-data"
-import { allMenuData } from "@/config/menu-data"
+import type { MenuData, MenuDish } from "@/config/menu-data"
 import { getPrices } from "@/lib/pricing"
 
-function buildDishIndex(): Map<string, MenuDish> {
+function buildDishIndex(menuData: MenuData[]): Map<string, MenuDish> {
   const index = new Map<string, MenuDish>()
-  for (const menu of allMenuData) {
+  for (const menu of menuData) {
     for (const section of menu.sections) {
       for (const dish of section.dishes) {
         index.set(dish.name, dish)
@@ -55,8 +54,11 @@ const STORAGE_KEY = "pp-cart"
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "add": {
+      // блюдо, отмеченное «временно отсутствует», в корзину не попадает
+      if (action.dish.outOfStock) return state
       const existing = state.items.find((item) => item.key === action.key)
       if (existing) {
+        if (existing.dish.outOfStock) return state
         return {
           items: state.items.map((item) =>
             item.key === action.key ? { ...item, quantity: item.quantity + 1 } : item,
@@ -65,12 +67,15 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       }
       return { items: [...state.items, { key: action.key, dish: action.dish, quantity: 1 }] }
     }
-    case "increment":
+    case "increment": {
+      const target = state.items.find((item) => item.key === action.key)
+      if (!target || target.dish.outOfStock) return state
       return {
         items: state.items.map((item) =>
           item.key === action.key ? { ...item, quantity: item.quantity + 1 } : item,
         ),
       }
+    }
     case "decrement":
       return {
         items: state.items
@@ -101,6 +106,7 @@ interface CartContextValue {
   totalCount: number
   totalAmount: number
   orders: OrderRecord[]
+  menuData: MenuData[]
   openCart: () => void
   closeCart: () => void
   addItem: (key: string, dish: MenuDish) => void
@@ -114,7 +120,13 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null)
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
+export function CartProvider({
+  children,
+  menuData,
+}: {
+  children: React.ReactNode
+  menuData: MenuData[]
+}) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] })
   const [isOpen, setIsOpen] = useState(false)
   const [orders, setOrders] = useState<OrderRecord[]>([])
@@ -126,7 +138,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (raw) {
         const parsed = JSON.parse(raw) as CartItem[]
         if (Array.isArray(parsed)) {
-          const index = buildDishIndex()
+          const index = buildDishIndex(menuData)
           const merged = parsed.map((item) => {
             const fresh = index.get(item.key)
             return fresh ? { ...item, dish: fresh } : item
@@ -147,7 +159,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
      
     setHydrated(true)
-  }, [])
+  }, [menuData])
 
   useEffect(() => {
     if (!hydrated) return
@@ -179,6 +191,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       totalCount,
       totalAmount,
       orders,
+      menuData,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
       addItem: (key, dish) => dispatch({ type: "add", key, dish }),
@@ -207,7 +220,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         }),
       clearOrders: () => setOrders([]),
     }
-  }, [state.items, isOpen, orders])
+  }, [state.items, isOpen, orders, menuData])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
