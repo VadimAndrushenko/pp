@@ -444,29 +444,3 @@ html, body {
 .animate-pop-in {
   animation: pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-
-/* Стильное зачёркивание недоступного блюда: красная «маркерная» линия
-   с мягким свечением, тянется по тексту и повторяется на каждой строке.
-   Ставить на inline-элемент (span) вокруг названия. */
-.dish-strike {
-  text-decoration: none;
-  background-image:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      var(--color-neon-red) 8%,
-      #ff8089 50%,
-      var(--color-neon-red) 92%,
-      transparent 100%
-    ),
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      color-mix(in srgb, var(--color-neon-red) 40%, transparent) 6%,
-      color-mix(in srgb, var(--color-neon-red) 40%, transparent) 94%,
-      transparent 100%
-    );
-  background-repeat: no-repeat, no-repeat;
-  background-position: 0 53%, 0 53%;
-  background-size: 100% 0.085em, 100% 0.22em;
-}

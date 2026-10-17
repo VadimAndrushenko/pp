@@ -131,7 +131,7 @@ const SearchResultCard = memo(function SearchResultCard({
             <span
               className={`font-display uppercase tracking-wide text-sm leading-snug break-words ${
                 outOfStock
-                  ? "text-text-muted dish-strike"
+                  ? "text-text-muted"
                   : "text-text-primary"
               }`}
             >
@@ -939,11 +939,7 @@ export function CartDrawer() {
                               <li key={item.key} className="space-y-1.5">
                                 <div className="flex items-baseline gap-2 text-base">
                                   <span
-                                    className={`truncate min-w-0 ${
-                                      item.dish.outOfStock
-                                        ? "text-text-muted dish-strike"
-                                        : "text-text-muted"
-                                    }`}
+                                    className="truncate min-w-0 text-text-muted"
                                   >
                                     {item.dish.name}
                                   </span>
@@ -1080,7 +1076,7 @@ export function CartDrawer() {
                                 <span
                                   className={`font-display uppercase tracking-wide text-sm leading-snug ${
                                     item.dish.outOfStock
-                                      ? "text-text-muted dish-strike"
+                                      ? "text-text-muted"
                                       : "text-text-primary"
                                   }`}
                                 >

@@ -82,7 +82,7 @@ export function MenuDishRow({ dish, index }: { dish: MenuDish; index?: number })
                 : "text-text-primary group-hover:text-accent"
             }`}
           >
-            <span className={outOfStock ? "dish-strike" : undefined}>{dish.name}</span>
+            {dish.name}
           </h3>
           {typeof index === "number" && (
             <span className="shrink-0 ml-auto lg:hidden font-display text-xl whitespace-nowrap">
