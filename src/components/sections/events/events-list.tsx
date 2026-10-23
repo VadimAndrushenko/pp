@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { CalendarDays, ChevronRight, Clock, Sparkles, Ticket } from "lucide-react"
-import type { EventCategory, EventItem } from "@/types"
+import type { EventItem } from "@/types"
 
 const DAY_FILTERS = [
   { param: "all", label: "Все дни" },
@@ -19,15 +19,6 @@ const DAY_FILTERS = [
 ] as const
 
 const DAY_PARAMS = DAY_FILTERS.map((day) => day.param)
-
-const CATEGORY_TITLES: Record<EventCategory, string> = {
-  all: "Все",
-  karaoke: "Караоке",
-  quiz: "Квиз",
-  music: "Музыка",
-  business: "Бизнес",
-  show: "Шоу",
-}
 
 /** Общий вид бейджей: крупно на десктопе, постепенно мельче к мобильному */
 const CHIP =
@@ -161,7 +152,7 @@ function EventCard({ event }: { event: EventItem }) {
               border: "1px solid var(--accent-border)",
             }}
           >
-            {CATEGORY_TITLES[event.category]}
+            {event.category}
           </span>
           {event.admission === "free" ? (
             <span
@@ -210,8 +201,6 @@ function EventCard({ event }: { event: EventItem }) {
             {event.tagline}
           </p>
         )}
-
-        <p className="mt-3 flex-1 text-sm max-sm:text-xs text-white/70 line-clamp-3">{event.description}</p>
 
         {/* meta */}
         <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4 pb-2 max-sm:pb-1 md:pb-3">

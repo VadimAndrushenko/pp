@@ -169,10 +169,13 @@ export interface Event {
   title: string;
   slug: string;
   /**
-   * Короткое описание события для карточки на главной и на странице события.
+   * Строка под названием в карточке афиши и в карусели. Используется только в карточке — на странице события не выводится.
    */
-  description: string;
-  category: 'all' | 'karaoke' | 'quiz' | 'music' | 'business' | 'show';
+  cardSubtitle: string;
+  /**
+   * Любое слово, которое показывается на карточке события, например «Шоу», «Караоке», «Квиз».
+   */
+  category: string;
   date: string;
   month: string;
   dayOfWeek: 'Понедельник' | 'Вторник' | 'Среда' | 'Четверг' | 'Пятница' | 'Суббота' | 'Воскресенье';
@@ -189,25 +192,27 @@ export interface Event {
    */
   accentColor?: string | null;
   /**
-   * Крупный заголовок на странице события. Можно разбить на 2–3 строки для красоты.
+   * Крупный заголовок только на странице события. Название события сюда не подставляется — заполните вручную.
    */
-  heroLines?:
-    | {
-        /**
-         * Одна строка заголовка. Например: «Караоке-батл каждый четверг»
-         */
-        line?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  heroLines: {
+    /**
+     * Одна строка заголовка. Например: «Караоке-батл каждый четверг»
+     */
+    line: string;
+    id?: string | null;
+  }[];
   /**
-   * Фраза под крупным заголовком. Например: «Зажигаем в четверг!»
+   * Фраза под крупным заголовком только на странице события. В карточку афиши не выводится — для карточки есть поле «Описание на карточке».
    */
-  heroSubtitle?: string | null;
+  heroSubtitle: string;
+  /**
+   * Полное описание на странице события. В карточках афиши и карусели не выводится — для них есть поле «Описание на карточке».
+   */
+  description: string;
   /**
    * Заголовок блока программы. По умолчанию: «В ПРОГРАММЕ»
    */
-  programHeading?: string | null;
+  programHeading: string;
   /**
    * Чем интересно событие. Например: «живой звук», «розыгрыши», «хиты 90-х».
    */
@@ -592,7 +597,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  description?: T;
+  cardSubtitle?: T;
   category?: T;
   date?: T;
   month?: T;
@@ -610,6 +615,7 @@ export interface EventsSelect<T extends boolean = true> {
         id?: T;
       };
   heroSubtitle?: T;
+  description?: T;
   programHeading?: T;
   features?:
     | T

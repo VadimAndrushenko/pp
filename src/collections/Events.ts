@@ -77,33 +77,24 @@ export const Events: CollectionConfig = {
       },
     },
     {
-      name: "description",
-      type: "textarea",
-      label: "Описание",
+      name: "cardSubtitle",
+      type: "text",
+      label: "Описание на карточке",
       required: true,
       admin: {
-        description: "Короткое описание события для карточки на главной и на странице события.",
+        description:
+          "Строка под названием в карточке афиши и в карусели. Используется только в карточке — на странице события не выводится.",
       },
     },
     {
       name: "category",
-      type: "select",
+      type: "text",
       label: "Категория",
       required: true,
-      options: [
-        { label: "Все", value: "all" },
-        { label: "Караоке", value: "karaoke" },
-        { label: "Квиз", value: "quiz" },
-        { label: "Музыка", value: "music" },
-        { label: "Бизнес", value: "business" },
-        { label: "Шоу", value: "show" },
-      ],
-      defaultValue: "show",
+      defaultValue: "Шоу",
       admin: {
-        hidden: true,
-      },
-      hooks: {
-        beforeValidate: [() => "show"],
+        description:
+          "Любое слово, которое показывается на карточке события, например «Шоу», «Караоке», «Квиз».",
       },
     },
     {
@@ -238,16 +229,19 @@ export const Events: CollectionConfig = {
                   name: "heroLines",
                   type: "array",
                   label: "Строки заголовка (до 3)",
+                  required: true,
+                  minRows: 1,
                   maxRows: 3,
                   admin: {
                     description:
-                      "Крупный заголовок на странице события. Можно разбить на 2–3 строки для красоты.",
+                      "Крупный заголовок только на странице события. Название события сюда не подставляется — заполните вручную.",
                   },
                   fields: [
                     {
                       name: "line",
                       type: "text",
                       label: "Строка",
+                      required: true,
                       admin: {
                         description: "Одна строка заголовка. Например: «Караоке-батл каждый четверг»",
                       },
@@ -258,14 +252,27 @@ export const Events: CollectionConfig = {
                   name: "heroSubtitle",
                   type: "text",
                   label: "Подзаголовок события",
+                  required: true,
                   admin: {
-                    description: "Фраза под крупным заголовком. Например: «Зажигаем в четверг!»",
+                    description:
+                      "Фраза под крупным заголовком только на странице события. В карточку афиши не выводится — для карточки есть поле «Описание на карточке».",
+                  },
+                },
+                {
+                  name: "description",
+                  type: "textarea",
+                  label: "Описание",
+                  required: true,
+                  admin: {
+                    description:
+                      "Полное описание на странице события. В карточках афиши и карусели не выводится — для них есть поле «Описание на карточке».",
                   },
                 },
                 {
                   name: "programHeading",
                   type: "text",
                   label: "Заголовок программы",
+                  required: true,
                   defaultValue: "В ПРОГРАММЕ",
                   admin: {
                     description: "Заголовок блока программы. По умолчанию: «В ПРОГРАММЕ»",

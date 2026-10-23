@@ -84,7 +84,6 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
         {event.tagline && (
           <p className="text-sm text-accent font-display uppercase mb-1">{event.tagline}</p>
         )}
-        <p className="text-xs text-text-secondary mb-2 line-clamp-2">{event.description}</p>
         <div className="flex items-center gap-2 text-sm text-text-muted">
           <Clock className="w-5 h-5 text-accent" strokeWidth={1.5} />
           <span>{event.time}</span>

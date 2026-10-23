@@ -48,7 +48,7 @@ export const transformEvents = (events: Event[], now: Date = new Date()): EventI
         month,
         dayOfWeek,
         title: event.title,
-        tagline: event.heroSubtitle ?? undefined,
+        tagline: event.cardSubtitle ?? undefined,
         category: event.category,
         time: event.time,
         image: resolveImageUrl(event.image, "", "card"),

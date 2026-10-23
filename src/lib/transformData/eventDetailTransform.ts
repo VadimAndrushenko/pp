@@ -23,7 +23,7 @@ export const transformEventDetail = (event: Event | null): EventDetail | null =>
     .filter((line): line is string => Boolean(line))
 
   return {
-    titleLine1: lines[0] || event.title.toUpperCase(),
+    titleLine1: lines[0] || "",
     titleLine2: lines[1],
     titleLine3: lines[2],
     subtitle: event.heroSubtitle || "",

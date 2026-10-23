@@ -33,7 +33,7 @@ export function EventHero({
             </span>
           </div>
         </div>
-        <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-text-primary mb-7 max-md:mb-0 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
+        <h1 className="text-8xl font-display font-bold uppercase tracking-tight text-text-primary mb-7 max-md:mb-0.5 max-lg:text-7xl max-md:text-5xl max-sm:text-5xl">
           {titleLine1}
           {titleLine2 ? <br /> : null}
           {titleLine2}

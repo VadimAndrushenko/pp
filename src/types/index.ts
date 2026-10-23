@@ -22,7 +22,7 @@ export interface EventItem {
   title: string
   subtitle?: string
   tagline?: string
-  category: EventCategory
+  category: string
   time: string
   image: string
   imageLarge?: string
@@ -32,14 +32,6 @@ export interface EventItem {
   slug: string
   accentColor?: string
 }
-
-export type EventCategory =
-  | "all"
-  | "karaoke"
-  | "quiz"
-  | "music"
-  | "business"
-  | "show"
 
 export interface AdvantageItem {
   icon: string

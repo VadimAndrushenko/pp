@@ -10,15 +10,6 @@ interface EventDayCardProps {
   className?: string
 }
 
-export const CATEGORY_LABELS: Record<EventItem["category"], string> = {
-  all: "Все",
-  karaoke: "Караоке",
-  quiz: "Квиз",
-  music: "Музыка",
-  business: "Бизнес",
-  show: "Шоу",
-}
-
 const pluralEvents = (n: number) => {
   if (n === 1) return "событие"
   if (n >= 2 && n <= 4) return "события"
@@ -44,7 +35,7 @@ export function EventDayCard({ events, className }: EventDayCardProps) {
 
         <span className="relative flex items-center gap-1.5 font-display text-[11px] font-semibold uppercase tracking-[0.25em] text-text-muted">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          {CATEGORY_LABELS[first.category]}
+          {first.category}
         </span>
 
         <div className="relative mt-2 flex flex-col items-center gap-0.5">
