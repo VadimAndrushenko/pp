@@ -32,7 +32,7 @@ function PhotoThumb({ photo, onOpen }: { photo: GalleryPhoto; onOpen: () => void
       className="relative cursor-pointer overflow-hidden p-0"
       onClick={onOpen}
     >
-      <div className="relative w-full aspect-square overflow-hidden bg-surface">
+      <div className="relative w-full aspect-[2/3] overflow-hidden bg-surface">
         <Image
           src={photo.image}
           alt={photo.title}
@@ -78,11 +78,10 @@ export function PhotoAlbums({ photos }: { photos: GalleryPhoto[] }) {
     <section id="photos" className="section-py">
       <h2 className="section-heading font-display font-bold uppercase text-text-primary mb-2">
         Фото отчёты
-        
-        <p className="text-sm font-display uppercase tracking-wider mb-6 mt-2 text-accent" >
-          Все фото с наших мероприятий
-        </p>
       </h2>
+      <p className="text-sm font-display uppercase tracking-wider mb-6 mt-2 text-accent">
+        Все фото с наших мероприятий
+      </p>
 
       <div className="flex flex-col gap-10">
         {albums.map((album) => (

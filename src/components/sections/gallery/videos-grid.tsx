@@ -90,11 +90,10 @@ export function VideoAlbums({ videos }: { videos: GalleryVideo[] }) {
     <section id="videos" className="section-py">
       <h2 className="section-heading font-display font-bold uppercase text-text-primary mb-2">
         Видео отчёты
-        
-        <p className="text-sm font-display uppercase tracking-wider mb-6 mt-2 text-accent">
-          Все видео с наших мероприятий
-        </p>
       </h2>
+      <p className="text-sm font-display uppercase tracking-wider mb-6 mt-2 text-accent">
+        Все видео с наших мероприятий
+      </p>
 
       <div className="flex flex-col gap-10">
         {albums.map((album) => (

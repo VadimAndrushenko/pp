@@ -9,6 +9,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Settings } from './collections/Settings'
 import { HomeContent } from './globals/HomeContent'
+import { GalleryContent } from './globals/GalleryContent'
 import { Events } from './collections/Events'
 import { MenuCategories } from './collections/MenuCategories'
 import { GalleryVideos } from './collections/GalleryVideos'
@@ -30,7 +31,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Events, MenuCategories, GalleryVideos, GalleryReports, Media],
-  globals: [Settings, HomeContent],
+  globals: [Settings, HomeContent, GalleryContent],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

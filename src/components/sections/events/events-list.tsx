@@ -112,7 +112,7 @@ function EventCard({ event }: { event: EventItem }) {
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-border)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] transition-[translate,transform,box-shadow,border-color] duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:border-[var(--accent-border)]"
       style={
         {
           "--accent": accent,

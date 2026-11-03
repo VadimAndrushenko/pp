@@ -13,7 +13,7 @@ interface GalleryReleasesPreviewProps {
 }
 
 function splitDateKey(dateKey: string) {
-  const [y, m, d] = dateKey.split("-")
+  const [, m, d] = dateKey.split("-")
   const months = ["", "ЯНВ", "ФЕВ", "МАР", "АПР", "МАЯ", "ИЮН", "ИЮЛ", "АВГ", "СЕН", "ОКТ", "НОЯ", "ДЕК"]
   return { day: d || dateKey, month: months[Number(m)] || m || "" }
 }
@@ -48,12 +48,18 @@ export function GalleryReleasesPreview({
             <a
               key={item.id}
               href={item.href}
-              className="group w-full border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
+              className="group w-full border border-transparent transition-[translate,transform,box-shadow,border-color] duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] [@media(hover:hover)]:hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
             >
-              <div
-                className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-cover bg-center bg-surface"
-                style={item.image ? { backgroundImage: `url(${item.image})` } : undefined}
-              >
+              <div className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-surface">
+                {item.image && (
+                  <img
+                    src={item.image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
                 <div className="absolute top-2 left-2 bg-black/80 rounded-md px-2 py-1.5 text-center min-w-[44px]">

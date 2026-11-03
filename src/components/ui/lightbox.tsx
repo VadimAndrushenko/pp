@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import type { GalleryPhoto } from "@/types"
@@ -78,7 +79,7 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
     >
       <div className="flex h-full w-full items-center justify-center p-4 sm:p-8">
         <div
-          className={`relative h-[70vh] w-full max-w-6xl max-sm:h-[65vh] ${
+          className={`relative flex h-[85vh] w-full max-w-6xl flex-col max-sm:h-[80vh] ${
             phase === "leaving" ? "animate-modal-leave" : "animate-modal-enter"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -92,45 +93,51 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
             <X size={20} strokeWidth={2.5} />
           </button>
 
-          <button
-            type="button"
-            onClick={() => emblaApi?.scrollPrev()}
-            aria-label="Предыдущее фото"
-            className="absolute left-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
-          >
-            <ChevronLeft size={24} strokeWidth={2.5} />
-          </button>
-          <button
-            type="button"
-            onClick={() => emblaApi?.scrollNext()}
-            aria-label="Следующее фото"
-            className="absolute right-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
-          >
-            <ChevronRight size={24} strokeWidth={2.5} />
-          </button>
+          <div className="relative min-h-0 flex-1">
+            <button
+              type="button"
+              onClick={() => emblaApi?.scrollPrev()}
+              aria-label="Предыдущее фото"
+              className="absolute left-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
+            >
+              <ChevronLeft size={24} strokeWidth={2.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => emblaApi?.scrollNext()}
+              aria-label="Следующее фото"
+              className="absolute right-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
+            >
+              <ChevronRight size={24} strokeWidth={2.5} />
+            </button>
 
-          <div ref={emblaRef} className="h-full overflow-hidden">
-            <div className="flex h-full">
-              {photos.map((photo) => (
-                <div key={photo.id} className="relative h-full min-w-0 flex-[0_0_100%] px-1.5">
-                  <div
-                    className="h-full w-full bg-contain bg-center bg-no-repeat bg-surface"
-                    style={{ backgroundImage: `url(${photo.imageLarge || photo.image})` }}
-                  />
-                </div>
-              ))}
+            <div className="absolute top-4 left-4 z-10 rounded-full bg-black/40 px-3 py-1.5 text-xs font-display uppercase tracking-wider text-white">
+              {selectedIndex + 1}/{photos.length}
+            </div>
+
+            <div ref={emblaRef} className="h-full overflow-hidden">
+              <div className="flex h-full">
+                {photos.map((photo) => (
+                  <div key={photo.id} className="relative h-full min-w-0 flex-[0_0_100%] px-1.5">
+                    <Image
+                      src={photo.imageLarge || photo.image}
+                      alt={photo.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 1152px"
+                      draggable={false}
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center gap-1 border-t border-white/10 bg-black/85 p-4 backdrop-blur-sm">
+          <div className="relative z-10 flex shrink-0 flex-col items-center gap-1 border-t border-white/10 bg-black/85 p-4 backdrop-blur-sm">
             <p className="text-xl font-display uppercase tracking-wider text-white">
               {current?.title}
             </p>
             <p className="text-xs text-white/70">{current?.dateLabel}</p>
-          </div>
-
-          <div className="absolute top-4 left-4 z-10 rounded-full bg-black/40 px-3 py-1.5 text-xs font-display uppercase tracking-wider text-white">
-            {selectedIndex + 1}/{photos.length}
           </div>
         </div>
       </div>

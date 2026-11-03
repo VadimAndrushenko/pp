@@ -1,21 +1,20 @@
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import type { GalleryCardData } from "@/lib/transformData"
 
-const cards = [
-  {
-    href: "/gallery/photos",
-    title: "Фото отчёты",
-    image: "https://picsum.photos/seed/poidem-collage-photo/600/400",
-  },
-  {
-    href: "/gallery/videos",
-    title: "Видео отчёты",
-    image: "https://picsum.photos/seed/poidem-collage-video/600/400",
-  },
-]
+export function HeroCards({
+  photoCard,
+  videoCard,
+}: {
+  photoCard: GalleryCardData
+  videoCard: GalleryCardData
+}) {
+  const cards = [
+    { href: "/gallery/photos", ...photoCard },
+    { href: "/gallery/videos", ...videoCard },
+  ]
 
-export function HeroCards() {
   return (
     <div className="grid grid-cols-2 gap-4 max-sm:gap-3 section-py">
       {cards.map((card) => (

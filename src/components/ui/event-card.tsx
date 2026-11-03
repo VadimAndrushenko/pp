@@ -16,10 +16,17 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
           <div className="text-2xl font-display font-bold text-accent">{event.date}</div>
           <div className="text-xs text-text-muted uppercase">{event.month}</div>
         </div>
-        <div
-          className="w-full h-24 rounded-sm bg-cover bg-center"
-          style={{ backgroundImage: `url(${event.image})` }}
-        />
+        <div className="relative w-full h-24 rounded-sm overflow-hidden">
+          {event.image && (
+            <img
+              src={event.image}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          )}
+        </div>
         <h4 className="text-sm font-display uppercase text-text-primary">{event.title}</h4>
         <div className="flex items-center gap-1 text-xs text-text-muted">
           <Clock className="w-3 h-3" />
@@ -33,14 +40,18 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
     return (
       <a
         href={`/events/${event.slug}`}
-        className="group w-full border border-transparent transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
+        className="group w-full border border-transparent transition-[translate,transform,box-shadow,border-color] duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] [@media(hover:hover)]:hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card cursor-pointer"
       >
-        <div
-          className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-contain bg-center bg-surface"
-          style={{
-            backgroundImage: `url(${event.image})`,
-          }}
-        >
+        <div className="relative w-full aspect-[4/5] rounded-card overflow-hidden bg-surface">
+          {event.image && (
+            <img
+              src={event.image}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-contain"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
           <div className="absolute top-2 left-2 bg-black/80 rounded-md px-2 py-1.5 text-center min-w-[44px]">
@@ -70,10 +81,16 @@ export function EventCard({ event, variant = "full" }: EventCardProps) {
   return (
     <Card as="a" href={`/events/${event.slug}`} className="grid grid-cols-[auto_1fr_auto] gap-4 max-md:grid-cols-[1fr_auto] items-start">
       <div className="col-span-1 col-start-2 max-md:col-span-2 max-md:col-start-auto">
-        <div
-          className="w-full h-36 rounded-sm bg-cover bg-center mb-3 relative"
-          style={{ backgroundImage: `url(${event.image})` }}
-        >
+        <div className="w-full h-36 rounded-sm overflow-hidden mb-3 relative">
+          {event.image && (
+            <img
+              src={event.image}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          )}
           <Badge variant="accent" className="absolute top-2 left-2">
             {event.category}
           </Badge>

@@ -8,8 +8,8 @@ const hookahPrice = ["/images/hookah/light.webp", "/images/hookah/medium.webp", 
 export function HookahPrices() {
   return (
     <section className="section-py">
-      <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-4 mb-4 mx-0 px-0 max-md:-mx-5 max-md:px-5">
-        <Slider title="Стоимость кальяна в ресторане" cols={{ base: 1, sm: 2, lg: 3 }} className="mb-4">
+      <div className="max-md:-mx-5 max-md:px-5">
+        <Slider title="Стоимость кальяна в ресторане" cols={{ base: 1, sm: 2, lg: 3 }} className="mb-4 w-full">
           {hookahPrice.map((src) => (
             <div key={src} className="rounded-card border border-border overflow-hidden">
               <Image src={src} alt="" width={400} height={400} className="w-full h-auto" />

@@ -24,13 +24,13 @@ export function EventDayCard({ events, className }: EventDayCardProps) {
     <div
       onClick={() => router.push(`/events/${first.slug}`)}
       className={cn(
-        "group flex h-full w-full cursor-pointer flex-col border border-border/60 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card",
+        "group flex h-full w-full cursor-pointer flex-col border border-border/60 transition-[translate,transform,box-shadow,border-color] duration-300 ease-out [@media(hover:hover)]:hover:-translate-y-1.5 [@media(hover:hover)]:hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_35%,transparent)] [@media(hover:hover)]:hover:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none rounded-card",
         className,
       )}
     >
       <div className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-card bg-surface px-3 py-5 text-center">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent/[0.07] via-transparent to-black/50" />
-        <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-accent/15 blur-3xl" />
+        <div className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full bg-accent/15 blur-3xl max-md:hidden" />
         <div className="pointer-events-none absolute inset-0 rounded-card ring-1 ring-inset ring-border/40" />
 
         <span className="relative flex items-center gap-1.5 font-display text-[11px] font-semibold uppercase tracking-[0.25em] text-text-muted">
@@ -52,13 +52,13 @@ export function EventDayCard({ events, className }: EventDayCardProps) {
           <div className="h-px w-10 border-t border-dashed border-accent/40" />
         </div>
 
-        <div className="relative mt-3 flex min-h-0 w-full flex-1 flex-col gap-1.5 overflow-y-auto pr-1 [scrollbar-width:thin] [scrollbar-color:var(--color-border)_transparent] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent">
+        <div className="relative mt-3 flex min-h-0 w-full flex-1 flex-col gap-1.5 overflow-y-auto pr-1 [touch-action:pan-y] [scrollbar-width:thin] [scrollbar-color:var(--color-border)_transparent] [&::-webkit-scrollbar]:w-[3px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-track]:bg-transparent">
           {events.map((event) => (
             <Link
               key={event.id}
               href={`/events/${event.slug}`}
               onClick={(e) => e.stopPropagation()}
-              className="group/chip flex flex-col gap-1.5 rounded-lg border-2 border-accent/40 bg-gradient-to-br from-black/60 to-accent/10 px-3 py-2.5 text-left transition-all duration-200 hover:border-accent hover:bg-accent/20 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_25%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="group/chip flex flex-col gap-1.5 rounded-lg border-2 border-accent/40 bg-gradient-to-br from-black/60 to-accent/10 px-3 py-2.5 text-left transition-[border-color,background-color,box-shadow] duration-200 hover:border-accent hover:bg-accent/20 hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_25%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span className="flex items-center justify-between gap-2">
                 <span className="shrink-0 font-display text-xs font-bold uppercase tracking-wider text-accent md:text-[13px] lg:text-sm xl:text-base">

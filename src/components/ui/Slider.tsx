@@ -49,7 +49,10 @@ export default function Slider({
     align: "start",
     containScroll: "trimSnaps",
     watchDrag: true,
+    watchSlides: true,
   });
+
+  const slideCount = Children.count(children);
 
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -79,10 +82,14 @@ export default function Slider({
     };
   }, [emblaApi]);
 
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [emblaApi, slideCount]);
+
   const gapValue = typeof gap === "number" ? `${gap}px` : gap;
-  const colsMap: ColsConfig = typeof cols === "number" ? { base: cols } : cols;
 
   const css = useMemo(() => {
+    const colsMap: ColsConfig = typeof cols === "number" ? { base: cols } : cols;
     const getFlex = (n: number) => {
       const totalGap = n === 1 ? "0px" : `calc(${gapValue} * ${n - 1})`;
       return `1 0 calc((100% - ${totalGap}) / ${n})`;
@@ -109,7 +116,7 @@ export default function Slider({
     });
 
     return result;
-  }, [slideClass, colsMap, gapValue]);
+  }, [slideClass, cols, gapValue]);
 
   const slides = useMemo(() => {
     return Children.map(children, (child, index) => (
@@ -159,7 +166,7 @@ export default function Slider({
 
       <div
         ref={emblaRef}
-        className="overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-4 px-4 -mx-4"
+        className="overflow-hidden overscroll-x-contain select-none [touch-action:pan-y_pinch-zoom] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-4 px-4 -mx-4"
       >
         <div className="flex items-stretch" style={{ gap: gapValue }}>
           {slides}

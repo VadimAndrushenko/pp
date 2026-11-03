@@ -98,10 +98,12 @@ export interface Config {
   globals: {
     settings: Setting;
     'home-content': HomeContent;
+    'gallery-content': GalleryContent;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
     'home-content': HomeContentSelect<false> | HomeContentSelect<true>;
+    'gallery-content': GalleryContentSelect<false> | GalleryContentSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1063,6 +1065,72 @@ export interface HomeContent {
   createdAt?: string | null;
 }
 /**
+ * Тексты, SEO и карточки раздела «Как у нас». Видео настраивается отдельно в блоке на главной странице.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-content".
+ */
+export interface GalleryContent {
+  id: number;
+  /**
+   * Главный заголовок страницы «Как у нас».
+   */
+  heading?: string | null;
+  reports?: {
+    /**
+     * Заголовок перед карточками отчётов.
+     */
+    title?: string | null;
+    /**
+     * Текст под заголовком блока.
+     */
+    subtitle?: string | null;
+  };
+  photoCard?: {
+    /**
+     * Текст на карточке-ссылке на фотоотчёты.
+     */
+    title?: string | null;
+    /**
+     * Обложка карточки на странице «Как у нас». Если не выбрана — показывается временная заглушка.
+     */
+    image?: (number | null) | Media;
+  };
+  videoCard?: {
+    /**
+     * Текст на карточке-ссылке на видеоотчёты.
+     */
+    title?: string | null;
+    /**
+     * Обложка карточки на странице «Как у нас». Если не выбрана — показывается временная заглушка.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Как страница выглядит в поиске и при отправке ссылки в мессенджер.
+   */
+  gallerySeo: {
+    /**
+     * Заголовок в выдаче поиска.
+     */
+    title: string;
+    /**
+     * Описание под заголовком в выдаче. Оптимально 140–160 символов.
+     */
+    description: string;
+    /**
+     * Показывается при отправке ссылки в мессенджере или соцсети. Оптимальный размер 1200×630. Если не выбрана — используется общая обложка сайта.
+     */
+    image?: (number | null) | Media;
+    /**
+     * Через запятую. Поисковики их не учитывают, но они помогают ориентироваться в содержимом. Пример: ресторан фукуок, караоке фукуок
+     */
+    keywords: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
@@ -1143,6 +1211,42 @@ export interface HomeContentSelect<T extends boolean = true> {
   seoImage?: T;
   seoFavicon?: T;
   seoKeywords?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-content_select".
+ */
+export interface GalleryContentSelect<T extends boolean = true> {
+  heading?: T;
+  reports?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+      };
+  photoCard?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+      };
+  videoCard?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+      };
+  gallerySeo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        keywords?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

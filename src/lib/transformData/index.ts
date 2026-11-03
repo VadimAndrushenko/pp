@@ -4,6 +4,12 @@ export {
   type HomeContentData,
   type HeroSectionData,
 } from "./homeContentTransform"
+export {
+  transformGalleryContent,
+  type GalleryContentData,
+  type GalleryPageData,
+  type GalleryCardData,
+} from "./galleryContentTransform"
 export { transformEvents, transformEvent, transformEventBySlug, sortEventsByStart } from "./eventsTransform"
 export {
   transformEventDetail,
