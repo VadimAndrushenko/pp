@@ -17,7 +17,9 @@ interface LightboxProps {
 export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
   const [phase, setPhase] = useState<Phase>("entering")
   const [selectedIndex, setSelectedIndex] = useState(initialIndex)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, startIndex: initialIndex })
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(false)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ startIndex: initialIndex })
 
   const close = useCallback(() => setPhase("leaving"), [])
 
@@ -48,11 +50,17 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
 
   useEffect(() => {
     if (!emblaApi) return
-    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap())
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap())
+      setCanScrollPrev(emblaApi.canScrollPrev())
+      setCanScrollNext(emblaApi.canScrollNext())
+    }
     onSelect()
     emblaApi.on("select", onSelect)
+    emblaApi.on("reInit", onSelect)
     return () => {
       emblaApi.off("select", onSelect)
+      emblaApi.off("reInit", onSelect)
     }
   }, [emblaApi])
 
@@ -94,22 +102,26 @@ export function Lightbox({ photos, initialIndex, onClose }: LightboxProps) {
           </button>
 
           <div className="relative min-h-0 flex-1">
-            <button
-              type="button"
-              onClick={() => emblaApi?.scrollPrev()}
-              aria-label="Предыдущее фото"
-              className="absolute left-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
-            >
-              <ChevronLeft size={24} strokeWidth={2.5} />
-            </button>
-            <button
-              type="button"
-              onClick={() => emblaApi?.scrollNext()}
-              aria-label="Следующее фото"
-              className="absolute right-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
-            >
-              <ChevronRight size={24} strokeWidth={2.5} />
-            </button>
+            {canScrollPrev && (
+              <button
+                type="button"
+                onClick={() => emblaApi?.scrollPrev()}
+                aria-label="Предыдущее фото"
+                className="absolute left-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
+              >
+                <ChevronLeft size={24} strokeWidth={2.5} />
+              </button>
+            )}
+            {canScrollNext && (
+              <button
+                type="button"
+                onClick={() => emblaApi?.scrollNext()}
+                aria-label="Следующее фото"
+                className="absolute right-0 top-1/2 z-20 flex aspect-square w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-all duration-200 hover:bg-white/25 max-sm:w-8"
+              >
+                <ChevronRight size={24} strokeWidth={2.5} />
+              </button>
+            )}
 
             <div className="absolute top-4 left-4 z-10 rounded-full bg-black/40 px-3 py-1.5 text-xs font-display uppercase tracking-wider text-white">
               {selectedIndex + 1}/{photos.length}

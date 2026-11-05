@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
+import Image from "next/image"
 import type { GalleryVideo } from "@/types"
 import { Card } from "@/components/ui/card"
 import { VideoLightbox } from "@/components/ui/video-lightbox"
@@ -32,16 +33,13 @@ function VideoThumb({ video, onClick }: { video: GalleryVideo; onClick: () => vo
       className="relative cursor-pointer overflow-hidden p-0"
       onClick={onClick}
     >
-      {/* 16:9 — натуральные пропорции превью YouTube; карточка растягивается на всю
-          ячейку грида, всё лишнее обрезается за пределами контейнера overflow-hidden */}
-      <div className="relative w-full aspect-video overflow-hidden bg-surface">
-        <img
+      <div className="relative w-full aspect-[4/5] overflow-hidden bg-surface">
+        <Image
           src={`https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`}
           alt={video.title}
-          width={480}
-          height={270}
-          className="block h-full w-full"
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          fill
+          sizes="(max-width: 640px) 50vw, 25vw"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div
